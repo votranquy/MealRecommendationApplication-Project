@@ -11,9 +11,9 @@ import {
   Text,
   View
 } from 'react-native';
-import App from "./Components/App.js";
+import App from "./Components/Login.js/index.js";
 import NhapMonHoc from "./Components/NhapMonHoc.js";
-import DangKy from "./Components/DangKy.js";
+import DangKy from "./Components/Register.js/index.js";
 import Buoi4 from "./Components/Buoi4.js";
 import Layout from "./Components/Layout.js";
 import TabBar from "./Components/TabBar.js";

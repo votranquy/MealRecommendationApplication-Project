@@ -1,1 +1,0 @@
-Use phpMyAdmin in XAMPP

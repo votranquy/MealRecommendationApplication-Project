@@ -26,10 +26,10 @@ export default class MealRecommendationApplicationProject extends Component {
     return (
       <View style={styles.container}>
         {/* <Register/> */}
-        {/* <Login/> */}
+        <Login/>
         {/* <RefreshListView /> */}
         {/* <SideMenu/> */}
-        <TabBar/>
+        {/* <TabBar/> */}
       </View>
     );
   }

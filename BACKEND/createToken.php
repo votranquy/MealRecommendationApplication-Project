@@ -23,8 +23,8 @@
   $password = md5($data["PASSWORD"]);
 
 
-  // $username = "quy";
-  // $password = md5("quy");
+  // $username = "votranquy";
+  // $password = md5("votranquy");
 
    
   $sql = "SELECT * FROM USER
@@ -33,7 +33,7 @@
             ";
 
   $users = mysqli_query($conn,$sql);
-  if(mysqli_num_rows($users)==1){
+  if(mysqli_num_rows($users) == 1){
     $u =mysqli_fetch_array($users);
 
     $token = array();

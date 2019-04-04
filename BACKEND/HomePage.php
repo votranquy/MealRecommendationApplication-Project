@@ -28,7 +28,7 @@
     array_push($arrFood,new Food($row["food_name"],$row["rate"],$row["address"],$row["worktime"]));
   }
 
-  $the_number_of_items_per_page = 4;
+  $the_number_of_items_per_page = 10;
   $page = $_GET["pagenumber"];
   $newArrayFood = array();
   $from = $page * $the_number_of_items_per_page;

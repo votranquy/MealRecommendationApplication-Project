@@ -19,17 +19,18 @@ import SideMenu from "./Components/SideMenu.js";
 import Layout from "./Components/Layout.js";
 import TabBar from "./Components/TabBar.js";
 import UserMenu from "./Components/UserMenu.js";
-
+import HomePage from "./Components/HomePage.js";
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
         {/* <Register/> */}
-        <Login/>
+        {/* <Login/> */}
         {/* <RefreshListView /> */}
         {/* <SideMenu/> */}
         {/* <TabBar/> */}
+        <HomePage/>
       </View>
     );
   }

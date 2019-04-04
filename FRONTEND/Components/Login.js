@@ -21,7 +21,7 @@ export default class Login extends Component {
   }
 
   LOGIN(){
-    fetch("http://192.168.64.2/MealRecommendationApplicationBackEnd/createToken.php",
+    fetch("http://192.168.1.187/MealRecommendationApplication-Project/BACKEND/createToken.php",
       {
         method:"POST",
         // headers:{

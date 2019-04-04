@@ -1,0 +1,152 @@
+//Scroll down to move to the next page
+
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  ListView,
+  Image,
+  RefreshControl
+} from 'react-native';
+
+var URL="http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+export default class HomePage extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      refreshing:false,
+      page:0,
+      dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+    }
+  }
+
+  fetchData(){
+    fetch("http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+      {method:"POST",body:null})
+    .then((response)=>response.json())
+    .then((responseData)=>{
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData)
+      });
+    })
+    .done()
+  }
+
+  componentDidMount(){
+    this.fetchData();
+  }
+
+  createRow(property){
+    return(
+        <View style={styles.row}>
+            <View style={styles.image}></View>
+            <View style={styles.content}>
+
+              <View style={styles.content_row}>
+                <Text style={styles.content_row_name}>{property.food_name}</Text>
+              </View>
+
+              <View style={styles.content_row}>
+                <Image source={require('../Image/star.png')}/>
+                <Text style={styles.content_row_rate}>  {property.rate}</Text>
+              </View>
+
+              <View style={styles.content_row}>
+                <Image source={require('../Image/location.png')}/>
+                <Text style={styles.content_row_address}>  {property.address}</Text>
+              </View>
+
+              <View style={styles.content_row}>
+                <Image source={require('../Image/clock.png')}/>
+                <Text style={styles.content_row_worktime}>  {property.worktime}</Text>
+              </View>  
+            </View>  
+        </View>
+    );
+  }
+
+  loadNewData(){
+    this.setState({
+      refreshing:true,
+    });
+    fetch("http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    .then((response)=>response.json())
+    .then((responseData)=>{
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData),
+        refreshing:false,
+        page: this.state.page+1,
+      });
+    })
+    .done()
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <StatusBar hidden={true} />
+        <View>
+          <ListView 
+            refreshControl={
+              <RefreshControl 
+                refreshing={this.state.refreshing}
+                onRefresh={this.loadNewData.bind(this)}
+              />
+            }
+            dataSource={this.state.dataSource}
+            renderRow={this.createRow}
+          />
+        </View>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1, backgroundColor: "white",
+  },
+  row: {
+    flex: 1,
+    flexDirection:'row',
+    backgroundColor:"#EEEEEE",
+    padding:3,
+    margin:3,
+    
+  },
+  image:{
+    flex:0.4,
+    margin:5,
+    borderWidth:1,
+    borderColor:"black",
+  },
+  content:{
+    flex:0.6,
+    padding:3,
+  },
+  content_row:{
+    flex:1,
+    flexDirection:"row",
+  },
+  content_row_name:{
+    color:"green",
+    fontSize: 20,
+  },
+  content_row_rate:{
+    color:"green",
+    fontSize: 25,
+  },
+  content_row_address:{
+    color:"gray",
+    fontSize: 15,
+  },
+  content_row_worktime:{
+    color:"gray",
+    fontSize: 15,
+  },
+});
+

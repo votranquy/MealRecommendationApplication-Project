@@ -1,4 +1,4 @@
-#Thu Apr 04 05:51:56 ICT 2019
-base.0=/home/votranquy/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Wed Apr 10 13:02:10 ICT 2019
+base.0=/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
-file.0=/home/votranquy/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.0=/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

@@ -5,7 +5,8 @@ import {
 } from "react-native";
 import TabNavigator from 'react-native-tab-navigator';
 import UserMenu from "./UserMenu";
-
+import HomePage from "./HomePage";
+import Header from "./Header";
 export default class SideMenu extends Component{
   constructor(props){
     super(props);
@@ -16,6 +17,8 @@ export default class SideMenu extends Component{
 
   render(){
     return(
+      <View style={{flex:1, backgroundColor:'#86AAEE'}}>
+      <Header />
       <TabNavigator>
         <TabNavigator.Item
           selected={this.state.selectedTab === 'home'}
@@ -23,7 +26,8 @@ export default class SideMenu extends Component{
           renderIcon={() => <Image source={require("../Image/home_white.png")} />}
           renderSelectedIcon={() => <Image source={require("../Image/home_black.png")} />}
           onPress={() => this.setState({ selectedTab: 'home' })}>
-          <View style={{flex:1,backgroundColor:"white"}}></View>
+          <HomePage />
+          {/* <View style={{flex:1,backgroundColor:"white"}}></View> */}
         </TabNavigator.Item>
 
         <TabNavigator.Item
@@ -117,6 +121,7 @@ export default class SideMenu extends Component{
 
         </TabNavigator.Item>
       </TabNavigator>
+      </View>
     );
   }
 }

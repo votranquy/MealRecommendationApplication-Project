@@ -5,12 +5,13 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 export default class UserMenu extends Component {
 
   render() {
     return (
-      <View style={styles.wrapper}>
+      <ScrollView style={styles.wrapper}>
             <TouchableOpacity 
               style={styles.touchable}
             >
@@ -65,16 +66,8 @@ export default class UserMenu extends Component {
               <Text style={styles.plus}>  Đăng xuất</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/logout.png')}
-              />
-              <Text style={styles.plus}>  Đăng xuất</Text>
-            </TouchableOpacity>
 
-          </View>
+          </ScrollView>
     );
   }
 }

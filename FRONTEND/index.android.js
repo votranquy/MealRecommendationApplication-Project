@@ -29,8 +29,8 @@ export default class MealRecommendationApplicationProject extends Component {
         {/* <Login/> */}
         {/* <RefreshListView /> */}
         {/* <SideMenu/> */}
-        {/* <TabBar/> */}
-        <HomePage/>
+        <TabBar/>
+        {/* <HomePage/> */}
       </View>
     );
   }

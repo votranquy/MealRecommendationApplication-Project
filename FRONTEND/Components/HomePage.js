@@ -11,8 +11,8 @@ import {
   Image,
   RefreshControl
 } from 'react-native';
-
-var URL="http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+var URL="http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 export default class HomePage extends Component {
 
   constructor(props){
@@ -25,7 +25,7 @@ export default class HomePage extends Component {
   }
 
   fetchData(){
-    fetch("http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -43,7 +43,9 @@ export default class HomePage extends Component {
   createRow(property){
     return(
         <View style={styles.row}>
-            <View style={styles.image}></View>
+            <View style={styles.image}>
+              <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
+            </View>
             <View style={styles.content}>
 
               <View style={styles.content_row}>
@@ -52,17 +54,17 @@ export default class HomePage extends Component {
 
               <View style={styles.content_row}>
                 <Image source={require('../Image/star.png')}/>
-                <Text style={styles.content_row_rate}>  {property.rate}</Text>
+                <Text style={styles.content_row_rate}>{property.rate}</Text>
               </View>
 
               <View style={styles.content_row}>
                 <Image source={require('../Image/location.png')}/>
-                <Text style={styles.content_row_address}>  {property.address}</Text>
+                <Text style={styles.content_row_address}>{property.address}</Text>
               </View>
 
               <View style={styles.content_row}>
                 <Image source={require('../Image/clock.png')}/>
-                <Text style={styles.content_row_worktime}>  {property.worktime}</Text>
+                <Text style={styles.content_row_worktime}>{property.worktime}</Text>
               </View>  
             </View>  
         </View>
@@ -73,7 +75,7 @@ export default class HomePage extends Component {
     this.setState({
       refreshing:true,
     });
-    fetch("http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({
@@ -131,22 +133,27 @@ const styles = StyleSheet.create({
   content_row:{
     flex:1,
     flexDirection:"row",
+    alignItems: 'center',
   },
   content_row_name:{
     color:"green",
-    fontSize: 20,
+    fontSize: 15,
+    alignItems: 'center',
   },
   content_row_rate:{
     color:"green",
-    fontSize: 25,
+    fontSize: 20,
+    alignItems: 'center',
   },
   content_row_address:{
     color:"gray",
     fontSize: 15,
+    alignItems: 'center',
   },
   content_row_worktime:{
     color:"gray",
     fontSize: 15,
+    alignItems: 'center',
   },
 });
 

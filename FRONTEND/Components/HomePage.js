@@ -1,5 +1,6 @@
 //Scroll down to move to the next page
-
+// Home:  192.168.43.103
+// Company: 10.10.31.214
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -12,7 +13,7 @@ import {
   RefreshControl
 } from 'react-native';
 
-var URL="http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+var URL="http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 export default class HomePage extends Component {
 
   constructor(props){
@@ -25,7 +26,7 @@ export default class HomePage extends Component {
   }
 
   fetchData(){
-    fetch("http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+    fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -73,7 +74,7 @@ export default class HomePage extends Component {
     this.setState({
       refreshing:true,
     });
-    fetch("http://10.10.31.214/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({

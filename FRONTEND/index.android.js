@@ -17,7 +17,7 @@ import RefreshListView from "./Components/RefreshListView.js";
 import Register from "./Components/Register.js";
 import SideMenu from "./Components/SideMenu.js";
 import Layout from "./Components/Layout.js";
-import TabBar from "./Components/TabBar.js";
+import App from "./Components/App";
 import UserMenu from "./Components/UserMenu.js";
 import HomePage from "./Components/HomePage.js";
 import ScrollMenu from "./Components/ScrollMenu";
@@ -29,7 +29,7 @@ export default class MealRecommendationApplicationProject extends Component {
         {/* <Login/> */}
         {/* <RefreshListView /> */}
         {/* <SideMenu/> */}
-        <TabBar/>
+        <App/>
         {/* <HomePage/> */}
         {/* <Example /> */}
       </View>

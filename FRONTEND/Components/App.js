@@ -6,8 +6,9 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import UserMenu from "./UserMenu";
 import HomePage from "./HomePage";
-import Header from "./Header";
-import ScrollMenu from "./ScrollMenu";
+import HomeView from "./HomeView";
+;
+
 export default class SideMenu extends Component{
   constructor(props){
     super(props);
@@ -19,8 +20,6 @@ export default class SideMenu extends Component{
   render(){
     return(
       <View style={{flex:1, backgroundColor:'#86AAEE'}}>
-      <Header />
-      <ScrollMenu/>
       <TabNavigator >
         <TabNavigator.Item
           selected={this.state.selectedTab === 'home'}
@@ -28,7 +27,7 @@ export default class SideMenu extends Component{
           renderIcon={() => <Image source={require("../Image/home_white.png")} />}
           renderSelectedIcon={() => <Image source={require("../Image/home_black.png")} />}
           onPress={() => this.setState({ selectedTab: 'home' })}>
-          <HomePage />
+          <HomeView />
           {/* <View style={{flex:1,backgroundColor:"white"}}></View> */}
         </TabNavigator.Item>
 
@@ -55,72 +54,6 @@ export default class SideMenu extends Component{
           renderSelectedIcon={() => <Image source={require("../Image/user_black.png")} />}
           onPress={() => this.setState({ selectedTab: 'user' })}>
             <UserMenu/>
-           {/* <View style={styles.wrapper}>
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                  source={require('../Image/password.png')}
-                />
-              <Text style={styles.plus}>  Đổi mật khẩu</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/setting.png')}
-              />
-              <Text style={styles.plus}>  Cài đặt thông báo</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/introduce.png')}
-              />
-              <Text style={styles.plus}>  Giới thiệu ứng dụng</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/star.png')}
-              />
-              <Text style={styles.plus}>  Xếp hạng ứng dụng</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/share.png')}
-              />
-              <Text style={styles.plus}>  Chia sẻ  ứng dụng</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/logout.png')}
-              />
-              <Text style={styles.plus}>  Đăng xuất</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity 
-              style={styles.touchable}
-            >
-              <Image
-                source={require('../Image/logout.png')}
-              />
-              <Text style={styles.plus}>  Đăng xuất</Text>
-            </TouchableOpacity>
-
-          </View> */}
-
         </TabNavigator.Item>
       </TabNavigator>
       </View>

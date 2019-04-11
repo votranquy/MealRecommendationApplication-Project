@@ -20,7 +20,7 @@ import Layout from "./Components/Layout.js";
 import TabBar from "./Components/TabBar.js";
 import UserMenu from "./Components/UserMenu.js";
 import HomePage from "./Components/HomePage.js";
-
+import ScrollMenu from "./Components/ScrollMenu";
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
@@ -29,8 +29,9 @@ export default class MealRecommendationApplicationProject extends Component {
         {/* <Login/> */}
         {/* <RefreshListView /> */}
         {/* <SideMenu/> */}
-        {/* <TabBar/> */}
-        <HomePage/>
+        <TabBar/>
+        {/* <HomePage/> */}
+        {/* <Example /> */}
       </View>
     );
   }

@@ -33,9 +33,9 @@ export default class HomePage extends Component {
     }
   }
 
-  gotoDetail(){
+  gotoDetail(property){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL"});
+    navigator.push({name: "FOOD_DETAIL",property});
   }
 
   fetchData(){
@@ -126,7 +126,7 @@ export default class HomePage extends Component {
           renderRow={
             // this.createRow
             (property) =>
-              <TouchableOpacity onPress={this.gotoDetail.bind(this)} style={styles.row}>
+              <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
                 <View style={styles.image}>
                   <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
                 </View>

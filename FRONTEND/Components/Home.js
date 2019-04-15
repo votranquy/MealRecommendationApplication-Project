@@ -22,7 +22,7 @@ export default class Home extends Component{
             />;
             default: return <FoodDetail 
               navigator={navigator} 
-              // product={route.product}
+              food={route.property}
             />;
           }
         }}

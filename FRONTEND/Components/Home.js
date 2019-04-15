@@ -14,14 +14,15 @@ export default class Home extends Component{
         renderScene={(route, navigator) => {
           switch(route.name){
             case 'HOME_VIEW': return <HomeView 
-              // navigator={navigator}
+              navigator={navigator}
               // types={types} topProducts={topProducts}
               />;
             case 'LIST_FOOD': return <ListFood 
-            // navigator={navigator}
+              navigator={navigator}
             />;
             default: return <FoodDetail 
-            // navigator={navigator} product={route.product}
+              navigator={navigator} 
+              // product={route.product}
             />;
           }
         }}

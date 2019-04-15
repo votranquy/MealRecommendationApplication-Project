@@ -12,13 +12,14 @@ import {
   Image,
   RefreshControl,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
 // var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
-const Img_Path= 'http://192.168.1.111/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-var URL="http://192.168.1.111/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+const Img_Path= 'http://10.94.65.10/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+var URL="http://10.94.65.10/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
 export default class HomePage extends Component {
 
@@ -32,8 +33,13 @@ export default class HomePage extends Component {
     }
   }
 
+  gotoDetail(){
+    const {navigator} = this.props;
+    navigator.push({name: "FOOD_DETAIL"});
+  }
+
   fetchData(){
-    fetch("http://192.168.1.111/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+    fetch("http://10.94.65.10/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -50,7 +56,7 @@ export default class HomePage extends Component {
 
   createRow(property){
     return(
-        <View style={styles.row}>
+        <TouchableOpacity onPress={this.gotoDetail.bind(this)} style={styles.row}>
             <View style={styles.image}>
               <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
             </View>
@@ -75,7 +81,7 @@ export default class HomePage extends Component {
                 <Text style={styles.content_row_worktime}>{property.worktime}</Text>
               </View>  
             </View>  
-        </View>
+        </TouchableOpacity>
     );
   }
 
@@ -84,7 +90,7 @@ export default class HomePage extends Component {
       refreshing:true,
     });
 
-    fetch("http://192.168.1.111/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://10.94.65.10/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({
@@ -117,7 +123,32 @@ export default class HomePage extends Component {
             />
           }
           dataSource={this.state.dataSource}
-          renderRow={this.createRow}
+          renderRow={
+            // this.createRow
+            (property) =>
+              <TouchableOpacity onPress={this.gotoDetail.bind(this)} style={styles.row}>
+                <View style={styles.image}>
+                  <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
+                </View>
+                <View style={styles.content}>
+                  <View style={styles.content_row}>
+                    <Text style={styles.content_row_name}>{property.food_name}</Text>
+                  </View>
+                  <View style={styles.content_row}>
+                    <Image source={require('../Image/star.png')}/>
+                    <Text style={styles.content_row_rate}>{property.rate}</Text>
+                  </View>
+                  <View style={styles.content_row}>
+                    <Image source={require('../Image/location.png')}/>
+                    <Text style={styles.content_row_address}>{property.address}</Text>
+                  </View>
+                  <View style={styles.content_row}>
+                    <Image source={require('../Image/clock.png')}/>
+                    <Text style={styles.content_row_worktime}>{property.worktime}</Text>
+                  </View>  
+                </View>  
+               </TouchableOpacity>
+          }
           onEndReached={this.loadNewData.bind(this)}
               
         />

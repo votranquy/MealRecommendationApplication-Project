@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
-export default class FoodDetail extends Component {
+export default class Random extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>FoodDetail</Text>
+                <Text>Random</Text>
             </View>
         );
     }
@@ -23,4 +23,5 @@ const styles = StyleSheet.create({
     },
 });
 
+//make this component available to the app
 

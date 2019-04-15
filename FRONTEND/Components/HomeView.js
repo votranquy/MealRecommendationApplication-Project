@@ -4,6 +4,10 @@ import Header from "./Header";
 import ScrollingButtonMenu from 'react-native-scrolling-button-menu';
 import ListFood from "./ListFood";
 import HomePage from "./HomePage";
+import Category from "./Category";
+import NearMe from "./NearMe";
+import Random from "./Random";
+import Trend from "./Trend";
 
 //define menu
 let menus = [
@@ -60,7 +64,11 @@ export default class HomeView extends Component {
     })
   }
   render() {
-    const mainJSX = <HomePage />;
+    const mainJSX = this.state.tabView =="Món Hót" ? <HomePage navigator={this.props.navigator}/>
+    : (this.state.tabView=="Danh Mục" ? <Category navigator={this.props.navigator}/> 
+    : (this.state.tabView=="Random" ? <Random navigator={this.props.navigator}/> 
+    :(this.state.tabView=="Gần Tôi" ? <NearMe navigator={this.props.navigator}/>
+    :<Trend navigator={this.props.navigator}/>))) ;
     return (
       <View style={{flex:1, backgroundColor:'#86AAEE'}}>
         <Header/>

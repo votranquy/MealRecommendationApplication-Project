@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import Header from "./Header";
 import ScrollingButtonMenu from 'react-native-scrolling-button-menu';
 import ListFood from "./ListFood";
-
+import HomePage from "./HomePage";
 
 //define menu
 let menus = [
@@ -60,7 +60,7 @@ export default class HomeView extends Component {
     })
   }
   render() {
-    const mainJSX = <ListFood />;
+    const mainJSX = <HomePage />;
     return (
       <View style={{flex:1, backgroundColor:'#86AAEE'}}>
         <Header/>

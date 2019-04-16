@@ -54,16 +54,36 @@ export default class SideMenu extends Component{
           renderSelectedIcon={() => <Image source={require("../Image/user_black.png")} />}
           onPress={() => this.setState({ selectedTab: 'user' })}>
             <UserMenu/>
+            {/* <View style={{flex:1,backgroundColor:"white"}}></View>   */}
         </TabNavigator.Item>
       </TabNavigator>
       </View>
-    );
+   
+   );
   }
 }
 
 var styles = StyleSheet.create({
-  input:{backgroundColor:'#EEEEEE',height:60,borderWidth:1,margin:5,fontSize: 20,},
-  wrapper: {flex:1, backgroundColor: "white", padding:10},
-  touchable:{margin:5,backgroundColor:"#EEEEEE",padding:10,flexDirection:"row"},
-  plus: {color:"black",fontSize: 20, },
+  input:{
+    backgroundColor:'#EEEEEE',
+    height:60,
+    borderWidth:1,
+    margin:5,
+    fontSize: 20,
+  },
+  wrapper: {
+    flex:1,
+    backgroundColor: "white", 
+    padding:10
+  },
+  touchable:{
+    margin:5,
+    backgroundColor:"#EEEEEE",
+    padding:10,
+    flexDirection:"row"
+  },
+  plus: {
+    color:"black",
+    fontSize: 20, 
+  },
 });

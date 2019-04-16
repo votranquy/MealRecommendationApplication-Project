@@ -6,7 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default class Category extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <View style={{flex:1, backgroundColor:'#86AAEE'}}>
                 <Text>Category</Text>
             </View>
         );

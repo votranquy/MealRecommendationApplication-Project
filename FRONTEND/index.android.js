@@ -21,6 +21,8 @@ import App from "./Components/App";
 import UserMenu from "./Components/UserMenu.js";
 import HomePage from "./Components/HomePage.js";
 import ScrollMenu from "./Components/ScrollMenu";
+
+import MultiSelectList from "./Test/MultiSelectList"
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
@@ -32,6 +34,7 @@ export default class MealRecommendationApplicationProject extends Component {
         <App/>
         {/* <HomePage/> */}
         {/* <Example /> */}
+        {/* <MultiSelectList/> */}
       </View>
     );
   }

@@ -12,17 +12,17 @@ import Trend from "./Trend";
 //define menu
 let menus = [
   {
-     text:'Món Hót',
+     text:'Tốp',
      textColor:'#FFFFFF',
      backgroundColor:'#FF002C',
      borderColor:'#FF002C',
   },
-  {
-     text:'Danh Mục',
-     textColor:'#FFFFFF',
-     backgroundColor:'#AC00B1',
-     borderColor:'#AC00B1',
-  },
+  // {
+  //    text:'Danh Mục',
+  //    textColor:'#FFFFFF',
+  //    backgroundColor:'#AC00B1',
+  //    borderColor:'#AC00B1',
+  // },
   {
      text:'Random',
      textColor:'#FFFFFF',
@@ -41,12 +41,12 @@ let menus = [
      backgroundColor:'#388E3C',
      borderColor:'#388E3C',
   },
-  {
-     text:'Spain',
-     textColor:'#FFFFFF',
-     backgroundColor:'#388E3C',
-     borderColor:'#388E3C',
-  }
+  // {
+  //    text:'Spain',
+  //    textColor:'#FFFFFF',
+  //    backgroundColor:'#388E3C',
+  //    borderColor:'#388E3C',
+  // }
 
 ];
 
@@ -54,7 +54,7 @@ export default class HomeView extends Component {
   constructor(props){
     super(props);
     this.state={
-      tabView:"Món Hót",
+      tabView:"Tốp",
     }
   }
   onPressButtonMenu(menu) {
@@ -64,11 +64,13 @@ export default class HomeView extends Component {
     })
   }
   render() {
-    const mainJSX = this.state.tabView =="Món Hót" ? <HomePage navigator={this.props.navigator}/>
+    
+    const mainJSX = this.state.tabView =="Tốp" ? <HomePage navigator={this.props.navigator}/>
     : (this.state.tabView=="Danh Mục" ? <Category navigator={this.props.navigator}/> 
     : (this.state.tabView=="Random" ? <Random navigator={this.props.navigator}/> 
-    :(this.state.tabView=="Gần Tôi" ? <NearMe navigator={this.props.navigator}/>
+    : (this.state.tabView=="Gần Tôi" ? <NearMe navigator={this.props.navigator}/>
     :<Trend navigator={this.props.navigator}/>))) ;
+
     return (
       <View style={{flex:1, backgroundColor:'#86AAEE'}}>
         <Header/>

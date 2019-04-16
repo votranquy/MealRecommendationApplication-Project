@@ -11,7 +11,6 @@
   FROM FOOD
   INNER JOIN FOOD_IMAGE
   ON FOOD.id = FOOD_IMAGE.id_food
-  ORDER BY rate DESC
   ";
   $query = mysqli_query($conn,$sql);
   

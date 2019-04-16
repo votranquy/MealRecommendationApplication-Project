@@ -1,7 +1,7 @@
 <?php 
   require("dbCon.php"); //Connect database 
   try{
-   $foodjsondata = file_get_contents('./CRAWL_DATA/DATA/data-miquang.json');
+   $foodjsondata = file_get_contents('./CRAWL_DATA/DATA/data-banhdap.json');
 
     $data = json_decode($foodjsondata, true);
 

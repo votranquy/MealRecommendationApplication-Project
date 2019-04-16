@@ -6,7 +6,6 @@
   $database = 'MealRecommendationApp'; 
   $conn = mysqli_connect($server_host,$server_username,$server_password,$database) or die("Can not connect to Database");
   mysqli_query($conn,"SET NAMES 'UTF8'");
-
   $sql = "SELECT * 
   FROM FOOD
   INNER JOIN FOOD_IMAGE
@@ -14,7 +13,7 @@
   ORDER BY rate DESC
   ";
   $query = mysqli_query($conn,$sql);
-  
+  $max = mysqli_num_rows($query);
   class Food{
     var $food_name;
     var $rate;
@@ -30,6 +29,7 @@
     }
   }
 
+  
   $arrFood = array();
   while( $row = mysqli_fetch_array($query) ){
     array_push($arrFood,new Food($row["food_name"],$row["rate"],$row["address"],$row["worktime"], $row["img_path"]));
@@ -40,7 +40,7 @@
   $newArrayFood = array();
   $from = $page * $the_number_of_items_per_page;
 
-  for($i=$from; $i <= $from + $the_number_of_items_per_page - 1; $i = $i + 1){
+  for($i=0; ($i <= $from + $the_number_of_items_per_page - 1) && ($i< $max); $i = $i + 1){
     array_push($newArrayFood,$arrFood[$i]);
   }
 

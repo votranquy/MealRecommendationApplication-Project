@@ -1,7 +1,3 @@
-//REVIEW: OK
-// User can enter Username, Password, Phone Number
-// Should add more: repeat password, check box agree with policy...., hidden password
-
 
 import React, { Component } from 'react';
 import {
@@ -10,42 +6,57 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
+import {firebaseApp} from "./FirebaseConfig.js";
 
-var URL= "http://192.168.64.2/MealRecommendationApplicationBackEnd/register.php";
+
 export default class Register extends Component {
 
   constructor(props){
     super(props);
     this.state={
-      USERNAME: "",
-      PASSWORD:"",
-      PHONE_NUMBER:"",
-      result:"",
-      checked:false,
+      email: "",
+      password:"",
     }
   }
 
-  clickPlus(){
-    fetch(URL, {
-      method:"POST",
-      // headers:{
-      //   "Accept":"application/json",
-      //   "Content-Type":"application/json"
-      // },
-      body:JSON.stringify({
-        USERNAME:this.state.USERNAME,
-        PASSWORD:this.state.PASSWORD,
-        PHONE_NUMBER:this.state.PHONE_NUMBER,
-      })
+
+  clickRegister(){
+    firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(()=>{
+      Alert.alert(
+          'Success',
+          'Dang ky thanh cong'+ this.state.email,
+          [
+            { text: 'Cancel',onPress: () => console.log('Cancel Pressed'),style: 'cancel',},
+            {text: 'OK', onPress: () => this.props.gotoLogin()},
+          ],
+          {cancelable: false},
+      )
+
+        this.setState({
+          email:"",
+          password:"",
+        })
+
     })
-    .then((response)=>response.json())
-    .then((responseJson)=>{
-      this.setState({
-        result: "Đăng ký thành công"
-      });
-    })
-    .catch((error)=>{console.log(error)});
+    .catch(function(error) {
+      Alert.alert(
+        'Fail',
+        'Dang ky that bai',
+        [
+          {text: 'Cancel',onPress: () => console.log('Cancel Pressed'),style: 'cancel',},
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        {cancelable: false},
+      )
+    });
+  }
+
+  gotoLogin(){
+    const {navigator} = this.props;
+    navigator.push({name:"login"});
   }
 
   render() {
@@ -53,35 +64,31 @@ export default class Register extends Component {
       <View style={styles.wrapper}>
         <TextInput
           style={styles.input}
-          onChangeText={(text)=> this.setState({USERNAME:text})}
-          value={this.state.HOTEN}
-          placeholder="Username"
+          onChangeText={(text)=> this.setState({email:text})}
+          value={this.state.email}
+          placeholder="email"
         />
         <TextInput
           style={styles.input}
-          onChangeText={(text)=> this.setState({PASSWORD:text})}
-          value={this.state.PASSWORD}
-          placeholder="Password"
+          onChangeText={(text)=> this.setState({password:text})}
+          value={this.state.password}
+          placeholder="password"
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={(text)=> this.setState({PHONE_NUMBER:text})}
-          value={this.state.PHONE_NUMBER}
-          placeholder="Phone Number"
-          
-        />
-
 
         <TouchableOpacity 
           style={styles.touchable}
-          onPress={()=>{this.clickPlus()}}
+          onPress={()=>{this.clickRegister()}}
         >
-          <Text style={styles.plus}>REGISTER</Text>
+          <Text style={styles.plus}> REGISTER </Text>
         </TouchableOpacity>
 
-        <View>
-          <Text style={styles.result}> {this.state.result}</Text>
-        </View>
+        <TouchableOpacity 
+          style={styles.touchable}
+          onPress={() => this.props.gotoLogin()}
+        >
+          <Text style={styles.plus}> GotoLogin </Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
@@ -92,6 +99,6 @@ const styles = StyleSheet.create({
   wrapper: {flex:1, backgroundColor: "white", padding:10},
   touchable:{alignItems: 'center',margin:5},
   plus: {backgroundColor:"black",color:"white",padding:10,fontSize: 30, },
-  result:{}
+  result:{},
 });
 

@@ -1,4 +1,5 @@
 
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -9,6 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import {firebaseApp} from "./FirebaseConfig.js";
+
 
 
 export default class Register extends Component {
@@ -57,6 +59,7 @@ export default class Register extends Component {
   gotoLogin(){
     const {navigator} = this.props;
     navigator.push({name:"login"});
+
   }
 
   render() {
@@ -88,6 +91,7 @@ export default class Register extends Component {
         >
           <Text style={styles.plus}> GotoLogin </Text>
         </TouchableOpacity>
+
 
       </View>
     );

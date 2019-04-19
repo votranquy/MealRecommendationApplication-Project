@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 
+
 import Login from "./Components/Login.js";
 import RefreshListView from "./Components/RefreshListView.js";
 import Register from "./Components/Register.js";
@@ -20,6 +21,7 @@ import Layout from "./Components/Layout.js";
 import TabBar from "./Components/TabBar.js";
 import UserMenu from "./Components/UserMenu.js";
 import HomePage from "./Components/HomePage.js";
+
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {
@@ -31,6 +33,7 @@ export default class MealRecommendationApplicationProject extends Component {
         {/* <SideMenu/> */}
         <TabBar/>
         {/* <HomePage/> */}
+
       </View>
     );
   }
@@ -42,6 +45,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
 });
-
 
 AppRegistry.registerComponent('MealRecommendationApplicationProject', () => MealRecommendationApplicationProject);

@@ -6,15 +6,16 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-
 } from 'react-native';
 import {firebaseApp} from "./FirebaseConfig.js";
+
 
 export default class Login extends Component {
 
   constructor(props){
     super(props);
     this.state={
+
       email:"",
       password:"",
     }
@@ -56,9 +57,11 @@ export default class Login extends Component {
     navigator.push({name:"welcome"});
   }
 
+
   render() {
     return (
       <View style={styles.wrapper}>
+
 
         <View style={styles.box}> 
           <Text> LOGIN BOX</Text>
@@ -71,6 +74,7 @@ export default class Login extends Component {
             onChangeText={(text)=> this.setState({email:text})}
             value={this.state.email}
             placeholder="email"
+
           />
         </View>
 
@@ -78,17 +82,21 @@ export default class Login extends Component {
           <Text style={styles.title}>Password:</Text>
           <TextInput
             style={styles.input}
+
             onChangeText={(text)=> this.setState({password:text})}
             value={this.state.password}
             placeholder="password"
+
           />
         </View>
 
         <View style={styles.box}>
           <TouchableOpacity 
             style={styles.touchable}
+
             onPress={()=>this.clickLogin()}
             >
+
             <Text style={styles.submit_button}>LOGIN</Text>
           </TouchableOpacity> 
         </View>
@@ -100,6 +108,7 @@ export default class Login extends Component {
           >
             <Text style={styles.submit_button}>GotoRegister</Text>
           </TouchableOpacity> 
+
         </View>
 
       </View>
@@ -115,6 +124,7 @@ const styles = StyleSheet.create({
   },
   box: {
     // color:"green",
+
   },
   box2: {
      borderWidth:1,

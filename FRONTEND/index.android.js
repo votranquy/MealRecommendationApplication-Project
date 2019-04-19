@@ -1,4 +1,5 @@
 
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -18,11 +19,13 @@ import App from "./Components/App";
 // import ScrollMenu from "./Components/ScrollMenu";
 import App1 from "./Components/App1";
 
+
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
         <App1/>
+
       </View>
     );
   }

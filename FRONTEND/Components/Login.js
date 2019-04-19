@@ -5,7 +5,9 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
+import {firebaseApp} from "./FirebaseConfig.js";
 
 
 export default class Login extends Component {
@@ -13,34 +15,46 @@ export default class Login extends Component {
   constructor(props){
     super(props);
     this.state={
-      USERNAME:"",
-      PASSWORD:"",
-      login_result:"NOT LOGIN YET",
-      token:"No have a token",
+
+      email:"",
+      password:"",
     }
   }
 
-  LOGIN(){
-    fetch("http://192.168.64.2/MealRecommendationApplicationBackEnd/createToken.php",
-      {
-        method:"POST",
-        // headers:{
-        //   "Accept":"application/json",
-        //   "Content-Type":"application/json"
-        // },
-        body: JSON.stringify({
-          USERNAME:this.state.USERNAME,
-          PASSWORD:this.state.PASSWORD,
-        })
-      })
-    .then((response)=>response.json())
-    .then((responseJson)=>{
+
+  clickLogin(){
+    firebaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .then(()=>{
+      Alert.alert(
+        'Success',
+        'Dang nhap thanh cong'+ this.state.email,
+        [
+          { text: 'Cancel',onPress: () => console.log('Cancel Pressed'),style: 'cancel',},
+          {text: 'OK', onPress: () => this.props.gotoWelcome()},
+        ],
+        {cancelable: false},
+      )
       this.setState({
-        login_result:"Logined",
-        token: responseJson.token,
-      });
+        email:"",
+        password:"",
+      })
     })
-    .catch((error)=>{console.log(error)});
+    .catch(function(error) {
+      Alert.alert(
+        'Fail',
+        'Dang nhap that bai',
+        [
+          { text: 'Cancel',onPress: () => console.log('Cancel Pressed'),style: 'cancel',},
+          {text: 'OK', onPress: () =>console.log('OK pressed')},
+        ],
+        {cancelable: false},
+      )
+    });
+  }
+
+  gotoWelcome(){
+    const {navigator} = this.props;
+    navigator.push({name:"welcome"});
   }
 
 
@@ -48,17 +62,19 @@ export default class Login extends Component {
     return (
       <View style={styles.wrapper}>
 
-       <View style={styles.box}> 
-        <Text> LOGIN BOX</Text>
+
+        <View style={styles.box}> 
+          <Text> LOGIN BOX</Text>
         </View>
 
         <View style={styles.box}> 
-          <Text style={styles.title}>Username:</Text>
+          <Text style={styles.title}>Email:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(text)=> this.setState({USERNAME:text})}
-            value={this.state.USERNAME}
-            placeholder="Username"
+            onChangeText={(text)=> this.setState({email:text})}
+            value={this.state.email}
+            placeholder="email"
+
           />
         </View>
 
@@ -66,24 +82,33 @@ export default class Login extends Component {
           <Text style={styles.title}>Password:</Text>
           <TextInput
             style={styles.input}
-            onChangeText={(text)=> this.setState({PASSWORD:text})}
-            value={this.state.PASSWORD}
-            placeholder="Password"
+
+            onChangeText={(text)=> this.setState({password:text})}
+            value={this.state.password}
+            placeholder="password"
+
           />
         </View>
 
         <View style={styles.box}>
           <TouchableOpacity 
             style={styles.touchable}
-            onPress={()=>{this.LOGIN()}}
-          >
+
+            onPress={()=>this.clickLogin()}
+            >
+
             <Text style={styles.submit_button}>LOGIN</Text>
           </TouchableOpacity> 
         </View>
 
-        <View style={styles.box2}>
-          <Text style={styles.warning_title}>{this.state.login_result}</Text>
-          <Text  style={styles.warning_title}>{this.state.token}</Text>
+        <View style={styles.box}>
+          <TouchableOpacity 
+            style={styles.touchable}
+            onPress={()=>{this.props.gotoRegister()}}
+          >
+            <Text style={styles.submit_button}>GotoRegister</Text>
+          </TouchableOpacity> 
+
         </View>
 
       </View>
@@ -98,6 +123,8 @@ const styles = StyleSheet.create({
     padding:10
   },
   box: {
+    // color:"green",
+
   },
   box2: {
      borderWidth:1,

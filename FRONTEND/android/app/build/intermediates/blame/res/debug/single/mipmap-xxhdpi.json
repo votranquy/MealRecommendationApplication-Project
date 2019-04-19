@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/votranquy/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/home/votranquy/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]

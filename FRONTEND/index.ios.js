@@ -11,20 +11,29 @@ import {
   Text,
   View
 } from 'react-native';
-import App from "./Components/Login.js/index.js";
-import NhapMonHoc from "./Components/NhapMonHoc.js";
-import DangKy from "./Components/Register.js/index.js";
-import Buoi4 from "./Components/Buoi4.js";
+
+
+import Login from "./Components/Login.js";
+import RefreshListView from "./Components/RefreshListView.js";
+import Register from "./Components/Register.js";
+import SideMenu from "./Components/SideMenu.js";
 import Layout from "./Components/Layout.js";
 import TabBar from "./Components/TabBar.js";
 import UserMenu from "./Components/UserMenu.js";
+import HomePage from "./Components/HomePage.js";
 
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {/* <Register/> */}
+        {/* <Login/> */}
+        {/* <RefreshListView /> */}
+        {/* <SideMenu/> */}
         <TabBar/>
+        {/* <HomePage/> */}
+
       </View>
     );
   }

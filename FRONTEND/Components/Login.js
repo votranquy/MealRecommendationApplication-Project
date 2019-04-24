@@ -29,7 +29,7 @@ export default class Login extends Component {
         'Dang nhap thanh cong'+ this.state.email,
         [
           { text: 'Cancel',onPress: () => console.log('Cancel Pressed'),style: 'cancel',},
-          {text: 'OK', onPress: () => this.props.gotoWelcome()},
+          {text: 'OK', onPress: () => this.gotoWelcome.bind(this)},
         ],
         {cancelable: false},
       )
@@ -54,6 +54,10 @@ export default class Login extends Component {
   gotoWelcome(){
     const {navigator} = this.props;
     navigator.push({name:"welcome"});
+  }
+  gotoRegister(){
+    const {navigator} = this.props;
+    navigator.push({name:"register"});
   }
 
   render() {
@@ -96,7 +100,7 @@ export default class Login extends Component {
         <View style={styles.box}>
           <TouchableOpacity 
             style={styles.touchable}
-            onPress={()=>{this.props.gotoRegister()}}
+            onPress={this.gotoRegister.bind(this)}
           >
             <Text style={styles.submit_button}>GotoRegister</Text>
           </TouchableOpacity> 

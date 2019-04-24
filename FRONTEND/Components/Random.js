@@ -18,8 +18,8 @@ import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
 // var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber=";
 
-const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-var URL="http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber=";
+const Img_Path= 'http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+var URL="http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber=";
 
 export default class Random extends Component {
 
@@ -39,7 +39,7 @@ export default class Random extends Component {
   }
 
   fetchData(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+this.state.page ,
+    fetch("http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -90,7 +90,7 @@ export default class Random extends Component {
       refreshing:true,
     });
 
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({

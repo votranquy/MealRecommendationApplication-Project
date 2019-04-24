@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import Header from "./Header";
 import ScrollingButtonMenu from 'react-native-scrolling-button-menu';
-import ListFood from "./ListFood";
+// import ListFood from "./ListFood";
 import HomePage from "./HomePage";
 import Category from "./Category";
 import NearMe from "./NearMe";
 import Random from "./Random";
 import Trend from "./Trend";
+import Header from "./Header";
+import Login from './Login';
 
 //define menu
 let menus = [
@@ -17,12 +18,12 @@ let menus = [
      backgroundColor:'#FF002C',
      borderColor:'#FF002C',
   },
-  // {
-  //    text:'Danh Mục',
-  //    textColor:'#FFFFFF',
-  //    backgroundColor:'#AC00B1',
-  //    borderColor:'#AC00B1',
-  // },
+  {
+     text:'Danh Mục',
+     textColor:'#FFFFFF',
+     backgroundColor:'#AC00B1',
+     borderColor:'#AC00B1',
+  },
   {
      text:'Random',
      textColor:'#FFFFFF',
@@ -41,12 +42,12 @@ let menus = [
      backgroundColor:'#388E3C',
      borderColor:'#388E3C',
   },
-  // {
-  //    text:'Spain',
-  //    textColor:'#FFFFFF',
-  //    backgroundColor:'#388E3C',
-  //    borderColor:'#388E3C',
-  // }
+  {
+     text:'Spain',
+     textColor:'#FFFFFF',
+     backgroundColor:'#388E3C',
+     borderColor:'#388E3C',
+  }
 
 ];
 
@@ -72,14 +73,14 @@ export default class HomeView extends Component {
     :<Trend navigator={this.props.navigator}/>))) ;
 
     return (
-      <View style={{flex:1, backgroundColor:'#86AAEE'}}>
+      <View style={{flex:1}}>
         <Header/>
         <ScrollingButtonMenu 
           items={menus}
           style={{padding:5, backgroundColor:'#FFF'}}
           onPress={this.onPressButtonMenu.bind(this)}
           selectedOpacity={0.1}
-        />
+        /> 
         {mainJSX}
       </View>
     )

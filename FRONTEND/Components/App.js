@@ -3,12 +3,14 @@ import {
   View, 
   StyleSheet, 
   Image,
+  Text,
 
 } from "react-native";
 import TabNavigator from 'react-native-tab-navigator';
 
 import UserMenu from "./UserMenu";
 import Home from "./Home";
+import App1 from "./App1";
 
 export default class App extends Component{
   constructor(props){
@@ -28,7 +30,7 @@ export default class App extends Component{
             renderIcon={() => <Image source={require("../Image/home_white.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/home_black.png")} />}
             onPress={() => this.setState({ selectedTab: 'home' })}>
-            <Home />
+            <Home/>
           </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -39,21 +41,22 @@ export default class App extends Component{
             onPress={() => this.setState({ selectedTab: 'save' })}>
             <View style={{flex:1,backgroundColor:"white"}}></View>
           </TabNavigator.Item>
-          {/* <TabNavigator.Item
+          <TabNavigator.Item
             selected={this.state.selectedTab === 'bell'}
             title="Notification"
             renderIcon={() => <Image source={require("../Image/bell_white.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/bell_black.png")} />}
             onPress={() => this.setState({ selectedTab: 'bell' })}>
-            <View style={{flex:1,backgroundColor:"white"}}></View>
-          </TabNavigator.Item> */}
+            {/* <View style={{flex:1,backgroundColor:"white"}}></View> */}
+            <App1/>
+          </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'user'}
             title="User"
             renderIcon={() => <Image source={require("../Image/user_white.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/user_black.png")} />}
             onPress={() => this.setState({ selectedTab: 'user' })}>
-              <UserMenu/>
+            <UserMenu/>
           </TabNavigator.Item>
 
         </TabNavigator>

@@ -27,10 +27,7 @@ export default class Header extends Component{
             <Text style={styles.searchBtnText}>Search</Text>
           </TouchableOpacity>  
         </View>
-        {/* <View style={styles.horizontalBar}>
-          <ScrollMenu/>
-        </View> */}
-
+        
      </View>
 
      );

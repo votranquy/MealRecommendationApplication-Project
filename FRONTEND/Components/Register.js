@@ -30,7 +30,7 @@ export default class Register extends Component {
           'Dang ky thanh cong'+ this.state.email,
           [
             { text: 'Cancel',onPress: () => console.log('Cancel Pressed'),style: 'cancel',},
-            {text: 'OK', onPress: () => this.props.gotoLogin()},
+            {text: 'OK', onPress: this.gotoLogin.bind(this)},
           ],
           {cancelable: false},
       )
@@ -84,7 +84,7 @@ export default class Register extends Component {
 
         <TouchableOpacity 
           style={styles.touchable}
-          onPress={() => this.props.gotoLogin()}
+          onPress={this.gotoLogin.bind(this)}
         >
           <Text style={styles.plus}> GotoLogin </Text>
         </TouchableOpacity>

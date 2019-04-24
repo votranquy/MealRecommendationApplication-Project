@@ -22,7 +22,7 @@ export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <App1/>
+        <App/>
       </View>
     );
   }

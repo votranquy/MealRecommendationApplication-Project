@@ -15,10 +15,10 @@ import {
 } from 'react-native';
 import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
-// var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
-const Img_Path= 'http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-var URL="http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+
+const Img_Path= 'http://10.10.31.172/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+var URL="http://10.10.31.172/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
 export default class HomePage extends Component {
 
@@ -38,7 +38,7 @@ export default class HomePage extends Component {
   }
 
   fetchData(){
-    fetch("http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+    fetch("http://10.10.31.172/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -89,7 +89,7 @@ export default class HomePage extends Component {
       refreshing:true,
     });
 
-    fetch("http://10.10.31.134/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://10.10.31.172/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({

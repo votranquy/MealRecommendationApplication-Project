@@ -8,6 +8,8 @@ import {
   TextInput,
   StyleSheet
 } from 'react-native';
+import icMenu from '../Image/ic_menu.png';
+
 const {height} = Dimensions.get('window'); 
 
 
@@ -18,7 +20,11 @@ export default class Header extends Component{
       <View style={styles.wrapper}>
 
         <View style={styles.row1}>
+            <TouchableOpacity onPress={this.props.onOpen}>
+                    <Image source={icMenu} style={styles.iconStyle} />
+            </TouchableOpacity>
             <Text style={styles.titleStyle}>Ăn Gì Hôm Nay?</Text>
+            <View/>
         </View>
 
         <View style={styles.searchContainer}>
@@ -39,8 +45,9 @@ const styles = StyleSheet.create({
    wrapper:{
     height: height / 6, backgroundColor: '#34B089', padding:10, justifyContent:'space-around'
    },
-   row1:{
-    flexDirection:'column', justifyContent:'space-around',flex:1,alignItems:'center', marginBottom:10
+   row1:{flexDirection: 'row', justifyContent: 'space-between' ,
+    // flexDirection:'column', justifyContent:'space-around',
+    flex:1,alignItems:'center', marginBottom:10
    },
    titleStyle:{
     color: '#FFF', fontSize:20, alignItems:'center', justifyContent:"space-between"

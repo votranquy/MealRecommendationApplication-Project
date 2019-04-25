@@ -6,12 +6,14 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+
 } from 'react-native';
 export default class UserMenu extends Component {
 
   render() {
     return (
       <ScrollView style={styles.wrapper}>
+
             <TouchableOpacity 
               style={styles.touchable}
             >
@@ -68,6 +70,7 @@ export default class UserMenu extends Component {
 
 
           </ScrollView>
+
     );
   }
 }

@@ -1417,7 +1417,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="250" />
     <option name="y" value="27" />
     <option name="width" value="1116" />
@@ -1428,9 +1428,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1465,7 +1465,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="250" y="27" width="1116" height="690" extended-state="0" />
+    <frame x="250" y="27" width="1116" height="690" extended-state="1" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2598353" />

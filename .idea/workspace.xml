@@ -2,46 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59b65b66-3d86-465b-94ed-8c4d195d0771" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/incremental/packageDebug/zip-cache/GVohu7KIZKv5W8zpERKifCtwRFs=" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_0bedf668fdd2cc9a20b13be71d6254bca7055849.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_0bedf668fdd2cc9a20b13be71d6254bca7055849.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_e9626f0315cb61d68d8da70e63cb1371d191a966.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_e9626f0315cb61d68d8da70e63cb1371d191a966.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_b96619cc2c385450f55dbc539908a9f4cb84f0bd.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_b96619cc2c385450f55dbc539908a9f4cb84f0bd.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.0.1_dd2a9305b74c5f6d8917dd85cfc9657d9e9d667b.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.0.1_dd2a9305b74c5f6d8917dd85cfc9657d9e9d667b.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.0.1_c12975a63e66450dbfbb32b3f6e30b6b018f0e55.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.0.1_c12975a63e66450dbfbb32b3f6e30b6b018f0e55.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.0.1_89b6ad5cc6d9f6cae7a04da272149fc307254b88.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.0.1_89b6ad5cc6d9f6cae7a04da272149fc307254b88.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.0.1_8a2c454d57a2ed0df7b72aab747a3e4b748278ff.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.0.1_8a2c454d57a2ed0df7b72aab747a3e4b748278ff.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.0.1_51d5f79e01bd1d5d47ea04a5eb18e82f9f3b2092.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.0.1_51d5f79e01bd1d5d47ea04a5eb18e82f9f3b2092.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_d77b1a3da6e778c65e3e890342b41b1de2bc28af.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_d77b1a3da6e778c65e3e890342b41b1de2bc28af.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/debug_91773907c11019f099c6ec6c4e9e484aedcf34eb.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/debug_91773907c11019f099c6ec6c4e9e484aedcf34eb.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5_d8e3516d344af5ce6190d124f5b2eca291d4308a.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5_d8e3516d344af5ce6190d124f5b2eca291d4308a.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_f6518172522bd105b8377c04874182825902c554.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_f6518172522bd105b8377c04874182825902c554.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_578c9fa2716d328f73a7dc8bfc81ff01f7349b6d.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_578c9fa2716d328f73a7dc8bfc81ff01f7349b6d.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_84013cd65b4d3c389d0d22c4504bb3d57f54ec98.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_84013cd65b4d3c389d0d22c4504bb3d57f54ec98.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_698ef75db0d3b92da8eca49e55cdf29964db9c37.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_698ef75db0d3b92da8eca49e55cdf29964db9c37.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.4.1_772e3b97918397546cefeac0c5559124386356a9.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.4.1_772e3b97918397546cefeac0c5559124386356a9.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-3.4.1_d8c23fb6115d3ec09c92b34d814fefc49f59ca87.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-3.4.1_d8c23fb6115d3ec09c92b34d814fefc49f59ca87.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okio-1.9.0_c3ad1f309ac1f96fd11c18166d3dbce40b8a1f41.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okio-1.9.0_c3ad1f309ac1f96fd11c18166d3dbce40b8a1f41.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_3824ee1f9865a6e7199a507c47dd39d867cafdfa.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_3824ee1f9865a6e7199a507c47dd39d867cafdfa.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_d4b50fb8047864756dc2bca935ca16c8c13b5e08.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.4.0_d4b50fb8047864756dc2bca935ca16c8c13b5e08.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/res/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/intermediates/res/resources-debug.ap_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/app/build/outputs/apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/app/build/outputs/apk/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/build/intermediates/dex-cache/cache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/build/intermediates/dex-cache/cache.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FRONTEND/index.android.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/index.android.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,11 +14,11 @@
     <session id="-1606087885">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.4" value="2" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -76,8 +37,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>

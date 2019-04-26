@@ -1,6 +1,5 @@
 //Scroll down to move to the next page
-// Home:  10.10.31.41
-// Company: 10.10.31.214
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -16,7 +15,7 @@ import {
 } from 'react-native';
 import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
-// var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+
 
 const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
 var URL="http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
@@ -149,7 +148,7 @@ export default class HomePage extends Component {
                 </View>  
                </TouchableOpacity>
           }
-          //onEndReached={this.loadNewData.bind(this)}
+          onEndReached={this.loadNewData.bind(this)}
               
         />
         </View>

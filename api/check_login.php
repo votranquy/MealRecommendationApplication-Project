@@ -17,7 +17,7 @@ try{
 		$jwt = getToken($decoded->email);
 		$decoded = JWT::decode($jwt, $key, array('HS256'));
 		$email = $decoded->email;
-		$sql = "SELECT * FROM users where email = '$email'";
+		$sql = "SELECT * FROM USER where email = '$email'";
 		$result = $mysqli->query($sql);
 
 		$user = mysqli_fetch_assoc($result);

@@ -10,7 +10,7 @@ $json = file_get_contents('php://input');
 $obj = json_decode($json, true);
 $email = $obj['email'];
 $password = md5($obj['password']);
-$sql = "SELECT u.email, u.name, u.address, u.phone FROM users u where email = '$email' and password = '$password'";
+$sql = "SELECT u.email, u.name, u.address, u.phone FROM USER u where email = '$email' and password = '$password'";
 $result = $mysqli->query($sql);
 
 $user = mysqli_fetch_assoc($result);

@@ -19,7 +19,7 @@ try{
 		$name = $obj['name'];
 		$phone = $obj['phone'];
 		$address = $obj['address'];
-		$sql = "UPDATE users SET name='$name', phone='$phone', address='$address' WHERE email ='$email'";
+		$sql = "UPDATE USER SET name='$name', phone='$phone', address='$address' WHERE email ='$email'";
 		$user = $mysqli->query($sql);
 		if($user){
 			$result = $mysqli->query("SELECT u.email, u.name, u.address, u.phone FROM users u where email = '$email'");

@@ -18,18 +18,19 @@ import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
 
 
-const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-var URL="http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+// const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+// var URL="http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
 export default class TopFood extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      //refreshing:false,
       page:0,
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       //currentTab:"HOTFOOD",
+      //refreshing:false,
+
     }
   }
 
@@ -39,7 +40,7 @@ export default class TopFood extends Component {
   }
 
   // fetchData(){
-  //   fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+  //   fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
   //     {method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
@@ -51,8 +52,13 @@ export default class TopFood extends Component {
   // }
 
   componentDidMount(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
-      {method:"POST",body:null})
+    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
+      {method:"POST",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
     .then((response)=>response.json())
     .then((responseData)=>{
       mang = responseData;
@@ -65,43 +71,63 @@ export default class TopFood extends Component {
     });
   }
 
-  // createRow(property){
-  //   return(
-  //       <TouchableOpacity onPress={this.gotoDetail.bind(this)} style={styles.row}>
-  //           <View style={styles.image}>
-  //             <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
-  //           </View>
-  //           <View style={styles.content}>
+  createRow(property){
+    var image_link="";
+    const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+property.Restaurant_ID+'&id_type=1';
+            fetch(url,
+            {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json, text/plain, */*',
+                    'x-foody-api-version':1,
+                    'x-foody-app-type':1004,
+                    'x-foody-client-id': '' ,
+                    'x-foody-client-type':1,
+                    'x-foody-client-version':1
+                },
+            })
+            .then(resp => resp.json())
+            .then(
+                function(responseJson) {
+                    if(responseJson.result == "success"){
+                        image_link = responseJson.reply.delivery_detail.photos[0].value;
+                   }
+              })
+            .catch(err => console.log(err));
 
-  //             <View style={styles.content_row}>
-  //               <Text style={styles.content_row_name}>{property.food_name}</Text>
-  //             </View>
-
-  //             <View style={styles.content_row}>
-  //               <Image source={require('../Image/star.png')}/>
-  //               <Text style={styles.content_row_rate}>{property.rate}</Text>
-  //             </View>
-
-  //             <View style={styles.content_row}>
-  //               <Image source={require('../Image/location.png')}/>
-  //               <Text style={styles.content_row_address}>{property.address}</Text>
-  //             </View>
-
-  //             <View style={styles.content_row}>
-  //               <Image source={require('../Image/clock.png')}/>
-  //               <Text style={styles.content_row_worktime}>{property.worktime}</Text>
-  //             </View>  
-  //           </View>  
-  //       </TouchableOpacity>
-  //   );
-  // }
+            return(
+              <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
+              <View style={styles.image} >
+                <Image style={styles.image}  />
+              </View>
+              <View style={styles.content}>
+                <View style={styles.content_row}>
+                  <Text style={styles.content_row_name}>{property.food_name}</Text>
+                </View>
+                <View style={styles.content_row}>
+                  <Image source={require('../Image/star.png')}/>
+                  <Text style={styles.content_row_rate}>{property.rate}</Text>
+                </View>
+                <View style={styles.content_row}>
+                  <Image source={require('../Image/location.png')}/>
+                  <Text style={styles.content_row_address}>{property.address}</Text>
+                </View>
+                <View style={styles.content_row}>
+                  <Image source={require('../Image/clock.png')}/>
+                  <Text style={styles.content_row_worktime}>AA</Text>
+                </View>  
+              </View>  
+             </TouchableOpacity>
+            );
+    
+  }
 
   // loadNewData(){
   //   this.setState({
   //     refreshing:true,
   //   });
 
-  //   fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+  //   fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
   //     this.setState({
@@ -115,8 +141,14 @@ export default class TopFood extends Component {
 
 
   _onEndReached(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
-      {method:"POST",body:null})
+    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
+      {
+        method:"POST",
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+      })
     .then((response)=>response.json())
     .then((responseData)=>{
       if(responseData.length != 0){
@@ -129,7 +161,7 @@ export default class TopFood extends Component {
       else{
           Alert.alert(
             'Alert Title',
-            'My Alert Msg',
+            'End of Page',
             [
               {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {
@@ -153,13 +185,9 @@ export default class TopFood extends Component {
   render() {
     return (
     <View style={{flex:1, backgroundColor:'#86AAEE'}}>
-    
-      
       <View style={styles.container}>
         <StatusBar hidden={true} />
         <View>
-
-
         <ListView 
           // refreshControl={
           //   <RefreshControl 
@@ -169,29 +197,29 @@ export default class TopFood extends Component {
           // }
           dataSource={this.state.dataSource}
           renderRow={
-            (property) =>
-              <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
-                <View style={styles.image}>
-                  <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
-                </View>
-                <View style={styles.content}>
-                  <View style={styles.content_row}>
-                    <Text style={styles.content_row_name}>{property.food_name}</Text>
-                  </View>
-                  <View style={styles.content_row}>
-                    <Image source={require('../Image/star.png')}/>
-                    <Text style={styles.content_row_rate}>{property.rate}</Text>
-                  </View>
-                  <View style={styles.content_row}>
-                    <Image source={require('../Image/location.png')}/>
-                    <Text style={styles.content_row_address}>{property.address}</Text>
-                  </View>
-                  <View style={styles.content_row}>
-                    <Image source={require('../Image/clock.png')}/>
-                    <Text style={styles.content_row_worktime}>{property.worktime}</Text>
-                  </View>  
-                </View>  
-               </TouchableOpacity>
+            (propertya) => this.createRow(propertya)
+            //   <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
+            //   <View style={styles.image}>
+            //     <Image style={styles.image} />
+            //   </View>
+            //   <View style={styles.content}>
+            //     <View style={styles.content_row}>
+            //       <Text style={styles.content_row_name}>{property.food_name}</Text>
+            //     </View>
+            //     <View style={styles.content_row}>
+            //       <Image source={require('../Image/star.png')}/>
+            //       <Text style={styles.content_row_rate}>{property.rate}</Text>
+            //     </View>
+            //     <View style={styles.content_row}>
+            //       <Image source={require('../Image/location.png')}/>
+            //       <Text style={styles.content_row_address}>{property.address}</Text>
+            //     </View>
+            //     <View style={styles.content_row}>
+            //       <Image source={require('../Image/clock.png')}/>
+            //       <Text style={styles.content_row_worktime}>AA</Text>
+            //     </View>  
+            //   </View>  
+            // </TouchableOpacity>
           }
           onEndReached={this._onEndReached.bind(this)}
           onEndReachedThreshold={5}

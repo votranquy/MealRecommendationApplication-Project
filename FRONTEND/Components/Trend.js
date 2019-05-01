@@ -18,8 +18,8 @@ import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
 // var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
-const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-var URL="http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
+const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+var URL="http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
 
 export default class Trend extends Component {
 
@@ -39,7 +39,7 @@ export default class Trend extends Component {
   }
 
   fetchData(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page ,
+    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -58,7 +58,7 @@ export default class Trend extends Component {
     return(
         <TouchableOpacity onPress={this.gotoDetail.bind(this)} style={styles.row}>
             <View style={styles.image}>
-              <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
+              {/* <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} /> */}
             </View>
             <View style={styles.content}>
 
@@ -78,7 +78,7 @@ export default class Trend extends Component {
 
               <View style={styles.content_row}>
                 <Image source={require('../Image/clock.png')}/>
-                <Text style={styles.content_row_worktime}>{property.worktime}</Text>
+                {/* <Text style={styles.content_row_worktime}>{property.worktime}</Text> */}
               </View>  
             </View>  
         </TouchableOpacity>
@@ -90,7 +90,7 @@ export default class Trend extends Component {
       refreshing:true,
     });
 
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({
@@ -128,7 +128,7 @@ export default class Trend extends Component {
             (property) =>
               <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
                 <View style={styles.image}>
-                  <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} />
+                  {/* <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} /> */}
                 </View>
                 <View style={styles.content}>
                   <View style={styles.content_row}>
@@ -144,7 +144,7 @@ export default class Trend extends Component {
                   </View>
                   <View style={styles.content_row}>
                     <Image source={require('../Image/clock.png')}/>
-                    <Text style={styles.content_row_worktime}>{property.worktime}</Text>
+                    {/* <Text style={styles.content_row_worktime}>{property.worktime}</Text> */}
                   </View>  
                 </View>  
                </TouchableOpacity>

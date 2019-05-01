@@ -38,13 +38,13 @@ export default class HomeView extends Component {
           <ScrollableTabView
               tabBarActiveTextColor="#53ac49"
               renderTabBar={() => <TabBar underlineColor="#53ac49" />}>
-            <TopFood    tabLabel={{label: "         Tốp      "}} navigator={this.props.navigator}/>
+            <TopFood   tabLabel={{label: "         Tốp      "}} navigator={this.props.navigator}/>
             <Category        tabLabel={{label: "Danh Mục  "}} navigator={this.props.navigator}/>
             <Random         tabLabel={{label: " Random    "}}  navigator={this.props.navigator}/>
             <NearMe          tabLabel={{label: "Gần Tôi      "}}  navigator={this.props.navigator}/>
             <Trend              tabLabel={{label: "Phổ Biến    "}}  navigator={this.props.navigator}/>
-            <Page               tabLabel={{label: "Page #6     "}}  label="Page #5"/>
-            <Page               tabLabel={{label: "Page #7     "}}  label="Page #5"/>
+            {/* <Page               tabLabel={{label: "Page #6     "}}  label="Page #5"/> */}
+            {/* <Page               tabLabel={{label: "Page #7     "}}  label="Page #5"/> */}
           </ScrollableTabView>
         </View>
     );

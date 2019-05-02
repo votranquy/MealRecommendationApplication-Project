@@ -9,7 +9,7 @@ StatusBar.setHidden(true);
 
 export default class App extends Component {
     componentDidMount() {
-       for (var i =648400; i < 648900; i++){
+       for (var i =648400; i < 648902; i++){
 
             const restaurantid=i;
             const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+i+'&id_type=1';
@@ -39,6 +39,7 @@ export default class App extends Component {
                         latitude=responseJson.reply.delivery_detail.position.latitude;
                         longitude=responseJson.reply.delivery_detail.position.longitude;
                         rate=responseJson.reply.delivery_detail.rating.avg;
+                        first_image=responseJson.reply.delivery_detail.photos[1].value;
                         fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/saveData.php',
                         {   
                             method: 'POST',
@@ -46,7 +47,7 @@ export default class App extends Component {
                                 'Content-Type': 'application/json',
                                 Accept: 'application/json'
                             },
-                            body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate})
+                            body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate,first_image})
                         })
                         .catch(err => console.log(err));
                     }

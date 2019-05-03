@@ -72,28 +72,28 @@ export default class TopFood extends Component {
   }
 
   createRow(property){
-    var image_link="";
-    const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+property.Restaurant_ID+'&id_type=1';
-            fetch(url,
-            {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json, text/plain, */*',
-                    'x-foody-api-version':1,
-                    'x-foody-app-type':1004,
-                    'x-foody-client-id': '' ,
-                    'x-foody-client-type':1,
-                    'x-foody-client-version':1
-                },
-            })
-            .then(resp => resp.json())
-            .then(
-                function(responseJson) {
-                    if(responseJson.result == "success"){
-                        image_link = responseJson.reply.delivery_detail.photos[0].value;
-                   }
-              })
-            .catch(err => console.log(err));
+    // var image_link="";
+    // const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+property.Restaurant_ID+'&id_type=1';
+    //         fetch(url,
+    //         {
+    //             method: 'GET',
+    //             headers: {
+    //                 Accept: 'application/json, text/plain, */*',
+    //                 'x-foody-api-version':1,
+    //                 'x-foody-app-type':1004,
+    //                 'x-foody-client-id': '' ,
+    //                 'x-foody-client-type':1,
+    //                 'x-foody-client-version':1
+    //             },
+    //         })
+    //         .then(resp => resp.json())
+    //         .then(
+    //             function(responseJson) {
+    //                 if(responseJson.result == "success"){
+    //                     image_link = responseJson.reply.delivery_detail.photos[0].value;
+    //                }
+    //           })
+    //         .catch(err => console.log(err));
 
             return(
               <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
@@ -223,7 +223,6 @@ export default class TopFood extends Component {
           }
           onEndReached={this._onEndReached.bind(this)}
           onEndReachedThreshold={5}
-              
         />
         </View>
       </View>

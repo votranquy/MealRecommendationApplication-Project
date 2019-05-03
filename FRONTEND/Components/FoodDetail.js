@@ -8,22 +8,57 @@ import { View,
     Image,
     TextInput,
     ScrollView,
-
+    ListView
     } from 'react-native';
 
 import icBack from "../Image/back_white.png";
 
-const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+//const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
 
 // create a component
 export default class FoodDetail extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+    }
+  }
+
+
     goBack() {
         const { navigator } = this.props;
         navigator.pop();
     }
 
+    componentDidMount(){
+      const { image_path, category, food_name,  address , restaurantid} = this.props.food;
+      fetch("https://www.foody.vn/__get/Review/ResLoadMore?t=1556358596613&ResId="+restaurantid+"&LastId=0&Count=10&Type=1&isLatest=true&HasPicture=true",
+      {method:"GET",
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+        'cache-control' : 'no-cache',
+        'pragma' :  'no-cache',
+        'x-requested-with' : 'XMLHttpRequest'
+      }
+    })
+    .then((response)=>response.json())
+    .then((responseData)=>{
+      mang = responseData.Items;
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(mang),
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+    }
+
+
+
+
     render() {
-        const { img_path, food_name, rate, address, worktime } = this.props.food;
+        const { image_path, category, food_name,  address , restaurantid} = this.props.food;
         return (
         <View style={styles.wrapper} >
             <View style={styles.row1}>
@@ -33,9 +68,9 @@ export default class FoodDetail extends Component {
                 <Text style={styles.titleStyle}>{food_name}</Text>
                 <View/>
             </View>
+            
             <ScrollView style={styles.content}>
-                <Image source={{uri: `${Img_Path}${img_path}`}} style={styles.foodImage}/>
-                {/* <Text>Anh mon an o day</Text> */}
+                <Image source={{uri: image_path}} style={styles.foodImage}/>
                 <View style={styles.foodInfo}>
                   <View style={styles.rowFoodInfo} >
                     <Image style={styles.smallImage} source={require('../Image/location.png')} />
@@ -47,7 +82,7 @@ export default class FoodDetail extends Component {
                   </View>
                   <View style={styles.rowFoodInfo} >
                     <Image style={styles.smallImage} source={require('../Image/spoon.png')} />
-                    <Text style={styles.contentrowFoodInfo}>  Món Việt</Text>
+                    <Text style={styles.contentrowFoodInfo}>  {category}</Text>
                   </View>
                   <View style={styles.rowFoodInfo} >
                     <Image style={styles.smallImage} source={require('../Image/cash.png')} />
@@ -67,9 +102,26 @@ export default class FoodDetail extends Component {
                     <Image source={require('../Image/bookmark.png')}/>
                     <Text style={styles.ContactTitle}>Lưu lại</Text>
                   </View>
-
                 </View>
-            </ScrollView>
+
+            <ListView 
+          dataSource={this.state.dataSource}
+          renderRow={
+            (data) => 
+                <View>
+
+                <View style={styles.image}>
+                  <Text>  {data.Owner.DisplayName} </Text>
+                </View>
+
+                <View style={styles.content}>
+                    <Text style={styles.content_row_name}>{data.Description}</Text>
+              </View>
+
+            </View>
+            }
+        />
+        </ScrollView>
          </View>
         );
     }

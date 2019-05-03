@@ -98,7 +98,7 @@ export default class TopFood extends Component {
             return(
               <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
               <View style={styles.image} >
-                <Image style={styles.image} source={{uri: property.image}} />
+                <Image style={styles.image} source={{uri: property.image_path}} />
               </View>
               <View style={styles.content}>
                 <View style={styles.content_row}>

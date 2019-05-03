@@ -13,7 +13,7 @@ import { View,
 
 import icBack from "../Image/back_white.png";
 
-const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
 
 // create a component
 export default class FoodDetail extends Component {

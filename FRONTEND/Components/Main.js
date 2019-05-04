@@ -10,6 +10,7 @@ import refreshToken from '../api/refreshToken';
 import global from './global';
 
 export default class Main extends Component{
+    
     componentDidMount() {
         getToken()
         .then(token => checkLogin(token))

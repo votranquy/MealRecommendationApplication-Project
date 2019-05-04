@@ -3,48 +3,48 @@ import {
     View, Alert, TouchableOpacity, Text, Image, StyleSheet, TextInput
 } from 'react-native';
 import backSpecial from '../Image/backs.png';
-// import getToken from "../../api/getToken";
-// import  changeInfoApi from "../../api/changeInfoApi";
-// import global from "../global";
+import getToken from "../api/getToken";
+import  changeInfoApi from "../api/changeInfoApi";
+import global from "./global";
 export default class ChangeInfo extends Component {
     constructor(props) {
         super(props);
-       // const { name, address, phone } = props.user;
+        const { name, address, phone } = props.user;
         this.state = { 
-            txtName:"" , 
-            txtAddress:"" , 
-            txtPhone: ""
+            txtName: name , 
+            txtAddress: address , 
+            txtPhone: phone
         };
     }
 
 
 
     goBackToMain() {
-        const { navigator } = this.props;
+        const {navigator} = this.props;
         navigator.pop();
     }
 
-    // alertSuccess() {
-    //     Alert.alert(
-    //         'Notice',
-    //         'Update Info successfully',
-    //         [
-    //             { text: 'OK', onPress: this.goBackToMain.bind(this) }
-    //         ],
-    //         { cancelable: false }
-    //     );
-    // }
+    alertSuccess() {
+        Alert.alert(
+            'Notice',
+            'Update Info successfully',
+            [
+                { text: 'OK', onPress: this.goBackToMain.bind(this) }
+            ],
+            { cancelable: false }
+        );
+    }
 
-    // clickChangeInfo() {
-    //     const { txtName, txtPhone, txtAddress } = this.state;
-    //     getToken()
-    //     .then(token => changeInfoApi(token, txtName, txtPhone, txtAddress))
-    //         .then((user) => {
-    //             this.alertSuccess();
-    //             global.onSignIn(user);
-    //         })
-    //     .catch(err => console.log(err));
-    // }
+    clickChangeInfo() {
+        const { txtName, txtPhone, txtAddress } = this.state;
+        getToken()
+        .then(token => changeInfoApi(token, txtName, txtPhone, txtAddress))
+        .then((user) => {
+                this.alertSuccess();
+                global.onSignIn(user);
+        })
+        .catch(err => console.log(err));
+    }
 
     render(){
         const {
@@ -88,7 +88,7 @@ export default class ChangeInfo extends Component {
                     />
                     <TouchableOpacity
                         style={signInContainer}
-                        //onPress={this.clickChangeInfo.bind(this)}
+                        onPress={this.clickChangeInfo.bind(this)}
                     >
                         <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>
                     </TouchableOpacity>

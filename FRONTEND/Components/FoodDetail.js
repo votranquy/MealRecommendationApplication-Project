@@ -13,7 +13,7 @@ import { View,
 
 import icBack from "../Image/back_white.png";
 
-//const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+//const Img_Path= 'http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
 
 // create a component
 export default class FoodDetail extends Component {
@@ -58,71 +58,73 @@ export default class FoodDetail extends Component {
 
 
     render() {
-        const { image_path, category, food_name,  address , restaurantid} = this.props.food;
+      const { image_path, category, food_name,  address , restaurantid} = this.props.food;
+      const headerJSX=(
+        <View style={styles.row1}>
+          <TouchableOpacity  onPress={this.goBack.bind(this)}>
+            <Image source={icBack} style={styles.iconStyle}/>
+          </TouchableOpacity>
+          <Text style={styles.titleStyle}>{food_name}</Text>
+          <View/>
+      </View>
+      );
+      const infomationJSX=(
+        <View>
+        <Image source={{uri: image_path}} style={styles.foodImage}/>
+        <View style={styles.foodInfo}>
+          <View style={styles.rowFoodInfo} >
+            <Image style={styles.smallImage} source={require('../Image/location.png')} />
+            <Text style={styles.contentrowFoodInfo}>  {address}</Text>
+          </View>
+          <View style={styles.rowFoodInfo} >
+            <Image style={styles.smallImage} source={require('../Image/global.png')} />
+            <Text style={styles.contentrowFoodInfo}>  Khoảng cách</Text>
+          </View>
+          <View style={styles.rowFoodInfo} >
+            <Image style={styles.smallImage} source={require('../Image/spoon.png')} />
+            <Text style={styles.contentrowFoodInfo}>  {category}</Text>
+          </View>
+          <View style={styles.rowFoodInfo} >
+            <Image style={styles.smallImage} source={require('../Image/cash.png')} />
+            <Text style={styles.contentrowFoodInfo}>  20K- 50K</Text>
+          </View>
+        </View>
+        <View style={styles.contact}>
+          <View style={styles.ContactCell}>
+            <Image source={require('../Image/map.png')}/>
+            <Text style={styles.ContactTitle}>Chỉ đường</Text>
+          </View>
+          <View style={styles.ContactCell}>
+            <Image source={require('../Image/phone.png')}/>
+            <Text style={styles.ContactTitle}>Gọi ngay</Text>
+          </View>
+          <View style={styles.ContactCell}>
+            <Image source={require('../Image/bookmark.png')}/>
+            <Text style={styles.ContactTitle}>Lưu lại</Text>
+          </View>
+        </View>
+      </View>
+      );
         return (
-        <View style={styles.wrapper} >
-            <View style={styles.row1}>
-                <TouchableOpacity  onPress={this.goBack.bind(this)}>
-                  <Image source={icBack} style={styles.iconStyle}/>
-                </TouchableOpacity>
-                <Text style={styles.titleStyle}>{food_name}</Text>
-                <View/>
-            </View>
+        <ScrollView style={styles.wrapper} >
+            {headerJSX }
             
-            <ScrollView style={styles.content}>
-                <Image source={{uri: image_path}} style={styles.foodImage}/>
-                <View style={styles.foodInfo}>
-                  <View style={styles.rowFoodInfo} >
-                    <Image style={styles.smallImage} source={require('../Image/location.png')} />
-                    <Text style={styles.contentrowFoodInfo}>  {address}</Text>
-                  </View>
-                  <View style={styles.rowFoodInfo} >
-                    <Image style={styles.smallImage} source={require('../Image/global.png')} />
-                    <Text style={styles.contentrowFoodInfo}>  Khoảng cách</Text>
-                  </View>
-                  <View style={styles.rowFoodInfo} >
-                    <Image style={styles.smallImage} source={require('../Image/spoon.png')} />
-                    <Text style={styles.contentrowFoodInfo}>  {category}</Text>
-                  </View>
-                  <View style={styles.rowFoodInfo} >
-                    <Image style={styles.smallImage} source={require('../Image/cash.png')} />
-                    <Text style={styles.contentrowFoodInfo}>  20K- 50K</Text>
-                  </View>
-                </View>
-                <View style={styles.contact}>
-                  <View style={styles.ContactCell}>
-                    <Image source={require('../Image/map.png')}/>
-                    <Text style={styles.ContactTitle}>Chỉ đường</Text>
-                  </View>
-                  <View style={styles.ContactCell}>
-                    <Image source={require('../Image/phone.png')}/>
-                    <Text style={styles.ContactTitle}>Gọi ngay</Text>
-                  </View>
-                  <View style={styles.ContactCell}>
-                    <Image source={require('../Image/bookmark.png')}/>
-                    <Text style={styles.ContactTitle}>Lưu lại</Text>
-                  </View>
-                </View>
-
+            {/* <View style={styles.content}> */}
+              {infomationJSX}
             <ListView 
-          dataSource={this.state.dataSource}
-          renderRow={
-            (data) => 
-                <View>
-
-                <View style={styles.image}>
-                  <Text>  {data.Owner.DisplayName} </Text>
-                </View>
-
-                <View style={styles.content}>
-                    <Text style={styles.content_row_name}>{data.Description}</Text>
-              </View>
-
-            </View>
-            }
+                dataSource={this.state.dataSource}
+                renderRow={
+                  (data) => 
+                      <View style={styles.comment}>
+                          <Text style={styles.username}>  {data.Owner.DisplayName} </Text>
+                        <View style={styles.content}>
+                            <Text style={styles.content_row_name}>{data.Description}</Text>
+                      </View>
+                     </View> 
+                  }
         />
-        </ScrollView>
-         </View>
+        {/* </View> */}
+         </ScrollView>
         );
     }
 }
@@ -132,8 +134,8 @@ const styles = StyleSheet.create({
       flex: 1,
       margin:0,
       flex:1,
-      justifyContent:'space-between',      
-      alignItems:'center',
+      //justifyContent:'space-between',      
+     //alignItems:'center',
       flexDirection:"column",
 
     },
@@ -221,10 +223,18 @@ const styles = StyleSheet.create({
       flexDirection:"column",
       justifyContent:"center",
       alignItems:"center",
+      backgroundColor:"white",
     },
     ContactTitle:{
       // fontSize:15,
       color:"green",
+    },
+    comment:{
+      backgroundColor:"white",
+    },
+    username:{
+      color:"green",
+      fontWeight:"bold",
     }
 
   })

@@ -40,7 +40,7 @@ export default class App extends Component {
     //                     longitude=responseJson.reply.delivery_detail.position.longitude;
     //                     rate=responseJson.reply.delivery_detail.rating.avg;
     //                     first_image=responseJson.reply.delivery_detail.photos[1].value;
-    //                     fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/saveData.php',
+    //                     fetch('http://10.0.12.27/MealRecommendationApplication-Project/api/saveData.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {

@@ -28,7 +28,7 @@ export default class Header extends Component{
         </View>
 
         <View style={styles.searchContainer}>
-          <TextInput style={styles.searchInput} placeholder="What do you want to eat?" underlineColorAndroid="white"/>
+          <TextInput style={styles.searchInput} placeholder="Bạn muốn ăn gì?" underlineColorAndroid="white"/>
           <TouchableOpacity style={styles.searchBtn}>
             <Text style={styles.searchBtnText}>Search</Text>
           </TouchableOpacity>  
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   searchInput:{
-    flex:3,height: height/15, backgroundColor: 'white', paddingLeft:5, paddingHorizontal: 20,  borderRadius: 20,
+    flex:3,height: height/15, backgroundColor: 'white', paddingLeft:5, paddingHorizontal: 20,  borderRadius: 20, marginRight:2
    },
   searchBtn: {
-    flex: 1,
-     height: height/15, backgroundColor: '#2ABB9C',  paddingHorizontal: 20,  borderRadius: 20,
+    // flex: 1,
+     height: height/15, backgroundColor: '#2ABB9C',  paddingHorizontal: 20,  borderRadius: 20,alignItems:'center', justifyContent: 'space-around'
   },
   searchBtnText:{
     color: '#FFF', fontSize:20, alignItems:'center', justifyContent:"space-between"

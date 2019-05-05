@@ -18,8 +18,8 @@ import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
 
 
-// const Img_Path= 'http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-// var URL="http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
+// const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+// var URL="http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
 
 export default class TopFood extends Component {
 
@@ -39,20 +39,10 @@ export default class TopFood extends Component {
     navigator.push({name: "FOOD_DETAIL",property});
   }
 
-  // fetchData(){
-  //   fetch("http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
-  //     {method:"POST",body:null})
-  //   .then((response)=>response.json())
-  //   .then((responseData)=>{
-  //     this.setState({
-  //       dataSource: this.state.dataSource.cloneWithRows(responseData)
-  //     });
-  //   })
-  //   .done()
-  // }
+
 
   componentDidMount(){
-    fetch("http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
+    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -71,30 +61,33 @@ export default class TopFood extends Component {
     });
   }
 
-  createRow(property){
-    // var image_link="";
-    // const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+property.Restaurant_ID+'&id_type=1';
-    //         fetch(url,
-    //         {
-    //             method: 'GET',
-    //             headers: {
-    //                 Accept: 'application/json, text/plain, */*',
-    //                 'x-foody-api-version':1,
-    //                 'x-foody-app-type':1004,
-    //                 'x-foody-client-id': '' ,
-    //                 'x-foody-client-type':1,
-    //                 'x-foody-client-version':1
-    //             },
-    //         })
-    //         .then(resp => resp.json())
-    //         .then(
-    //             function(responseJson) {
-    //                 if(responseJson.result == "success"){
-    //                     image_link = responseJson.reply.delivery_detail.photos[0].value;
-    //                }
-    //           })
-    //         .catch(err => console.log(err));
+creatStar1(score){
+  //1
+  if(score <  0.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+}
+creatStar2(score){
+  //2
+  if(score <  1.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+}
+creatStar3(score){
+  //3
+  if(score <  2.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+}
+creatStar4(score){
+  //4
+  if(score <  3.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+}
+creatStar5(score){
+  //1
+  if(score <  4.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+}
 
+  createRow(property){
             return(
               <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
               <View style={styles.image} >
@@ -102,24 +95,27 @@ export default class TopFood extends Component {
               </View>
               <View style={styles.content}>
                 <View style={styles.content_row}>
-                  <Text style={styles.content_row_name}>{property.food_name}</Text>
+                  <Text style={styles.content_row_name}>{property.food_name.length >25 ? property.food_name.substring(0,23)+"..." :property.food_name }</Text>
                 </View>
                 <View style={styles.content_row}>
-                  <Image source={require('../Image/star.png')}/>
+                  {this.creatStar1(property.rate)}
+                  {this.creatStar2(property.rate)}
+                  {this.creatStar3(property.rate)}
+                  {this.creatStar4(property.rate)}
+                  {this.creatStar5(property.rate)}
                   <Text style={styles.content_row_rate}>{property.rate}</Text>
                 </View>
                 <View style={styles.content_row}>
                   <Image source={require('../Image/location.png')}/>
-                  <Text style={styles.content_row_address}>{property.address}</Text>
+                  <Text style={styles.content_row_address}>{property.address.length >30 ? property.address.substring(0,28)+"..." :property.address }</Text>
                 </View>
                 <View style={styles.content_row}>
-                  <Image source={require('../Image/clock.png')}/>
-                  <Text style={styles.content_row_worktime}>AA</Text>
+                  <Image source={require('../Image/spoon.png')}/>
+                  <Text style={styles.content_row_menu}>{property.menu.length >30 ? property.menu.substring(0,28)+"..." :property.menu }</Text>
                 </View>  
               </View>  
              </TouchableOpacity>
             );
-    
   }
 
   // loadNewData(){
@@ -127,7 +123,7 @@ export default class TopFood extends Component {
   //     refreshing:true,
   //   });
 
-  //   fetch("http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+  //   fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
   //     this.setState({
@@ -141,7 +137,7 @@ export default class TopFood extends Component {
 
 
   _onEndReached(){
-    fetch("http://10.0.12.27/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
+    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {
@@ -198,28 +194,6 @@ export default class TopFood extends Component {
           dataSource={this.state.dataSource}
           renderRow={
             (propertya) => this.createRow(propertya)
-            //   <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
-            //   <View style={styles.image}>
-            //     <Image style={styles.image} />
-            //   </View>
-            //   <View style={styles.content}>
-            //     <View style={styles.content_row}>
-            //       <Text style={styles.content_row_name}>{property.food_name}</Text>
-            //     </View>
-            //     <View style={styles.content_row}>
-            //       <Image source={require('../Image/star.png')}/>
-            //       <Text style={styles.content_row_rate}>{property.rate}</Text>
-            //     </View>
-            //     <View style={styles.content_row}>
-            //       <Image source={require('../Image/location.png')}/>
-            //       <Text style={styles.content_row_address}>{property.address}</Text>
-            //     </View>
-            //     <View style={styles.content_row}>
-            //       <Image source={require('../Image/clock.png')}/>
-            //       <Text style={styles.content_row_worktime}>AA</Text>
-            //     </View>  
-            //   </View>  
-            // </TouchableOpacity>
           }
           onEndReached={this._onEndReached.bind(this)}
           onEndReachedThreshold={5}
@@ -233,24 +207,25 @@ export default class TopFood extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1, backgroundColor: "white",
+    flex:1, backgroundColor: "#AAA",
   },
   row: {
     flex: 1,
     flexDirection:'row',
-    backgroundColor:"#EEEEEE",
+    backgroundColor:"#FFF",
     padding:3,
     margin:3,
-    
+    borderRadius: 20,
   },
   image:{
-    flex:0.4,
+    flex:0.3,
     margin:5,
-    borderWidth:1,
-    borderColor:"black",
+    // borderWidth:1,
+    // borderColor:"black",
+    borderRadius: 100
   },
   content:{
-    flex:0.6,
+    flex:0.7,
     padding:3,
   },
   content_row:{
@@ -260,7 +235,7 @@ const styles = StyleSheet.create({
   },
   content_row_name:{
     color:"green",
-    fontSize: 15,
+    fontSize: 20,
     alignItems: 'center',
   },
   content_row_rate:{
@@ -270,12 +245,12 @@ const styles = StyleSheet.create({
   },
   content_row_address:{
     color:"gray",
-    fontSize: 15,
+    fontSize: 17,
     alignItems: 'center',
   },
-  content_row_worktime:{
+  content_row_menu:{
     color:"gray",
-    fontSize: 15,
+    fontSize: 17,
     alignItems: 'center',
   },
 });

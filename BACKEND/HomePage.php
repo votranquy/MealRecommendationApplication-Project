@@ -21,7 +21,8 @@
     var $image_path;
     var $category;
     var $restaurantid;
-    function Food($_id,$_food_name, $_rate, $_address, $_image_path,$_category,$_restaurantid){
+    var $menu;
+    function Food($_id,$_food_name, $_rate, $_address, $_image_path,$_category,$_restaurantid, $_menu){
       $this->food_name = $_food_name;
       $this->rate = $_rate;
       $this->address = $_address;
@@ -30,13 +31,14 @@
       $this->id = $_id;
       $this->category=$_category;
       $this->restaurantid=$_restaurantid;
+      $this->menu = $_menu;
     }
   }
 
   
   $arrFood = array();
   while( $row = mysqli_fetch_array($query) ){
-    array_push($arrFood,new Food($row["id"],$row["food_name"],$row["rate"],$row["address"], $row["image_path"], $row["category"], $row["restaurant_id"]));
+    array_push($arrFood,new Food($row["id"],$row["food_name"],$row["rate"],$row["address"], $row["image_path"], $row["category"], $row["restaurant_id"], $row["menu"]));
   }
 
   $the_number_of_items_per_page = 10;
@@ -45,7 +47,7 @@
   $from = $page * $the_number_of_items_per_page;
   $newArrayFood = array();
   try{
-      for($i=$from; ($i <= $from + $the_number_of_items_per_page - 1) && ($i< $max); $i = $i + 1){
+      for($i=$from; ($i <= $from + $the_number_of_items_per_page - 1) && ($i< $max-1); $i = $i + 1){
         array_push($newArrayFood,$arrFood[$i]);
       }
     echo json_encode($newArrayFood);

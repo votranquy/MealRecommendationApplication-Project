@@ -11,7 +11,7 @@ export default class Home extends Component{
   render() {
     return(
         <Navigator 
-          style={{flex:1, backgroundColor:"red"}}
+          style={{flex:1, backgroundColor:"#EEE"}}
           initialRoute={{ name: "HOME_VIEW" }}
           renderScene={(route, navigator) => {
               switch(route.name){

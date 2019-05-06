@@ -8,9 +8,11 @@ import { View,
     Image,
     TextInput,
     ScrollView,
-    ListView
+    ListView,
+    Alert
     } from 'react-native';
 import Swiper from 'react-native-swiper';
+import call from 'react-native-phone-call';
 // import Modal from 'react-native-animated-modal';
 
 import icBack from "../Image/back_white.png";
@@ -88,6 +90,25 @@ export default class FoodDetail extends Component {
 
     }
 
+    callTheRestaurant(){
+      const args = {
+        number: '0369380628', // String value with the number to call
+        prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+      }
+      Alert.alert(
+        'Liên lạc',
+        'Gọi số 0369380628',
+        [
+          {
+            text: 'Hủy',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'OK', onPress: () => call(args).catch(console.error)},
+        ],
+        {cancelable: false},
+      );
+    }
 
 
 
@@ -131,7 +152,7 @@ export default class FoodDetail extends Component {
             <Image source={require('../Image/map.png')}/>
             <Text style={styles.ContactTitle}>Chỉ đường</Text>
           </View>
-          <TouchableOpacity style={styles.ContactCell} onPress={this._showModal}>
+          <TouchableOpacity style={styles.ContactCell} onPress={this.callTheRestaurant}>
             <TouchableOpacity source={require('../Image/phone.png')}/>
             <Text style={styles.ContactTitle}>Gọi ngay</Text>
           </TouchableOpacity>

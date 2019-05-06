@@ -4,7 +4,7 @@ import { StatusBar, Navigator } from 'react-native';
 import Authentication from './Authentication';
 import ChangeInfo from './ChangeInfo';
 import Main from './Main';
-
+import Welcome from './Welcome';
 StatusBar.setHidden(true);
 
 export default class App extends Component {
@@ -40,7 +40,7 @@ export default class App extends Component {
     //                     longitude=responseJson.reply.delivery_detail.position.longitude;
     //                     rate=responseJson.reply.delivery_detail.rating.avg;
     //                     first_image=responseJson.reply.delivery_detail.photos[1].value;
-    //                     fetch('http://10.0.12.37/MealRecommendationApplication-Project/api/saveData.php',
+    //                     fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/saveData.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -77,7 +77,7 @@ export default class App extends Component {
     //                         for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
     //                         menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
     //                     }
-    //                     fetch('http://10.0.12.37/MealRecommendationApplication-Project/api/updateMenu.php',
+    //                     fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/updateMenu.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -97,9 +97,10 @@ export default class App extends Component {
     render() {
         return (
             <Navigator 
-                initialRoute={{ name: 'MAIN' }}
+                initialRoute={{ name: 'WELCOME' }}
                 renderScene={(route, navigator) => {
                     switch (route.name) {
+                        case "WELCOME": return <Welcome navigator={navigator} />
                         case 'MAIN': return <Main navigator={navigator} />;
                         case 'CHANGE_INFO': return <ChangeInfo navigator={navigator} user={route.user} />;
                         case 'AUTHENTICATION': return <Authentication navigator={navigator} />; 

@@ -1,12 +1,45 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, 
+  View,
+   Image,
+   StyleSheet,
+   ActivityIndicator,
+   } from 'react-native'
 
 export default class Welcome extends Component {
+  constructor(props) {
+    super(props);
+    this.state={};
+    setTimeout(() => {
+      const { navigator } = this.props;
+      navigator.push({ name: 'MAIN' });
+    }, 1000);
+  }
+
   render() {
     return (
-      <View>
-        <Text> Welcome </Text>
+      <View style={styles.wrapper}>
+        <Image style={styles.imgLogo} source={require('../Image/welcome.png')} />
+        <ActivityIndicator size="large" color="#0000ff"/>
+        <Text style={styles.txtWelcome}> Welcome </Text>
       </View>
     )
   }
 }
+const styles= StyleSheet.create({
+  wrapper:{
+    backgroundColor:"#34B089",
+    flex:1,
+    justifyContent:"space-around",
+    alignItems:'center',
+  },
+  imgLogo:{
+    width:250,
+    height:250,
+  },
+  txtWelcome:{
+    fontSize:30,
+    color:"#FFF",
+    fontWeight:"bold",
+  }
+})

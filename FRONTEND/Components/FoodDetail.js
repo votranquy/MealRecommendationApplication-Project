@@ -13,6 +13,7 @@ import { View,
     } from 'react-native';
 import Swiper from 'react-native-swiper';
 import call from 'react-native-phone-call';
+import global from "./global";
 // import Modal from 'react-native-animated-modal';
 
 import icBack from "../Image/back_white.png";
@@ -30,6 +31,8 @@ export default class FoodDetail extends Component {
     }
   }
 
+
+
   // _showModal = () => this.setState({ isModalVisible: true })
 
   // _hideModal = () => this.setState({ isModalVisible: false })
@@ -38,6 +41,11 @@ export default class FoodDetail extends Component {
         const { navigator } = this.props;
         navigator.pop();
     }
+
+    addThisFoodToBookMark() {
+      const { food } = this.props;
+      global.addFoodToBookMark(food);
+  }
 
     componentDidMount(){
       const { image_path, category, food_name,  address , restaurantid} = this.props.food;
@@ -153,13 +161,13 @@ export default class FoodDetail extends Component {
             <Text style={styles.ContactTitle}>Chỉ đường</Text>
           </View>
           <TouchableOpacity style={styles.ContactCell} onPress={this.callTheRestaurant}>
-            <TouchableOpacity source={require('../Image/phone.png')}/>
+            <Image source={require('../Image/phone.png')}/>
             <Text style={styles.ContactTitle}>Gọi ngay</Text>
           </TouchableOpacity>
-          <View style={styles.ContactCell}>
+          <TouchableOpacity style={styles.ContactCell} onPress={this.addThisFoodToBookMark.bind(this)}>
             <Image source={require('../Image/bookmark.png')}/>
             <Text style={styles.ContactTitle}>Lưu lại</Text>
-          </View>
+          </TouchableOpacity>
           {/* <Modal visible={this.state.isModalVisible}>
             <View style={{ flex: 1 }}>
               <Text>Hello!</Text>

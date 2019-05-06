@@ -34,9 +34,9 @@ export default class TopFood extends Component {
     }
   }
 
-  gotoDetail(property){
+  gotoDetail(food){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",property});
+    navigator.push({name: "FOOD_DETAIL",food});
   }
 
 
@@ -82,7 +82,7 @@ creatStar4(score){
   else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
 }
 creatStar5(score){
-  //1
+  //5
   if(score <  4.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
   else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
 }

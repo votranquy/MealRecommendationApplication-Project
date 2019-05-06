@@ -11,10 +11,11 @@ import { View,
     ListView
     } from 'react-native';
 import Swiper from 'react-native-swiper';
+// import Modal from 'react-native-animated-modal';
 
 import icBack from "../Image/back_white.png";
 
-//const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+//const Img_Path= 'http://10.0.12.37/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
 
 // create a component
 export default class FoodDetail extends Component {
@@ -22,10 +23,14 @@ export default class FoodDetail extends Component {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
-      foodItems: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} )
+      foodItems: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+      // isModalVisible: false,
     }
   }
 
+  // _showModal = () => this.setState({ isModalVisible: true })
+
+  // _hideModal = () => this.setState({ isModalVisible: false })
 
     goBack() {
         const { navigator } = this.props;
@@ -126,14 +131,19 @@ export default class FoodDetail extends Component {
             <Image source={require('../Image/map.png')}/>
             <Text style={styles.ContactTitle}>Chỉ đường</Text>
           </View>
-          <View style={styles.ContactCell}>
-            <Image source={require('../Image/phone.png')}/>
+          <TouchableOpacity style={styles.ContactCell} onPress={this._showModal}>
+            <TouchableOpacity source={require('../Image/phone.png')}/>
             <Text style={styles.ContactTitle}>Gọi ngay</Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.ContactCell}>
             <Image source={require('../Image/bookmark.png')}/>
             <Text style={styles.ContactTitle}>Lưu lại</Text>
           </View>
+          {/* <Modal visible={this.state.isModalVisible}>
+            <View style={{ flex: 1 }}>
+              <Text>Hello!</Text>
+            </View>
+          </Modal> */}
         </View>
       </View>
       );
@@ -150,7 +160,7 @@ export default class FoodDetail extends Component {
               <Text style={styles.contentrowFoodInfo}>{e.Name}</Text>
               <Text>{e.Price}</Text>
             </View>
-            </View>
+          </View>
           }
     />
     );
@@ -161,12 +171,12 @@ export default class FoodDetail extends Component {
         dataSource={this.state.dataSource}
         renderRow={
           (data) => 
-              <View style={styles.comment}>
-                  <Text style={styles.username}>  {data.Owner.DisplayName} </Text>
-                <View style={styles.content}>
-                    <Text style={styles.content_row_name}>{data.Description}</Text>
+            <View style={{flexDirection:"row"}}>
+              <View  style={styles.lbMenu}>
+                <Text style={styles.contentrowFoodInfo}>{data.Owner.DisplayName}</Text>
+                <Text>{data.Description}</Text>
               </View>
-            </View> 
+            </View>
           }
     />
     );
@@ -179,10 +189,11 @@ export default class FoodDetail extends Component {
                 <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Thực Đơn</Text>
                 </View>
-                
                 {itemsJSX}
             </View>
-            
+            <View style={styles.lbMenu}>
+                  <Text style={styles.txtMenu}>Bình Luận</Text>
+            </View>
             {commentJSX}
          </ScrollView>
         );

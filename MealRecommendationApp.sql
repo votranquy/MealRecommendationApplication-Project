@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th5 07, 2019 lúc 07:36 AM
+-- Thời gian đã tạo: Th5 07, 2019 lúc 08:00 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.4
 
@@ -102,6 +102,162 @@ INSERT INTO `FOOD` (`id`, `restaurant_id`, `food_name`, `address`, `category`, `
 (50, 649263, 'Trâu Tươi Đồng Xanh - Cầu Diễn', '135 Cầu Diễn, Quận Bắc Từ Liêm, Hà Nội', 'Quán nhậu, ', NULL, NULL, 21.0495, 105.74, NULL, 4.2, 'Súp Gà Nấm Hương, Súp Rau, Ngô Chiên, Khoai Tây Chiên, Khoai Môn Chiên, Khoai Lang Chiên, Ngô Chiên Trứng Gà, Giò Trâu, Nem Nướng Đặc Biệt, Nem Phùng, Đuôi Trâu Hấp Gừng, Óc Trần, Óc Hấp Ngải Cứu, Nem Chua, Vó, Mũi Trâu Hấp Gừng, Đuôi Trâu Chiên Mắm, Đuôi Trâu Rang Muối, Rau Muống Xào, Rau Muống Luộc, Ngọn Su Luộc, Ngọn Su Xào, Rau Lang Xào, Rau Lang Luộc, Ngọn Bí Xào, Ngọn Bí Luộc, Mồng Tơi Xào, Mồng Tơi Luộc, Mướp Xào, Mướp Luộc, Rau Cần Xào Tỏi, Ngồng Cải Luộc Chấm Trứng, Thiên Lý Xào Tỏi, Đậ', 'https://images.foody.vn/res/g65/649263/prof/s120x120/foody-mobile-16807282_74591010223-353-636269149391615581.jpg', 6),
 (51, 649364, 'Lẩu Dê Đồng Hương 2 - Hoàng Diệu 2', '113 Hoàng Diệu 2, P. Linh Trung, Quận Thủ Đức, TP. HCM', 'Quán ăn, ', NULL, NULL, 10.8582, 106.763, NULL, 3.1, 'Vú dê nướng, Dê bóp thấu, Dê tái chanh, Cà ri dê, Dê xào lăn, Vú dê xào sả ớt, Sườn dê hấp mắm nhĩ, Vú dê xào lăn khô, Dê tắm rượu vang, Sườn dê nướng mọi, Sườn dê nướng mắm nhĩ, Sườn dê nướng ngũ vị, Sườn dê nướng sa tế, Sườn dê nướng sốt cà ri, Sườn dê nướng sốt tiêu xanh, Đùi dê nướng mọi, Đùi dê nướng mắm nhĩ, Đùi dê nướng sốt tiêu xanh, Đùi dê nướng ngũ vị, Đùi dê nướng sa tế, Đùi dê nướng sốt cà ri, Tiết canh dĩa, Tiết bỏ lẩu (chén), Tiết canh chén, Tiết canh hấp (chén), Tiếp canh hấp (dĩa', 'https://images.foody.vn/res/g65/649364/prof/s120x120/foody-upload-api-foody-mobile-222-jpg-180817145954.jpg', 3);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `FOOD_CATEGORY`
+--
+
+CREATE TABLE `FOOD_CATEGORY` (
+  `id` int(10) NOT NULL,
+  `category_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `category_detail` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `FOOD_CATEGORY`
+--
+
+INSERT INTO `FOOD_CATEGORY` (`id`, `category_name`, `category_detail`) VALUES
+(68, 'Quán ăn', NULL),
+(69, 'Shop Online', NULL),
+(70, 'Nhà hàng', NULL),
+(71, 'Café/Dessert', NULL),
+(72, 'Quán nhậu', NULL),
+(73, 'Ăn chay', NULL),
+(74, 'Nhà hàng, ', NULL),
+(75, 'Bar/Pub', NULL),
+(76, 'Ăn vặt/vỉa hè', NULL),
+(77, 'Quán ăn, ', NULL),
+(78, 'Café/Dessert, ', NULL),
+(79, 'Shop Online, ', NULL),
+(80, 'Beer club', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `FOOD_IMAGE`
+--
+-- Error reading structure for table MealRecommendationApp.FOOD_IMAGE: #1932 - Table 'MealRecommendationApp.FOOD_IMAGE' doesn't exist in engine
+-- Error reading data for table MealRecommendationApp.FOOD_IMAGE: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `MealRecommendationApp`.`FOOD_IMAGE`' at line 1
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `KEYWORD`
+--
+
+CREATE TABLE `KEYWORD` (
+  `id` int(10) NOT NULL,
+  `keyword` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `times` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `KEYWORD_AND_FOOD`
+--
+
+CREATE TABLE `KEYWORD_AND_FOOD` (
+  `id` int(10) NOT NULL,
+  `id_food` int(10) NOT NULL,
+  `id_keyword` int(10) NOT NULL,
+  `times` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `MARK`
+--
+
+CREATE TABLE `MARK` (
+  `id` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL,
+  `id_food` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ROLE`
+--
+
+CREATE TABLE `ROLE` (
+  `id` int(10) NOT NULL,
+  `role_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `role_detail` varchar(1000) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ROLE`
+--
+
+INSERT INTO `ROLE` (`id`, `role_name`, `role_detail`) VALUES
+(1, 'USER', 'Users who use the application'),
+(2, 'ADMIN', 'Administrators who manage the application');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `SEARCH_HISTORY`
+--
+
+CREATE TABLE `SEARCH_HISTORY` (
+  `id` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL,
+  `id_keyword` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `USER`
+--
+
+CREATE TABLE `USER` (
+  `id` int(10) NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_role` int(10) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `USER`
+--
+
+INSERT INTO `USER` (`id`, `email`, `password`, `name`, `phone`, `address`, `id_role`) VALUES
+(13, 'votranquy96@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Votranquy96', NULL, NULL, 1),
+(14, 'votranquy97@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Votranquy96', NULL, NULL, 1),
+(15, 'QUY@GMAIL.COMQUY', '46a2f03c19e00e52a50d3a91b72abb8f', 'QUY', NULL, NULL, 1),
+(16, 'QUY@GMAIL.COMQUY', '46a2f03c19e00e52a50d3a91b72abb8f', 'QUY', NULL, NULL, 1),
+(17, 'A@gmail.com', '7fc56270e7a70fa81a5935b72eacbe29', 'A@gmail.com', NULL, NULL, 1),
+(18, 'B@gmail.com', '9d5ed678fe57bcca610140957afab571', 'B@gmail.com', NULL, NULL, 1),
+(19, 'C@gmail.com', '0d61f8370cad1d412f80b84d143e1257', 'C@gmail.com', NULL, NULL, 1),
+(20, 'QUY@GMAIL.COM', '46a2f03c19e00e52a50d3a91b72abb8f', 'QUY TRAN VO', '0235678945', '60 Ngo Si lien Da Nang', 1),
+(21, 'levana@gmail.com', 'a70a40de1e924355d38e8011e0727145', 'LeVanA', NULL, NULL, 1),
+(22, 'H@GMAIL.COM', 'c1d9f50f86825a1a2302ec2449c17196', 'H@GMAIL.COM', NULL, NULL, 1),
+(23, 'QUYVO@GMAIL.COM', '6ffd28771923fbd8a539faf1a1d23eb5', 'Quys VOxABCZYX', '0369380629', '44 Le Do Da Nang', 1),
+(24, 'LeVanA@gmail.com', '6042c0687fdc318b34675b8c55c534b7', 'LeVanA', NULL, NULL, 1),
+(25, 'v@gmail.com', '9e3669d19b675bd57058fd4664205d2a', 'v@gmail.com', NULL, NULL, 1),
+(26, 'abc@gmail.com', '900150983cd24fb0d6963f7d28e17f72', 'abc', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `USER_IMAGE`
+--
+
+CREATE TABLE `USER_IMAGE` (
+  `id` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL,
+  `img_path` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -113,6 +269,63 @@ ALTER TABLE `FOOD`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `FOOD_CATEGORY`
+--
+ALTER TABLE `FOOD_CATEGORY`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `KEYWORD`
+--
+ALTER TABLE `KEYWORD`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `keyword` (`keyword`);
+
+--
+-- Chỉ mục cho bảng `KEYWORD_AND_FOOD`
+--
+ALTER TABLE `KEYWORD_AND_FOOD`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_food` (`id_food`),
+  ADD KEY `id_keyword` (`id_keyword`);
+
+--
+-- Chỉ mục cho bảng `MARK`
+--
+ALTER TABLE `MARK`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_food` (`id_food`);
+
+--
+-- Chỉ mục cho bảng `ROLE`
+--
+ALTER TABLE `ROLE`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `SEARCH_HISTORY`
+--
+ALTER TABLE `SEARCH_HISTORY`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_keyword` (`id_keyword`);
+
+--
+-- Chỉ mục cho bảng `USER`
+--
+ALTER TABLE `USER`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_role` (`id_role`);
+
+--
+-- Chỉ mục cho bảng `USER_IMAGE`
+--
+ALTER TABLE `USER_IMAGE`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -121,6 +334,91 @@ ALTER TABLE `FOOD`
 --
 ALTER TABLE `FOOD`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT cho bảng `FOOD_CATEGORY`
+--
+ALTER TABLE `FOOD_CATEGORY`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
+-- AUTO_INCREMENT cho bảng `KEYWORD`
+--
+ALTER TABLE `KEYWORD`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `KEYWORD_AND_FOOD`
+--
+ALTER TABLE `KEYWORD_AND_FOOD`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `MARK`
+--
+ALTER TABLE `MARK`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `ROLE`
+--
+ALTER TABLE `ROLE`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `SEARCH_HISTORY`
+--
+ALTER TABLE `SEARCH_HISTORY`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `USER`
+--
+ALTER TABLE `USER`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT cho bảng `USER_IMAGE`
+--
+ALTER TABLE `USER_IMAGE`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `KEYWORD_AND_FOOD`
+--
+ALTER TABLE `KEYWORD_AND_FOOD`
+  ADD CONSTRAINT `KEYWORD_AND_FOOD_ibfk_1` FOREIGN KEY (`id_keyword`) REFERENCES `KEYWORD` (`id`),
+  ADD CONSTRAINT `KEYWORD_AND_FOOD_ibfk_2` FOREIGN KEY (`id_food`) REFERENCES `FOOD` (`id`);
+
+--
+-- Các ràng buộc cho bảng `MARK`
+--
+ALTER TABLE `MARK`
+  ADD CONSTRAINT `MARK_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `USER` (`id`),
+  ADD CONSTRAINT `MARK_ibfk_2` FOREIGN KEY (`id_food`) REFERENCES `FOOD` (`id`);
+
+--
+-- Các ràng buộc cho bảng `SEARCH_HISTORY`
+--
+ALTER TABLE `SEARCH_HISTORY`
+  ADD CONSTRAINT `SEARCH_HISTORY_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `USER` (`id`),
+  ADD CONSTRAINT `SEARCH_HISTORY_ibfk_2` FOREIGN KEY (`id_keyword`) REFERENCES `KEYWORD` (`id`);
+
+--
+-- Các ràng buộc cho bảng `USER`
+--
+ALTER TABLE `USER`
+  ADD CONSTRAINT `USER_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `ROLE` (`id`);
+
+--
+-- Các ràng buộc cho bảng `USER_IMAGE`
+--
+ALTER TABLE `USER_IMAGE`
+  ADD CONSTRAINT `USER_IMAGE_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `USER` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

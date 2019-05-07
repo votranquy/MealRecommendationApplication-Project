@@ -47,8 +47,8 @@
     //Is NOT exist. Insert it.
         $sql_insert = 
             "INSERT INTO FOOD(restaurant_id,food_name,address,category,latitude,
-            longitude,rate,	image_path) 
-            VALUES('$restaurantid','$name','$address','$category','$latitude','$longitude','$rate','$image_path')";
+            longitude,rate,	image_path, totalReview) 
+            VALUES('$restaurantid','$name','$address','$category','$latitude','$longitude','$rate','$image_path','$totalReview')";
         $sql_insert_result=mysqli_query($conn,$sql_insert);
         if($sql_insert_result){echo("{\"result\":\"INSERT_THANH_CONG\"}");}
         else{echo("{\"result\":\"KHONG_THANH_CONG\"}");};

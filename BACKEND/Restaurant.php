@@ -8,7 +8,8 @@
   mysqli_query($conn,"SET NAMES 'UTF8'");
   $sql = "SELECT * 
   FROM FOOD
-  ORDER BY rate DESC";
+  WHERE category='Quán ăn, '
+  ";
   // ORDER BY rate DESC
   
   $query = mysqli_query($conn,$sql);

@@ -72,7 +72,7 @@ export default class Category extends Component {
               <View style={styles.content}>
                 <View style={styles.content_row}>
                   <Image source={require('../Image/location.png')}/>
-                  <Text style={styles.content_row_address}>{property.food_category}</Text>
+                  <Text style={styles.content_row_address}>{property.category_name}</Text>
                 </View>
               </View>  
              </TouchableOpacity>

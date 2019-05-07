@@ -13,7 +13,7 @@ export default class Welcome extends Component {
     setTimeout(() => {
       const { navigator } = this.props;
       navigator.push({ name: 'MAIN' });
-    }, 1000);
+    }, 20);
   }
 
   render() {

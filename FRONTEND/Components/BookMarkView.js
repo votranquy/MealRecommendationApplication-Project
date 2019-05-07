@@ -64,6 +64,12 @@ creatStar1(score){
         //const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
         return (
             <View style={styles.wrapper}>
+
+            <View style={styles.row1}>
+              <Text style={styles.titleStyle}>BookMark</Text>
+            </View>
+
+
                 <ListView
                     contentContainerStyle={styles.main}
                     enableEmptySections
@@ -106,12 +112,12 @@ creatStar1(score){
 
 
 
-const { width } = Dimensions.get('window');
+const { width, height} = Dimensions.get('window');
 const imageWidth = width / 4;
 const imageHeight = (imageWidth * 452) / 361;
 const styles = StyleSheet.create({
     main: {
-        width, backgroundColor: '#DFDFDF'
+        width, backgroundColor: '#EEE'
     },
     wrapper:{
         flex:1
@@ -163,6 +169,22 @@ const styles = StyleSheet.create({
       fontSize: 17,
       alignItems: 'center',
     },
+    row1:{
+      flexDirection: 'row',
+      //  justifyContent: 'space-between' ,
+    alignItems:'center', 
+    marginBottom:10,
+    height: height / 12, 
+    backgroundColor: '#34B089',
+     padding:10, 
+     justifyContent:'space-around'
+   },
+   titleStyle:{
+    color: '#FFF', 
+    fontSize:20, 
+    alignItems:'center',
+     justifyContent:"space-between",
+   }, 
   });
   
 

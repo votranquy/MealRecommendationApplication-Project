@@ -183,14 +183,14 @@ export default class FoodDetail extends Component {
         dataSource={this.state.foodItems}
         renderRow={
           (e) => 
-          <View style={{flexDirection:"row"}}>
+            <View style={{flexDirection:"row"}}>
             <Image style={styles.smallImage} source={require('../Image/fooditem.png')} />
             <View key={e.Id}  style={styles.lbMenu}>
               <Text style={styles.contentrowFoodInfo}>{e.Name}</Text>
               <Text>{e.Price}</Text>
             </View>
-          </View>
-          }
+            </View>
+        } 
     />
     );
 
@@ -203,7 +203,7 @@ export default class FoodDetail extends Component {
             <View style={{flexDirection:"row"}}>
               <View  style={styles.lbMenu}>
                 <Text style={styles.contentrowFoodInfo}>{data.Owner.DisplayName}</Text>
-                <Text>{data.Description}</Text>
+                <Text style={styles.comment}>{data.Description}</Text>
               </View>
             </View>
           }
@@ -218,12 +218,12 @@ export default class FoodDetail extends Component {
                 <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Thực Đơn</Text>
                 </View>
-                {itemsJSX}
+                { itemsJSX}
             </View>
             <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Bình Luận</Text>
             </View>
-            {commentJSX}
+            {this.state.dataSource.length  != 0  ? commentJSX:<Text style={styles.contentrowFoodInfo}> Không có bình luận nào</Text> }
          </ScrollView>
         );
     }
@@ -359,6 +359,7 @@ const styles = StyleSheet.create({
     },
     comment:{
       backgroundColor:"white",
+      fontSize:15,
     },
     username:{
       color:"green",

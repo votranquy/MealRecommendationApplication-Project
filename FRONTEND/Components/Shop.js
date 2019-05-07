@@ -85,7 +85,7 @@ removeFood(foodId){
           </TabNavigator.Item> */}
           <TabNavigator.Item
             selected={this.state.selectedTab === 'user'}
-            title="User"
+            title="Suggest"
             renderIcon={() => <Image source={require("../Image/whiteuser.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/greenuser.png")} />}
             onPress={() => this.setState({ selectedTab: 'user' })}

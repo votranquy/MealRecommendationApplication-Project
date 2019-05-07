@@ -57,12 +57,31 @@ export default class Menu extends Component {
                 <Text style={username}>{user ? user.name : ''}</Text>
                 <View>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
-                        <Text style={btnTextSignIn}>Change Info</Text>
+                        <Text style={btnTextSignIn}>Đổi thông tin</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={btnSignInStyle} 
-                        onPress={this.onSignOut.bind(this)}
-                    >
-                        <Text style={btnTextSignIn}>Sign out</Text>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
+                    <Image  source={require('../Image/password.png')} />
+                        <Text style={btnTextSignIn}>Đổi mật khẩu        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
+                    <Image source={require('../Image/setting.png')}/>
+                        <Text style={btnTextSignIn}>Cài đặt thông báo</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
+                        <Image source={require('../Image/introduce.png')}  />
+                        <Text style={btnTextSignIn}>Giới thiệu ứng dụng</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
+                        <Image source={require('../Image/star.png')}/>
+                        <Text style={btnTextSignIn}>Xếp hạng ứng dụng</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
+                      <Image  source={require('../Image/share.png')}         />
+                       <Text style={btnTextSignIn}>Chia sẻ ứng dụng</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
+                       <Image    source={require('../Image/logout.png')}           />
+                        <Text style={btnTextSignIn}>Đăng xuất            </Text>
                     </TouchableOpacity>
                 </View>
                 <View />
@@ -95,9 +114,9 @@ const styles = StyleSheet.create({
     btnStyle: {
         height: 50,
         backgroundColor: '#fff',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        borderRadius: 5,
+        borderRadius: 20,
         paddingHorizontal: 70
     },
     btnText: {
@@ -106,13 +125,15 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     btnSignInStyle: {
+        flexDirection: "row",
         height: 50,
         backgroundColor: '#fff',
-        borderRadius: 5,
+        borderRadius: 20,
         width: 200,
         marginBottom: 10,
         justifyContent: 'center',
-        paddingLeft: 10
+        paddingLeft: 10,
+        alignItems: 'center',
     },
     btnTextSignIn: {
         color: '#34B089',

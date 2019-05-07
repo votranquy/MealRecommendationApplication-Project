@@ -15,7 +15,7 @@ import Random                     from "./Random";
 import Trend                          from "./Trend";
 import Header                       from "./Header";
 import TopFood                    from "./TopFood";
-
+import Restaurant                 from './Restaurant';
 const Page = ({label}) => (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -41,10 +41,10 @@ export default class HomeView extends Component {
               renderTabBar={() => <TabBar underlineColor="#53ac49" />}>
             <TopFood   tabLabel={{label: "TỐP"}} navigator={this.props.navigator}/>
             {/* <Category        tabLabel={{label: "Danh Mục  "}} navigator={this.props.navigator}/> */}
-            {/* <Random         tabLabel={{label: " Random    "}}  navigator={this.props.navigator}/> */}
+            <Random         tabLabel={{label: " RANDOM "}}  navigator={this.props.navigator}/>
             <NearMe          tabLabel={{label: "GẦN TÔI"}}  navigator={this.props.navigator}/>
-            {/* <Trend              tabLabel={{label: "Phổ Biến    "}}  navigator={this.props.navigator}/> */}
-            {/* <Page               tabLabel={{label: "Page #6     "}}  label="Page #5"/> */}
+            <Trend              tabLabel={{label: "PHỔ BIẾN"}}  navigator={this.props.navigator}/>
+            <Restaurant     tabLabel={{label: "Quán Ăn"}}  navigator={this.props.navigator}/>
             {/* <Page               tabLabel={{label: "Page #7     "}}  label="Page #5"/> */}
           </ScrollableTabView>
         </View>

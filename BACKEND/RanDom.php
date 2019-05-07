@@ -6,8 +6,12 @@
   $database = 'MealRecommendationApp'; 
   $conn = mysqli_connect($server_host,$server_username,$server_password,$database) or die("Can not connect to Database");
   mysqli_query($conn,"SET NAMES 'UTF8'");
+  $randum_number = rand(1,4);
+  $min_randum_number =  $randum_number - 1;
+  $max_randum_number =  $randum_number + 1;
   $sql = "SELECT * 
   FROM FOOD
+  WHERE rate > '$min_randum_number' AND rate < '$max_randum_number'
   ";
   // ORDER BY rate DESC
   

@@ -34,8 +34,8 @@ const styles= StyleSheet.create({
     alignItems:'center',
   },
   imgLogo:{
-    width:250,
-    height:250,
+    width:200,
+    height:200,
   },
   txtWelcome:{
     fontSize:30,

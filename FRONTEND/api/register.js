@@ -1,5 +1,5 @@
 const register = (email, name, password) => (
-    fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/register.php',
+    fetch('http://10.0.12.47/MealRecommendationApplication-Project/api/register.php',
     {   
         method: 'POST',
         headers: {

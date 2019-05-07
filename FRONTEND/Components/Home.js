@@ -15,7 +15,7 @@ export default class Home extends Component{
           initialRoute={{ name: "HOME_VIEW" }}
           renderScene={(route, navigator) => {
               switch(route.name){
-                case "HOME_VIEW": return( <HomeView     navigator={navigator}  open={this.props.open}  /> );
+                case "HOME_VIEW" : return( <HomeView     navigator={navigator}  open={this.props.open}  /> );
                 case "LIST_FOOD"   : return( <ListFood        navigator={navigator}                                                  /> );
                 default                        : return( <FoodDetail    navigator={navigator}  food={route.food}    /> );
               }

@@ -9,9 +9,8 @@ StatusBar.setHidden(true);
 
 export default class App extends Component {
     componentDidMount() {
-        const start = Math.random() * (900000 - 600000) + 600000;
-       for (var i = start; i < start+200; i++){
-
+        //var start = Math.random( ) * (900000 - 600000) + 600000;
+       for (var i = 648867; i < 648867+500; i++){
             const restaurantid=i;
             const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+i+'&id_type=1';
             fetch(url,
@@ -40,15 +39,16 @@ export default class App extends Component {
                         latitude=responseJson.reply.delivery_detail.position.latitude;
                         longitude=responseJson.reply.delivery_detail.position.longitude;
                         rate=responseJson.reply.delivery_detail.rating.avg;
+                        totalReview=responseJson.reply.delivery_detail.rating.total_review;
                         first_image=responseJson.reply.delivery_detail.photos[1].value;
-                        fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/saveData.php',
+                        fetch('http://10.0.12.47/MealRecommendationApplication-Project/api/saveData.php',
                         {   
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                                 Accept: 'application/json'
                             },
-                            body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate,first_image})
+                            body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate,first_image,totalReview})
                         })
                         .catch(err => console.log(err));
                     }
@@ -78,7 +78,7 @@ export default class App extends Component {
                             for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
                             menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
                         }
-                        fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/updateMenu.php',
+                        fetch('http://10.0.12.47/MealRecommendationApplication-Project/api/updateMenu.php',
                         {   
                             method: 'POST',
                             headers: {
@@ -101,9 +101,9 @@ export default class App extends Component {
                 initialRoute={{ name: 'WELCOME' }}
                 renderScene={(route, navigator) => {
                     switch (route.name) {
-                        case "WELCOME": return <Welcome navigator={navigator} />
-                        case 'MAIN': return <Main navigator={navigator} />;
-                        case 'CHANGE_INFO': return <ChangeInfo navigator={navigator} user={route.user} />;
+                        case "WELCOME":            return <Welcome navigator={navigator} />
+                        case 'MAIN':                       return <Main navigator={navigator} />;
+                        case 'CHANGE_INFO':      return <ChangeInfo navigator={navigator} user={route.user} />;
                         case 'AUTHENTICATION': return <Authentication navigator={navigator} />; 
                     }
                 }}

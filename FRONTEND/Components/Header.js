@@ -30,7 +30,7 @@ export default class Header extends Component{
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="Bạn muốn ăn gì?" underlineColorAndroid="white"/>
           <TouchableOpacity style={styles.searchBtn}>
-            <Text style={styles.searchBtnText}>Search</Text>
+            <Text style={styles.searchBtnText}>Tìm</Text>
           </TouchableOpacity>  
         </View>
         

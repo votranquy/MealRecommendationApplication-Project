@@ -55,7 +55,7 @@ removeFood(foodId){
         <TabNavigator >
           <TabNavigator.Item
             selected={this.state.selectedTab === 'home'}
-            title="Home"
+            // title="Home"
             renderIcon={() => <Image source={require("../Image/whitehome.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/greenhome.png")} />}
             onPress={() => this.setState({ selectedTab: 'home' })}
@@ -66,7 +66,7 @@ removeFood(foodId){
 
           <TabNavigator.Item
             selected={this.state.selectedTab === 'save'}
-            title="Save"
+            // title="Save"
             renderIcon={() => <Image source={require("../Image/whitebookmark.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/greenbookmark.png")} />}
             onPress={() => this.setState({ selectedTab: 'save' })}
@@ -85,7 +85,7 @@ removeFood(foodId){
           </TabNavigator.Item> */}
           <TabNavigator.Item
             selected={this.state.selectedTab === 'user'}
-            title="Suggest"
+            // title="Suggest"
             renderIcon={() => <Image source={require("../Image/whiteuser.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/greenuser.png")} />}
             onPress={() => this.setState({ selectedTab: 'user' })}

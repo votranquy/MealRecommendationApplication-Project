@@ -44,7 +44,7 @@ export default class HomeView extends Component {
             <Random         tabLabel={{label: " RANDOM "}}  navigator={this.props.navigator}/>
             <NearMe          tabLabel={{label: "GẦN TÔI"}}  navigator={this.props.navigator}/>
             <Trend              tabLabel={{label: "PHỔ BIẾN"}}  navigator={this.props.navigator}/>
-            <Restaurant     tabLabel={{label: "Quán Ăn"}}  navigator={this.props.navigator}/>
+            <Restaurant     tabLabel={{label: "QUÁN ĂN"}}  navigator={this.props.navigator}/>
             {/* <Page               tabLabel={{label: "Page #7     "}}  label="Page #5"/> */}
           </ScrollableTabView>
         </View>

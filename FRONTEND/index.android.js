@@ -5,14 +5,14 @@ import {
   Text,
   View
 } from 'react-native';
-
+import DemeMapview from "./Components/DemoMapView";
 import App from './Components/App';
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <App/>
+        <DemeMapview/>
       </View>
     );
   }

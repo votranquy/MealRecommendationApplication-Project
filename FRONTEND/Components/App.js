@@ -41,7 +41,7 @@ export default class App extends Component {
                         rate=responseJson.reply.delivery_detail.rating.avg;
                         totalReview=responseJson.reply.delivery_detail.rating.total_review;
                         first_image=responseJson.reply.delivery_detail.photos[1].value;
-                        fetch('http://10.0.12.47/MealRecommendationApplication-Project/api/saveData.php',
+                        fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
                         {   
                             method: 'POST',
                             headers: {
@@ -78,7 +78,7 @@ export default class App extends Component {
                             for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
                             menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
                         }
-                        fetch('http://10.0.12.47/MealRecommendationApplication-Project/api/updateMenu.php',
+                        fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
                         {   
                             method: 'POST',
                             headers: {

@@ -19,8 +19,8 @@ import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
 // var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
 
-// const Img_Path= 'http://10.0.12.47/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-// var URL="http://10.0.12.47/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
+// const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
+// var URL="http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
 
 export default class Trend extends Component {
 
@@ -43,7 +43,7 @@ export default class Trend extends Component {
 
 
   componentDidMount(){
-    fetch("http://10.0.12.47/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ creatStar5(score){
   //     refreshing:true,
   //   });
 
-  //   fetch("http://10.0.12.47/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,{method:"POST",body:null})
+  //   fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,{method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
   //     this.setState({
@@ -138,7 +138,7 @@ creatStar5(score){
 
 
   _onEndReached(){
-    fetch("http://10.0.12.47/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+(this.state.page+1),
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {

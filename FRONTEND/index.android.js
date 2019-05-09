@@ -5,8 +5,10 @@ import {
   Text,
   View
 } from 'react-native';
+
 import DemeMapview from "./Components/DemoMapView";
 import App from './Components/App';
+import DemoModal from "./Components/DemoModal";
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {

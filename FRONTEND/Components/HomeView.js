@@ -39,9 +39,9 @@ export default class HomeView extends Component {
               tabBarActiveTextColor="#53ac49"
               tabBarTextStyle={{fontFamily: 'Roboto', fontSize: 15, fontWeight: "500"}}
               renderTabBar={() => <TabBar underlineColor="#53ac49" />}>
-            <TopFood   tabLabel={{label: ""}} navigator={this.props.navigator}/>
+            <TopFood   tabLabel={{label: "TOP"}} navigator={this.props.navigator}/>
             {/* <Category        tabLabel={{label: "Danh Mục  "}} navigator={this.props.navigator}/> */}
-            <Random         tabLabel={{label: " RANDOM "}}  navigator={this.props.navigator}/>
+            <Random         tabLabel={{label: "NGẪU NHIÊN"}}  navigator={this.props.navigator}/>
             <NearMe          tabLabel={{label: "GẦN TÔI"}}  navigator={this.props.navigator}/>
             <Trend              tabLabel={{label: "PHỔ BIẾN"}}  navigator={this.props.navigator}/>
             <Restaurant     tabLabel={{label: "QUÁN ĂN"}}  navigator={this.props.navigator}/>

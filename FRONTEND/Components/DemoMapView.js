@@ -17,7 +17,7 @@ export default class DemoMapView extends Component {
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
       },
-      makers:arrayMarker,
+      markers:arrayMarker,
     }
   }
   onPress(data){
@@ -28,10 +28,21 @@ export default class DemoMapView extends Component {
       longitude:longitude,
     });
     this.setState({
-      makers:arrayMarker,
-    })
+      markers:arrayMarker,
+    });
   }
 
+  renderMarker(){
+    markers=[];
+    for(marker of this.state.makers){
+      marker.push(
+        <MapView.Marker title={makers.latitude} 
+          description={"HERE"}
+          coordinate={marker}
+        />
+      )
+    }
+  }
   render() {
     return (
       <View style={{flex:1, borderColor:"black",borderWidth:5}}>
@@ -42,6 +53,7 @@ export default class DemoMapView extends Component {
           onPress={this.onPress.bind(this)}
         >
           <MapView.Marker coordinate={this.state.region} title={"Here"} description={"No"} />
+          {this.renderMarker()}
         </MapView>
       </View>
     )

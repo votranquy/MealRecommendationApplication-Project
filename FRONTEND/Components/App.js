@@ -10,7 +10,7 @@ StatusBar.setHidden(true);
 export default class App extends Component {
     componentDidMount() {
         //var start = Math.random( ) * (900000 - 600000) + 600000;
-       for (var i = 648867; i < 648867+500; i++){
+       for (var i = 648000; i < 648000+500; i++){
             const restaurantid=i;
             const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+i+'&id_type=1';
             fetch(url,

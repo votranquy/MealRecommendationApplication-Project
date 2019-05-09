@@ -185,6 +185,7 @@ creatStar5(score){
         <StatusBar hidden={true} />
         <View>
         <ListView 
+          enableEmptySections
           // refreshControl={
           //   <RefreshControl 
           //     refreshing={this.state.refreshing}

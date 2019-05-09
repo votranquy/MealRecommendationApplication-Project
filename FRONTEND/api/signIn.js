@@ -1,5 +1,5 @@
 const signIn = (email, password) => (
-    fetch('http://10.0.12.47/MealRecommendationApplication-Project/api/login.php',
+    fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/login.php',
     {   
         method: 'POST',
         headers: {

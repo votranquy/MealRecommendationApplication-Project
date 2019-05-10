@@ -29,14 +29,9 @@ MERGED from [com.facebook.react:react-native:0.43.0] /Users/quy.vo/Desktop/MealR
 uses-sdk
 ADDED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:9:5-11:41
 MERGED from [MealRecommendationApplicationProject:react-native-maps:unspecified] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/MealRecommendationApplicationProject/react-native-maps/unspecified/AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.android.gms:play-services-maps:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.8.0/AndroidManifest.xml:23:5-42
-MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/AndroidManifest.xml:17:5-42
-MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.8.0/AndroidManifest.xml:3:5-42
-MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/AndroidManifest.xml:17:5-42
 MERGED from [com.facebook.react:react-native:0.43.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.43.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:recyclerview-v7:23.4.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:24.0.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/AndroidManifest.xml:21:5-23:54
 MERGED from [com.facebook.fbui.textlayoutbuilder:textlayoutbuilder:1.0.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/AndroidManifest.xml:14:5-16:41
 MERGED from [com.facebook.fresco:fresco:1.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.0.1/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:drawee:1.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.0.1/AndroidManifest.xml:5:5-7:41
@@ -45,6 +40,11 @@ MERGED from [com.facebook.fresco:imagepipeline:1.0.1] /Users/quy.vo/Desktop/Meal
 MERGED from [com.facebook.fresco:imagepipeline-base:1.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.0.1/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.fresco:fbcore:1.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.0.1/AndroidManifest.xml:5:5-7:41
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:2:3-70
+MERGED from [com.google.android.gms:play-services-maps:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.8.0/AndroidManifest.xml:23:5-42
+MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/AndroidManifest.xml:17:5-42
+MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.8.0/AndroidManifest.xml:3:5-42
+MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/AndroidManifest.xml:17:5-42
+MERGED from [com.android.support:support-v4:24.0.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/AndroidManifest.xml:21:5-23:54
 	tools:overrideLibrary
 		ADDED from [com.android.support:support-v4:24.0.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
@@ -57,15 +57,15 @@ MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/quy.vo/Desktop/MealRec
 		INJECTED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml
 application
 ADDED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:13:5-33:19
+MERGED from [com.facebook.react:react-native:0.43.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.43.0/AndroidManifest.xml:13:5-20
+MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
+MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
+MERGED from [org.webkit:android-jsc:r174650] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 MERGED from [com.google.android.gms:play-services-maps:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.8.0/AndroidManifest.xml:24:5-19
 MERGED from [com.google.android.gms:play-services-base:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/AndroidManifest.xml:18:5-20:19
 MERGED from [com.google.android.gms:play-services-tasks:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.8.0/AndroidManifest.xml:4:5-19
 MERGED from [com.google.android.gms:play-services-basement:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/AndroidManifest.xml:19:5-21:19
-MERGED from [com.facebook.react:react-native:0.43.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.43.0/AndroidManifest.xml:13:5-20
-MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:24.0.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/AndroidManifest.xml:25:5-20
-MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
-MERGED from [org.webkit:android-jsc:r174650] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/AndroidManifest.xml:2:3-17
 	android:label
 		ADDED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:16:7-39
 	android:allowBackup
@@ -110,6 +110,12 @@ uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from [MealRecommendationApplicationProject:react-native-maps:unspecified] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/MealRecommendationApplicationProject/react-native-maps/unspecified/AndroidManifest.xml:10:5-81
 	android:name
 		ADDED from [MealRecommendationApplicationProject:react-native-maps:unspecified] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/MealRecommendationApplicationProject/react-native-maps/unspecified/AndroidManifest.xml:10:22-78
+android:uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:1:1-35:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+android:uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:1:1-35:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:1:1-35:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [com.google.android.gms:play-services-maps:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.8.0/AndroidManifest.xml:19:5-78
 	android:name
@@ -134,9 +140,3 @@ ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/quy.vo/D
 		ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/AndroidManifest.xml:20:66-119
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:9.8.0] /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/AndroidManifest.xml:20:20-65
-android:uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:1:1-35:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-android:uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:1:1-35:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
-android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:1:1-35:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE

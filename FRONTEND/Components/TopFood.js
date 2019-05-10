@@ -89,7 +89,7 @@ creatStar5(score){
 
   createRow(property){
             return(
-              <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
+              <TouchableOpacity activeOpacity={0.8}  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
               <View style={styles.image} >
                 <Image style={styles.image} source={{uri: property.image_path}} />
               </View>
@@ -185,6 +185,7 @@ creatStar5(score){
         <StatusBar hidden={true} />
         <View>
         <ListView 
+          enableEmptySections
           // refreshControl={
           //   <RefreshControl 
           //     refreshing={this.state.refreshing}

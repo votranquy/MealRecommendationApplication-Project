@@ -9,10 +9,13 @@ import { View,
     TextInput,
     ScrollView,
     ListView,
-    Alert
+    Alert,
+    Button,
     } from 'react-native';
 import Swiper from 'react-native-swiper';
 import call from 'react-native-phone-call';
+import MapView from 'react-native-maps';
+import Modal from 'react-native-modalbox';
 import global from "./global";
 // import Modal from 'react-native-animated-modal';
 
@@ -24,10 +27,17 @@ import icBack from "../Image/back_white.png";
 export default class FoodDetail extends Component {
   constructor(props){
     super(props);
+    const {latitude,longitude} = this.props.food;
     this.state = {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       foodItems: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
-      // isModalVisible: false,
+      swipeToClose: false,
+      region:{
+        latitude:parseFloat(latitude) ,
+        longitude:parseFloat(longitude),
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      }
     }
   }
 
@@ -105,7 +115,7 @@ export default class FoodDetail extends Component {
       }
       Alert.alert(
         'Liên lạc',
-        'Gọi số 0369380628',
+        'Gọi số' +args.number,
         [
           {
             text: 'Hủy',
@@ -142,10 +152,10 @@ export default class FoodDetail extends Component {
             <Image style={styles.smallImage} source={require('../Image/location.png')} />
             <Text style={styles.contentrowFoodInfo}>  {address.length >38 ? address.substring(0,36)+"..." :address }</Text>
           </View>
-          <View style={styles.rowFoodInfo} >
+          {/* <View style={styles.rowFoodInfo} >
             <Image style={styles.smallImage} source={require('../Image/global.png')} />
             <Text style={styles.contentrowFoodInfo}>  Khoảng cách </Text>
-          </View>
+          </View> */}
           <View style={styles.rowFoodInfo} >
             <Image style={styles.smallImage} source={require('../Image/spoon.png')} />
             <Text style={styles.contentrowFoodInfo}>  {category}</Text>
@@ -156,10 +166,10 @@ export default class FoodDetail extends Component {
           </View>
         </View>
         <View style={styles.contact}>
-          <View style={styles.ContactCell}>
+          <TouchableOpacity style={styles.ContactCell} onPress={() => this.refs.modal1.open()}>
             <Image source={require('../Image/map.png')}/>
-            <Text style={styles.ContactTitle}>Chỉ đường</Text>
-          </View>
+            <Text style={styles.ContactTitle}>Bản đồ</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.ContactCell} onPress={this.callTheRestaurant}>
             <Image source={require('../Image/phone.png')}/>
             <Text style={styles.ContactTitle}>Gọi ngay</Text>
@@ -214,6 +224,21 @@ export default class FoodDetail extends Component {
         <ScrollView style={styles.wrapper} >
             {headerJSX }
             {infomationJSX}
+            <Modal
+              style={[styles.modal, styles.modal1]}
+              backdrop={true}
+              coverScreen={true}
+              ref={"modal1"}
+            >
+              <View style={{height:height,width:width,flex:1, borderWidth:4, borderColor:"black"}}>
+                <MapView
+                  style={{flex:1}}
+                  region={this.state.region}
+                  initialRegion={this.state.region}>
+                  <MapView.Marker coordinate={this.state.region} title={"Here"} description={"No"} />
+                </MapView>
+              </View>
+            </Modal>
             <View style={styles.menuRestaurant}>
                 <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Thực Đơn</Text>

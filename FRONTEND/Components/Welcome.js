@@ -13,7 +13,7 @@ export default class Welcome extends Component {
     setTimeout(() => {
       const { navigator } = this.props;
       navigator.push({ name: 'MAIN' });
-    }, 20);
+    }, 100);
   }
 
   render() {
@@ -21,7 +21,7 @@ export default class Welcome extends Component {
       <View style={styles.wrapper}>
         <Image style={styles.imgLogo} source={require('../Image/welcome.png')} />
         <ActivityIndicator size="large" color="#0000ff"/>
-        <Text style={styles.txtWelcome}> Welcome </Text>
+        <Text style={styles.txtWelcome}>Ăn gì hôm nay?</Text>
       </View>
     )
   }

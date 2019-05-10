@@ -43,7 +43,7 @@
     array_push($arrFood,new Food($row["id"],$row["food_name"],$row["rate"],$row["address"], $row["image_path"], $row["category"], $row["restaurant_id"], $row["menu"]));
   }
 
-  $the_number_of_items_per_page = 10;
+  $the_number_of_items_per_page = 5;
   $page = $_GET["pagenumber"];
   
   $from = $page * $the_number_of_items_per_page;

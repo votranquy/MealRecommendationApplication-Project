@@ -2,27 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b7ceb56-8ee9-4ca3-87ed-00a638e930cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Category.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/FoodDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/FoodDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/ListFood.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/ListFood.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Random.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Random.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/RefreshListView.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/RefreshListView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Restaurant.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Restaurant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/TopFood.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/TopFood.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Trend.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Trend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/changeInfoApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/changeInfoApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/checkLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/checkLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/crawlData.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/crawlData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/initData.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/initData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/refreshToken.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/refreshToken.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FRONTEND/api/signIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/signIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +64,7 @@
     <frame x="77" y="47" width="1161" height="582" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.29525483" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.29473683" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />

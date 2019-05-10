@@ -17,7 +17,7 @@
     $longitude    =$obj["longitude"];
     $rate         =$obj["rate"];
     $image_path   =$obj["first_image"];
-    $totalReview  =$obj["totalReview"];
+    $totalReview  = $obj["totalReview"];
     //check if this restaurant is exist
     $sql_check = "SELECT * FROM FOOD
                  WHERE restaurant_id = '$restaurantid' 

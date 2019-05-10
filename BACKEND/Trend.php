@@ -8,6 +8,7 @@
   mysqli_query($conn,"SET NAMES 'UTF8'");
   $sql = "SELECT * 
   FROM FOOD
+  WHERE rate>1
   ORDER BY  food_name,rate DESC";
   // 
   

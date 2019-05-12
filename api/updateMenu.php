@@ -10,7 +10,7 @@
 
     //Receive datas from frontend
     $obj= json_decode(file_get_contents('php://input'),true);
-    $restaurantid =$obj["restaurantid"];
+    $restaurantid =$obj["i"];
     $menu         =$obj["menu"];
 
  
@@ -22,7 +22,7 @@
         WHERE 
             restaurant_id = '$restaurantid'";
     $sql_update_result=mysqli_query($conn,$sql_update);
-    if($sql_update_result){echo("{\"result\":\"THANH_CONG\"}");}
-    else{echo("{\"result\":\"KHONG_THANH_CONG\"}");};
+    if($sql_update_result){echo("{\"result\":\"UPDATE_MENU_THANH_CONG\"}");}
+    else{echo("{\"result\":\"UPDATE_MENU_KHONG_THANH_CONG\"}");};
 
 ?>

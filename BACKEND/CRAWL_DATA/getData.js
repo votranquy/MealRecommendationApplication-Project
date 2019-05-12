@@ -1,70 +1,45 @@
 
 const fetch = require('node-fetch');
 
+// async function saveData(responseJson){ 
+//     if(responseJson.result == "success"){
+//         let name=responseJson.reply.delivery_detail.name;
+//         let address=responseJson.reply.delivery_detail.address;
+//         let category ='';
+//         for (var j = 0; j < responseJson.reply.delivery_detail.categories.length; j++){
+//             category=category+responseJson.reply.delivery_detail.categories[j]+', ';
+//         }
+//         let latitude=responseJson.reply.delivery_detail.position.latitude;
+//         let longitude=responseJson.reply.delivery_detail.position.longitude;
+//         let rate=responseJson.reply.delivery_detail.rating.avg;
+//         let totalReview=responseJson.reply.delivery_detail.rating.total_review;
+//         let first_image=responseJson.reply.delivery_detail.photos[1].value;
+        
+//         let responseresult = await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
+//             {   
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                     Accept: 'application/json'
+//                 },
+//                 body:  JSON.stringify({name,i,address,category,latitude,longitude,rate,first_image,totalReview})
+//             });
+
+//         let responseJson = await responseresult.json();
+
+//         return responseJson;
+//     }
+// }
+
+
 async function getData(){
-for (i = 770624; i < 1000000; i++){
-  console.log(i);
-  const restaurantid=i;
-  const url = 'https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+i+'&id_type=1';
-  try{
+    let count =0 ;
 
-    let resp= await fetch(url,
-    {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json, text/plain, */*',
-            'x-foody-api-version':1,
-            'x-foody-app-type':1004,
-            'x-foody-client-id': '' ,
-            'x-foody-client-type':1,
-            'x-foody-client-version':1
-        },
-    }); 
+    for (i = 648405; i < 648405 +100; i++){
 
-    let responseJson = await resp.json();
+        console.log(i);
 
-
-    console.log("GET DATA");
-
-    if(responseJson.result == "success"){
-
-                name=responseJson.reply.delivery_detail.name;
-                //restaurantid=i;
-                address=responseJson.reply.delivery_detail.address;
-                category ='';
-                for (var j = 0; j < responseJson.reply.delivery_detail.categories.length; j++){
-                    category=category+responseJson.reply.delivery_detail.categories[j]+', ';
-                }
-                latitude=responseJson.reply.delivery_detail.position.latitude;
-                longitude=responseJson.reply.delivery_detail.position.longitude;
-                rate=responseJson.reply.delivery_detail.rating.avg;
-                totalReview=responseJson.reply.delivery_detail.rating.total_review;
-                first_image=responseJson.reply.delivery_detail.photos[1].value;
-
-                try{
-                   let save=await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
-                    {   
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Accept: 'application/json'
-                        },
-                        body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate,first_image,totalReview})
-                    });
-                }
-                catch(err){console.log(err)};
-                
-    }
-
-    console.log("SAVE DATA");
-
-    }
-  catch(err){console.log(err);};
-
-  //Update Menu
-  const url_menu= 'https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id='+restaurantid+'&id_type=1';
-  try{
-    let resp_menu =await fetch(url_menu,
+        let resp= await fetch('https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+i+'&id_type=1',
         {
             method: 'GET',
             headers: {
@@ -75,37 +50,128 @@ for (i = 770624; i < 1000000; i++){
                 'x-foody-client-type':1,
                 'x-foody-client-version':1
             },
-        });
-    let responsemenuJson =await resp_menu.json();
+        }); 
 
-    console.log("GET MENU");
+        let responseJson = await resp.json();
 
-    if(responsemenuJson.result == "success"){
+        //console.log(responseJson.result);
 
-        var menu="";
-        for (var k = 0; k < responsemenuJson.reply.menu_infos.length; k++){
-            for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
-            menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
-        }
+       // if(responseJson.result == "success"){
+        try{   
+            console.log(responseJson);
+            count = count + 1;
+            let name         =responseJson.reply.delivery_detail.name;
+            let address     =responseJson.reply.delivery_detail.address;
+            let category    ='';
+            for (var j = 0; j < responseJson.reply.delivery_detail.categories.length; j++){
+                category    =category+responseJson.reply.delivery_detail.categories[j]+', ';
+            }
+            let latitude     =responseJson.reply.delivery_detail.position.latitude;
+            let longitude   =responseJson.reply.delivery_detail.position.longitude;
+            let rate          =responseJson.reply.delivery_detail.rating.avg;
+            let totalReview =responseJson.reply.delivery_detail.rating.total_review;
+            let first_image =responseJson.reply.delivery_detail.photos[1].value;
+            let restaurantid = i;
+            let responseresult =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
+                {   
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json'
+                    },
+                    body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate,first_image,totalReview})
+                });
+            // let responseJson = await responseresult.json();
+            // console.log(responseJson.result);
+       }catch (err) {   console.log(err); }
 
-        let save =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
-        {   
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body:  JSON.stringify({restaurantid,menu})
-        });
 
-    }
+       
+       //const url_menu='https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id='+restaurantid+'&id_type=1';
+       let resp_menu =await fetch('https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id='+i+'&id_type=1',
+       {
+           method: 'GET',
+           headers: {
+               Accept: 'application/json, text/plain, */*',
+               'x-foody-api-version':1,
+               'x-foody-app-type':1004,
+               'x-foody-client-id': '' ,
+               'x-foody-client-type':1,
+               'x-foody-client-version':1
+           },
+       });
 
-    console.log("SAVE MENU");
+       let responsemenuJson =await resp_menu.json();
+
+       try{
+           var menu="";
+           for (var k = 0; k < responsemenuJson.reply.menu_infos.length; k++){
+               for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
+               menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
+           }
+           let save =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
+           {   
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json',
+                   Accept: 'application/json'
+               },
+               body:  JSON.stringify({i,menu})
+           });
+        //    let saveJson = await save.json();
+        //    console.log(saveJson);
+       }catch (err) {console.log(err);}
+
+
     
-  }
-  catch(err){console.log(err);};
- }
+
+
+
+
+
+
+
+    }//for
+    console.log(count);
 }
 
+
+
+// async function getMenu(){
+//     for (i = 999800; i < 1000000; i++){
+//         const url_menu='https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id='+restaurantid+'&id_type=1';
+//         let resp_menu =await fetch(url_menu,
+//         {
+//             method: 'GET',
+//             headers: {
+//                 Accept: 'application/json, text/plain, */*',
+//                 'x-foody-api-version':1,
+//                 'x-foody-app-type':1004,
+//                 'x-foody-client-id': '' ,
+//                 'x-foody-client-type':1,
+//                 'x-foody-client-version':1
+//             },
+//         });
+//         let responsemenuJson =await resp_menu.json();
+//         try{
+//             var menu="";
+//             for (var k = 0; k < responsemenuJson.reply.menu_infos.length; k++){
+//                 for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
+//                 menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
+//             }
+//             let save =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
+//             {   
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                     Accept: 'application/json'
+//                 },
+//                 body:  JSON.stringify({i,menu})
+//             });
+//             let saveJson = await save.json();
+//             console.log(saveJson);
+//         }catch (err) {console.log(err);}
+//     }
+// }
 
 getData();

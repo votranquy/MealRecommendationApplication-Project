@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -12,28 +6,15 @@ import {
   View
 } from 'react-native';
 
-
-import Login from "./Components/Login.js";
-import RefreshListView from "./Components/RefreshListView.js";
-import Register from "./Components/Register.js";
-import SideMenu from "./Components/SideMenu.js";
-import Layout from "./Components/Layout.js";
-import TabBar from "./Components/TabBar.js";
-import UserMenu from "./Components/UserMenu.js";
-import HomePage from "./Components/HomePage.js";
-
+import DemeMapview from "./Components/DemoMapView";
+import App from './Components/App';
+import DemoModal from "./Components/DemoModal";
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Register/> */}
-        {/* <Login/> */}
-        {/* <RefreshListView /> */}
-        {/* <SideMenu/> */}
-        <TabBar/>
-        {/* <HomePage/> */}
-
+        <App/>
       </View>
     );
   }
@@ -42,8 +23,9 @@ export default class MealRecommendationApplicationProject extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#EEE',
   },
 });
+
 
 AppRegistry.registerComponent('MealRecommendationApplicationProject', () => MealRecommendationApplicationProject);

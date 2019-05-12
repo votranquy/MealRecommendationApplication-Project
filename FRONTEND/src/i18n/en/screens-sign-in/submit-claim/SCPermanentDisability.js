@@ -1,0 +1,16 @@
+export default {
+  Title: 'Submit Claim',
+  PermanentDisability: 'Permanent disability ',
+  DescriptionTitle: 'Compensation in event of permanent disability due to accident during the trip.',
+  BTHowMuch: 'How much can I claim?',
+  TripName: 'Select Trip',
+  PlaceOfIncident: 'Place of incident',
+  DateOfIncident: 'Date of incident',
+  Detail: 'Details on incident and injuries',
+  DescriptionDetail: 'e.g diagnosis, injuries sustained, how the\n incident occurred.',
+  TotalExpensesIncurred: 'Total expenses incurred',
+  ImageOfMedicalBill: 'Image of medical report',
+  ImageOfPoliceReport: 'Image of police report (if applicable)',
+  ImageOfTravel: 'Image of travel itinerary or air tickets (if applicable)',
+  FormatDate: 'DD/MM/YYYY',
+};

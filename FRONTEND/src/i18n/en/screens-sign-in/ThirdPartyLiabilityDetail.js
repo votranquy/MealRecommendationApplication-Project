@@ -1,0 +1,17 @@
+export default {
+  Next: 'Next',
+  Title: 'Third party liability',
+  Detail: 'Covers third party injury, death or property damage',
+  QuestionClaim: 'How much can I claim?',
+  SelectTrip: 'Select Trip',
+  PoI: 'Place of incident',
+  DoI: 'Date of incident',
+  DetailIncident: 'Details on incident and injuries',
+  PoliceReport: 'Image of police report',
+  DocumentReport: 'Image of letters or claim documents received from the third party in relation to the claim',
+  DamageReport: 'Image(s) of damaged third party property (if applicable)',
+  Value: 'Value of third party claim',
+  txtImage_3: 'Image(s) of receipts of expenses incurred, refunded or unused',
+  placeHolderMoney: '0.00',
+  phIncident: 'e.g. how the incident occurred, damage or injuries sustained by third party',
+};

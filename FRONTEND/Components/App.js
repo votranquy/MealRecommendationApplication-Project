@@ -5,7 +5,7 @@ import Authentication from './Authentication';
 import ChangeInfo from './ChangeInfo';
 import Main from './Main';
 import Welcome from './Welcome';
-StatusBar.setHidden(true);
+// StatusBar.setHidden(true);
 
 export default class App extends Component {
     // componentDidMount() {

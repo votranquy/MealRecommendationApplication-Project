@@ -1,0 +1,18 @@
+export default {
+  EstimateTripTitle: 'Estimate Trip Premium',
+  ETPTxtEstimate: 'Want to know how much your trip will cost? Simply select when and where you are travelling',
+  LBLDestination: 'Destination',
+  LBLArrivalDate: 'Arrival date',
+  LBLQuestion: 'How does it work?',
+  LBLItemTitleEstimate1: 'Base Premium (annual)',
+  LBLItemContentEstimate1: 'Pay once when you sign up today',
+  LBLItemTitleEstimate2: 'Trip Premium (for every trip)',
+  LBLItemContentEstimate2: 'Daily premium',
+  LBLDailyPremium: 'Daily Premium',
+  Premium1: 'Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Thailand and Vietnam',
+  Premium2: 'Australia, China (excluding Inner Mongolia and Tibet), Hong Kong, India, Japan, Korea, Macau, New Zealand, Sri Lanka and Taiwan',
+  Premium3: 'Rest of world',
+  MoneyPremium35: '$3.50/day',
+  MoneyPremium45: '$4.50/day',
+  MoneyPremium7: '$7/day',
+};

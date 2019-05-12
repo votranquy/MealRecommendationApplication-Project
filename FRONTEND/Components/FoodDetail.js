@@ -17,8 +17,6 @@ import call from 'react-native-phone-call';
 import MapView from 'react-native-maps';
 import Modal from 'react-native-modalbox';
 import global from "./global";
-// import Modal from 'react-native-animated-modal';
-
 import icBack from "../Image/back_white.png";
 
 //const Img_Path= 'http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';

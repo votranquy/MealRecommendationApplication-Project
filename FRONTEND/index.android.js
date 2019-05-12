@@ -3,8 +3,10 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
+// StatusBar.setHidden(true);
 
 import DemeMapview from "./Components/DemoMapView";
 import App from './Components/App';

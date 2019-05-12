@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
     View, Text,
-    TouchableOpacity, StyleSheet, Image
+    TouchableOpacity, StyleSheet, Image,StatusBar
 } from 'react-native';
 import global from './global';
 import profileIcon from '../Image/profile.png';
 import saveToken from '../api/saveToken';
-
+StatusBar.setHidden(true);
 export default class Menu extends Component {
 
     constructor(props) {

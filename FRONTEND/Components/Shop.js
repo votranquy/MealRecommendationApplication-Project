@@ -10,7 +10,6 @@ import TabNavigator from 'react-native-tab-navigator';
 import global from "./global";
 import UserMenu from "./UserMenu";
 import Home from "./Home";
-import App1 from "./App1";
 import BookMark from "./BookMark";
 import initData from "../api/initData";
 import getBookMark from "../api/getBookMark";

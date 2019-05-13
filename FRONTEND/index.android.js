@@ -7,11 +7,7 @@ import {
   StatusBar
 } from 'react-native';
 // StatusBar.setHidden(true);
-
-import DemeMapview from "./Components/DemoMapView";
 import App from './Components/App';
-import DemoModal from "./Components/DemoModal";
-
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
@@ -21,13 +17,10 @@ export default class MealRecommendationApplicationProject extends Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#EEE',
   },
 });
-
-
 AppRegistry.registerComponent('MealRecommendationApplicationProject', () => MealRecommendationApplicationProject);

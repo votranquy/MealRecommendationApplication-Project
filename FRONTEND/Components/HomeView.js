@@ -14,7 +14,7 @@ import NearMe                      from "./NearMe";
 import Random                     from "./Random";
 import Trend                          from "./Trend";
 import Header                       from "./Header";
-import TopFood                    from "./TopFood";
+import TopFood                    from "./TopFood/index";
 import Restaurant                 from './Restaurant';
 const Page = ({label}) => (
     <View style={styles.container}>

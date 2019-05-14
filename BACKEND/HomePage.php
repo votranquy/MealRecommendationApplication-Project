@@ -12,7 +12,7 @@
   // ORDER BY rate DESC
   
   $query = mysqli_query($conn,$sql);
-  $max = mysqli_num_rows($query);
+  $max = mysqli_num_rows($query) -1;
   class Food{
     var $id;
     var $food_name;
@@ -52,7 +52,7 @@
   $from = $page * $the_number_of_items_per_page;
   $newArrayFood = array();
   try{
-      for($i=$from; ($i <= $from + $the_number_of_items_per_page - 1) && ($i< $max-1); $i = $i + 1){
+      for($i=$from; ($i <= $from + $the_number_of_items_per_page - 1) && ($i< $max-2); $i = $i + 1){
         array_push($newArrayFood,$arrFood[$i]);
       }
     echo json_encode($newArrayFood);

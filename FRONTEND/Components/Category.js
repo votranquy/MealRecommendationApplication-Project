@@ -35,7 +35,7 @@ export default class Category extends Component {
   }
 
   // fetchData(){
-  //   fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+  //   fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
   //     {method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
@@ -47,7 +47,7 @@ export default class Category extends Component {
   // }
 
   componentDidMount(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/category.php",
+    fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/category.php",
       {method:"GET",
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export default class Category extends Component {
   //     refreshing:true,
   //   });
 
-  //   fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+  //   fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
   //     this.setState({
@@ -98,7 +98,7 @@ export default class Category extends Component {
 
 
 //   _onEndReached(){
-//     fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
+//     fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
 //       {
 //         method:"POST",
 //         headers: {

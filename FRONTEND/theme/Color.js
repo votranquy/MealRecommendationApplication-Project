@@ -24,8 +24,11 @@ const Color = {
   Divider: '#eaeaea',
   Overlay: '#00000088',
   Badge: '#d2351c',
+  //Header Background
+  HeaderBackground:'#34B089',
 
-  // Text, background button
+
+  // Text, background, button
 
   Main: '#fa811c',
   Background: '#fafafa',

@@ -6,45 +6,54 @@ export default StyleSheet.create({
     flex:1, 
     backgroundColor: theme.Color.White,
   },
-  row: {
+  ctnRestaurant: {
     flex: 1,
     flexDirection:'row',
     backgroundColor:"#FFF",
     padding:3,
     margin:3,
-    //borderRadius: 20,
+    borderBottomWidth:1,
+    borderColor: theme.Color.LightGray,
+    paddingBottom:10,
   },
-  image:{
+  ctnImage:{
     flex:0.3,
+    padding:1,
     // borderRadius: 100
   },
-  content:{
+  image:{
+    flex:1,
+  },
+  ctnInfomation:{
     flex:0.7,
     padding:3,
   },
-  content_row:{
+  cntText:{
     flex:1,
     flexDirection:"row",
     alignItems: 'center',
+    padding:3,
   },
-  content_row_name:{
+  txtName:{
     color:"green",
-    fontSize: 20,
+    fontSize: theme.Size.FontBig,
+    alignItems: 'center',
+    fontWeight:"900",
+    // margin: theme.Size.TextMargin,
+  },
+  txtRate:{
+    color: theme.Color.NiceRed,
+    fontSize:  theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_rate:{
-    color:"green",
-    fontSize: 20,
+  txtAddress:{
+    color: theme.Color.MediumGray,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_address:{
-    color:"gray",
-    fontSize: 17,
-    alignItems: 'center',
-  },
-  content_row_menu:{
-    color:"gray",
-    fontSize: 17,
+  txtMenu:{
+    color: theme.Color.Orange,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
 });

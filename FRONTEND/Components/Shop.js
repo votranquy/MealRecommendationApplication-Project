@@ -66,7 +66,7 @@ removeFood(foodId){
           <TabNavigator.Item
             selected={this.state.selectedTab === 'save'}
             // title="Save"
-            renderIcon={() => <Image source={require("../Image/whitebookmark.png")} />}
+            renderIcon={() => <Image source={require("../Image/BookMark.png")} />}
             renderSelectedIcon={() => <Image source={require("../Image/greenbookmark.png")} />}
             onPress={() => this.setState({ selectedTab: 'save' })}
             badgeText={bookmarkArray.length}

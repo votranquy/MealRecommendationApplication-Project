@@ -5,7 +5,7 @@ import {
 
 import HomeView     from './HomeView';
 import ListFood          from './ListFood';
-import FoodDetail     from "./FoodDetail";
+import FoodDetail     from "./FoodDetail/";
 
 export default class Home extends Component{
   render() {

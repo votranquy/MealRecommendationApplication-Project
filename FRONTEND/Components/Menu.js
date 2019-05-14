@@ -6,7 +6,6 @@ import {
 import global from './global';
 import profileIcon from '../Image/profile.png';
 import saveToken from '../api/saveToken';
-StatusBar.setHidden(true);
 export default class Menu extends Component {
 
     constructor(props) {

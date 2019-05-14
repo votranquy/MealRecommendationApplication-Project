@@ -8,6 +8,8 @@ const Image = {
     YellowStar: require("../Image/yellowstar.png"),
     Location:   require('../Image/location.png'),
     Spoon:      require('../Image/spoon.png'),
+    Whiteback: require('../Image/back_white.png'),
+    Save:        require('../Image/whitebookmark.png'),
   },
 
   Bg: {

@@ -4,9 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  StatusBar
+  StatusBar,
 } from 'react-native';
-// StatusBar.setHidden(true);
 import App from './Components/App';
 export default class MealRecommendationApplicationProject extends Component {
   render() {

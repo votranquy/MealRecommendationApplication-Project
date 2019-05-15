@@ -1,41 +1,36 @@
-//import liraries
 import React, { Component } from 'react';
-import { View,
+import { 
+    View,
     Text,
     StyleSheet, 
     Dimensions,
     TouchableOpacity,
     Image,
-    TextInput,
     ScrollView,
     ListView,
     Alert,
-    Button,
-    } from 'react-native';
-import Swiper from 'react-native-swiper';
+} from 'react-native';
 import call from 'react-native-phone-call';
 import MapView from 'react-native-maps';
-import Modal from 'react-native-modalbox';
+import Modal from 'react-native-modalbox';  
 import global from "../global";
 import theme from "../../theme";
+import Swiper from 'react-native-swiper';
+import styles from "./styles";
+const {height , width} = Dimensions.get('window'); 
 
 
 export default class FoodDetail extends Component {
   constructor(props){
     super(props);
-    const {latitude,longitude} = this.props.food;
+    
     this.state = {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       foodItems: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+      restaurantImages: [],
       swipeToClose: false,
-      region:{
-        latitude:16.053364,
-        longitude: 108.217740,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
       }
     }
-  }
 
     goBack() {
         const { navigator } = this.props;
@@ -48,15 +43,29 @@ export default class FoodDetail extends Component {
   }
 
     componentDidMount(){
-      const { restaurantid, latitude,longitude} = this.props.food;
-      this.setState({
-        region:{
-          latitude:parseFloat(latitude) ,
-          longitude:parseFloat(longitude),
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.005,
+      const { restaurantid} = this.props.food;
+
+      //Get Restaurant Image
+      fetch("https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557886982580&Count=6&RestaurantId="+restaurantid,{
+        method:"GET",
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+          'x-requested-with' : 'XMLHttpRequest'
         }
       })
+      .then((response)=>response.json())
+      .then(
+        (responseData)=>{
+          if(responseData.ListPicture != null){
+            resImage = responseData.ListPicture;
+            this.setState({
+              restaurantImages: resImage,
+            });
+          }
+        }
+      )
+      .catch()
 
       //GET COMMENTS
       fetch("https://www.foody.vn/__get/Review/ResLoadMore?t=1556358596613&ResId="+restaurantid+"&LastId=0&Count=10&Type=1&isLatest=true&HasPicture=true",
@@ -103,8 +112,7 @@ export default class FoodDetail extends Component {
   .catch((error) => {
     console.error(error);
   });
-
-    }
+}
 
     callTheRestaurant(){
       const args = {
@@ -127,9 +135,7 @@ export default class FoodDetail extends Component {
 
 
     render() {
-      const { foodItems } = this.state;
-      const { image_path, category, food_name,  address , restaurantid} = this.props.food;
-      
+      const {category, food_name,  address, Latitude, Longitude} = this.props.food;
       const headerJSX=(
         <View style={styles.ctnHeader}>
           <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
@@ -142,7 +148,23 @@ export default class FoodDetail extends Component {
             <Image source={theme.Image.iCon.Save} style={styles.iconHeader}/>
           </TouchableOpacity>
       </View>
+      );
 
+      const imageJSX=(
+        <View style={styles.ctnImageFood}>
+          <Swiper 
+            showsButtons={true} 
+            width={width} 
+            height={height/5}
+            loop={true}
+            autoplay={false} 
+            showsPagination={true}
+          >
+              { this.state.restaurantImages.map(e => (
+                <Image source={{ uri: e.FullSizeImageUrl }} style={styles.imageFood} key={e.Id} />
+              )) }
+          </Swiper>
+        </View>
       );
 
       const infomationJSX=(
@@ -161,20 +183,24 @@ export default class FoodDetail extends Component {
 
       const itemsJSX = (
         <ListView 
-        enableEmptySections
-        dataSource={this.state.foodItems}
-        renderRow={
-          (e) => 
-            <View style={{flexDirection:"row"}}>
-            <View style={styles.ctnImageItem}>
-            <Image source={{uri: "https:"+e.ImageUrl }} style={styles.ctnImageItem}/>
-            </View>
-            <View key={e.Id}  style={styles.ctnInfomationItem}>
-              <Text style={styles.contentrowFoodInfo}>{e.Name}</Text>
-              <Text>{e.Price}</Text>
-            </View>
-            </View>
-        } 
+          enableEmptySections
+          dataSource={this.state.foodItems}
+          renderRow={
+            (e) => 
+              <View style={styles.ctnItem}>
+              <View style={styles.ctnImageItem}>
+              {e.ImageUrl == "/style/images/deli-dish-no-image.png"  
+              ? <Image source={{uri: "https:"+e.ImageUrl }} style={styles.imgeItem}/>
+              : <Image source={theme.Image.iCon.DefaultImage} style={styles.imgeItem}/>
+              }
+                
+              </View>
+              <View key={e.Id}  style={styles.ctnInfomationItem}>
+                <Text style={styles.contentrowFoodInfo} numberOfLines={1}>{e.Name}</Text>
+                <Text style={styles.contentrowFoodInfo}>{e.Price}đ</Text>
+              </View>
+              </View>
+          } 
     />
     );
 
@@ -198,7 +224,8 @@ export default class FoodDetail extends Component {
         <View style={{flex:1}}>
           {headerJSX }
         <ScrollView style={styles.wrapper} >
-            <Image source={{uri: image_path}} style={styles.imageFood}/>
+            {imageJSX}
+            {/* <Image source={{uri: image_path}} style={styles.imageFood}/> */}
             {infomationJSX}
             <Modal
               style={[styles.modal, styles.modal1]}
@@ -206,13 +233,47 @@ export default class FoodDetail extends Component {
               coverScreen={true}
               ref={"modal1"}
             >
-              <View style={{height:height,width:width,flex:1, borderWidth:4, borderColor:"black"}}>
+              <View style={styles.ctnMapView}>
+                <View/>
+                <View style={styles.ctnHeaderMap}>
+                  <View style={styles.ctnCloseButton}></View>
+                  <View style={styles.ctnHeaderText}>
+                    <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+                  </View>
+                  <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
+                    <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+                  </TouchableOpacity>
+                </View>
+               <View style={styles.ctnMapArea}>    
                 <MapView
-                  style={{flex:1}}
-                  region={this.state.region}
-                  initialRegion={this.state.region}>
-                  <MapView.Marker coordinate={this.state.region} title={"Here"} description={"No"} />
+                  style={{flex:1,height:height, width:width,}}
+                  // region={{        
+                  //   latitude: parseFloat(Latitude),
+                  //   longitude: parseFloat(Longitude),
+                  //   latitudeDelta: 0.005,
+                  //   longitudeDelta: 0.005,}}
+                  initialRegion={{        
+                    latitude: parseFloat(Latitude),
+                    longitude: parseFloat(Longitude),
+                    latitudeDelta: 0.005,
+                    longitudeDelta: 0.005,}}>
+                  <MapView.Marker 
+                    coordinate={{        
+                      latitude: parseFloat(Latitude),
+                      longitude: parseFloat(Longitude),
+                      // latitudeDelta: 0.005,
+                      // longitudeDelta: 0.005
+                    }} 
+                    title={food_name} 
+                    description={address}
+                    pinColor={"pink"}
+                    >
+                       {/* <View style={{backgroundColor: "red", padding: 10}}>
+                        <Text>SF</Text>
+                      </View> */}
+                    </MapView.Marker>
                 </MapView>
+               </View> 
               </View>
             </Modal>
             <View style={styles.ctnMenu}>
@@ -221,173 +282,14 @@ export default class FoodDetail extends Component {
                 </View>
                 { itemsJSX}
             </View>
+            <View style={styles.ctnMenu}>
             <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Bình Luận</Text>
             </View>
             {this.state.dataSource.length  != 0  ? commentJSX:<Text style={styles.contentrowFoodInfo}> Không có bình luận nào</Text> }
+           </View>
          </ScrollView>
          </View>
         );
     }
 }
-const {height , width} = Dimensions.get('window'); 
-const styles = StyleSheet.create({
-    wrapper:{
-      flex: 1,
-      margin:0,
-      backgroundColor:"#EEE",
-    },
-    ctnHeader:{
-     flexDirection:'row', 
-     justifyContent:'space-between',
-     height: height/15,
-     width:width,
-     backgroundColor: theme.Color.HeaderBackground, 
-     alignItems:'center',
-    },
-    ctnHeaderIcon:{
-      flex:0.1,
-      padding:1,
-      alignItems:'center',
-    },
-    ctnHeaderText:{
-      flex:0.8,
-      alignItems:'center',
-    },
-    iconHeader:{
-      flex:1,
-      width: width*0.1,
-      height:height/15,
-    },
-    txtHeader:{
-      color: '#FFF',
-       fontSize:20,
-    },
-    content:{
-        flexDirection:"row",
-        flex:1,
-        backgroundColor:"#CCC",
-        width:width,
-    },
-    imageFood:{
-        height:height/3,
-        width:width,
-        alignItems:"center",
-        padding:0,
-    },
-    ctnFoodInfomation:{
-      alignItems:"center",
-      // backgroundColor:"#EEE",
-      // justifyContent:"space-around",
-      padding:3,
-      marginBottom: 5,
-      // marginTop:2,
-    },
-    ctnText:{
-      width:width,
-      // height: theme.Size.FontSmall,
-      backgroundColor:theme.Color.White,
-      // flexDirection:"row",
-      // justifyContent: 'flex-start',
-      // alignItems: 'left',
-      padding:3,
-    },
-    smallImage:{
-      width:20,
-      height:20,
-      padding:1,
-
-    },
-    txtAddress:{
-      fontSize: theme.Size.FontSmall,
-      color: theme.Color.Orange,
-      alignItems: 'center',
-    },
-    txtCategory:{
-      fontSize: theme.Size.FontSmall,
-      color: theme.Color.Orange,
-      alignItems: 'center',
-    },
-    txtPhoneNumber:{
-      fontSize: theme.Size.FontSmall,
-      color: theme.Color.Orange,
-      alignItems: 'center',
-    },
-    contentrowFoodInfo: {
-      color:"black",
-      fontSize: theme.Size.FontSmall, 
-      padding:3,
-    },
-    ctnMenu:{
-      // justifyContent:"center",
-      borderBottomWidth:1,
-      borderColor: theme.Color.LightGray,
-      marginTop:2,
-      padding:3,
-      backgroundColor: theme.Color.White,
-    },
-    lbMenu:{
-      justifyContent:"center",
-      borderBottomWidth:1,
-      borderColor:  theme.Color.LightGray,
-    },
-    txtMenu:{
-      fontSize:20,
-      fontWeight:"900",
-      color: theme.Color.LightGray,
-    },
-    ctnItem:{
-      flex: 1,
-      flexDirection:'row',
-      backgroundColor:"#FFF",
-      padding:3,
-      margin:3,
-      borderBottomWidth:1,
-      borderColor: theme.Color.LightGray,
-      paddingBottom:10,
-    },
-    ctnImageItem:{
-      flex:0.3,
-      padding:1,
-    },
-    imgeItem:{
-      flex:1,
-    },
-    ctnInfomationItem:{
-      flex:0.7,
-      padding:3,
-    },
-    contact:{
-      flexDirection: "row",
-      justifyContent:"center",
-      borderWidth:0,
-      borderColor: '#FFF',
-      marginBottom:2,
-      marginTop:2,
-      borderRadius: 20,
-      
-    },
-    ContactCell:{
-      flex:1,
-      borderColor: '#2ABB9C',
-      borderWidth:1,
-      flexDirection:"column",
-      justifyContent:"center",
-      alignItems:"center",
-      backgroundColor:"white",
-      borderRadius: 20,
-    },
-    ContactTitle:{
-      fontSize:20,
-      color:"green",
-    },
-    comment:{
-      backgroundColor:"white",
-      fontSize:15,
-    },
-    username:{
-      color:"green",
-      fontWeight:"bold",
-    }
-
-  })

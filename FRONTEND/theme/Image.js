@@ -10,6 +10,8 @@ const Image = {
     Spoon:      require('../Image/spoon.png'),
     Whiteback: require('../Image/back_white.png'),
     Save:        require('../Image/whitebookmark.png'),
+    Close:       require('../Image/close.png'),
+    DefaultImage:  require('../Image/default_image.png'),
   },
 
   Bg: {

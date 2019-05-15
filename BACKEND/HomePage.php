@@ -22,8 +22,8 @@
     var $image_path;
     var $category;
     var $restaurantid;
-    var $latitude;
-    var $longitude;
+    var $Latitude;
+    var $Longitude;
     var $menu;
     function Food($_id,$_food_name, $_rate, $_address, $_image_path,$_category,$_restaurantid, $_menu, $_latitude, $_longitude){
       $this->food_name = $_food_name;
@@ -35,8 +35,8 @@
       $this->category=$_category;
       $this->restaurantid=$_restaurantid;
       $this->menu = $_menu;
-      $this->latitude = $_latitude;
-      $this->longitude = $_longitude;
+      $this->Latitude = $_latitude;
+      $this->Longitude = $_longitude;
     }
   }
 
@@ -46,7 +46,7 @@
     array_push($arrFood,new Food($row["id"],$row["food_name"],$row["rate"],$row["address"], $row["image_path"], $row["category"], $row["restaurant_id"], $row["menu"],$row["latitude"],$row["longitude"]));
   }
 
-  $the_number_of_items_per_page = 5;
+  $the_number_of_items_per_page = 7;
   $page = $_GET["pagenumber"];
   
   $from = $page * $the_number_of_items_per_page;

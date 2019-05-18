@@ -3,7 +3,7 @@
   $server_username ="root"; 
   $server_password =""; 
   $server_host = "localhost"; 
-  $database = 'MealRecommendationApp'; 
+  $database = 'MealApp'; 
   $link = mysqli_connect($server_host,$server_username,$server_password,$database);
   mysqli_query($link,"SET NAMES 'UTF8'");
 

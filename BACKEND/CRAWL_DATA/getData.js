@@ -15,7 +15,7 @@ const fetch = require('node-fetch');
 //         let totalReview=responseJson.reply.delivery_detail.rating.total_review;
 //         let first_image=responseJson.reply.delivery_detail.photos[1].value;
         
-//         let responseresult = await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
+//         let responseresult = await fetch('http://192.168.64.2/MealApplication-Project/api/saveData.php',
 //             {   
 //                 method: 'POST',
 //                 headers: {
@@ -72,7 +72,7 @@ async function getData(){
             let totalReview =responseJson.reply.delivery_detail.rating.total_review;
             let first_image =responseJson.reply.delivery_detail.photos[1].value;
             let restaurantid = i;
-            let responseresult =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
+            let responseresult =await fetch('http://192.168.64.2/MealApplication-Project/api/saveData.php',
                 {   
                     method: 'POST',
                     headers: {
@@ -109,7 +109,7 @@ async function getData(){
                for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
                menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
            }
-           let save =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
+           let save =await fetch('http://192.168.64.2/MealApplication-Project/api/updateMenu.php',
            {   
                method: 'POST',
                headers: {
@@ -159,7 +159,7 @@ async function getData(){
 //                 for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
 //                 menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
 //             }
-//             let save =await fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
+//             let save =await fetch('http://192.168.64.2/MealApplication-Project/api/updateMenu.php',
 //             {   
 //                 method: 'POST',
 //                 headers: {

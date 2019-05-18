@@ -4,6 +4,8 @@ import {
     Dimensions, StyleSheet, Image
 } from 'react-native';
 import global from './global';
+import getToken from "../api/getToken";
+import getBookmarkApi from "../api/getBookmarkApi";
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -12,54 +14,72 @@ function toTitleCase(str) {
 // const url = 'http://10.0.12.57/MyShop/api/images/product/';
 
 export default class BookMarkView extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+      }
+    }
     // incrQuantity(id) {
     //     global.incrQuantity(id);
     // }
     // decrQuantity(id) {
     //     global.decrQuantity(id);
     // }
-    removeFood(id) {
-        global.removeFood(id);
-    }
+    // removeFood(id) {
+    //     global.removeFood(id);
+    // }
 
-    gotoDetail(food) {
-        const { navigator } = this.props;
-        navigator.push({ name: 'FOOD_DETAIL' ,food});
-    }
+    // gotoDetail(food) {
+    //     const { navigator } = this.props;
+    //     navigator.push({ name: 'FOOD_DETAIL' ,food});
+    // }
 
-
-creatStar1(score){
-    //1
-    if(score <  0.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-    else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-  }
-  creatStar2(score){
-    //2
-    if(score <  1.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-    else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-  }
-  creatStar3(score){
-    //3
-    if(score <  2.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-    else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-  }
-  creatStar4(score){
-    //4
-    if(score <  3.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-    else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-  }
-  creatStar5(score){
-    //5
-    if(score <  4.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-    else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-  }
+    componentDidMount(){
+      // const { restaurantid} = this.props.food;
+      getToken()
+      .then(token => getBookmarkApi(token))
+      .then(
+        (responseData)=>{
+            this.setState({
+              dataSource: this.state.dataSource.cloneWithRows(responseData),
+            });
+          }
+        )  
+      .catch(err => console.log(err));
+}     
+// creatStar1(score){
+//     //1
+//     if(score <  0.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+//     else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+//   }
+//   creatStar2(score){
+//     //2
+//     if(score <  1.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+//     else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+//   }
+//   creatStar3(score){
+//     //3
+//     if(score <  2.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+//     else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+//   }
+//   creatStar4(score){
+//     //4
+//     if(score <  3.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+//     else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+//   }
+//   creatStar5(score){
+//     //5
+//     if(score <  4.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
+//     else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
+//   }
 
     render() {
         // const { main, checkoutButton, checkoutTitle, wrapper,
         //     productStyle, mainRight, productController,
         //     txtName, txtPrice, productImage, numberOfProduct,
         //     txtShowDetail, showDetailContainer } = styles;
-        const { bookmarkArray } = this.props;
+        // const { bookmarkArray } = this.props;
         //const arrTotal = cartArray.map(e => e.product.price * e.quantity);
         //const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b) : 0;
         return (
@@ -73,36 +93,21 @@ creatStar1(score){
                 <ListView
                     contentContainerStyle={styles.main}
                     enableEmptySections
-                    dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(bookmarkArray)}
-                    renderRow={property => (
-                        <TouchableOpacity  onPress={()=>this.gotoDetail(property.food)} key={property.food.id} style={styles.row}>
+                    dataSource={this.state.dataSource}
+                    renderRow={e => (
+                      <View>
                         <View style={styles.image} >
-                          <Image style={styles.image} source={{uri: property.food.image_path}} />
+                          <Text>{e.bookmark_name}</Text>
                         </View>
-                        <View style={styles.content}>
-                          <View style={styles.content_row}>
-                            <Text style={styles.content_row_name}>
-                            {property.food.food_name >25 ? property.food.food_name.substring(0,23)+"..." :property.food.food_name }
-                            </Text>
-                          </View>
-                          <View style={styles.content_row}>
-                            {this.creatStar1(property.food.rate)}
-                            {this.creatStar2(property.food.rate)}
-                            {this.creatStar3(property.food.rate)}
-                            {this.creatStar4(property.food.rate)}
-                            {this.creatStar5(property.food.rate)}
-                            <Text style={styles.content_row_rate}>{property.food.rate}</Text>
-                          </View>
-                          <View style={styles.content_row}>
-                            <Image source={require('../Image/location.png')}/>
-                            <Text style={styles.content_row_address}>{property.food.address.length >30 ? property.food.address.substring(0,28)+"..." :property.food.address }</Text>
-                          </View>
-                          <View style={styles.content_row}>
-                            <Image source={require('../Image/spoon.png')}/>
-                            <Text style={styles.content_row_menu}>{property.food.menu.length >30 ? property.food.menu.substring(0,28)+"..." :property.food.menu }</Text>
-                          </View>  
-                        </View>  
-                       </TouchableOpacity>
+                        <View>
+                          { e.food.map((item) =>
+                            <View key={item.id}>
+                              <Text>{item.food_name}</Text>
+                            </View> 
+                          )}
+                        </View>
+                      </View>
+
                     )}
                 />
             </View>

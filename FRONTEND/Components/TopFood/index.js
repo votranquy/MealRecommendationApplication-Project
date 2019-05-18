@@ -49,30 +49,32 @@ export default class TopFood extends Component {
 
   createRow(property){
     if(property.food_name == "") return;
-    return(
-    <TouchableOpacity 
-      activeOpacity={0.8}  
-      onPress={() => this.gotoDetail(property)} 
-      key={property.id} style={styles.ctnRestaurant}>
-      <View style={styles.ctnImage} >
-        <Image style={styles.image} source={{uri: property.image_path}} />
-      </View>
-      <View style={styles.ctnInfomation}>
-        <View style={styles.cntText}>
-          <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
+    else{
+      return(
+      <TouchableOpacity 
+        activeOpacity={0.8}  
+        onPress={() => this.gotoDetail(property)} 
+        key={property.id} style={styles.ctnRestaurant}>
+        <View style={styles.ctnImage} >
+          <Image style={styles.image} source={{uri: property.image_path}} />
         </View>
-        <View style={styles.cntText}>
-          <Text style={styles.txtRate}>{property.rate != "0" ? property.rate+ "★" : "Chưa có đánh giá"}</Text>
-        </View>
-        <View style={styles.cntText}>
-          <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
-        </View>
-        <View style={styles.cntText}>
-          <Text style={styles.txtMenu} numberOfLines={1}>{property.menu}</Text>
+        <View style={styles.ctnInfomation}>
+          <View style={styles.cntText}>
+            <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtRate}>{property.rate != "0" ? property.rate+ "★" : "Chưa có đánh giá"}</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtMenu} numberOfLines={1}>{property.menu}</Text>
+          </View>  
         </View>  
-      </View>  
-    </TouchableOpacity>
-    );
+      </TouchableOpacity>
+      );
+    }
   }
 
   _onEndReached(){

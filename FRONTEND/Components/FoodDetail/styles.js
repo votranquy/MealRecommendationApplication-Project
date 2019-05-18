@@ -54,27 +54,18 @@ export default StyleSheet.create({
       },
       ctnFoodInfomation:{
         alignItems:"center",
-        // backgroundColor:"#EEE",
-        // justifyContent:"space-around",
         padding:3,
         marginBottom: 5,
-        // marginTop:2,
       },
       ctnText:{
         width:width,
-        // height: theme.Size.FontSmall,
         backgroundColor:theme.Color.White,
-        // flexDirection:"row",
-        // justifyContent: 'flex-start',
-        // alignItems: 'left',
         padding:3,
       },
       ctnMapView: {
         height:height,
         width:width,
         flex:1,
-        // borderWidth:4, 
-        // borderColor:"black",
        },
        ctnHeaderMap:{
          flex:1/15,
@@ -117,13 +108,17 @@ export default StyleSheet.create({
         color: theme.Color.Orange,
         alignItems: 'center',
       },
-      contentrowFoodInfo: {
-        color:"black",
+      txtItem: {
+        color: theme.Color.Orange,
+        fontSize: theme.Size.FontSmall, 
+        padding:3,
+      },
+      txtPrice: {
+        color: theme.Color.DarkGray,
         fontSize: theme.Size.FontSmall, 
         padding:3,
       },
       ctnMenu:{
-        // justifyContent:"center",
         borderBottomWidth:1,
         borderColor: theme.Color.LightGray,
         marginTop:2,
@@ -152,14 +147,16 @@ export default StyleSheet.create({
         paddingBottom:10,
       },
       ctnImageItem:{
-        flex:0.3,
+        flex:3,
         padding:1,
       },
       imgeItem:{
         flex:1,
+        alignItems:"center",
+        justifyContent:"center"
       },
       ctnInfomationItem:{
-        flex:0.7,
+        flex:7,
         padding:3,
       },
       contact:{

@@ -17,6 +17,8 @@ import global from "../global";
 import theme from "../../theme";
 import Swiper from 'react-native-swiper';
 import styles from "./styles";
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 const {height , width} = Dimensions.get('window'); 
 
 
@@ -32,6 +34,7 @@ export default class FoodDetail extends Component {
       }
     }
 
+
     goBack() {
         const { navigator } = this.props;
         navigator.pop();
@@ -43,6 +46,7 @@ export default class FoodDetail extends Component {
   }
 
     componentDidMount(){
+
       const { restaurantid} = this.props.food;
 
       //Get Restaurant Image
@@ -136,6 +140,7 @@ export default class FoodDetail extends Component {
 
     render() {
       const {category, food_name,  address, Latitude, Longitude} = this.props.food;
+      
       const headerJSX=(
         <View style={styles.ctnHeader}>
           <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
@@ -144,7 +149,7 @@ export default class FoodDetail extends Component {
           <View style={styles.ctnHeaderText}>
           <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
           </View>
-          <TouchableOpacity  onPress={this.addThisFoodToBookMark.bind(this)} style={styles.ctnHeaderIcon}>
+          <TouchableOpacity  onPress={() => this.refs.modal2.open()} style={styles.ctnHeaderIcon}>
             <Image source={theme.Image.iCon.Save} style={styles.iconHeader}/>
           </TouchableOpacity>
       </View>
@@ -181,6 +186,53 @@ export default class FoodDetail extends Component {
         </View>
       );
 
+      const mapJSX=(
+        <Modal
+              style={[styles.modal, styles.modal1]}
+              backdrop={true}
+              coverScreen={true}
+              ref={"modal1"}
+            >
+              <View style={styles.ctnMapView}>
+                <View/>
+                <View style={styles.ctnHeaderMap}>
+                  <View style={styles.ctnCloseButton}></View>
+                  <View style={styles.ctnHeaderText}>
+                    <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+                  </View>
+                  <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
+                    <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+                  </TouchableOpacity>
+                </View>
+                <Text>{parseFloat(Latitude)} {parseFloat(Longitude)}</Text>
+               <View style={styles.ctnMapArea}>
+               {
+                 parseFloat(Latitude) > 0 
+                 ? <MapView
+                 style={{flex:1,height:height, width:width,}}
+                 initialRegion={{        
+                   latitude: parseFloat(Latitude),
+                   longitude: parseFloat(Longitude),
+                   latitudeDelta: 0.005,
+                   longitudeDelta: 0.005,}}>
+                 <MapView.Marker 
+                   coordinate={{        
+                     latitude: parseFloat(Latitude),
+                     longitude: parseFloat(Longitude),
+                   }} 
+                   title={food_name} 
+                   description={address}
+                   pinColor={"pink"}
+                   >
+                   </MapView.Marker>
+               </MapView>
+               :<Text>Bản đồ hiện không khả dụng</Text>
+               } 
+               </View> 
+              </View>
+            </Modal>
+      );
+
       const itemsJSX = (
         <ListView 
           enableEmptySections
@@ -188,20 +240,47 @@ export default class FoodDetail extends Component {
           renderRow={
             (e) => 
               <View style={styles.ctnItem}>
+
               <View style={styles.ctnImageItem}>
-              {e.ImageUrl == "/style/images/deli-dish-no-image.png"  
-              ? <Image source={{uri: "https:"+e.ImageUrl }} style={styles.imgeItem}/>
-              : <Image source={theme.Image.iCon.DefaultImage} style={styles.imgeItem}/>
+              {e.ImageUrl != "/style/images/deli-dish-no-image.png"  
+              ? <Image source={{uri: "https:"+e.ImageUrl }}           style={styles.imgeItem}/>
+              : <Image source={theme.Image.iCon.DefaultImage} style={{width: width/4 , height: height/13,flex:1}}/>
               }
-                
               </View>
+
               <View key={e.Id}  style={styles.ctnInfomationItem}>
-                <Text style={styles.contentrowFoodInfo} numberOfLines={1}>{e.Name}</Text>
-                <Text style={styles.contentrowFoodInfo}>{e.Price}đ</Text>
+                <Text style={styles.txtItem} numberOfLines={1}>{e.Name}</Text>
+                <Text style={styles.txtPrice}>{e.Price}đ</Text>
               </View>
+
               </View>
           } 
     />
+    );
+
+    const bookmarkJSX=(
+      <Modal
+      style={[styles.modal, styles.modal2]}
+      backdrop={true}
+      coverScreen={true}
+      ref={"modal2"}
+    >
+      <View style={styles.ctnMapView}>
+
+        <View style={styles.ctnHeaderMap}>
+          <View style={styles.ctnCloseButton}></View>
+          <View style={styles.ctnHeaderText}>
+            <Text style={styles.txtHeader} numberOfLines={1}>BOOKMARK</Text>
+          </View>
+          <TouchableOpacity onPress={() => this.refs.modal2.close()} style={styles.ctnHeaderIcon}>
+            <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+          </TouchableOpacity>
+        </View>
+        <View style={styles.ctnMapArea}>
+          
+        </View>
+      </View>
+    </Modal>
     );
 
     const commentJSX=(
@@ -220,62 +299,28 @@ export default class FoodDetail extends Component {
     />
     );
 
+    const actionButtonJSX=(
+      <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item buttonColor='#9b59b6' title="Bản đồ" onPress={() => this.refs.modal1.open()}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#3498db' title="Gọi điện" onPress={this.callTheRestaurant}>
+            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor='#1abc9c' title="Lưu lại" onPress={() => this.refs.modal2.open()}>
+            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
+    );
+
       return (
         <View style={{flex:1}}>
           {headerJSX }
         <ScrollView style={styles.wrapper} >
             {imageJSX}
-            {/* <Image source={{uri: image_path}} style={styles.imageFood}/> */}
             {infomationJSX}
-            <Modal
-              style={[styles.modal, styles.modal1]}
-              backdrop={true}
-              coverScreen={true}
-              ref={"modal1"}
-            >
-              <View style={styles.ctnMapView}>
-                <View/>
-                <View style={styles.ctnHeaderMap}>
-                  <View style={styles.ctnCloseButton}></View>
-                  <View style={styles.ctnHeaderText}>
-                    <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
-                  </View>
-                  <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
-                    <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-                  </TouchableOpacity>
-                </View>
-               <View style={styles.ctnMapArea}>    
-                <MapView
-                  style={{flex:1,height:height, width:width,}}
-                  // region={{        
-                  //   latitude: parseFloat(Latitude),
-                  //   longitude: parseFloat(Longitude),
-                  //   latitudeDelta: 0.005,
-                  //   longitudeDelta: 0.005,}}
-                  initialRegion={{        
-                    latitude: parseFloat(Latitude),
-                    longitude: parseFloat(Longitude),
-                    latitudeDelta: 0.005,
-                    longitudeDelta: 0.005,}}>
-                  <MapView.Marker 
-                    coordinate={{        
-                      latitude: parseFloat(Latitude),
-                      longitude: parseFloat(Longitude),
-                      // latitudeDelta: 0.005,
-                      // longitudeDelta: 0.005
-                    }} 
-                    title={food_name} 
-                    description={address}
-                    pinColor={"pink"}
-                    >
-                       {/* <View style={{backgroundColor: "red", padding: 10}}>
-                        <Text>SF</Text>
-                      </View> */}
-                    </MapView.Marker>
-                </MapView>
-               </View> 
-              </View>
-            </Modal>
+            {mapJSX}
+            {bookmarkJSX}
             <View style={styles.ctnMenu}>
                 <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Thực Đơn</Text>
@@ -286,9 +331,14 @@ export default class FoodDetail extends Component {
             <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Bình Luận</Text>
             </View>
-            {this.state.dataSource.length  != 0  ? commentJSX:<Text style={styles.contentrowFoodInfo}> Không có bình luận nào</Text> }
+            {this.state.dataSource.getRowCount()  ===  0  ? 
+            <View style={styles.ctnItem}>
+            <Text> Không có bình luận nào</Text> 
+            </View>
+            :commentJSX }
            </View>
          </ScrollView>
+         {actionButtonJSX}
          </View>
         );
     }

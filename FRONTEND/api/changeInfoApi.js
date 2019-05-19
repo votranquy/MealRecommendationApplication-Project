@@ -10,5 +10,4 @@ const changeInfoApi = (token, name, phone, address) => (
   })
   .then(res => res.json())
 );
-
 module.exports = changeInfoApi;

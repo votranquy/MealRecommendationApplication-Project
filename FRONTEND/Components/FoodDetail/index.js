@@ -40,17 +40,17 @@ export default class FoodDetail extends Component {
         navigator.pop();
     }
 
-    addThisFoodToBookMark() {
-      const { food } = this.props;
-      global.addFoodToBookMark(food);
-  }
+  // addThisFoodToBookMark() {
+  //     const { food } = this.props;
+  //     global.addFoodToBookMark(food);
+  // }
 
     componentDidMount(){
 
-      const { restaurantid} = this.props.food;
+      const { restaurant_id} = this.props.food;
 
       //Get Restaurant Image
-      fetch("https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557886982580&Count=6&RestaurantId="+restaurantid,{
+      fetch("https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557886982580&Count=6&RestaurantId="+restaurant_id,{
         method:"GET",
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -72,7 +72,7 @@ export default class FoodDetail extends Component {
       .catch()
 
       //GET COMMENTS
-      fetch("https://www.foody.vn/__get/Review/ResLoadMore?t=1556358596613&ResId="+restaurantid+"&LastId=0&Count=10&Type=1&isLatest=true&HasPicture=true",
+      fetch("https://www.foody.vn/__get/Review/ResLoadMore?t=1556358596613&ResId="+restaurant_id+"&LastId=0&Count=10&Type=1&isLatest=true&HasPicture=true",
       {method:"GET",
       headers: {
         Accept: 'application/json, text/plain, */*',
@@ -94,7 +94,7 @@ export default class FoodDetail extends Component {
     });
 
     //Get Item List
-    fetch("https://www.foody.vn/__get/Delivery/GetDeliveryDishes?t=1557065498605&RequestCount=5&RestaurantId="+restaurantid+"&SortType=2&NextItemId=0",
+    fetch("https://www.foody.vn/__get/Delivery/GetDeliveryDishes?t=1557065498605&RequestCount=5&RestaurantId="+restaurant_id+"&SortType=2&NextItemId=0",
     {method:"GET",
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -139,8 +139,7 @@ export default class FoodDetail extends Component {
 
 
     render() {
-      const {category, food_name,  address, Latitude, Longitude} = this.props.food;
-      
+      const {category, food_name,  address, latitude, longitude} = this.props.food;
       const headerJSX=(
         <View style={styles.ctnHeader}>
           <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
@@ -204,21 +203,21 @@ export default class FoodDetail extends Component {
                     <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
                   </TouchableOpacity>
                 </View>
-                <Text>{parseFloat(Latitude)} {parseFloat(Longitude)}</Text>
+                <Text>{parseFloat(latitude)} {parseFloat(longitude)}</Text>
                <View style={styles.ctnMapArea}>
                {
-                 parseFloat(Latitude) > 0 
+                 parseFloat(latitude) > 0 
                  ? <MapView
                  style={{flex:1,height:height, width:width,}}
                  initialRegion={{        
-                   latitude: parseFloat(Latitude),
-                   longitude: parseFloat(Longitude),
+                   latitude: parseFloat(latitude),
+                   longitude: parseFloat(longitude),
                    latitudeDelta: 0.005,
                    longitudeDelta: 0.005,}}>
                  <MapView.Marker 
                    coordinate={{        
-                     latitude: parseFloat(Latitude),
-                     longitude: parseFloat(Longitude),
+                     latitude: parseFloat(latitude),
+                     longitude: parseFloat(longitude),
                    }} 
                    title={food_name} 
                    description={address}

@@ -6,13 +6,13 @@ import FoodDetail from './FoodDetail';
 
 export default class BookMark extends Component {
     render() {
-        const { bookmarkArray } = this.props;
+        // const { bookmarkArray } = this.props;
         return (
             <Navigator
                 initialRoute={{ name: 'BOOKMARK_VIEW' }}
                 renderScene={(route, navigator) => {
                     switch (route.name) {
-                        case 'BOOKMARK_VIEW': return <BookMarkView navigator={navigator} bookmarkArray={bookmarkArray} />;
+                        case 'BOOKMARK_VIEW': return <BookMarkView navigator={navigator} />;
                         default: return <FoodDetail navigator={navigator} food={route.food}/>;
                     }
                 }}

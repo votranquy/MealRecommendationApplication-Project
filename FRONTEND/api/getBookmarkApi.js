@@ -10,6 +10,5 @@ const getBookmarkApi = (token) => (
     })
     .then(res => res.json())
   );
-  
-  module.exports = getBookmarkApi;
+module.exports = getBookmarkApi;
   

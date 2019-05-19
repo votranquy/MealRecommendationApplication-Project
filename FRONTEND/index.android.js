@@ -7,6 +7,7 @@ import {
   StatusBar,
 } from 'react-native';
 import App from './Components/App';
+// import TEST from './Components/TEST';
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (

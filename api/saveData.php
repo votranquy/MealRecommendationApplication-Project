@@ -29,7 +29,7 @@
     
 if($name != ""){
     //check if this restaurant is exist
-    $sql_check = "SELECT * FROM FOOD
+    $sql_check = "SELECT * FROM STORE
                  WHERE restaurant_id = '$restaurantid' 
                  ";
     $sql_check_result = mysqli_query($conn,$sql_check);
@@ -38,7 +38,7 @@ if($name != ""){
         
         //Is exist. Update it.
         $sql_update = 
-            "UPDATE FOOD 
+            "UPDATE STORE 
             SET 
                 food_name='$name', 
                 address='$address', 
@@ -71,7 +71,7 @@ if($name != ""){
         
         //Is NOT exist. Insert it.
         $sql_insert = 
-            "INSERT INTO FOOD(restaurant_id,food_name,address,category,latitude,longitude,rate,	image_path, totalReview) VALUES('$restaurantid','$name','$address','$category','$latitude','$longitude','$rate','$image_path','$totalReview')";
+            "INSERT INTO STORE(restaurant_id,food_name,address,category,latitude,longitude,rate,	image_path, totalReview) VALUES('$restaurantid','$name','$address','$category','$latitude','$longitude','$rate','$image_path','$totalReview')";
         
         $sql_insert_result=mysqli_query($conn,$sql_insert);
         

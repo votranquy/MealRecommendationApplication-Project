@@ -1,37 +1,6 @@
 
 const fetch = require('node-fetch');
 
-// async function saveData(responseJson){ 
-//     if(responseJson.result == "success"){
-//         let name=responseJson.reply.delivery_detail.name;
-//         let address=responseJson.reply.delivery_detail.address;
-//         let category ='';
-//         for (var j = 0; j < responseJson.reply.delivery_detail.categories.length; j++){
-//             category=category+responseJson.reply.delivery_detail.categories[j]+', ';
-//         }
-//         let latitude=responseJson.reply.delivery_detail.position.latitude;
-//         let longitude=responseJson.reply.delivery_detail.position.longitude;
-//         let rate=responseJson.reply.delivery_detail.rating.avg;
-//         let totalReview=responseJson.reply.delivery_detail.rating.total_review;
-//         let first_image=responseJson.reply.delivery_detail.photos[1].value;
-        
-//         let responseresult = await fetch('http://192.168.64.2/MealApplication-Project/api/saveData.php',
-//             {   
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     Accept: 'application/json'
-//                 },
-//                 body:  JSON.stringify({name,i,address,category,latitude,longitude,rate,first_image,totalReview})
-//             });
-
-//         let responseJson = await responseresult.json();
-
-//         return responseJson;
-//     }
-// }
-
-
 async function getData(){
     let count =0 ;
 
@@ -39,6 +8,8 @@ async function getData(){
 
         console.log(i);
 
+
+        //Get data for Restaurant
         let resp= await fetch('https://gappapi.deliverynow.vn/api/delivery/get_detail?request_id='+i+'&id_type=1',
         {
             method: 'GET',
@@ -54,9 +25,6 @@ async function getData(){
 
         let responseJson = await resp.json();
 
-        //console.log(responseJson.result);
-
-       // if(responseJson.result == "success"){
         try{   
             console.log(responseJson);
             count = count + 1;
@@ -81,13 +49,10 @@ async function getData(){
                     },
                     body:  JSON.stringify({name,restaurantid,address,category,latitude,longitude,rate,first_image,totalReview})
                 });
-            // let responseJson = await responseresult.json();
-            // console.log(responseJson.result);
        }catch (err) {   console.log(err); }
 
 
-       
-       //const url_menu='https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id='+restaurantid+'&id_type=1';
+       //Get data for Review Menu
        let resp_menu =await fetch('https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?request_id='+i+'&id_type=1',
        {
            method: 'GET',
@@ -118,24 +83,14 @@ async function getData(){
                },
                body:  JSON.stringify({i,menu})
            });
-        //    let saveJson = await save.json();
-        //    console.log(saveJson);
+
        }catch (err) {console.log(err);}
 
-
-    
-
-
-
-
-
-
-
-    }//for
+    }
     console.log(count);
 }
 
-
+getData();
 
 // async function getMenu(){
 //     for (i = 999800; i < 1000000; i++){
@@ -174,4 +129,3 @@ async function getData(){
 //     }
 // }
 
-getData();

@@ -1,12 +1,5 @@
 <?php
-/**
- * JSON Web Token implementation
- * PHP: http://khoapham.vn/lap-trinh-php.html
- * React Native: http://khoapham.vn/khoa-hoc-lap-trinh-react-native.html
- * Android: http://khoapham.vn/khoa-hoc-lap-trinh-android.html
- * iOS: http://khoapham.vn/khoa-hoc-laptrinhios.html
- * NodeJS: http://khoapham.vn/khoa-hoc-lap-trinh-nodejs.html
- */
+
 class JWT
 {
 	public static function decode($jwt, $key = null, $verify = true)

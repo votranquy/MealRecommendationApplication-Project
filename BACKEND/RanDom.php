@@ -10,7 +10,7 @@
   $min_randum_number =  $randum_number - 1;
   $max_randum_number =  $randum_number + 1;
   $sql = "SELECT * 
-  FROM FOOD
+  FROM STORE
   WHERE rate > '$min_randum_number' AND rate < '$max_randum_number'
   ";
   // ORDER BY rate DESC

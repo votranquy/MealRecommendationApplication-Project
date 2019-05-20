@@ -8,9 +8,6 @@
     $obj = json_decode($json, true);
     $token = $obj['token'];
     $key = "example_key";
-    // p: bookmark
-    // q: bookmark save 
-    // t: food
 
     try{
 		$decoded = JWT::decode($token, $key, array('HS256'));
@@ -19,9 +16,6 @@
 		}
 		else{
 			$email = $decoded->email;
-			// $name = $obj['name'];
-			// $phone = $obj['phone'];
-            // $address = $obj['address'];
 
             $sql_getid = $mysqli->query("SELECT id FROM USER WHERE email = '$email'");
 
@@ -46,7 +40,7 @@
                 );
                 while($rowgroup = $group->fetch_object()){
                     $idfood = $rowgroup->id_food;
-                    $fooditem = $mysqli->query("SELECT * FROM FOOD WHERE restaurant_id = '$idfood'");
+                    $fooditem = $mysqli->query("SELECT * FROM STORE WHERE restaurant_id = '$idfood'");
                     while($rowfood = $fooditem->fetch_object()){
                         array_push($arrFood,$rowfood);
                     }
@@ -54,13 +48,10 @@
                 $row->food = $arrFood;
                 array_push($array,$row);
             }
-
             echo json_encode($array);
-
 		}
 	}
 	catch(Exception $e){
 		echo 'LOI';
 	}
-
 ?>

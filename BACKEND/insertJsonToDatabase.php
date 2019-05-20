@@ -62,7 +62,7 @@
             echo $image_path."<br>";
 
             //=============INSERT TO DATABASE
-            $sql = "SELECT * FROM FOOD
+            $sql = "SELECT * FROM STORE
                 WHERE address = '$address' 
                 AND district = '$district' 
                 AND id_food_category = '$idfoodtype'
@@ -76,7 +76,7 @@
             else{
               //Chua ton tai, iten hanh insert
                 //Bang Food
-                $query = "INSERT INTO FOOD VALUES(null,'$name','$address','$idfoodtype','$district','$latitude','$longitude','$worktime','$rate')";
+                $query = "INSERT INTO STORE VALUES(null,'$name','$address','$idfoodtype','$district','$latitude','$longitude','$worktime','$rate')";
                 mysqli_query($conn,$query);
                 $idfood = mysqli_insert_id($conn);
                 echo "Da insert mot du lieu moi<br>";

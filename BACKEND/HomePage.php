@@ -7,7 +7,7 @@
   $conn = mysqli_connect($server_host,$server_username,$server_password,$database) or die("Can not connect to Database");
   mysqli_query($conn,"SET NAMES 'UTF8'");
   $sql = "SELECT * 
-  FROM FOOD
+  FROM STORE
   ORDER BY rate DESC";
   // ORDER BY rate DESC
   
@@ -18,25 +18,23 @@
     var $food_name;
     var $rate;
     var $address;
-    //var $worktime;
     var $image_path;
     var $category;
-    var $restaurantid;
-    var $Latitude;
-    var $Longitude;
+    var $restaurant_id;
+    var $latitude;
+    var $longitude;
     var $menu;
     function Food($_id,$_food_name, $_rate, $_address, $_image_path,$_category,$_restaurantid, $_menu, $_latitude, $_longitude){
       $this->food_name = $_food_name;
       $this->rate = $_rate;
       $this->address = $_address;
-      //$this->worktime = $_worktime;
       $this->image_path = $_image_path;
       $this->id = $_id;
       $this->category=$_category;
-      $this->restaurantid=$_restaurantid;
+      $this->restaurant_id=$_restaurantid;
       $this->menu = $_menu;
-      $this->Latitude = $_latitude;
-      $this->Longitude = $_longitude;
+      $this->latitude = $_latitude;
+      $this->longitude = $_longitude;
     }
   }
 

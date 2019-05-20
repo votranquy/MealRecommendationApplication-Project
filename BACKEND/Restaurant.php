@@ -7,7 +7,7 @@
   $conn = mysqli_connect($server_host,$server_username,$server_password,$database) or die("Can not connect to Database");
   mysqli_query($conn,"SET NAMES 'UTF8'");
   $sql = "SELECT * 
-  FROM FOOD
+  FROM STORE
   WHERE category='Quán ăn, '
   ";
   // ORDER BY rate DESC

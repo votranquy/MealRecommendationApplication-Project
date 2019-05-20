@@ -16,7 +16,7 @@
  
 
     $sql_update = 
-        "UPDATE FOOD 
+        "UPDATE STORE 
         SET 
         menu='$menu'
         WHERE 

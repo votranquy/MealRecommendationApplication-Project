@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import register from "../api/register";
+import {AuthService} from '../Components/services';
+
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -11,6 +13,9 @@ export default class SignUp extends Component {
             password: '',
             rePassword: ''
         };
+        this._handleSuccess = this._handleSuccess.bind(this);
+        this._handleError = this._handleError.bind(this);
+        this._handleErrorCode = this._handleErrorCode.bind(this);
     }
 
     onSuccess() {
@@ -39,14 +44,33 @@ export default class SignUp extends Component {
         this.setState({ email: '' });
     }
 
+    _handleSuccess(res){
+        console.log('_LOGIN', '_handleSuccess');
+        console.log('_LOGIN',res);
+        if(res.result);
+        // global.onSignIn(res.user);
+        // this.props.goBackToMain();
+        // saveToken(res.token);
+    }
+    _handleError(){
+        console.log('_LOGIN', '_handleError');
+    }
+    _handleErrorCode(){ 
+        console.log('_LOGIN', '_handleErrorCode');
+    }
+
+
     registerUser() {
         const { email, name, password } = this.state;
-        register(email, name, password)
-        .then((response) => response.json())
-        .then((responseJson) => {
-          if (responseJson.result === 'THANH_CONG') return this.onSuccess();
-          else return this.onFail();
-        });
+        AuthService.signUp(email, password,name,this. _handleSuccess, this._handleErrorCode, this._handleError);
+
+
+        // register(email, name, password)
+        // .then((response) => response.json())
+        // .then((responseJson) => {
+        //   if (responseJson.result === 'THANH_CONG') return this.onSuccess();
+        //   else return this.onFail();
+        // });
     }
 
     render() {

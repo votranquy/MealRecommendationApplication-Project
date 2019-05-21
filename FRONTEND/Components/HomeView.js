@@ -33,7 +33,7 @@ export default class HomeView extends Component {
 
   render() {
     return (
-        <View style={[styles.container, {paddingTop: 20}]}>
+        <View style={styles.container}>
           <Header onOpen={this.openMenu.bind(this)}/>
           <ScrollableTabView
               tabBarActiveTextColor="#53ac49"

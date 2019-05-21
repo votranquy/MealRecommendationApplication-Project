@@ -4,6 +4,7 @@ import {
   StyleSheet, 
   Image,
   Text,
+  Dimensions
 
 } from "react-native";
 import TabNavigator from 'react-native-tab-navigator';
@@ -55,8 +56,8 @@ removeFood(foodId){
           <TabNavigator.Item
             selected={this.state.selectedTab === 'home'}
             // title="Home"
-            renderIcon={() => <Image source={require("../Image/whitehome.png")} />}
-            renderSelectedIcon={() => <Image source={require("../Image/greenhome.png")} />}
+            renderIcon={() => <Image source={require("../Image/whitehome.png")} style={styles.imageStyle}/>}
+            renderSelectedIcon={() => <Image source={require("../Image/greenhome.png")} style={styles.imageStyle} />}
             onPress={() => this.setState({ selectedTab: 'home' })}
             selectedTitleStyle={{ color: '#2ECC97', fontFamily: 'Avenir' }}
             >
@@ -66,8 +67,8 @@ removeFood(foodId){
           <TabNavigator.Item
             selected={this.state.selectedTab === 'save'}
             // title="Save"
-            renderIcon={() => <Image source={require("../Image/BookMark.png")} />}
-            renderSelectedIcon={() => <Image source={require("../Image/greenbookmark.png")} />}
+            renderIcon={() => <Image source={require("../Image/BookMark.png")} style={styles.imageStyle}/>}
+            renderSelectedIcon={() => <Image source={require("../Image/greenbookmark.png")} style={styles.imageStyle}/>}
             onPress={() => this.setState({ selectedTab: 'save' })}
             badgeText={bookmarkArray.length}
             selectedTitleStyle={{ color: '#2ECC97', fontFamily: 'Avenir' }}
@@ -85,8 +86,8 @@ removeFood(foodId){
           <TabNavigator.Item
             selected={this.state.selectedTab === 'user'}
             // title="Suggest"
-            renderIcon={() => <Image source={require("../Image/whiteuser.png")} />}
-            renderSelectedIcon={() => <Image source={require("../Image/greenuser.png")} />}
+            renderIcon={() => <Image source={require("../Image/whiteuser.png")} style={styles.imageStyle}/>}
+            renderSelectedIcon={() => <Image source={require("../Image/greenuser.png")} style={styles.imageStyle}/>}
             onPress={() => this.setState({ selectedTab: 'user' })}
             selectedTitleStyle={{ color: '#2ECC97', fontFamily: 'Avenir' }}
             >
@@ -97,7 +98,7 @@ removeFood(foodId){
    );
   }
 }
-
+const {height , width} = Dimensions.get('window'); 
 const styles = StyleSheet.create({
   input:{
     backgroundColor:'#EEEEEE',
@@ -117,6 +118,11 @@ const styles = StyleSheet.create({
     padding:10,
     flexDirection:"row"
   },
+  imageStyle:{
+    width: width/14,
+    height: width/14,
+    marginRight:0,
+ },
   plus: {
     color:"black",
     fontSize: 20, 

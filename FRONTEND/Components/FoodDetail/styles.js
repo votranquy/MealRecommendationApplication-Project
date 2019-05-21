@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import theme from '../../theme';
 
-
 const {height , width} = Dimensions.get('window'); 
 export default StyleSheet.create({
     wrapper:{
@@ -43,7 +42,7 @@ export default StyleSheet.create({
       },
       ctnImageFood:{
         justifyContent: 'flex-end', 
-        height:height/3,
+        // height:height/3,
         width:width,
       },
       imageFood:{

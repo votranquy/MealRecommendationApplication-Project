@@ -12,7 +12,6 @@ import icMenu from '../Image/ic_menu.png';
 
 const {height} = Dimensions.get('window'); 
 
-
 export default class Header extends Component{
    render(){
      return(
@@ -43,14 +42,20 @@ export default class Header extends Component{
 
 const styles = StyleSheet.create({
    wrapper:{
-    height: height / 6, backgroundColor: '#34B089', padding:10, justifyContent:'space-around'
+    height: height / 6, 
+    backgroundColor: '#34B089',
+     padding:10,
+      justifyContent:'space-around',
    },
-   row1:{flexDirection: 'row', justifyContent: 'space-between' ,
-    // flexDirection:'column', justifyContent:'space-around',
+   row1:{
+     flexDirection: 'row', 
+     justifyContent: 'space-between' ,
     flex:1,alignItems:'center', marginBottom:10
    },
    titleStyle:{
-    color: '#FFF', fontSize:20, alignItems:'center', justifyContent:"space-between"
+    color: '#FFF',
+     fontSize:20, 
+     alignItems:'center', justifyContent:"space-between"
    }, 
    iconStyle:{
      height:30, width:30,
@@ -62,16 +67,27 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   searchInput:{
-    flex:3,height: height/15, backgroundColor: 'white', paddingLeft:5, paddingHorizontal: 20,  borderRadius: 20, marginRight:2
+    flex:3,height: height/15, backgroundColor: 'white', paddingLeft:20, paddingHorizontal: 20,  borderRadius: 20, marginRight:2
    },
   searchBtn: {
-    // flex: 1,
-     height: height/15, backgroundColor: '#2ABB9C',  paddingHorizontal: 20,  borderRadius: 20,alignItems:'center', justifyContent: 'space-around'
+     height: height/15,
+     backgroundColor: '#2ABB9C',  
+     paddingHorizontal: 20,  
+     borderRadius: 20,
+     alignItems:'center', 
+     justifyContent: 'space-around'
   },
   searchBtnText:{
-    color: '#FFF', fontSize:20, alignItems:'center', justifyContent:"space-between"
+    color: '#FFF', 
+    fontSize:20, 
+    alignItems:'center', 
+    justifyContent:"space-between",
   },
   horizontalBar:{
-    backgroundColor: '#2ABB9C',height:30,flex:1,flexDirection:'row', justifyContent: 'space-between'
+    backgroundColor: '#2ABB9C',
+    height:30,
+    flex:1,
+    flexDirection:'row', 
+    justifyContent: 'space-between',
   }
  })

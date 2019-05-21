@@ -5,6 +5,8 @@ import signIn    from '../api/signIn';
 import global    from './global';
 import saveToken from '../api/saveToken';
 
+import {AuthService} from '../Components/services';
+
 export default class SignIn extends Component {
 
     constructor(props){
@@ -13,17 +15,44 @@ export default class SignIn extends Component {
             email: '',
             password: ''
         };
+
+        this._handleSuccess = this._handleSuccess.bind(this);
+        this._handleError = this._handleError.bind(this);
+        this._handleErrorCode = this._handleErrorCode.bind(this);
     }
 
-    onSignIn() {
+    _handleSuccess(res){
+        console.log('_LOGIN', '_handleSuccess');
+        console.log('_LOGIN',res);
+        global.onSignIn(res.user);
+        this.props.goBackToMain();
+        saveToken(res.token);
+    }
+
+    _handleError(){
+        console.log('_LOGIN', '_handleError');
+    }
+
+    _handleErrorCode(){
+        console.log('_LOGIN', '_handleErrorCode');
+    }
+
+    async onSignIn() {
+        // const { email, password} = this.state;
+        // AuthService.signIn(email, password,this. _handleSuccess, this._handleErrorCode, this._handleError);
+
         const { email, password } = this.state;
-        signIn(email, password)
-            .then(res => {
-                global.onSignIn(res.user);
-                this.props.goBackToMain();
-                saveToken(res.token);
-            })
-            .catch(err => console.log(err));
+        try{
+            let response = await signIn(email, password);
+            let responseJson = await response.json();
+    
+            global.onSignIn(responseJson.user);
+            this.props.goBackToMain();
+            saveToken(responseJson.token); 
+        }catch(err) {
+            console.log("ERORORRRRRRRRRRRR")
+        }
+
     }
 
     render() {
@@ -46,7 +75,7 @@ export default class SignIn extends Component {
                 />
                 <TouchableOpacity
                     style={bigButton}
-                    onPress={this.onSignIn.bind(this)}
+                    onPress={() => this.onSignIn()}
                     >
                     <Text style={buttonText}>SIGN IN NOW</Text>
                 </TouchableOpacity>

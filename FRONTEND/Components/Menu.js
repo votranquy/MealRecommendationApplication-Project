@@ -13,6 +13,7 @@ import global from './global';
 import profileIcon from '../Image/profile.png';
 import saveToken from '../api/saveToken';
 import settingMenu from '../Components/settingMenu';
+import theme from '../theme';
 const {height , width} = Dimensions.get('window'); 
 
 export default class Menu extends Component {
@@ -46,7 +47,7 @@ export default class Menu extends Component {
     render() {
         const { 
             container, profile, btnStyle, btnText, 
-            btnSignInStyle, btnTextSignIn, loginContainer,
+            btnSignInStyle, txtButton, loginContainer,
             username
         } = styles;
 
@@ -128,35 +129,35 @@ export default class Menu extends Component {
         //   </View>
 
             <View style={loginContainer}>
-                <Text style={username}>{user ? user.name : ''}</Text>
+                
                 <View>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image  source={require('../Image/user.png')} style={styles.imageStyle}/>
-                        <Text style={btnTextSignIn}>Đổi thông tin</Text>
+                        <Text style={txtButton}>Đổi thông tin</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image  source={require('../Image/key.png')} style={styles.imageStyle}/>
-                        <Text style={btnTextSignIn}>Đổi mật khẩu</Text>
+                        <Text style={txtButton}>Đổi mật khẩu</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image source={require('../Image/settingorange.png')} style={styles.imageStyle}/>
-                        <Text style={btnTextSignIn}>Cài đặt thông báo</Text>
+                        <Text style={txtButton}>Cài đặt thông báo</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image source={require('../Image/infomation.png')}  style={styles.imageStyle}/>
-                        <Text style={btnTextSignIn}>Giới thiệu ứng dụng</Text>
+                        <Text style={txtButton}>Giới thiệu ứng dụng</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image source={require('../Image/google.png')} style={styles.imageStyle}/>
-                        <Text style={btnTextSignIn}>Xếp hạng ứng dụng</Text>
+                        <Text style={txtButton}>Xếp hạng ứng dụng</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                       <Image  source={require('../Image/bluetooth.png')}    style={styles.imageStyle}     />
-                       <Text style={btnTextSignIn}>Chia sẻ ứng dụng</Text>
+                       <Text style={txtButton}>Chia sẻ ứng dụng</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
                        <Image    source={require('../Image/logout.png')}         style={styles.imageStyle}  />
-                        <Text style={btnTextSignIn}>Đăng xuất            </Text>
+                        <Text style={txtButton}>Đăng xuất </Text>
                     </TouchableOpacity>
                 </View>
                 <View />
@@ -168,6 +169,7 @@ export default class Menu extends Component {
             <View style={container}>
                 <View style={styles.ctnAvatart}>                
                     <Image source={profileIcon} style={profile} />
+                    <Text style={username}>{user ? user.name : ''}</Text>
                 </View>
                 <ScrollView style={styles.ctnSetting}>
                     { mainJSX }
@@ -188,7 +190,6 @@ const styles = StyleSheet.create({
     ctnAvatart:{
         alignItems: 'center',
         backgroundColor: '#34B089',
-
     },
     ctnSetting:{
 
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         alignItems: 'center',
     },
-    btnTextSignIn: {
+    txtButton: {
         color: '#34B089',
         fontSize: 15
     },
@@ -241,7 +242,7 @@ const styles = StyleSheet.create({
         // alignItems: 'center'
     },
     username: {
-        color: '#fff', 
+        color: theme.Color.White, 
         fontFamily: 'Avenir', 
         fontSize: 15
     }

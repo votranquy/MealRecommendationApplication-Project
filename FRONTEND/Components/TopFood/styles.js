@@ -36,7 +36,7 @@ export default StyleSheet.create({
   },
   txtName:{
     color:"green",
-    fontSize: theme.Size.FontBig,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
     fontWeight:"900",
     // margin: theme.Size.TextMargin,

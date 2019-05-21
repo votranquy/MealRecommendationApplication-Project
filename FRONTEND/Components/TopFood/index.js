@@ -7,7 +7,8 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import styles from "./styles";
 
@@ -18,6 +19,7 @@ export default class TopFood extends Component {
     this.state = {
       page:0,
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+      mang:[],
     }
   }
 
@@ -26,29 +28,32 @@ export default class TopFood extends Component {
     navigator.push({name: "FOOD_DETAIL",food});
   }
 
-  componentDidMount(){
-    fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
+  async componentDidMount(){
+    try{
+      let response = await  fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
-    })
-    .then((response)=>response.json())
-    .then((responseData)=>{
-      mang = responseData;
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(mang),
-      });
-    })
-    .catch((error) => {
-      console.error(error);
     });
+    let responseJson = await response.json();
+    // mang = responseJson;
+    this.setState({
+      mang : responseJson,
+      dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+    });
+    }catch(err) {
+        console.log("ERORORRRRRRRRRRRR");
+        this.setState({
+          dataSource: [],
+        });
+    }
   }
 
 
   createRow(property){
-    if(property.food_name == "") return;
+    if(property.food_name == "");
     else{
       return(
       <TouchableOpacity 
@@ -63,7 +68,10 @@ export default class TopFood extends Component {
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
           <View style={styles.cntText}>
-            <Text style={styles.txtRate}>{property.rate != "0" ? property.rate+ "★" : "Chưa có đánh giá"}</Text>
+            <Text style={styles.txtName}>{property.restaurant_id }</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtRate}>{property.rate != "0" ? Math.round(property.rate*10)/10 + "★"  : property.rate+ "★"+"Chưa có đánh giá"}</Text>
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
@@ -90,10 +98,11 @@ export default class TopFood extends Component {
     .then((response)=>response.json())
     .then((responseData)=>{
       if(responseData.length != 0){
-        mang = mang.concat(responseData);
+        // mang = mang.concat(responseData);
         this.setState({
           isLoading:false,
-          dataSource: this.state.dataSource.cloneWithRows(mang),
+          mang : this.state.mang.concat(responseData),
+          dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
           page: this.state.page+1,
         });
       }

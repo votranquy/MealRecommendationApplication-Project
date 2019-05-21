@@ -116,6 +116,7 @@ export default class App extends Component {
                     if (route.name === 'AUTHENTICATION') return Navigator.SceneConfigs.FloatFromRight;
                     return Navigator.SceneConfigs.FloatFromLeft;
                 }}
+                style={{flex:1}}
             />
         );
     }

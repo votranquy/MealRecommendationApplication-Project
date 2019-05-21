@@ -12,6 +12,14 @@ const Image = {
     Save:        require('../Image/whitebookmark.png'),
     Close:       require('../Image/close.png'),
     DefaultImage:  require('../Image/default_image.png'),
+    Map:         require('../Image/map.png'),
+    Phone: require ('../Image/phone.png'),
+    BookMark : require ('../Image/bookmark.png'),
+    WhiteMap: require('../Image/whitemap.png'),
+    WhitePhone: require('../Image/whitephone.png'),
+    Earth: require('../Image/Earth.png'),
+    WhiteSave: require('../Image/whitesave.png'),
+    WhiteHeart: require('../Image/whiteheart.png'),
   },
 
   Bg: {

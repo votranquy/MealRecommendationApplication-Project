@@ -182,12 +182,39 @@ export default StyleSheet.create({
         fontSize:20,
         color:"green",
       },
-      comment:{
-        backgroundColor:"white",
-        fontSize:15,
+      ctnComment:{
+        // flexDirection:"row",
+        padding:5,
+        // justifyContent:"center",
+        borderBottomWidth:1,
+        borderColor:  theme.Color.LightGray,
       },
-      username:{
-        color:"green",
-        fontWeight:"bold",
-      }
+
+      ctnUsername:{
+        flexDirection: "row",
+        margin:2,
+      },
+      logoUsername:{
+        backgroundColor: theme.Color.DarkGray,
+        borderRadius: 60,
+        width: width/16,
+        height: width/16,
+        justifyContent:"center",
+        alignItems:"center",
+        marginRight:5,
+      },
+      txtLogo:{
+        color: theme.Color.White,
+        fontWeight:"900",
+      },
+      txtUsername:{
+        color: theme.Color.Green,
+        fontWeight: "900",
+      },
+      txtComment:{
+        // backgroundColor:"white",
+        fontSize: theme.Size.FontSmall,
+        color: theme.Color.Black,
+        fontFamily: theme.Font.Light,
+      },
 });

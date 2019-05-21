@@ -18,9 +18,8 @@ import Modal from 'react-native-modalbox';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
-
+import theme from '../../theme';
 import global from "../global";
-import theme from "../../theme";
 import styles from "./styles";
 import getRestaurantImage from '../../api/getRestaurantImage';
 const {height , width} = Dimensions.get('window'); 
@@ -292,11 +291,14 @@ componentDidMount(){
         dataSource={this.state.comment}
         renderRow={
           (data) => 
-            <View style={{flexDirection:"row"}}>
-              <View  style={styles.lbMenu}>
-                <Text style={styles.contentrowFoodInfo}>{data.Owner.DisplayName}</Text>
-                <Text style={styles.comment}>{data.Description}</Text>
+            <View style={styles.ctnComment}>
+              <View style={styles.ctnUsername}>
+                <View style={styles.logoUsername}>
+                  <Text style={styles.txtLogo}>{data.Owner.DisplayName.substring(0,1).toUpperCase()}</Text>   
+                </View>
+                <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
               </View>
+                <Text style={styles.comment}>{data.Description}</Text>
             </View>
           }
     />
@@ -317,7 +319,7 @@ const menuJSX = (
 				</View>
 				<View  style={styles.ctnInfomationItem}>
 					<Text style={styles.txtItem} numberOfLines={1}>{item.Name}</Text>
-					<Text style={styles.txtPrice}>{item.Price}đ</Text>
+					<Text style={styles.txtPrice}>{item.Price }đ</Text>
 				</View>
 			</View>
 		)}
@@ -352,16 +354,20 @@ const menuJSX = (
 
     const actionButtonJSX=(
       <ActionButton buttonColor="rgba(231,76,60,1)">
+
           <ActionButton.Item buttonColor='#9b59b6' title="Bản đồ" onPress={() => this.refs.modal1.open()}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
+            <Image source={theme.Image.iCon.Earth} />
           </ActionButton.Item>
+
           <ActionButton.Item buttonColor='#3498db' title="Gọi điện" onPress={this.callTheRestaurant}>
-            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+            <Image source={theme.Image.iCon.WhitePhone}/>
           </ActionButton.Item>
+
           <ActionButton.Item buttonColor='#1abc9c' title="Lưu lại" onPress={() => this.refs.modal2.open()}>
-            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+              <Image source={theme.Image.iCon.WhiteHeart}/>
           </ActionButton.Item>
-        </ActionButton>
+
+      </ActionButton>
     );
 
 //     if(this.state.isLoading){
@@ -384,9 +390,7 @@ const menuJSX = (
                 <View style={styles.lbMenu}>
                   <Text style={styles.txtMenu}>Thực Đơn</Text>
                 </View>
-		  {/* {this.state.foodItems.length  ==  0  ?   <View style={styles.ctnItem}><Text> Không có món ăn nào</Text> </View> :  itemsJSX } */}
-		  {/* {this.state.menu.length != 0 ?   menuJSX  : <Text>KHONG CO GI</Text>} */}
-		  {menuJSX}
+                {menuJSX}
             </View>
             <View style={styles.ctnMenu}>
             <View style={styles.lbMenu}>

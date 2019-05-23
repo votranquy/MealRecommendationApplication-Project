@@ -9,6 +9,7 @@ import {
   Dimensions,
 
 } from 'react-native';
+import theme from '../theme';
 export default class UserMenu extends Component {
 
   render() {
@@ -32,12 +33,9 @@ const styles = StyleSheet.create({
   plus: {color:"black",fontSize: 20, },
   row1:{
     flexDirection: 'row',
-    //  justifyContent: 'space-between' ,
   alignItems:'center', 
-  marginBottom:10,
-  height: height / 12, 
-  backgroundColor: '#34B089',
-   padding:10, 
+  height: height / 17, 
+  backgroundColor: theme.Color.NiceRed,
    justifyContent:'space-around'
  },
  titleStyle:{

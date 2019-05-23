@@ -20,6 +20,9 @@ const Image = {
     Earth: require('../Image/Earth.png'),
     WhiteSave: require('../Image/whitesave.png'),
     WhiteHeart: require('../Image/whiteheart.png'),
+    WhiteAdress: require('../Image/whiteaddress.png'),
+    WhiteHouse: require('../Image/whitehouse.png'),
+    WhiteSmartPhone: require('../Image/whitesmartphone.png'),
   },
 
   Bg: {

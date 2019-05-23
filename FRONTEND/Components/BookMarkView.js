@@ -223,17 +223,16 @@ const styles = StyleSheet.create({
     },
     row1:{
       flexDirection: 'row',
-      //  justifyContent: 'space-between' ,
-    alignItems:'center', 
-    marginBottom:10,
-    height: height / 12, 
-    backgroundColor: '#34B089',
-     padding:10, 
-     justifyContent:'space-around'
+      alignItems:'center', 
+      // marginBottom:10,
+      height: height / 17, 
+      backgroundColor: theme.Color.NiceRed,
+      padding:5, 
+      justifyContent:'space-around'
    },
    titleStyle:{
     color: '#FFF', 
-    fontSize:20, 
+    fontSize: theme.Size.FontMedium, 
     alignItems:'center',
      justifyContent:"space-between",
    }, 

@@ -11,9 +11,9 @@ export default StyleSheet.create({
       ctnHeader:{
        flexDirection:'row', 
        justifyContent:'space-between',
-       height: height/15,
+       height: height/17,
        width:width,
-       backgroundColor: theme.Color.HeaderBackground, 
+       backgroundColor: theme.Color.NiceRed, 
        alignItems:'center',
       },
       ctnHeaderIcon:{
@@ -27,12 +27,12 @@ export default StyleSheet.create({
       },
       iconHeader:{
         flex:1,
-        width: width*0.1,
-        height:height/15,
+        width:  width/17,
+        height: width/17,
       },
       txtHeader:{
         color: '#FFF',
-         fontSize:20,
+         fontSize: theme.Size.FontBig,
       },
       content:{
           flexDirection:"row",
@@ -56,10 +56,15 @@ export default StyleSheet.create({
         padding:3,
         marginBottom: 5,
       },
+      iconInfomation:{
+        width:width/17,
+        height:width/17,
+      },
       ctnText:{
         width:width,
         backgroundColor:theme.Color.White,
         padding:3,
+        flexDirection:"row",
       },
       ctnMapView: {
         height:height,
@@ -67,15 +72,19 @@ export default StyleSheet.create({
         flex:1,
        },
        ctnHeaderMap:{
-         flex:1/15,
+         flex:1,
          flexDirection:"row",
-         backgroundColor: theme.Color.HeaderBackground,
+         backgroundColor: theme.Color.NiceRed,
          alignItems:"center",
   
        },
        ctnMapArea:{
-        flex:14/15,
+        flex:14,
         backgroundColor: theme.Color.HeaderBackground,
+      },
+      ctnCommentArea:{
+        flex:14,
+        backgroundColor: theme.Color.Red,
       },
       ctnCloseButton:{
         flex: 0.1,
@@ -133,7 +142,7 @@ export default StyleSheet.create({
       txtMenu:{
         fontSize:20,
         fontWeight:"900",
-        color: theme.Color.NiceBlack, 
+        color: theme.Color.NiceRed, 
       },
       ctnItem:{
         flex: 1,
@@ -188,6 +197,7 @@ export default StyleSheet.create({
         // justifyContent:"center",
         borderBottomWidth:1,
         borderColor:  theme.Color.LightGray,
+        backgroundColor: theme.Color.White,
       },
 
       ctnUsername:{
@@ -195,7 +205,7 @@ export default StyleSheet.create({
         margin:2,
       },
       logoUsername:{
-        backgroundColor: theme.Color.DarkGray,
+        // backgroundColor: theme.Color.DarkGray,
         borderRadius: 60,
         width: width/16,
         height: width/16,
@@ -207,6 +217,11 @@ export default StyleSheet.create({
         color: theme.Color.White,
         fontWeight:"900",
       },
+      imageAvatar:{
+        flex:1,
+        width:width/16,
+        height:width/16,
+      },
       txtUsername:{
         color: theme.Color.Green,
         fontWeight: "900",
@@ -217,4 +232,23 @@ export default StyleSheet.create({
         color: theme.Color.Black,
         fontFamily: theme.Font.Light,
       },
+      imageComment:{
+        width:width,
+        height:height/3,
+      },
+      btnComment:{
+        backgroundColor: theme.Color.NiceRed,
+        alignItems:"center",
+        padding:5,
+      },
+      txtButton:{
+        color: theme.Color.White,
+        fontWeight:"bold",
+      },
+      indicator: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 80,
+      }
 });

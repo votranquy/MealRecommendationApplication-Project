@@ -1,5 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet , Dimensions} from 'react-native';
 import theme from '../../theme';
+const {height , width} = Dimensions.get('window'); 
 
 export default StyleSheet.create({
   container: {
@@ -35,7 +36,7 @@ export default StyleSheet.create({
     padding:3,
   },
   txtName:{
-    color:"green",
+    color: theme.Color.Black,
     fontSize: theme.Size.FontSmall,
     alignItems: 'center',
     fontWeight:"900",
@@ -56,4 +57,18 @@ export default StyleSheet.create({
     fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
+  ctnFood:{
+    flexDirection: "row",
+    alignItems: 'center',
+  },
+  imageFood:{
+    width:width/10,
+    height:width/10,
+    marginRight:2,
+  },
+  textFood:{
+    color: theme.Color.Orange,
+    fontSize: theme.Size.FontSmall,
+    // alignItems: 'center',
+  }
 });

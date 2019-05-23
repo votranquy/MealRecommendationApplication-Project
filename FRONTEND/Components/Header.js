@@ -9,8 +9,7 @@ import {
   StyleSheet
 } from 'react-native';
 import icMenu from '../Image/ic_menu.png';
-
-const {height} = Dimensions.get('window'); 
+import theme from '../theme';
 
 export default class Header extends Component{
    render(){
@@ -28,9 +27,9 @@ export default class Header extends Component{
 
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="Bạn muốn ăn gì?" underlineColorAndroid="white"/>
-          <TouchableOpacity style={styles.searchBtn}>
+          {/* <TouchableOpacity style={styles.btnSearch}>
             <Text style={styles.searchBtnText}>Tìm</Text>
-          </TouchableOpacity>  
+          </TouchableOpacity>   */}
         </View>
         
      </View>
@@ -39,26 +38,29 @@ export default class Header extends Component{
    }
  }
 
-
+const {height , width} = Dimensions.get('window'); 
 const styles = StyleSheet.create({
    wrapper:{
-    height: height / 6, 
-    backgroundColor: '#34B089',
+    height: height / 8, 
+    backgroundColor: theme.Color.NiceRed,
      padding:10,
       justifyContent:'space-around',
    },
    row1:{
      flexDirection: 'row', 
      justifyContent: 'space-between' ,
-    flex:1,alignItems:'center', marginBottom:10
+    flex:1,
+    alignItems:'center', 
+    marginBottom:2,
    },
    titleStyle:{
-    color: '#FFF',
-     fontSize:20, 
+    color: theme.Color.White,
+     fontSize: theme.Size.FontMedium, 
      alignItems:'center', justifyContent:"space-between"
    }, 
    iconStyle:{
-     height:30, width:30,
+     height: width/16,
+      width:width/16,
    },
    searchContainer: {
     alignItems:'center',
@@ -67,10 +69,17 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   searchInput:{
-    flex:3,height: height/15, backgroundColor: 'white', paddingLeft:20, paddingHorizontal: 20,  borderRadius: 20, marginRight:2
+    flex:3,
+    height: height/20, 
+    backgroundColor: theme.Color.White, 
+    padding:0,
+    paddingLeft:15, 
+    paddingHorizontal: 5,  
+    borderRadius: 15, 
+    alignItems:"center",
    },
-  searchBtn: {
-     height: height/15,
+  btnSearch: {
+     height: height/17,
      backgroundColor: '#2ABB9C',  
      paddingHorizontal: 20,  
      borderRadius: 20,

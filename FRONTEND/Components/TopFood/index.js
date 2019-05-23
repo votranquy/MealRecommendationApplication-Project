@@ -20,6 +20,7 @@ export default class TopFood extends Component {
       page:0,
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       mang:[],
+      isLoading:true,
     }
   }
 
@@ -42,11 +43,13 @@ export default class TopFood extends Component {
     this.setState({
       mang : responseJson,
       dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+      isLoading:false,
     });
     }catch(err) {
         console.log("ERORORRRRRRRRRRRR");
         this.setState({
           dataSource: [],
+          isLoading:false,
         });
     }
   }
@@ -67,18 +70,22 @@ export default class TopFood extends Component {
           <View style={styles.cntText}>
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
-          <View style={styles.cntText}>
+          {/* <View style={styles.cntText}>
             <Text style={styles.txtName}>{property.restaurant_id }</Text>
-          </View>
+          </View> */}
           <View style={styles.cntText}>
-            <Text style={styles.txtRate}>{property.rate != "0" ? Math.round(property.rate*10)/10 + "★"  : property.rate+ "★"+"Chưa có đánh giá"}</Text>
+            <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
           </View>
-          <View style={styles.cntText}>
+          {/* <View style={styles.cntText}>
             <Text style={styles.txtMenu} numberOfLines={1}>{property.menu}</Text>
-          </View>  
+          </View>   */}
+          <View style={styles.ctnFood} >
+            <Image style={styles.imageFood} source={{uri: "http:"+property.image}}/>
+            <Text style={styles.textFood} numberOfLines={1}>{property.name}</Text>
+          </View>
         </View>  
       </TouchableOpacity>
       );
@@ -123,20 +130,31 @@ export default class TopFood extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <View>
-          <ListView 
-            enableEmptySections
-            dataSource={this.state.dataSource}
-            renderRow={
-              (propertya) => this.createRow(propertya)
-            }
-            onEndReached={this._onEndReached.bind(this)}
-          />
-        </View>
-      </View>
-    );
+    // if(this.state.isLoading){
+    //   return(
+    //     <View>
+    //     <ActivityIndicator
+    //         animating={true}
+    //         size="large"
+    //       />
+    //     </View>  
+    //   );
+    // }
+        return (
+          <View style={styles.container}>
+            <View>
+              <ListView 
+                enableEmptySections
+                dataSource={this.state.dataSource}
+                renderRow={
+                  (propertya) => this.createRow(propertya)
+                }
+                onEndReached={this._onEndReached.bind(this)}
+              />
+            </View>
+          </View>
+        );
+    
   }
 }
 

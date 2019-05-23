@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import App from './Components/App';
 import AppB from "./Components/Introduction";
-
+import TEST from "./Components/TEST";
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (

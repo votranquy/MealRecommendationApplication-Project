@@ -14,6 +14,7 @@ const Color = {
   DarkBlue: '#0c3270',
   LightBlue: '#41BCD9',
   Orange: '#e68a00',
+  Purple: '#5f42f4',
   Transparent: '#00000000',
   TYellow: '#FFB100',
   Green: '#95ca66',
@@ -24,6 +25,7 @@ const Color = {
   Divider: '#eaeaea',
   Overlay: '#00000088',
   Badge: '#d2351c',
+
   //Header Background
   HeaderBackground:'#34B089',
 

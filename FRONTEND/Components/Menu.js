@@ -10,7 +10,7 @@ import {
     Dimensions,
 } from 'react-native';
 import global from './global';
-import profileIcon from '../Image/profile.png';
+import profileIcon from '../Image/whiteuser.png';
 import saveToken from '../api/saveToken';
 import settingMenu from '../Components/settingMenu';
 import theme from '../theme';
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     },
     ctnAvatart:{
         alignItems: 'center',
-        backgroundColor: '#34B089',
+        backgroundColor: theme.Color.NiceRed,
     },
     ctnSetting:{
 
@@ -202,8 +202,8 @@ const styles = StyleSheet.create({
     profile: {
         width: 120,
         height: 120,
-        borderRadius: 60,
-        marginVertical: 30
+        // borderRadius: 60,
+        // marginVertical: 30,
     },
     btnStyle: {
         height: 50,
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     },
     btnSignInStyle: {
         margin:5,
-        backgroundColor:"#EEEEEE",
+        backgroundColor: theme.Color.White,
         padding:10,
         flexDirection:"row",
         height: 50,

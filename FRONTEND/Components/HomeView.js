@@ -16,6 +16,8 @@ import Trend                          from "./Trend";
 import Header                       from "./Header";
 import TopFood                    from "./TopFood/index";
 import Restaurant                 from './Restaurant';
+import theme from '../theme';
+
 const Page = ({label}) => (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -36,15 +38,16 @@ export default class HomeView extends Component {
         <View style={styles.container}>
           <Header onOpen={this.openMenu.bind(this)}/>
           <ScrollableTabView
-              tabBarActiveTextColor="#53ac49"
-              tabBarTextStyle={{fontFamily: 'Roboto', fontSize: 15, fontWeight: "500"}}
-              renderTabBar={() => <TabBar underlineColor="#53ac49" />}>
-            <TopFood   tabLabel={{label: "TOP"}} navigator={this.props.navigator}/>
+              tabBarActiveTextColor={theme.Color.Purple}
+              tabBarTextStyle={{fontFamily: 'Roboto', fontSize: theme.Size.FontSmall, fontWeight:"300"}}
+              renderTabBar={() => <TabBar underlineColor={theme.Color.Purple} />}
+          >
+            <TopFood   tabLabel={{label: "Top"}} navigator={this.props.navigator}/>
             {/* <Category        tabLabel={{label: "Danh Mục  "}} navigator={this.props.navigator}/> */}
-            <Random         tabLabel={{label: "NGẪU NHIÊN"}}  navigator={this.props.navigator}/>
-            <NearMe          tabLabel={{label: "GẦN TÔI"}}  navigator={this.props.navigator}/>
-            <Trend              tabLabel={{label: "PHỔ BIẾN"}}  navigator={this.props.navigator}/>
-            <Restaurant     tabLabel={{label: "QUÁN ĂN"}}  navigator={this.props.navigator}/>
+            <Random         tabLabel={{label: "Ngẫu nhiên"}}  navigator={this.props.navigator}/>
+            <NearMe          tabLabel={{label: "Gần tôi"}}  navigator={this.props.navigator}/>
+            <Trend              tabLabel={{label: "Phổ biến"}}  navigator={this.props.navigator}/>
+            <Restaurant     tabLabel={{label: "Quán ăn"}}  navigator={this.props.navigator}/>
             {/* <Page               tabLabel={{label: "Page #7     "}}  label="Page #5"/> */}
           </ScrollableTabView>
         </View>

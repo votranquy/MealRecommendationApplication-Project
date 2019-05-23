@@ -18,11 +18,14 @@ const Image = {
     WhiteMap: require('../Image/whitemap.png'),
     WhitePhone: require('../Image/whitephone.png'),
     Earth: require('../Image/Earth.png'),
+    Earths: require('../Image/Earths.png'),
+
     WhiteSave: require('../Image/whitesave.png'),
     WhiteHeart: require('../Image/whiteheart.png'),
     WhiteAdress: require('../Image/whiteaddress.png'),
     WhiteHouse: require('../Image/whitehouse.png'),
     WhiteSmartPhone: require('../Image/whitesmartphone.png'),
+    Folder : require("../Image/folder.png"),
   },
 
   Bg: {

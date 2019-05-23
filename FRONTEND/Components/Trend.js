@@ -14,13 +14,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Dimensions
 } from 'react-native';
 import Header from "./Header";
 import ScrollMenu from "./ScrollMenu";
-// var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
-
-// const Img_Path= 'http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-// var URL="http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
+import theme from '../theme';
+const {height , width} = Dimensions.get('window'); 
 
 export default class Trend extends Component {
 
@@ -28,6 +27,7 @@ export default class Trend extends Component {
     super(props);
     this.state = {
       page:0,
+      mang:[],
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       //currentTab:"HOTFOOD",
       //refreshing:false,
@@ -62,79 +62,38 @@ export default class Trend extends Component {
     });
   }
 
-creatStar1(score){
-  //1
-  if(score <  0.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-}
-creatStar2(score){
-  //2
-  if(score <  1.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-}
-creatStar3(score){
-  //3
-  if(score <  2.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-}
-creatStar4(score){
-  //4
-  if(score <  3.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-}
-creatStar5(score){
-  //5
-  if(score <  4.5){ return(<Image source={require('../Image/whitestar.png')}/>) }
-  else{ return (<Image source={require('../Image/yellowstar.png')}/>) };
-}
 
   createRow(property){
-            return(
-              <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
-              <View style={styles.image} >
-                <Image style={styles.image} source={{uri: property.image_path}} />
-              </View>
-              <View style={styles.content}>
-                <View style={styles.content_row}>
-                  <Text style={styles.content_row_name}>{property.food_name.length >25 ? property.food_name.substring(0,23)+"..." :property.food_name }</Text>
-                </View>
-                <View style={styles.content_row}>
-                  {this.creatStar1(property.rate)}
-                  {this.creatStar2(property.rate)}
-                  {this.creatStar3(property.rate)}
-                  {this.creatStar4(property.rate)}
-                  {this.creatStar5(property.rate)}
-                  <Text style={styles.content_row_rate}>{property.rate}</Text>
-                </View>
-                <View style={styles.content_row}>
-                  <Image source={require('../Image/location.png')}/>
-                  <Text style={styles.content_row_address}>{property.address.length >30 ? property.address.substring(0,28)+"..." :property.address }</Text>
-                </View>
-                <View style={styles.content_row}>
-                  <Image source={require('../Image/spoon.png')}/>
-                  <Text style={styles.content_row_menu}>{property.menu.length >30 ? property.menu.substring(0,28)+"..." :property.menu }</Text>
-                </View>  
-              </View>  
-             </TouchableOpacity>
-            );
+    if(property.food_name == "");
+    else{
+      return(
+      <TouchableOpacity 
+        activeOpacity={0.8}  
+        onPress={() => this.gotoDetail(property)} 
+        key={property.id} style={styles.ctnRestaurant}>
+        <View style={styles.ctnImage} >
+          <Image style={styles.image} source={{uri: property.image_path}} />
+        </View>
+        <View style={styles.ctnInfomation}>
+          <View style={styles.cntText}>
+            <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
+          </View>
+          <View style={styles.ctnFood} >
+            <Image style={styles.imageFood} source={{uri: "http:"+property.image}}/>
+            <Text style={styles.textFood} numberOfLines={1}>{property.name}</Text>
+          </View>
+        </View>  
+      </TouchableOpacity>
+      );
+    }
   }
-
-  // loadNewData(){
-  //   this.setState({
-  //     refreshing:true,
-  //   });
-
-  //   fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,{method:"POST",body:null})
-  //   .then((response)=>response.json())
-  //   .then((responseData)=>{
-  //     this.setState({
-  //       dataSource: this.state.dataSource.cloneWithRows(responseData),
-  //       refreshing:false,
-  //       page: this.state.page+1,
-  //     });
-  //   })
-  //   .done()
-  // }
+  
 
 
   _onEndReached(){
@@ -181,79 +140,90 @@ creatStar5(score){
 
   render() {
     return (
-    <View style={{flex:1, backgroundColor:'#86AAEE'}}>
       <View style={styles.container}>
-        <StatusBar hidden={true} />
         <View>
-        <ListView 
+          <ListView 
             enableEmptySections
-          // refreshControl={
-          //   <RefreshControl 
-          //     refreshing={this.state.refreshing}
-          //     onRefresh={this.loadNewData.bind(this)}
-          //   />
-          // }
-          dataSource={this.state.dataSource}
-          renderRow={
-            (propertya) => this.createRow(propertya)
-          }
-          onEndReached={this._onEndReached.bind(this)}
-          onEndReachedThreshold={5}
-        />
+            dataSource={this.state.dataSource}
+            renderRow={
+              (propertya) => this.createRow(propertya)
+            }
+            onEndReached={this._onEndReached.bind(this)}
+          />
         </View>
       </View>
-    </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1, backgroundColor: "#AAA",
+    flex:1, 
+    backgroundColor: theme.Color.White,
   },
-  row: {
+  ctnRestaurant: {
     flex: 1,
     flexDirection:'row',
     backgroundColor:"#FFF",
     padding:3,
     margin:3,
-    borderRadius: 20,
+    borderBottomWidth:1,
+    borderColor: theme.Color.LightGray,
+    paddingBottom:10,
+  },
+  ctnImage:{
+    flex:0.3,
+    padding:1,
+    // borderRadius: 100
   },
   image:{
-    flex:0.3,
-    margin:5,
-    // borderWidth:1,
-    // borderColor:"black",
-    borderRadius: 100
+    flex:1,
   },
-  content:{
+  ctnInfomation:{
     flex:0.7,
     padding:3,
   },
-  content_row:{
+  cntText:{
     flex:1,
     flexDirection:"row",
     alignItems: 'center',
+    padding:3,
   },
-  content_row_name:{
-    color:"green",
-    fontSize: 20,
+  txtName:{
+    color: theme.Color.Black,
+    fontSize: theme.Size.FontSmall,
+    alignItems: 'center',
+    fontWeight:"900",
+    // margin: theme.Size.TextMargin,
+  },
+  txtRate:{
+    color: theme.Color.NiceRed,
+    fontSize:  theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_rate:{
-    color:"green",
-    fontSize: 20,
+  txtAddress:{
+    color: theme.Color.MediumGray,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_address:{
-    color:"gray",
-    fontSize: 17,
+  txtMenu:{
+    color: theme.Color.Orange,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_menu:{
-    color:"gray",
-    fontSize: 17,
+  ctnFood:{
+    flexDirection: "row",
     alignItems: 'center',
   },
+  imageFood:{
+    width:width/10,
+    height:width/10,
+    marginRight:2,
+  },
+  textFood:{
+    color: theme.Color.Orange,
+    fontSize: theme.Size.FontSmall,
+    // alignItems: 'center',
+  }
 });
 

@@ -70,18 +70,12 @@ export default class TopFood extends Component {
           <View style={styles.cntText}>
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
-          {/* <View style={styles.cntText}>
-            <Text style={styles.txtName}>{property.restaurant_id }</Text>
-          </View> */}
           <View style={styles.cntText}>
             <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
           </View>
-          {/* <View style={styles.cntText}>
-            <Text style={styles.txtMenu} numberOfLines={1}>{property.menu}</Text>
-          </View>   */}
           <View style={styles.ctnFood} >
             <Image style={styles.imageFood} source={{uri: "http:"+property.image}}/>
             <Text style={styles.textFood} numberOfLines={1}>{property.name}</Text>
@@ -130,16 +124,6 @@ export default class TopFood extends Component {
   }
 
   render() {
-    // if(this.state.isLoading){
-    //   return(
-    //     <View>
-    //     <ActivityIndicator
-    //         animating={true}
-    //         size="large"
-    //       />
-    //     </View>  
-    //   );
-    // }
         return (
           <View style={styles.container}>
             <View>
@@ -154,7 +138,6 @@ export default class TopFood extends Component {
             </View>
           </View>
         );
-    
   }
 }
 

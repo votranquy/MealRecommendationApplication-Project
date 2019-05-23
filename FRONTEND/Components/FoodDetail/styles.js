@@ -76,7 +76,6 @@ export default StyleSheet.create({
          flexDirection:"row",
          backgroundColor: theme.Color.NiceRed,
          alignItems:"center",
-  
        },
        ctnMapArea:{
         flex:14,
@@ -250,5 +249,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: 80,
+      },
+      iconActionButton:{
+        width: width/14,
+        height:width/14,
       }
 });

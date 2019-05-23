@@ -18,7 +18,7 @@ export default StyleSheet.create({
     paddingBottom:10,
   },
   ctnImage:{
-    flex:0.3,
+    flex:0.2,
     padding:1,
     // borderRadius: 100
   },
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     flex:1,
   },
   ctnInfomation:{
-    flex:0.7,
+    flex:0.8,
     padding:3,
   },
   cntText:{

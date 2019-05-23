@@ -281,6 +281,18 @@ componentDidMount(){
   //      </View> 
   //   );
   // };
+  commaSeparateNumber(val){
+    while (/(\d+)(\d{3})/.test(val.toString())){
+      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+    }
+    return val;
+  }
+  formatVND(number){
+    string = String(number);
+    long = str.length;
+    display = str.substring(0, long-3) +","+str.substring(long-3,long);
+    return display;
+  }
 
 
   render() {
@@ -400,22 +412,6 @@ componentDidMount(){
                     }
                     keyExtractor={pic => pic.Id}
                 />
-      {/* <FlatList
-          data={this.state.picture}
-          showsVerticalScrollIndicator={false}
-          renderItem={({pic}) =>
-            <Image source={{ uri: pic.FullSizeImageUrl }} style={styles.imageFood}/>
-          }
-          keyExtractor={pic => pic.Id}
-      /> */}
-        {/* <ListView 
-          enableEmptySections
-          dataSource={this.state.picture}
-          renderRow={
-            (pic) => 
-            <Image source={{ uri: pic.FullSizeImageUrl }} style={styles.imageFood}/>
-            }
-        /> */}
         </Swiper>
       </View>
     );
@@ -427,6 +423,7 @@ componentDidMount(){
         </View>
         <ListView
             enableEmptySection
+            // enableEmptySections={<View></View>}
             dataSource={this.state.comment}
             renderRow={
               (data) => 
@@ -446,9 +443,9 @@ componentDidMount(){
         />
         { this.state.comment.getRowCount() == 0 && (<Text>Không có bình luận nào!</Text>)}
         { this.state.comment.getRowCount() != 0 && (
-          <View style={styles.btnComment}>
+          <TouchableOpacity style={styles.btnComment} onPress={() => this.refs.modal3.open()}>
             <Text style={styles.txtButton}>Xem tất cả bình luận</Text>
-          </View>
+          </TouchableOpacity>
         )}
       </View>
     );
@@ -474,7 +471,7 @@ componentDidMount(){
 
               <View style={styles.ctnCommentArea}>
                 <ListView 
-                    enableEmptySections
+                    enableEmptySection
                     dataSource={this.state.comment}
                     renderRow={
                       (data) => 
@@ -518,7 +515,10 @@ componentDidMount(){
             </View>
             <View  style={styles.ctnInfomationItem}>
               <Text style={styles.txtItem} numberOfLines={1}>{item.Name}</Text>
-              <Text style={styles.txtPrice}>{String(item.Price)}đ</Text>
+              <Text style={styles.txtPrice}>
+             {formatVND(item.Price)} đ
+              {/* {commaSeparateNumber(item.Price)} đ */}
+              </Text>
 
             </View>
           </View>
@@ -553,16 +553,34 @@ componentDidMount(){
 
   const actionButtonJSX=(
     <ActionButton buttonColor="rgba(231,76,60,1)">
-        <ActionButton.Item buttonColor='#9b59b6' title="Bản đồ" onPress={() => this.refs.modal1.open()}>
-          <Image source={theme.Image.iCon.Earth} />
+        <ActionButton.Item 
+          buttonColor='#9b59b6' 
+          title="Bản đồ" 
+          textStyle={{fontSize: theme.Size.FontSmall}} 
+          spaceBetween={5}
+          textContainerStyle={{height:25}}       
+          onPress={() => this.refs.modal1.open()}>
+          <Image source={theme.Image.iCon.Earths} style={styles.iconActionButton}/>
         </ActionButton.Item>
 
-        <ActionButton.Item buttonColor='#3498db' title="Gọi điện" onPress={this.callTheRestaurant}>
-          <Image source={theme.Image.iCon.WhitePhone}/>
+        <ActionButton.Item 
+        buttonColor='#3498db' 
+        title="Gọi điện" 
+        textStyle={{fontSize: theme.Size.FontSmall}} 
+        spaceBetween={5}
+        textContainerStyle={{height:25}}       
+        onPress={this.callTheRestaurant}>
+          <Image source={theme.Image.iCon.WhitePhone} style={styles.iconActionButton}/>
         </ActionButton.Item>
 
-        <ActionButton.Item buttonColor='#1abc9c' title="Lưu lại" onPress={() => this.refs.modal2.open()}>
-            <Image source={theme.Image.iCon.WhiteHeart}/>
+        <ActionButton.Item 
+          buttonColor='#1abc9c' 
+          title="Lưu lại" 
+          textStyle={{fontSize: theme.Size.FontSmall}} 
+          spaceBetween={5}
+          textContainerStyle={{height:25}}       
+          onPress={() => this.refs.modal2.open()}>
+            <Image source={theme.Image.iCon.WhiteHeart} style={styles.iconActionButton}/>
         </ActionButton.Item>
 
     </ActionButton>

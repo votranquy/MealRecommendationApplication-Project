@@ -6,11 +6,23 @@
   $database = 'MealApp'; 
   $conn = mysqli_connect($server_host,$server_username,$server_password,$database) or die("Can not connect to Database");
   mysqli_query($conn,"SET NAMES 'UTF8'");
-  $sql = "SELECT * 
-  FROM STORE
-  WHERE rate>1
-  ORDER BY  food_name,rate DESC";
-  // 
+
+  $sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
+  FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
+  WHERE rate >= 1.0 
+  AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
+  AND NOT image = '/style/images/deli-dish-no-image.png'
+  GROUP BY p.id";
+
+
+  // $sql = "SELECT * 
+  // FROM STORE
+  // WHERE rate>1
+  // ORDER BY  food_name,rate DESC";
+  // // 
+
+
+
   
   $query = mysqli_query($conn,$sql);
   $max = mysqli_num_rows($query);

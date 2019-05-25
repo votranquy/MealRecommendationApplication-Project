@@ -9,12 +9,12 @@
 
   $sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
   FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-  WHERE rate >= 4.5 
+  WHERE rate >= 4.0 
   AND rate <= 5.0 
   AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
   AND NOT image = '/style/images/deli-dish-no-image.png'
-  GROUP BY p.id";
-  //ORDER BY rate DESC
+  GROUP BY p.id
+  ORDER BY rate DESC";
   
   $query = mysqli_query($conn,$sql);
   $max = mysqli_num_rows($query); //The number of result

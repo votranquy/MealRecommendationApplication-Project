@@ -6,54 +6,67 @@
   $database = 'MealApp'; 
   $conn = mysqli_connect($server_host,$server_username,$server_password,$database) or die("Can not connect to Database");
   mysqli_query($conn,"SET NAMES 'UTF8'");
-  $sql = "SELECT * 
-  FROM STORE
-  WHERE category='Quán ăn, '
-  ";
+
+
+
+$sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
+FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
+WHERE category='Quán ăn, '
+AND rate >= 1.0 
+AND NOT image = '/style/images/deli-dish-no-image.png'
+GROUP BY p.id";
   // ORDER BY rate DESC
-  
   $query = mysqli_query($conn,$sql);
-  $max = mysqli_num_rows($query);
+  $max = mysqli_num_rows($query); //The number of result
+
   class Food{
     var $id;
     var $food_name;
     var $rate;
     var $address;
-    //var $worktime;
     var $image_path;
     var $category;
-    var $restaurantid;
+    var $restaurant_id;
+    var $latitude;
+    var $longitude;
     var $menu;
-    function Food($_id,$_food_name, $_rate, $_address, $_image_path,$_category,$_restaurantid, $_menu){
+    var $name;
+    var $image;
+
+
+    function Food($_id,$_food_name, $_rate, $_address, $_image_path,$_category,$_restaurantid, $_menu, $_latitude, $_longitude, $_name, $_image){
       $this->food_name = $_food_name;
       $this->rate = $_rate;
       $this->address = $_address;
-      //$this->worktime = $_worktime;
       $this->image_path = $_image_path;
       $this->id = $_id;
       $this->category=$_category;
-      $this->restaurantid=$_restaurantid;
+      $this->restaurant_id=$_restaurantid;
       $this->menu = $_menu;
+      $this->latitude = $_latitude;
+      $this->longitude = $_longitude;
+      $this->name = $_name;
+      $this->image = $_image;
     }
   }
 
   
-  $arrFood = array();
+  $arrFood = array(); //0-> $max -1
   while( $row = mysqli_fetch_array($query) ){
-    array_push($arrFood,new Food($row["id"],$row["food_name"],$row["rate"],$row["address"], $row["image_path"], $row["category"], $row["restaurant_id"], $row["menu"]));
+    array_push($arrFood,new Food($row["id"],$row["food_name"],$row["rate"],$row["address"], $row["image_path"], $row["category"], $row["restaurant_id"], $row["menu"],$row["latitude"],$row["longitude"],$row["name"],$row["image"]));
   }
 
-  $the_number_of_items_per_page = 5;
+  $the_number_of_items_per_page = 10; //10 datas per page
   $page = $_GET["pagenumber"];
-  
   $from = $page * $the_number_of_items_per_page;
+  
+  
   $newArrayFood = array();
-  try{
-      for($i=$from; ($i <= $from + $the_number_of_items_per_page - 1) && ($i< $max-1); $i = $i + 1){
-        array_push($newArrayFood,$arrFood[$i]);
-      }
-    echo json_encode($newArrayFood);
-  }catch(Exception $e){
-    echo json_encode($newArrayFood);
-  }
+  if($from > $max){}
+  else{
+    for($i=$from; ($i <= $from + $the_number_of_items_per_page-1) && ($i <= $max-1); $i = $i + 1){
+      array_push($newArrayFood,$arrFood[$i]);
+    }  
+  } 
+  echo json_encode($newArrayFood);
 ?>

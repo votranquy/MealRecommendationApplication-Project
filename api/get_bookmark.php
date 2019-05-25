@@ -12,7 +12,7 @@
     try{
 		$decoded = JWT::decode($token, $key, array('HS256'));
 		if($decoded->expire < time()){
-			echo 'HET_HAN';
+			echo("{\"result\":\"TOKEN_HET_HAN\"}");
 		}
 		else{
 			$email = $decoded->email;
@@ -27,9 +27,10 @@
                 "SELECT id as idbookmark, bookmark_name
                 FROM BOOKMARK
                 WHERE id_user = '$id'
-                GROUP BY id"
+                GROUP BY id 
+                ORDER BY id DESC"
             );
-            $array =   array();
+            $array = array();
             while ($row = $bookmark->fetch_object()){
                 $arrFood =  array();
                 $idbookmark=$row->idbookmark;
@@ -40,7 +41,11 @@
                 );
                 while($rowgroup = $group->fetch_object()){
                     $idfood = $rowgroup->id_food;
-                    $fooditem = $mysqli->query("SELECT * FROM STORE WHERE restaurant_id = '$idfood'");
+                    $fooditem = $mysqli->query("SELECT 
+                    p.id as sttfood, p.food_id, p.name, p.price, p.image,
+                    q.id, q.restaurant_id, q.food_name, q.address, q.category, 
+                    q.latitude, q.longitude, q.rate, q.worktime, q.menu, q.image_path, q.totalReview 
+                     FROM FOOD p INNER JOIN STORE q ON p.restaurant_id = q.restaurant_id WHERE food_id = '$idfood'");
                     while($rowfood = $fooditem->fetch_object()){
                         array_push($arrFood,$rowfood);
                     }
@@ -48,10 +53,11 @@
                 $row->food = $arrFood;
                 array_push($array,$row);
             }
-            echo json_encode($array);
+            $result = array('result'=>'success','data'=>$array);
+            echo json_encode($result);
 		}
 	}
 	catch(Exception $e){
-		echo 'LOI';
+		echo("{\"result\":\"LOI\"}");
 	}
 ?>

@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  StatusBar,
   ListView,
   Image,
   TouchableOpacity,
   Alert,
-  ActivityIndicator,
-  RefreshControl,
 } from 'react-native';
 import styles from "./styles";
 
@@ -21,6 +18,7 @@ export default class TopFood extends Component {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       mang:[],
       isLoading:true,
+      isEndOfData: false,
     }
   }
 
@@ -64,9 +62,12 @@ export default class TopFood extends Component {
         onPress={() => this.gotoDetail(property)} 
         key={property.id} style={styles.ctnRestaurant}>
         <View style={styles.ctnImage} >
-          <Image style={styles.image} source={{uri: property.image_path}} />
+          <Image style={styles.image} source={{uri: "http:"+property.image}} />
         </View>
         <View style={styles.ctnInfomation}>
+          <View style={styles.cntText}>
+            <Text style={styles.textFood} numberOfLines={1}>{property.name }</Text>
+          </View>
           <View style={styles.cntText}>
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
@@ -75,10 +76,6 @@ export default class TopFood extends Component {
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
-          </View>
-          <View style={styles.ctnFood} >
-            <Image style={styles.imageFood} source={{uri: "http:"+property.image}}/>
-            <Text style={styles.textFood} numberOfLines={1}>{property.name}</Text>
           </View>
         </View>  
       </TouchableOpacity>
@@ -99,7 +96,6 @@ export default class TopFood extends Component {
     .then((response)=>response.json())
     .then((responseData)=>{
       if(responseData.length != 0){
-        // mang = mang.concat(responseData);
         this.setState({
           isLoading:false,
           mang : this.state.mang.concat(responseData),
@@ -108,14 +104,7 @@ export default class TopFood extends Component {
         });
       }
       else{
-          Alert.alert(
-            'Hết dữ liệu',
-            'Đây là cuối trang',
-            [
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            {cancelable: false},
-          );
+        this.setState({ isEndOfData: true});
       }
     })
     .catch((error) => {
@@ -123,19 +112,24 @@ export default class TopFood extends Component {
     });
   }
 
+
   render() {
+    const topfoodJSX=(
+       
+          <ListView 
+          enableEmptySections
+          dataSource={this.state.dataSource}
+          renderRow={
+            (propertya) => this.createRow(propertya)
+          }
+          onEndReached={this._onEndReached.bind(this)}
+        />
+        // {this.state.isEndOfData ? <Text>Hết danh sách</Text> : <View/>}
+       
+      );
         return (
           <View style={styles.container}>
-            <View>
-              <ListView 
-                enableEmptySections
-                dataSource={this.state.dataSource}
-                renderRow={
-                  (propertya) => this.createRow(propertya)
-                }
-                onEndReached={this._onEndReached.bind(this)}
-              />
-            </View>
+            {topfoodJSX}
           </View>
         );
   }

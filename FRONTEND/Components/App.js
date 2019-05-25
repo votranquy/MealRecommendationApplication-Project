@@ -6,7 +6,7 @@ import ChangeInfo from './ChangeInfo';
 import Main from './Main';
 import Welcome from './Welcome';
 
-export default class App extends Component {
+export default class                                                             App extends Component {
     // componentDidMount() {
     //     //var start = Math.random( ) * (900000 - 600000) + 600000;
     //    for (var i = 500000; i < 60000; i++){

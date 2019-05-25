@@ -7,12 +7,21 @@ import {
   StatusBar,
 } from 'react-native';
 import App from './Components/App';
-import AppB from "./Components/Introduction";
-import TEST from "./Components/TEST";
+import Tab from './Components/TEST';
+import theme from "./theme";
+// StatusBar.setHidden(true, 'none');
+// StatusBar.setBackgroundColor(color:red);
+
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar 
+          barStyle="light-content"
+          hidden = {false}
+          translucent = {false}
+          networkActivityIndicatorVisible = {true}
+          backgroundColor="#da5350"/>
         <App/>
       </View>
     );

@@ -19,9 +19,9 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
 import theme from '../../theme';
-import global from "../global";
 import styles from "./styles";
-import getRestaurantImage from '../../api/getRestaurantImage';
+import getToken from '../../api/getToken';
+import getMenuApi from '../../api/getMenuApi';
 const {height , width} = Dimensions.get('window'); 
 
 
@@ -30,12 +30,12 @@ export default class FoodDetail extends Component {
     super(props);
     this.state = {
 	    isLoading: true,
-      //restaurantImages: [],
       swipeToClose: false,
       comment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       allComment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       //picture : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       picture: null,
+      isLoaded: false,
       }
   }
 
@@ -100,15 +100,12 @@ export default class FoodDetail extends Component {
     if(responseJsoni.ListPicture.length !== 0){
       console.log('IMAGE_WORK');
       this.setState({
-        //picture: this.state.picture.cloneWithRows(responseJsoni.ListPicture),
         picture: responseJsoni.ListPicture,
         isLoading: false,
       });
-      // console.log("IMAGE",this.state.picture);
     }else{
       console.log('IMAGE_NULL');
       this.setState({
-        // picture: this.state.picture.cloneWithRows([]),
         picture: [],
         isLoading: false,
       });
@@ -117,12 +114,10 @@ export default class FoodDetail extends Component {
   .catch(error=>{
     console.log('IMAGE_ERROR',error);
     this.setState({
-      // picture: this.state.picture.cloneWithRows([]),
       picture:[],
       isLoading: false, 
     });
   });
-  // this.setState({ isLoading: false, })
 }
 
   getComment(){
@@ -164,92 +159,46 @@ export default class FoodDetail extends Component {
       });
     });
   }
-    
-  getMenu(){
-    const { restaurant_id} = this.props.food;
-    console.log("GET_RESTAURANT_ID"+ restaurant_id);
-    const URL = "https://www.foody.vn/__get/Delivery/GetDeliveryDishes?t=1557065498605&RequestCount=5&RestaurantId="+restaurant_id+"&SortType=2&NextItemId=0";
-    fetch(URL,
-      {method:"GET",
-      headers: {
-        accept: 'application/json, text/plain, */*',
-        'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-        'x-requested-with' : 'XMLHttpRequest'
-      }
-    })
-    .then(response => response.json())
-    .then(responseJson=>{
-      //console.log(responseJson);
-      if(responseJson.Dishes !== null){
-        console.log('MENU_WORK');
-        this.setState({
-          menu: responseJson.Dishes.Items,
-          // isLoading: false,
-        });
-        // console.log("ME_NU",this.state.menu);
-      }else{
-        console.log('MENU_ERROR');
-        this.setState({
-          menu:[],
-          // isLoading: false,
-        });
-      }
-    })	
-    .catch(error=>{
-      console.log('_LOGIN_',error);
-      console.log('CCCCCCCCCCCCCC');
+
+
+getMenu(){
+  getToken()
+  .then(token => getMenuApi(token, this.props.food.restaurant_id))
+  .then(responseJsonMenu =>{
+    if(responseJsonMenu.result === "success"){
+      console.log('MENU_WORK');
       this.setState({
-        menu: [],
-        // isLoading: false, 
+        menu: responseJsonMenu.data,
+        // isLoading: false,
       });
+      console.log("ME_NU",this.state.menu);
+    }else{
+      console.log('MENU_ERROR');
+      this.setState({
+        menu:[],
+        // isLoading: false,
+      });
+    }
+  })
+  .catch(error=>{
+    console.log('_LOGIN_',error);
+    this.setState({
+      menu: [],
     });
-  }
+  });
+}
 
-  // getAllComment(){
-  //   const { restaurant_id} = this.props.food;
-  //   console.log("GET_RESTAURANT_ID"+ restaurant_id);
-  //   const URLs = "https://www.foody.vn/__get/Review/ResLoadMore?t=1556358596613&ResId="+restaurant_id+"&LastId=0&Count=100&Type=1&isLatest=true&HasPicture=true";
-  //   fetch(URLs,
-  //       {method:"GET",
-  //       headers: {
-  //         Accept: 'application/json, text/plain, */*',
-  //         'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-  //         'cache-control' : 'no-cache',
-  //         'pragma' :  'no-cache',
-  //         'x-requested-with' : 'XMLHttpRequest'
-  //       }
-  //   })
-  //   .then(responses => responses.json())
-  //   .then(responseJsons=>{
-  //     if(responseJsons.Total !== 0){
-  //       console.log('ALLCOMMENT_WORK');
-  //       this.setState({
-  //         allComment: this.state.allComment.cloneWithRows(responseJsons.Items),
-  //         isLoading: false,
-  //       });
-  //       console.log("ALLCOMMENT",this.state.allComment);
-  //     }else{
-  //       console.log('ALLCOMMENT_NULL');
-  //       this.setState({
-  //         allComment: this.state.allComment.cloneWithRows([]),
-  //         isLoading: false,
-  //       });
-  //     }
-  //   })	
-  //   .catch(error=>{
-  //     console.log('ALLCOMMENT_ERROR',error);
-  //     this.setState({
-  //       allComment:  this.state.allComment.cloneWithRows([]),
-  //       isLoading: false, 
-  //     });
-  //   });
-
-  //   // this.refs.modal3.open();
-
-  // }
-
+checkLogin(){
+  getToken()
+  .then(token => {
+    if(token!==""){
+      this.setState({ isLogin: true})
+    }
+  })
+}
 
 componentDidMount(){
+  this.checkLogin();
   this.getPicture();	
 	this.getMenu();
   this.getComment();
@@ -274,13 +223,6 @@ componentDidMount(){
     );
   }
 
-  // ListEmpty() {
-  //   return (
-  //     <View style={{backgroundColor:"red"}}>
-  //      <Text> Không có bình luận nào! </Text>
-  //      </View> 
-  //   );
-  // };
   commaSeparateNumber(val){
     while (/(\d+)(\d{3})/.test(val.toString())){
       val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
@@ -297,36 +239,33 @@ componentDidMount(){
 
   render() {
     const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
+    
     const headerJSX=(
       <View style={styles.ctnHeader}>
         <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
           <Image source={theme.Image.iCon.Whiteback} style={styles.iconHeader}/>
         </TouchableOpacity>
         <View style={styles.ctnHeaderText}>
-        <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+          <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
         </View>
-        <View/>
-        {/* <TouchableOpacity  onPress={() => this.refs.modal2.open()} style={styles.ctnHeaderIcon}>
-          <Image source={theme.Image.iCon.Save} style={styles.iconHeader}/>
-        </TouchableOpacity> */}
-    </View>
+      </View>
     );
     const infomationJSX=(
       <View style={styles.ctnFoodInfomation}>
-        <TouchableOpacity style={styles.ctnText} onPress={() => this.refs.modal1.open()}>
+        <View style={styles.lableMenu}>
+              <Text style={styles.txtMenu}>Thông Tin Cửa Hàng</Text>
+        </View>
+        <TouchableOpacity style={styles.ctnInfomationRow} onPress={() => this.refs.modal1.open()}>
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteAdress}/>
           <Text style={styles.txtAddress} numberOfLines={1}>  {address}</Text>
         </TouchableOpacity>
-        <View style={styles.ctnText} >
+        <View style={styles.ctnInfomationRow} >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteHouse}/>
           <Text style={styles.txtCategory}>  { category.substring(0,category.length-2) }</Text>
         </View>
-        <TouchableOpacity style={styles.ctnText}  onPress={this.callTheRestaurant}>
+        <TouchableOpacity style={styles.ctnInfomationRow}  onPress={this.callTheRestaurant}>
         <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteSmartPhone}/>
-          <Text style={styles.txtPhoneNumber}>  0369380628 </Text>
-        </TouchableOpacity>
-    <TouchableOpacity style={styles.ctnText}  onPress={this.callTheRestaurant}>
-          <Text style={styles.txtPhoneNumber}>  {restaurant_id} </Text>
+          <Text style={styles.txtPhoneNumber}>  0369380628  {restaurant_id}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -350,8 +289,8 @@ componentDidMount(){
                   <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
                 </TouchableOpacity>
               </View>
-              <Text>{parseFloat(latitude)} {parseFloat(longitude)}</Text>
-              <View style={styles.ctnMapArea}>
+              {/* <Text>{parseFloat(latitude)} {parseFloat(longitude)}</Text> */}
+              <View style={styles.ctnBodyMap}>
               {
                 parseFloat(latitude) > 0 
                 ? <MapView
@@ -378,21 +317,7 @@ componentDidMount(){
             </View>
           </Modal>
     );
-    // const dataPicture=(
-    //   // <View>
-    //   //   {this.state.picture.map((pic)=>{
-    //   //     <Image source={{ uri: pic.FullSizeImageUrl }} style={styles.imageFood}/>
-    //   //   })}
-    //   // </View>
-    //   <FlatList
-    //       data={this.state.picture}
-    //       showsVerticalScrollIndicator={false}
-    //       renderItem={({pic}) =>
-    //         <Image source={{ uri: pic.FullSizeImageUrl }} style={styles.imageFood}/>
-    //       }
-    //       keyExtractor={pic => pic.Id}
-    //   />
-    // );
+
     const pictureJSX=(
       <View style={styles.ctnImageFood}>
         <Swiper
@@ -418,22 +343,29 @@ componentDidMount(){
 
     const commentJSX=(
       <View style={styles.ctnMenu}>
-        <View style={styles.lbMenu}>
+        <View style={styles.lableMenu}>
               <Text style={styles.txtMenu}>Bình Luận</Text>
         </View>
         <ListView
-            enableEmptySection
+            enableEmptySections={true}
             // enableEmptySections={<View></View>}
             dataSource={this.state.comment}
             renderRow={
               (data) => 
                 <View style={styles.ctnComment}>
+
                   <View style={styles.ctnUsername}>
-                    <View style={styles.logoUsername}>
-                      <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
+
+                    <View style={styles.ctnUsernameArea}>
+                      <View style={styles.logoUsername}>
+                        <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
+                      </View>
+                      <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
                     </View>
-                    <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
-                    <Text style={styles.comment}> {String(data.AvgRating)}</Text>
+
+                    <View style={styles.ctnScore}>
+                      <Text style={styles.txtScore}>đã chấm {String(data.AvgRating/2)} đ</Text>
+                    </View>
 
                   </View>
                     <Text style={styles.comment}>{data.Description}</Text>
@@ -442,7 +374,7 @@ componentDidMount(){
             }
         />
         { this.state.comment.getRowCount() == 0 && (<Text>Không có bình luận nào!</Text>)}
-        { this.state.comment.getRowCount() != 0 && (
+        { this.state.comment.getRowCount() >= 10 && (
           <TouchableOpacity style={styles.btnComment} onPress={() => this.refs.modal3.open()}>
             <Text style={styles.txtButton}>Xem tất cả bình luận</Text>
           </TouchableOpacity>
@@ -471,7 +403,7 @@ componentDidMount(){
 
               <View style={styles.ctnCommentArea}>
                 <ListView 
-                    enableEmptySection
+                    enableEmptySections={true}
                     dataSource={this.state.comment}
                     renderRow={
                       (data) => 
@@ -497,7 +429,7 @@ componentDidMount(){
 
   const menuJSX = (
     <View style={styles.ctnMenu}>
-      <View style={styles.lbMenu}>
+      <View style={styles.lableMenu}>
         <Text style={styles.txtMenu}>Thực Đơn</Text>
       </View>
       <FlatList
@@ -506,24 +438,32 @@ componentDidMount(){
         showsVerticalScrollIndicator={false}
         renderItem={ ({item}) => (
           <View style={styles.ctnItem}>
+
             <View style={styles.ctnImageItem}>
-            { 
-            item.ImageUrl !== "/style/images/deli-dish-no-image.png"  ?
-            <Image source={{uri: "https:"+item.ImageUrl }}  style={styles.imgeItem}/> :
-            <Image source={theme.Image.iCon.DefaultImage} style={{width: width/4 , height: height/13,flex:1}}/>
+              { 
+              item.image !== "/style/images/deli-dish-no-image.png"  ?
+              <Image source={{uri: "https:"+item.image }}  style={styles.imgeItem}/> :
+              <Image source={theme.Image.iCon.NoImage} style={styles.imgeItem}/> //style={{width: width/4 , height: height/13,flex:1}}
               }
             </View>
-            <View  style={styles.ctnInfomationItem}>
-              <Text style={styles.txtItem} numberOfLines={1}>{item.Name}</Text>
-              <Text style={styles.txtPrice}>
-             {formatVND(item.Price)} đ
-              {/* {commaSeparateNumber(item.Price)} đ */}
-              </Text>
 
+            <View  style={styles.ctnInfomationItem}>
+              <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+              <Text style={styles.txtPrice}>{String(item.price)} đ</Text>
             </View>
+              { this.state.isLogin ?
+                <View style={styles.ctnHeartIcon}>
+                  <View/>
+                  <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
+                  <View/>
+                </View> :
+                <View/>
+              }
+
+
           </View>
         )}
-        keyExtractor={item => item.Id}
+        keyExtractor={item => item.id}
       />
     </View>
   );
@@ -552,9 +492,9 @@ componentDidMount(){
   );
 
   const actionButtonJSX=(
-    <ActionButton buttonColor="rgba(231,76,60,1)">
+    <ActionButton buttonColor={theme.Color.LightRed}>
         <ActionButton.Item 
-          buttonColor='#9b59b6' 
+          buttonColor={theme.Color.NicePurple}
           title="Bản đồ" 
           textStyle={{fontSize: theme.Size.FontSmall}} 
           spaceBetween={5}
@@ -564,7 +504,7 @@ componentDidMount(){
         </ActionButton.Item>
 
         <ActionButton.Item 
-        buttonColor='#3498db' 
+        buttonColor={theme.Color.NiceBlue} 
         title="Gọi điện" 
         textStyle={{fontSize: theme.Size.FontSmall}} 
         spaceBetween={5}
@@ -573,39 +513,29 @@ componentDidMount(){
           <Image source={theme.Image.iCon.WhitePhone} style={styles.iconActionButton}/>
         </ActionButton.Item>
 
-        <ActionButton.Item 
-          buttonColor='#1abc9c' 
+        {/* <ActionButton.Item 
+          buttonColor={theme.Color.NiceGreen} 
           title="Lưu lại" 
           textStyle={{fontSize: theme.Size.FontSmall}} 
           spaceBetween={5}
           textContainerStyle={{height:25}}       
           onPress={() => this.refs.modal2.open()}>
             <Image source={theme.Image.iCon.WhiteHeart} style={styles.iconActionButton}/>
-        </ActionButton.Item>
+        </ActionButton.Item> */}
 
     </ActionButton>
   );
-  // if(!this.state.picture){
-  //   return(
-  //     <ActivityIndicator
-  //         animating={true}
-  //         style={styles.indicator}
-  //         size="large"
-  //       />
-  //   );
-  // } 
+
   return (
-      <View style={{flex:1, backgroundColor: "white"}}>
+      <View style={styles.wrapper}>
         {headerJSX }
-        <ScrollView style={styles.wrapper} >
+        <ScrollView style={styles.body} >
             {pictureJSX }
             {infomationJSX}
             {mapJSX}
             {bookmarkJSX}
-
-             {menuJSX}
+            {menuJSX}
             {commentJSX}
-
           </ScrollView>
         {actionButtonJSX}
         {allCommentJSX}

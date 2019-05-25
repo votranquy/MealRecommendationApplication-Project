@@ -26,6 +26,11 @@ const Image = {
     WhiteHouse: require('../Image/whitehouse.png'),
     WhiteSmartPhone: require('../Image/whitesmartphone.png'),
     Folder : require("../Image/folder.png"),
+    RedBookmark: require("../Image/bookmarksave.png"),
+    saveBookmark: require("../Image/whitestar.png"),
+    NoImage: require('../Image/noimage.png'),
+    WhitePlus: require('../Image/WhitePlus.png'),
+    Menu: require('../Image/whitemenu.png'),
   },
 
   Bg: {

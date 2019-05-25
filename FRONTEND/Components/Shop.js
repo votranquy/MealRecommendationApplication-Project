@@ -16,74 +16,42 @@ import initData from "../api/initData";
 import getBookMark from "../api/getBookMark";
 import saveBookMark from "../api/saveBookMark";
 import theme from "../theme";
-
+import getToken from "../api/getToken";
 
 
 export default class Shop extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab: "home",
+      selectedTab: "save",
       bookmarkArray: [],
+      isLogIn:null,
     };
-    global.addFoodToBookMark = this.addFoodToBookMark.bind(this);
-    global.removeFood = this.removeFood.bind(this);
   }
+
+
+
 
   componentDidMount(){
-    getBookMark()
-    .then(bookmarkArray => this.setState({bookmarkArray}));
+
   }
 
-  addFoodToBookMark(food) {
-    this.setState({ 
-      bookmarkArray: this.state.bookmarkArray.concat({ food})},
-      ()=> saveBookMark(this.state.bookmarkArray)
-    );
-  }
-
-removeFood(foodId){
-  const newBookMark =  this.state.bookmarkArray.filter(e=> e.id !== foodId);
-  this.setState({bookmarkArray: newBookMark}, 
-    ()=> saveBookMark(this.state.bookmarkArray)
-  );
-}
 
   render(){
-    const {bookmarkArray}= this.state;
     return(
       <View style={{flex:1, backgroundColor:theme.Color.White,padding:0,}}>
         <TabNavigator >
+
           <TabNavigator.Item
             selected={this.state.selectedTab === 'home'}
             title="Trang chủ"
             renderIcon={() => <Image source={require("../Image/whitehome.png")} style={styles.imageStyle}/>}
             renderSelectedIcon={() => <Image source={require("../Image/redhome.png")} style={styles.imageStyle} />}
             onPress={() => this.setState({ selectedTab: 'home' })}
-            selectedTitleStyle={{ color: theme.Color.Red, fontFamily: 'Avenir' }}
+            selectedTitleStyle={{ color: theme.Color.Red, fontFamily: 'Avenir', }}
             >
             <Home open={this.props.open}/>
           </TabNavigator.Item>
-
-          <TabNavigator.Item
-            selected={this.state.selectedTab === 'save'}
-            title="Đã lưu"
-            renderIcon={() => <Image source={require("../Image/whitestar.png")} style={styles.imageStyle}/>}
-            renderSelectedIcon={() => <Image source={require("../Image/redstar.png")} style={styles.imageStyle}/>}
-            onPress={() => this.setState({ selectedTab: 'save' })}
-            badgeText={bookmarkArray.length}
-            selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
-          >
-            <BookMark bookmarkArray={bookmarkArray} />
-          </TabNavigator.Item>
-          {/* <TabNavigator.Item
-            selected={this.state.selectedTab === 'bell'}
-            title="Notification"
-            renderIcon={() => <Image source={require("../Image/bell_white.png")} />}
-            renderSelectedIcon={() => <Image source={require("../Image/bell_black.png")} />}
-            onPress={() => this.setState({ selectedTab: 'bell' })}>
-            <View style={{flex:1,backgroundColor:"white"}}></View>
-          </TabNavigator.Item> */}
           <TabNavigator.Item
             selected={this.state.selectedTab === 'suggestion'}
             title="Gợi ý"
@@ -94,6 +62,21 @@ removeFood(foodId){
             >
             <UserMenu/>
           </TabNavigator.Item>
+
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'save'}
+            title="Đã lưu"
+            renderIcon={() => <Image source={require("../Image/whitestar.png")} style={styles.imageStyle}/>}
+            renderSelectedIcon={() => <Image source={require("../Image/redstar.png")} style={styles.imageStyle}/>}
+            onPress={() => this.setState({ selectedTab: 'save' })}
+            // badgeText={bookmarkArray.length}
+            selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
+          >
+            <BookMark 
+            // bookmarkArray={bookmarkArray}
+             />
+          </TabNavigator.Item>
+          
         </TabNavigator>
       </View>
    );

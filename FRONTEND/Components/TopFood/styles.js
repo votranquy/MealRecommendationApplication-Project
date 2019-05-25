@@ -18,15 +18,17 @@ export default StyleSheet.create({
     paddingBottom:10,
   },
   ctnImage:{
-    flex:0.2,
+    flex:0.3,
     padding:1,
     // borderRadius: 100
   },
   image:{
     flex:1,
+    width: width/4,
+    height: height/10,
   },
   ctnInfomation:{
-    flex:0.8,
+    flex:0.7,
     padding:3,
   },
   cntText:{
@@ -39,7 +41,7 @@ export default StyleSheet.create({
     color: theme.Color.Black,
     fontSize: theme.Size.FontSmall,
     alignItems: 'center',
-    fontWeight:"900",
+    fontWeight:"100",
     // margin: theme.Size.TextMargin,
   },
   txtRate:{
@@ -68,7 +70,7 @@ export default StyleSheet.create({
   },
   textFood:{
     color: theme.Color.Orange,
-    fontSize: theme.Size.FontSmall,
+    fontSize: theme.Size.FontMedium,
     // alignItems: 'center',
   }
 });

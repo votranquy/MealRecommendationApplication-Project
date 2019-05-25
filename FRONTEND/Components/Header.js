@@ -8,32 +8,25 @@ import {
   TextInput,
   StyleSheet
 } from 'react-native';
-import icMenu from '../Image/ic_menu.png';
 import theme from '../theme';
 
 export default class Header extends Component{
    render(){
      return(
-
       <View style={styles.wrapper}>
-
-        <View style={styles.row1}>
-            <TouchableOpacity onPress={this.props.onOpen}>
-                    <Image source={icMenu} style={styles.iconStyle} />
+        <View style={styles.ctnHeader}>
+            <TouchableOpacity onPress={this.props.onOpen} style={styles.ctnHeaderIcon}>
+                <Image source={theme.Image.iCon.Menu} style={styles.imageHeader} />
             </TouchableOpacity>
-            <Text style={styles.titleStyle}>Ăn Gì Hôm Nay?</Text>
+            <View style={styles.ctnHeaderText}>
+              <Text style={styles.txtHeader}>Ăn Gì Hôm Nay?</Text>
+            </View>
             <View/>
         </View>
-
-        <View style={styles.searchContainer}>
+        {/* <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="Bạn muốn ăn gì?" underlineColorAndroid="white"/>
-          {/* <TouchableOpacity style={styles.btnSearch}>
-            <Text style={styles.searchBtnText}>Tìm</Text>
-          </TouchableOpacity>   */}
-        </View>
-        
+        </View> */}
      </View>
-
      );
    }
  }
@@ -41,26 +34,36 @@ export default class Header extends Component{
 const {height , width} = Dimensions.get('window'); 
 const styles = StyleSheet.create({
    wrapper:{
-    height: height / 8, 
+    height: height / 17, 
     backgroundColor: theme.Color.NiceRed,
      padding:10,
-      justifyContent:'space-around',
+    justifyContent:'space-around',
    },
-   row1:{
+   ctnHeader:{
      flexDirection: 'row', 
      justifyContent: 'space-between' ,
-    flex:1,
-    alignItems:'center', 
-    marginBottom:2,
+      flex:1,
+      alignItems:'center', 
+      marginBottom:2,
    },
-   titleStyle:{
+   ctnHeaderIcon:{
+    flex:0.1,
+    padding:1,
+    alignItems:'center',
+    justifyContent:"center",
+  },
+  ctnHeaderText:{
+    flex:0.7,
+    alignItems:'center',
+  },
+
+   txtHeader:{
     color: theme.Color.White,
-     fontSize: theme.Size.FontMedium, 
-     alignItems:'center', justifyContent:"space-between"
-   }, 
-   iconStyle:{
-     height: width/16,
-      width:width/16,
+      fontSize: theme.Size.FontMedium,
+  },
+   imageHeader:{
+     height: width/15,
+      width:width/15,
    },
    searchContainer: {
     alignItems:'center',

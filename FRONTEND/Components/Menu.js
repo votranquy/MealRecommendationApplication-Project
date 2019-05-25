@@ -17,7 +17,6 @@ import theme from '../theme';
 const {height , width} = Dimensions.get('window'); 
 
 export default class Menu extends Component {
-
     constructor(props) {
         super(props);
         this.state = { user: null };
@@ -62,74 +61,7 @@ export default class Menu extends Component {
         );
 
         const loginJSX = (
-        //     <View style={styles.wrapper}>
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //           source={require('../Image/password.png')}
-        //         />
-        //       <Text style={styles.plus}>  Đổi mật khẩu</Text>
-        //     </TouchableOpacity>
-
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //         source={require('../Image/setting.png')}
-        //       />
-        //       <Text style={styles.plus}>  Cài đặt thông báo</Text>
-        //     </TouchableOpacity>
-
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //         source={require('../Image/introduce.png')}
-        //       />
-        //       <Text style={styles.plus}>  Giới thiệu ứng dụng</Text>
-        //     </TouchableOpacity>
-
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //         source={require('../Image/star.png')}
-        //       />
-        //       <Text style={styles.plus}>  Xếp hạng ứng dụng</Text>
-        //     </TouchableOpacity>
-
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //         source={require('../Image/share.png')}
-        //       />
-        //       <Text style={styles.plus}>  Chia sẻ  ứng dụng</Text>
-        //     </TouchableOpacity>
-
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //         source={require('../Image/logout.png')}
-        //       />
-        //       <Text style={styles.plus}>  Đăng xuất</Text>
-        //     </TouchableOpacity>
-
-        //     <TouchableOpacity 
-        //       style={styles.touchable}
-        //     >
-        //       <Image
-        //         source={require('../Image/logout.png')}
-        //       />
-        //       <Text style={styles.plus}>  Đăng xuất</Text>
-        //     </TouchableOpacity>
-
-        //   </View>
-
             <View style={loginContainer}>
-                
                 <View>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image  source={require('../Image/user.png')} style={styles.imageStyle}/>
@@ -165,6 +97,7 @@ export default class Menu extends Component {
         );
 
         const mainJSX = this.state.user ? loginJSX : logoutJSX;
+
         return (
             <View style={container}>
                 <View style={styles.ctnAvatart}>                

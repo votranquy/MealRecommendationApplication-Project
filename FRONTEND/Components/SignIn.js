@@ -16,26 +16,26 @@ export default class SignIn extends Component {
             password: ''
         };
 
-        this._handleSuccess = this._handleSuccess.bind(this);
-        this._handleError = this._handleError.bind(this);
-        this._handleErrorCode = this._handleErrorCode.bind(this);
+        // this._handleSuccess = this._handleSuccess.bind(this);
+        // this._handleError = this._handleError.bind(this);
+        // this._handleErrorCode = this._handleErrorCode.bind(this);
     }
 
-    _handleSuccess(res){
-        console.log('_LOGIN', '_handleSuccess');
-        console.log('_LOGIN',res);
-        global.onSignIn(res.user);
-        this.props.goBackToMain();
-        saveToken(res.token);
-    }
+    // _handleSuccess(res){
+    //     console.log('_LOGIN', '_handleSuccess');
+    //     console.log('_LOGIN',res);
+    //     global.onSignIn(res.user);
+    //     this.props.goBackToMain();
+    //     saveToken(res.token);
+    // }
 
-    _handleError(){
-        console.log('_LOGIN', '_handleError');
-    }
+    // _handleError(){
+    //     console.log('_LOGIN', '_handleError');
+    // }
 
-    _handleErrorCode(){
-        console.log('_LOGIN', '_handleErrorCode');
-    }
+    // _handleErrorCode(){
+    //     console.log('_LOGIN', '_handleErrorCode');
+    // }
 
     async onSignIn() {
         // const { email, password} = this.state;
@@ -52,7 +52,6 @@ export default class SignIn extends Component {
         }catch(err) {
             console.log("ERORORRRRRRRRRRRR")
         }
-
     }
 
     render() {

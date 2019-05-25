@@ -11,7 +11,7 @@ import global from './global';
 
 export default class Main extends Component{
     
-    componentDidMount() {
+    componentDidMount(){
         getToken()
         .then(token => checkLogin(token))
         .then(res => global.onSignIn(res.user))

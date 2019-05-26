@@ -9,8 +9,6 @@ import {
 import App from './Components/App';
 import Tab from './Components/TEST';
 import theme from "./theme";
-// StatusBar.setHidden(true, 'none');
-// StatusBar.setBackgroundColor(color:red);
 
 export default class MealRecommendationApplicationProject extends Component {
   render() {
@@ -22,7 +20,7 @@ export default class MealRecommendationApplicationProject extends Component {
           translucent = {false}
           networkActivityIndicatorVisible = {true}
           backgroundColor="#da5350"/>
-        <App/>
+       <App/>
       </View>
     );
   }

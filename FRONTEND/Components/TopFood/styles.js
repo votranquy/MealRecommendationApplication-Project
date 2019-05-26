@@ -10,7 +10,7 @@ export default StyleSheet.create({
   ctnRestaurant: {
     flex: 1,
     flexDirection:'row',
-    backgroundColor:"#FFF",
+    backgroundColor: theme.Color.White,
     padding:3,
     margin:3,
     borderBottomWidth:1,

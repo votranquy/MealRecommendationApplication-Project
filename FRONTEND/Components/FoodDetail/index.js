@@ -36,13 +36,19 @@ export default class FoodDetail extends Component {
       //picture : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       picture: null,
       isLoaded: false,
+      menu:[],
       }
   }
 
-    goBack() {
-        const { navigator } = this.props;
-        navigator.pop();
-    }
+  goBack() {
+      const { navigator } = this.props;
+      navigator.pop();
+  }
+
+  gotoSaveBookmark(idfood){
+    const {navigator} = this.props;
+    navigator.push({name: "SAVE_BOOKMARK",idfood});
+  }
 
   getPicture() {  
     //FlatList
@@ -118,7 +124,7 @@ export default class FoodDetail extends Component {
       isLoading: false, 
     });
   });
-}
+  }
 
   getComment(){
     const { restaurant_id} = this.props.food;
@@ -160,50 +166,49 @@ export default class FoodDetail extends Component {
     });
   }
 
-
-getMenu(){
-  getToken()
-  .then(token => getMenuApi(token, this.props.food.restaurant_id))
-  .then(responseJsonMenu =>{
-    if(responseJsonMenu.result === "success"){
-      console.log('MENU_WORK');
+  getMenu(){
+    getToken()
+    .then(token => getMenuApi(token, this.props.food.restaurant_id))
+    .then(responseJsonMenu =>{
+      if(responseJsonMenu.result === "success"){
+        console.log('MENU_WORK');
+        this.setState({
+          menu: responseJsonMenu.data,
+          // isLoading: false,
+        });
+        console.log("ME_NU",this.state.menu);
+      }else{
+        console.log('MENU_ERROR');
+        this.setState({
+          menu:[],
+          // isLoading: false,
+        });
+      }
+    })
+    .catch(error=>{
+      console.log('_LOGIN_',error);
       this.setState({
-        menu: responseJsonMenu.data,
-        // isLoading: false,
+        menu: [],
       });
-      console.log("ME_NU",this.state.menu);
-    }else{
-      console.log('MENU_ERROR');
-      this.setState({
-        menu:[],
-        // isLoading: false,
-      });
-    }
-  })
-  .catch(error=>{
-    console.log('_LOGIN_',error);
-    this.setState({
-      menu: [],
     });
-  });
-}
+  }
 
-checkLogin(){
-  getToken()
-  .then(token => {
-    if(token!==""){
-      this.setState({ isLogin: true})
-    }
-  })
-}
+  checkLogin(){
+    getToken()
+    .then(token => {
+      if(token!==""){
+        this.setState({ isLogin: true})
+      }
+    })
+  }
 
-componentDidMount(){
-  this.checkLogin();
-  this.getPicture();	
-	this.getMenu();
-  this.getComment();
-  // this.getAllComment();    	
-}
+  componentDidMount(){
+    this.checkLogin();
+    this.getPicture();	
+    this.getMenu();
+    this.getComment();
+    // this.getAllComment();    	
+  }
 
   callTheRestaurant(){
     const args = {
@@ -229,6 +234,7 @@ componentDidMount(){
     }
     return val;
   }
+
   formatVND(number){
     string = String(number);
     long = str.length;
@@ -236,8 +242,8 @@ componentDidMount(){
     return display;
   }
 
-
   render() {
+
     const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
     
     const headerJSX=(
@@ -250,6 +256,7 @@ componentDidMount(){
         </View>
       </View>
     );
+
     const infomationJSX=(
       <View style={styles.ctnFoodInfomation}>
         <View style={styles.lableMenu}>
@@ -269,6 +276,7 @@ componentDidMount(){
         </TouchableOpacity>
       </View>
     );
+
     const mapJSX=(
       <Modal
             style={[styles.modal, styles.modal1]}
@@ -313,6 +321,33 @@ componentDidMount(){
               </MapView>
               :<Text>Bản đồ hiện không khả dụng</Text>
               } 
+              </View> 
+            </View>
+          </Modal>
+    );
+
+    const saveJSX=(
+      <Modal
+            style={[styles.modal, styles.modal1]}
+            backdrop={true}
+            coverScreen={true}
+            ref={"modal1"}
+            backdropPressToClose={false}
+            swipeToClose={false}
+        >
+            <View style={styles.ctnMapView}>
+              <View/>
+              <View style={styles.ctnHeaderMap}>
+                <View style={styles.ctnCloseButton}></View>
+                <View style={styles.ctnHeaderText}>
+                  <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+                </View>
+                <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
+                  <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+                </TouchableOpacity>
+              </View>
+              <View style={styles.ctnBodyMap}>
+                  {/* NOIDUNG */}
               </View> 
             </View>
           </Modal>
@@ -381,6 +416,7 @@ componentDidMount(){
         )}
       </View>
     );
+
     const allCommentJSX=(
       <Modal
             style={[styles.modal, styles.modal3]}
@@ -454,7 +490,9 @@ componentDidMount(){
               { this.state.isLogin ?
                 <View style={styles.ctnHeartIcon}>
                   <View/>
-                  <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
+                  <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id)}>
+                    <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
+                  </TouchableOpacity>
                   <View/>
                 </View> :
                 <View/>
@@ -537,9 +575,9 @@ componentDidMount(){
             {menuJSX}
             {commentJSX}
           </ScrollView>
-        {actionButtonJSX}
-        {allCommentJSX}
+          {actionButtonJSX}
+          {allCommentJSX}
         </View>
-      );
+    );
   }
 }

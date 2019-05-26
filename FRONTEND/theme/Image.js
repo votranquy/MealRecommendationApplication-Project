@@ -19,7 +19,7 @@ const Image = {
     WhitePhone: require('../Image/whitephone.png'),
     Earth: require('../Image/Earth.png'),
     Earths: require('../Image/Earths.png'),
-
+    ThreeDots: require('../Image/threedots.png'),
     WhiteSave: require('../Image/whitesave.png'),
     WhiteHeart: require('../Image/whiteheart.png'),
     WhiteAdress: require('../Image/whiteaddress.png'),

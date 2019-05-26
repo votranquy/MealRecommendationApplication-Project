@@ -99,7 +99,7 @@ alertError() {
           keyboardTopOffset={0}
           position={"top"}
          >
-            <View style={styles.ctnMapView}>
+            <View style={styles.wrapper}>
               <View style={styles.ctnHeaderMap}>
                 <View style={styles.ctnCloseButton}>
                 </View>
@@ -119,7 +119,7 @@ alertError() {
                       onChangeText={(text) => this.setState({text})}
                       value={this.state.text}
                   />
-                <TouchableOpacity style={styles.btnComment} onPress={() => this.createNewBookmark(this.state.text)}>
+                <TouchableOpacity style={styles.btnCreateBookmark} onPress={() => this.createNewBookmark(this.state.text)}>
                   <Text style={styles.txtButton}> Tạo mới</Text>
                 </TouchableOpacity>
               </View> 
@@ -144,7 +144,7 @@ alertError() {
               />
           );
           const headerJSX=(
-            <View style={styles.row1}>
+            <View style={styles.ctnHeader}>
             <View style={styles.ctnHeaderIcon} />
             <View style={styles.ctnHeaderText}>
               <Text style={styles.txtHeader}>Danh sách đã lưu</Text>
@@ -175,7 +175,9 @@ const styles = StyleSheet.create({
         backgroundColor: theme.Color.White,
     },
     wrapper:{
-        flex:1
+        height:height,
+        width:width,
+        flex:1,
     },
     container: {
       flex:1, backgroundColor: theme.Color.White,
@@ -249,7 +251,7 @@ const styles = StyleSheet.create({
       fontSize: 17,
       alignItems: 'center',
     },
-    row1:{
+    ctnHeader:{
       flexDirection: 'row',
       alignItems:'center', 
       // marginBottom:10,
@@ -258,73 +260,8 @@ const styles = StyleSheet.create({
       padding:5, 
       justifyContent:'space-around'
    },
-   titleStyle:{
-    color: '#FFF', 
-    fontSize: theme.Size.FontMedium, 
-    alignItems:'center',
-     justifyContent:"space-between",
-   }, 
 
-   ctnRestaurant: {
-    flex: 1,
-    flexDirection:'row',
-    backgroundColor:"#FFF",
-    padding:3,
-    margin:3,
-    borderBottomWidth:1,
-    borderColor: theme.Color.LightGray,
-    paddingBottom:10,
-  },
-  ctnImage:{
-    flex:0.3,
-    padding:1,
-    // borderRadius: 100
-  },
-  image:{
-    flex:1,
-  },
-  ctnInfomation:{
-    flex:0.7,
-    padding:3,
-  },
-  cntText:{
-    flex:1,
-    flexDirection:"row",
-    alignItems: 'center',
-    padding:3,
-  },
-  cntBtnDelete:{
-    // flex:1,
-    width:width/8,
-    height:width/10,
-    flexDirection:"row",
-    alignItems: 'center',
-    justifyContent:"center",
-    padding:3,
-    backgroundColor: theme.Color.NiceRed,
-  },
-  txtBtnDelete:{
-    color: theme.Color.White,
-    fontWeight:"900",
-  },
-  txtName:{
-    color:"green",
-    fontSize: theme.Size.FontBig,
-    alignItems: 'center',
-    fontWeight:"900",
-    // margin: theme.Size.TextMargin,
-  },
-  txtRate:{
-    color: theme.Color.NiceRed,
-    fontSize:  theme.Size.FontSmall,
-    alignItems: 'center',
-  },
-  txtAddress:{
-    color: theme.Color.MediumGray,
-    fontSize: theme.Size.FontSmall,
-    alignItems: 'center',
-  },
-  btnComment:{
+  btnCreateBookmark:{
     backgroundColor: theme.Color.NiceRed,
     alignItems:"center",
     padding:10,

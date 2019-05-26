@@ -29,7 +29,7 @@ export default class TopFood extends Component {
 
   async componentDidMount(){
     try{
-      let response = await  fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
+      let response = await  fetch("http://10.0.13.130/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default class TopFood extends Component {
 
   _onEndReached(){
     this.setState({isLoading:true,})
-    fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
+    fetch("http://10.0.13.130/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {
@@ -125,7 +125,6 @@ export default class TopFood extends Component {
           onEndReached={this._onEndReached.bind(this)}
         />
         // {this.state.isEndOfData ? <Text>Hết danh sách</Text> : <View/>}
-       
       );
         return (
           <View style={styles.container}>

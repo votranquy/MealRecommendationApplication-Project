@@ -12,7 +12,7 @@ import {
   RefreshControl
 } from 'react-native';
 
-//var URL="http://10.0.12.57/MealRecommendationApplicationBackEnd/RefreshListView.php?pagenumber=0";
+//var URL="http://10.0.13.130/MealRecommendationApplicationBackEnd/RefreshListView.php?pagenumber=0";
 export default class RefreshListView extends Component {
 
   constructor(props){
@@ -25,7 +25,7 @@ export default class RefreshListView extends Component {
   }
 
   fetchData(){
-    fetch("http://10.0.12.57/MealRecommendationApplicationBackEnd/RefreshListView.php?pagenumber="+this.state.page ,
+    fetch("http://10.0.13.130/MealRecommendationApplicationBackEnd/RefreshListView.php?pagenumber="+this.state.page ,
       {method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
@@ -63,7 +63,7 @@ export default class RefreshListView extends Component {
     this.setState({
       refreshing:true,
     });
-    fetch("http://10.0.12.57/MealRecommendationApplicationBackEnd/RefreshListView.php?pagenumber="+this.state.page,{method:"POST",body:null})
+    fetch("http://10.0.13.130/MealRecommendationApplicationBackEnd/RefreshListView.php?pagenumber="+this.state.page,{method:"POST",body:null})
     .then((response)=>response.json())
     .then((responseData)=>{
       this.setState({

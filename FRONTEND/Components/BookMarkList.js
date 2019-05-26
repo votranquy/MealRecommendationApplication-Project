@@ -6,15 +6,12 @@ import {
 import global from './global';
 import theme from '../theme';
 import getToken from "../api/getToken";
-import getBookmarkApi from "../api/getBookmarkApi";
 import getOneBookmarkApi from "../api/getOneBookmarkApi";
-import createBookmarkApi from "../api/createBookmarkApi";
-import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
-import deleteItemApi from '../api/deleteItemApi';
-import Modal from 'react-native-modalbox'; 
+
 
 
 export default class BookMarkList extends Component {
+  _isMounted = false;
   constructor(props){
     super(props);
     this.state = {
@@ -34,20 +31,23 @@ export default class BookMarkList extends Component {
   }
 
   getData(){
+    const {idbookmark} = this.props;
     getToken()
-    .then(token =>{ return(getOneBookmarkApi(token, this.props.idbookmark));})
+    .then(token =>{ return(getOneBookmarkApi(token, idbookmark));})
     .then((responseData)=>{
-      if(responseData.result === "success"){
+      if(responseData.result === "success" && this._isMounted){
         this.setState({
           listFood: this.state.listFood.cloneWithRows(responseData.data), 
           BookmarkName: responseData.bookmarkname,
         });
       }
-      else{ 
-        this.setState({ 
-          listFood: this.state.listFood.cloneWithRows([]), 
-          BookmarkName:"Error",
-        });
+      else{
+        if(this._isMounted){
+          this.setState({ 
+            listFood: this.state.listFood.cloneWithRows([]), 
+            BookmarkName:"Error",
+          });
+        } 
       }
     })  
     .catch(err => console.log(err));
@@ -87,10 +87,12 @@ export default class BookMarkList extends Component {
 
 
       componentDidMount(){
-      this.interval = setInterval(() => this.getData(), 1000);
+      this._isMounted = true;
+      this.interval = setInterval(() => this.getData(), 2000);
     }     
 
     componentWillUnmount() {
+      this._isMounted = false;
       clearInterval(this.interval);
     }
 
@@ -106,7 +108,10 @@ export default class BookMarkList extends Component {
                 onPress={() => this.gotoDetail(e)} 
                 style={styles.ctnRestaurant}>
                 <View style={styles.ctnImage} >
-                  <Image style={styles.image} source={{uri: "http:"+e.image}} />
+                  { e.image !== "/style/images/deli-dish-no-image.png" ?
+                    <Image style={styles.image} source={{uri: "http:"+e.image}} />:
+                    <Image style={styles.image} source={theme.Image.iCon.NoImage} />
+                  }
                 </View>
                 <View style={styles.ctnInfomation}>
                   <View style={styles.cntText}>
@@ -127,23 +132,24 @@ export default class BookMarkList extends Component {
           />
       );
 
+      const headerJSX=(
+        <View style={styles.ctnHeader}>
+          <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
+            <Image source={theme.Image.iCon.Whiteback} style={styles.iconHeader}/>
+          </TouchableOpacity>
+          <View style={styles.ctnHeaderText}>
+            <Text style={styles.txtHeader} numberOfLines={1}>{this.state.BookmarkName}</Text>
+          </View>
+          <TouchableOpacity  onPress={() => this.refs.modal2.open()} style={styles.ctnHeaderIcon}>
+            <Image source={theme.Image.iCon.ThreeDots} style={styles.iconHeader}/>
+          </TouchableOpacity> 
+        </View>
+
+      );
        return (
         <View style={styles.wrapper}>
-          <View style={styles.row1}>
-            <View style={styles.ctnHeader}>
-              <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
-                <Image source={theme.Image.iCon.Whiteback} style={styles.iconHeader}/>
-              </TouchableOpacity>
-              <View style={styles.ctnHeaderText}>
-                <Text style={styles.txtHeader} numberOfLines={1}>{this.state.BookmarkName}</Text>
-              </View>
-          <View/>
-                {/* <TouchableOpacity  onPress={() => this.refs.modal2.open()} style={styles.ctnHeaderIcon}>
-                  <Image source={theme.Image.iCon.Save} style={styles.iconHeader}/>
-                </TouchableOpacity> */}
-          </View>
-        </View>
-        {listFoodJSX}
+          {headerJSX}
+          {listFoodJSX}
         </View>
        );
     }
@@ -159,8 +165,18 @@ const styles = StyleSheet.create({
     wrapper:{
         flex:1
     },
+    ctnHeader:{
+      flexDirection: 'row',
+      alignItems:'center', 
+      // marginBottom:10,
+      height: height / 17, 
+      backgroundColor: theme.Color.NiceRed,
+      padding:5, 
+      justifyContent:'space-around'
+    },
     container: {
-      flex:1, backgroundColor: "#AAA",
+      flex:1, 
+      backgroundColor: "#AAA",
     },
     row: {
       flex: 1,
@@ -178,6 +194,11 @@ const styles = StyleSheet.create({
       borderRadius: 100,
       flexDirection:"row",
       alignItems:"center",
+    },
+    textFood:{
+      color: theme.Color.Orange,
+      fontSize: theme.Size.FontMedium,
+      // alignItems: 'center',
     },
     iconFoler:{
       width:width/17,
@@ -232,7 +253,7 @@ const styles = StyleSheet.create({
    ctnRestaurant: {
     flex: 1,
     flexDirection:'row',
-    backgroundColor:"#FFF",
+    backgroundColor:theme.Color.White,
     padding:3,
     margin:3,
     borderBottomWidth:1,
@@ -245,7 +266,9 @@ const styles = StyleSheet.create({
     // borderRadius: 100
   },
   image:{
-    flex:1,
+    // flex:1,
+    width: width/4,
+    height: height/5,
   },
   ctnInfomation:{
     flex:0.7,
@@ -272,10 +295,10 @@ const styles = StyleSheet.create({
     fontWeight:"900",
   },
   txtName:{
-    color:"green",
-    fontSize: theme.Size.FontBig,
+    color: theme.Color.Black,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
-    fontWeight:"900",
+    fontWeight:"100",
     // margin: theme.Size.TextMargin,
   },
   txtRate:{

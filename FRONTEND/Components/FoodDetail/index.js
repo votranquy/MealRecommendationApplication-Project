@@ -176,7 +176,7 @@ export default class FoodDetail extends Component {
           menu: responseJsonMenu.data,
           // isLoading: false,
         });
-        console.log("ME_NU",this.state.menu);
+        // console.log("ME_NU",this.state.menu);
       }else{
         console.log('MENU_ERROR');
         this.setState({
@@ -228,19 +228,19 @@ export default class FoodDetail extends Component {
     );
   }
 
-  commaSeparateNumber(val){
-    while (/(\d+)(\d{3})/.test(val.toString())){
-      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-    }
-    return val;
-  }
+  // commaSeparateNumber(val){
+  //   while (/(\d+)(\d{3})/.test(val.toString())){
+  //     val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+  //   }
+  //   return val;
+  // }
 
-  formatVND(number){
-    string = String(number);
-    long = str.length;
-    display = str.substring(0, long-3) +","+str.substring(long-3,long);
-    return display;
-  }
+  // formatVND(number){
+  //   string = String(number);
+  //   long = str.length;
+  //   display = str.substring(0, long-3) +","+str.substring(long-3,long);
+  //   return display;
+  // }
 
   render() {
 
@@ -485,12 +485,12 @@ export default class FoodDetail extends Component {
 
             <View  style={styles.ctnInfomationItem}>
               <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-              <Text style={styles.txtPrice}>{String(item.price)} đ</Text>
+              <Text style={styles.txtPrice}>{String(item.price)} đ {item.food_id}</Text>
             </View>
               { this.state.isLogin ?
                 <View style={styles.ctnHeartIcon}>
                   <View/>
-                  <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id)}>
+                  <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
                     <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
                   </TouchableOpacity>
                   <View/>

@@ -6,7 +6,9 @@ import backSpecial from '../Image/backs.png';
 import getToken from "../api/getToken";
 import  changeInfoApi from "../api/changeInfoApi";
 import global from "./global";
+import theme from '../theme';
 export default class ChangeInfo extends Component {
+
     constructor(props) {
         super(props);
         const { name, address, phone } = props.user;
@@ -16,8 +18,6 @@ export default class ChangeInfo extends Component {
             txtPhone: phone
         };
     }
-
-
 
     goBackToMain() {
         const {navigator} = this.props;
@@ -47,11 +47,14 @@ export default class ChangeInfo extends Component {
     }
 
     render(){
+
         const {
             wrapper, header, headerTitle, backIconStyle, body,
             signInContainer, signInTextStyle, textInput
         } = styles;
+
         const { txtName, txtAddress, txtPhone } = this.state;
+
         return (
             <View style={wrapper}>
                 <View style={header}>
@@ -98,12 +101,34 @@ export default class ChangeInfo extends Component {
     }
 }
 
+
 const styles = StyleSheet.create({
-    wrapper: { flex: 1, backgroundColor: '#fff' },
-    header: { flex: 1, backgroundColor: '#2ABB9C', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 10 },// eslint-disable-line
-    headerTitle: { fontFamily: 'Avenir', color: '#fff', fontSize: 20 },
-    backIconStyle: { width: 30, height: 30 },
-    body: { flex: 10, backgroundColor: '#F6F6F6', justifyContent: 'center' },
+    wrapper: { 
+        flex: 1, 
+        backgroundColor: '#fff' 
+    },
+    header: { 
+        flex: 1,
+        backgroundColor:  theme.Color.NiceRed, 
+        alignItems: 'center',
+        justifyContent: 'space-between', 
+        flexDirection: 'row',
+        paddingHorizontal: 10 
+    },// eslint-disable-line
+    headerTitle: { 
+        fontFamily: 'Avenir', 
+        color: '#fff',
+         fontSize: 20 
+    },
+    backIconStyle: { 
+        width: 30,
+        height: 30 
+    },
+    body: { 
+        flex: 10, 
+        backgroundColor: '#F6F6F6',
+         justifyContent: 'center'
+     },
     textInput: {
         height: 45,
         marginHorizontal: 20,
@@ -113,22 +138,25 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginBottom: 20,
         borderColor: '#2ABB9C',
-        borderWidth: 1
+        borderWidth: 1,
     },
     signInTextStyle: {
-        color: '#FFF', fontFamily: 'Avenir', fontWeight: '600', paddingHorizontal: 20
+        color: '#FFF', 
+        fontFamily: 'Avenir', 
+        fontWeight: '600', 
+        paddingHorizontal: 20,
     },
     signInContainer: {
         marginHorizontal: 20,
-        backgroundColor: '#2ABB9C',
+        backgroundColor:  theme.Color.NiceRed,
         borderRadius: 20,
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
     },
     signInStyle: {
         flex: 3,
-        marginTop: 50
+        marginTop: 50,
     }
 });

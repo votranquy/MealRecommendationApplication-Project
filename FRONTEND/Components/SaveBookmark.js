@@ -6,31 +6,23 @@ import {
     Dimensions,
     TouchableOpacity,
     Image,
-    ScrollView,
-    ListView,
-    Alert,
     FlatList,
-    ActivityIndicator,
-    CheckBox,
 } from 'react-native';
-import call from 'react-native-phone-call';
-import MapView from 'react-native-maps';
-import Modal from 'react-native-modalbox';  
-import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Swiper from 'react-native-swiper';
+import CheckBox from 'react-native-check-box';
 import theme from "../theme";
 import getToken from '../api/getToken';
+import getBookmarkOfOneFood from '../api/getBookmarkOfOneFood';
+import updateBookmarkOfOneFoodApi from '../api/updateBookmarkOfOneFoodApi';
 
 
 export default class FoodDetail extends Component {
+
   constructor(props){
     super(props);
     this.state = {
-	isLoading: true,
-      bookmark : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      checkArray: [],
-      }
+      bookmark:[],
+      isLoading: true,
+    }
   }
 
   goBack() {
@@ -38,29 +30,32 @@ export default class FoodDetail extends Component {
       navigator.pop();
   }
 
-
-  
-
   getBookmark(){
+    const {idfood} = this.props;
     getToken()
-    .then(token => getBookmarkOfOneFood(token, this.props.idfood))
-    .then(responseJsonMenu =>{
-      if(responseJsonMenu.result === "success"){
+    .then(token =>{return getBookmarkOfOneFood(token, idfood)})
+    .then(responseJson =>{
+      console.log(responseJson);
+      if(responseJson.result === "success"){
+        console.log('BOOKMARK_WORK');
+        console.log(responseJson.data);
         this.setState({
-              bookmark: this.state.comment.cloneWithRows(responseJsonMenu.data), 
+          bookmark:  responseJson.data,
         });
-        console.log("ME_NU",this.state.bookmark);
+        console.log("BOOKMARK",this.state.bookmark);
       }else{
-        console.log('MENU_ERROR');
+        console.log('GETBOOKMARK_ERROR');
         this.setState({
-              bookmark:this.state.comment.cloneWithRows([]),
+          bookmark:[],
+          isLoading: false,
         });
       }
     })
     .catch(error=>{
       console.log('ERROR',error);
       this.setState({
-       bookmark: this.state.comment.cloneWithRows([]),
+        bookmark:[],
+        isLoading: false,
       });
     });
   }
@@ -70,19 +65,31 @@ export default class FoodDetail extends Component {
     this.getBookmark();	
   }
 
+updateBookmarkOfOneFood(idbookmark,idfood){
+    // const {idfood} = this.props;
+    getToken()
+    .then(token =>{return updateBookmarkOfOneFoodApi(token,idbookmark, idfood)})
+    .then(responseJson =>{
+      console.log(responseJson.result);
+    })
+    .catch(error=>{
+      console.log('ERROR',error);
+    });
+}
+
+
   changeStateOfCheckbox(idbookmark) {
+        const {idfood} = this.props;
        const newBookmark = this.state.bookmark.map(e => {
               if (e.idbookmark !== idbookmark) return e;
-              return { idbookmark : e.idbookmark, bookmark_name: e.bookmark_name, isInThis : 1 - e.isInThis };
+              return { idbookmark : e.idbookmark, bookmark_name: e.bookmark_name, isInThis : 1 - Number(e.isInThis)};
        });
-       this.setState({ bookmark: newBookmark }
-       );
+       this.setState({ bookmark: newBookmark });
+       this.updateBookmarkOfOneFood(idbookmark,idfood);
     }   
 
 
-  render() {
-//     const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
-    
+  render() {    
     const headerJSX=(
       <View style={styles.ctnHeader}>
         <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
@@ -97,27 +104,31 @@ export default class FoodDetail extends Component {
 
 
     const bookmarkJSX=(
-         <ListView
-             enableEmptySections={true}
-             dataSource={this.state.bookmark}
-             renderRow={
-               (data) => {
-                      <CheckBox
-                            value={data.isInThis === "1"}
-                            title={data.bookmark_name}
-                            onValueChange={() => this.changeStateOfCheckbox(idbookmark)}
-                      />
-               }
+         <FlatList
+            enableEmptySections={true}
+            data={this.state.bookmark}
+            renderItem={
+               ({item}) => 
+              // <Text> {item.bookmark_name} </Text>
+                <View style={styles.ctnBookmarkRow}>
+                  <CheckBox
+                        isChecked={item.isInThis === "1"}
+                        onClick={() => this.changeStateOfCheckbox(item.idbookmark)}
+                  />
+                  <Text>{item.bookmark_name}</Text>
+                  <Text>{item.isInThis}</Text>
+                </View>
              }
+             keyExtractor={item => item.idbookmark}
          />
      );
+
 
   return (
       <View style={styles.wrapper}>
         {headerJSX }
-        <ScrollView style={styles.body} >
-              {bookmarkJSX}
-          </ScrollView>
+        {this.state.bookmark.length === 0 ? <Text>Loading</Text> : bookmarkJSX}
+        {/* {bookmarkJSX} */}
         </View>
     );
   }
@@ -143,6 +154,10 @@ const styles= StyleSheet.create({
     width:width,
     backgroundColor: theme.Color.NiceRed, 
     alignItems:'center',
+  },
+  ctnBookmarkRow:{
+    flexDirection:"row",
+    padding:5,
   },
   ctnHeaderIcon:{
     flex:0.1,

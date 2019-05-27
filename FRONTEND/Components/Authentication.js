@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import icBack from '../Image/back_white.png';
-// import icLogo from '../../media/appIcon/ic_logo.png';
+import theme from '../theme';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
@@ -67,13 +67,24 @@ export default class Authentication extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#3EBA77',
+        backgroundColor: theme.Color.NiceRed,
         padding: 20,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
-    row1: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-    titleStyle: { color: '#FFF', fontFamily: 'Avenir', fontSize: 30 },
-    iconStyle: { width: 30, height: 30 },
+    row1: { 
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        alignItems: 'center' 
+    },
+    titleStyle: { 
+        color: '#FFF', 
+        fontFamily: 'Avenir', 
+        fontSize: 30 
+    },
+    iconStyle: {
+         width: 30, 
+         height: 30 
+    },
     controlStyle: {
         flexDirection: 'row',
         alignSelf: 'stretch'

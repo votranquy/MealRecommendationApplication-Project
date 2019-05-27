@@ -43,7 +43,7 @@ const config = { ...common, ...getConfigSet() };
 
 export function configPath(isTest) {
   config.isTest = isTest;
-  config.apiPath = `http://10.0.13.130/`;
+  config.apiPath = `http://10.0.23.29/`;
 }
 
 export default config;

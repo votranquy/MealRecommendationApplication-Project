@@ -29,7 +29,7 @@ export default class TopFood extends Component {
 
   async componentDidMount(){
     try{
-      let response = await  fetch("http://10.0.13.130/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
+      let response = await  fetch("http://10.0.23.29/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default class TopFood extends Component {
 
   _onEndReached(){
     this.setState({isLoading:true,})
-    fetch("http://10.0.13.130/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
+    fetch("http://10.0.23.29/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {

@@ -96,7 +96,7 @@ updateBookmarkOfOneFood(idbookmark,idfood){
           <Image source={theme.Image.iCon.Whiteback} style={styles.iconHeader}/>
         </TouchableOpacity>
         <View style={styles.ctnHeaderText}>
-          <Text style={styles.txtHeader} numberOfLines={1}>TIEU DE</Text>
+          <Text style={styles.txtHeader} numberOfLines={1}>Lưu vào bookmark</Text>
         </View>
       </View>
     );

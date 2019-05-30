@@ -12,6 +12,7 @@ import global from "./global";
 import UserMenu from "./UserMenu";
 import Home from "./Home";
 import BookMark from "./BookMark";
+import Search from "./Search";
 import initData from "../api/initData";
 import getBookMark from "../api/getBookMark";
 import saveBookMark from "../api/saveBookMark";
@@ -52,6 +53,18 @@ export default class Shop extends Component{
             >
             <Home open={this.props.open}/>
           </TabNavigator.Item>
+
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'search'}
+            title="Tìm kiếm"
+            renderIcon={() => <Image source={require("../Image/whitesearch.png")} style={styles.imageStyle}/>}
+            renderSelectedIcon={() => <Image source={require("../Image/redsearch.png")} style={styles.imageStyle}/>}
+            onPress={() => this.setState({ selectedTab: 'search' })}
+            selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
+            >
+            <Search/>
+          </TabNavigator.Item>
+
           <TabNavigator.Item
             selected={this.state.selectedTab === 'suggestion'}
             title="Gợi ý"

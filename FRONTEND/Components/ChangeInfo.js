@@ -59,7 +59,7 @@ export default class ChangeInfo extends Component {
             <View style={wrapper}>
                 <View style={header}>
                     <View />
-                    <Text style={headerTitle}>User Infomation</Text>
+                    <Text style={headerTitle}>Đổi thông tin</Text>
                     <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
                         <Image source={backSpecial} style={backIconStyle} />
                     </TouchableOpacity>
@@ -93,7 +93,7 @@ export default class ChangeInfo extends Component {
                         style={signInContainer}
                         onPress={this.clickChangeInfo.bind(this)}
                     >
-                        <Text style={signInTextStyle}>CHANGE YOUR INFOMATION</Text>
+                        <Text style={signInTextStyle}>Đổi thông tin</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     },
     body: { 
         flex: 10, 
-        backgroundColor: '#F6F6F6',
+        backgroundColor: theme.Color.NiceRed,
          justifyContent: 'center'
      },
     textInput: {
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         borderRadius: 20,
         marginBottom: 20,
-        borderColor: '#2ABB9C',
+        borderColor: theme.Color.Black,
         borderWidth: 1,
     },
     signInTextStyle: {
@@ -154,6 +154,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
+        borderColor: theme.Color.White,
+        borderWidth: 1,
     },
     signInStyle: {
         flex: 3,

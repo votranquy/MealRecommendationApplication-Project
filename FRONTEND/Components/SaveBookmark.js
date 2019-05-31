@@ -112,12 +112,14 @@ updateBookmarkOfOneFood(idbookmark,idfood){
               // <Text> {item.bookmark_name} </Text>
                 <View style={styles.ctnBookmarkRow}>
                   <CheckBox
+                        checkBoxColor={"red"}
+                        style={{marginRight:10}}
                         isChecked={item.isInThis === "1"}
                         onClick={() => this.changeStateOfCheckbox(item.idbookmark)}
                   />
-                  <Text>{item.bookmark_name}</Text>
-                  <Text>{item.isInThis}</Text>
-                </View>
+                  <Text style={styles.txtBookmarkName}>{item.bookmark_name}</Text>
+                  {/* <Text>{item.isInThis}</Text> */}
+                </View> 
              }
              keyExtractor={item => item.idbookmark}
          />
@@ -154,6 +156,11 @@ const styles= StyleSheet.create({
     width:width,
     backgroundColor: theme.Color.NiceRed, 
     alignItems:'center',
+  },
+  txtBookmarkName:{
+    fontSize: theme.Size.FontSmall,
+    color: theme.Color.Orange,
+    alignItems: 'center',
   },
   ctnBookmarkRow:{
     flexDirection:"row",

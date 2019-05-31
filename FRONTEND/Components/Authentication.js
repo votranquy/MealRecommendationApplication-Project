@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
     View, Text, TouchableOpacity, Image, StyleSheet
 } from 'react-native';
-
-import icBack from '../Image/back_white.png';
 import theme from '../theme';
+import icBack from '../Image/back_white.png';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
@@ -53,10 +52,10 @@ export default class Authentication extends Component {
                 {mainJSX}
                 <View style={controlStyle}>
                     <TouchableOpacity style={signInStyle} onPress={this.signIn.bind(this)}>
-                        <Text style={isSignIn ? activeStyle : inactiveStyle}>SIGN IN</Text>
+                        <Text style={!isSignIn ? activeStyle : inactiveStyle}>Đăng nhập</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={signUpStyle} onPress={this.signUp.bind(this)}>
-                        <Text style={!isSignIn ? activeStyle : inactiveStyle}>SIGN UP</Text>
+                        <Text style={isSignIn ? activeStyle : inactiveStyle}>Đăng kí</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     titleStyle: { 
         color: '#FFF', 
         fontFamily: 'Avenir', 
-        fontSize: 30 
+        fontSize: theme.Size.FontMedium,
     },
     iconStyle: {
          width: 30, 

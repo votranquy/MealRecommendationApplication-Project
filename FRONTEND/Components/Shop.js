@@ -24,7 +24,7 @@ export default class Shop extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab: "home",
+      selectedTab: "save",
       bookmarkArray: [],
       isLogIn:null,
     };

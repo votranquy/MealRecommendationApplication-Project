@@ -14,7 +14,7 @@ const Image = {
     DefaultImage:  require('../Image/default_image.png'),
     Map:         require('../Image/map.png'),
     Phone: require ('../Image/phone.png'),
-    BookMark : require ('../Image/bookmark.png'),
+    BookMark : require ('../Image/BookMark.png'),
     WhiteMap: require('../Image/whitemap.png'),
     WhitePhone: require('../Image/whitephone.png'),
     Earth: require('../Image/Earth.png'),

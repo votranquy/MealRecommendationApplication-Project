@@ -55,7 +55,7 @@ export default class Menu extends Component {
         const logoutJSX = (
             <View style={{ flex: 1 }}>
                 <TouchableOpacity style={btnStyle} onPress={this.gotoAuthentication.bind(this)}>
-                    <Text style={btnText}>Sign In</Text>
+                    <Text style={btnText}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -67,7 +67,7 @@ export default class Menu extends Component {
                         <Image  source={require('../Image/user.png')} style={styles.imageStyle}/>
                         <Text style={txtButton}>Đổi thông tin</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
+                    {/* <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Image  source={require('../Image/key.png')} style={styles.imageStyle}/>
                         <Text style={txtButton}>Đổi mật khẩu</Text>
                     </TouchableOpacity>
@@ -86,7 +86,7 @@ export default class Menu extends Component {
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                       <Image  source={require('../Image/bluetooth.png')}    style={styles.imageStyle}     />
                        <Text style={txtButton}>Chia sẻ ứng dụng</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
                        <Image    source={require('../Image/logout.png')}         style={styles.imageStyle}  />
                         <Text style={txtButton}>Đăng xuất </Text>

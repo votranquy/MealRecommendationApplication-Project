@@ -7,7 +7,7 @@ import global from './global';
 import theme from '../theme';
 import getToken from "../api/getToken";
 import getOneBookmarkApi from "../api/getOneBookmarkApi";
-
+import Modal from 'react-native-modalbox';  
 
 
 export default class BookMarkList extends Component {
@@ -17,6 +17,7 @@ export default class BookMarkList extends Component {
     this.state = {
       listFood: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       BookmarkName:"",
+      isOpen: false,
       }
     }
 
@@ -97,6 +98,8 @@ export default class BookMarkList extends Component {
     }
 
     render() {
+
+      var BContent = <TouchableOpacity onPress={() => this.setState({isOpen: false})} style={[styles.btn, styles.btnModal]}><Text>X</Text></TouchableOpacity>;
       const listFoodJSX=(
         <ListView
             contentContainerStyle={styles.main}
@@ -146,9 +149,32 @@ export default class BookMarkList extends Component {
         </View>
 
       );
+
+      const  menuJSX=(
+        // <Modal isOpen={this.state.isOpen} onClosed={() => this.setState({isOpen: false})} style={[ styles.modal3]} position={"center"} >
+        //   <Text style={styles.text}>Modal with backdrop content</Text>
+        // </Modal>
+
+        <Modal style={[styles.modal, styles.modal2]} 
+          backdrop={true}
+          backdropOpacity={0} 
+          position={"top"}
+          ref={"modal2"}
+          swipeToClose={false}
+          // wipeArea={20}
+          backdropPressToClose={true}
+        >
+          <View>
+            <Text style={styles.text}>Modal on top</Text>
+          </View>
+          
+        </Modal>
+      );
+
        return (
         <View style={styles.wrapper}>
           {headerJSX}
+          {menuJSX}
           {listFoodJSX}
         </View>
        );
@@ -363,5 +389,27 @@ const styles = StyleSheet.create({
     fontWeight:"900",
     color: theme.Color.NiceRed, 
   },
+  modal: {
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // margin:20,
+
+  },
+
+  modal2: {
+    height: height/17,
+    backgroundColor: theme.Color.NiceGreen,
+    // marginTop:0,
+    // marginLeft:30,
+    // marginRight:50,
+    marginTop:5,
+    marginLeft:width/3,
+    // justifyContent:"center",
+    // alignItems:"center",
+  },
+  text: {
+    color: "black",
+    fontSize: 22
+  }
   });
   

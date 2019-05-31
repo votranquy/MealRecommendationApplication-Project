@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import register from "../api/register";
 import {AuthService} from '../Components/services';
+import theme from '../theme';
 
 
 export default class SignUp extends Component {
@@ -13,9 +14,9 @@ export default class SignUp extends Component {
             password: '',
             rePassword: ''
         };
-        this._handleSuccess = this._handleSuccess.bind(this);
-        this._handleError = this._handleError.bind(this);
-        this._handleErrorCode = this._handleErrorCode.bind(this);
+        // this._handleSuccess = this._handleSuccess.bind(this);
+        // this._handleError = this._handleError.bind(this);
+        // this._handleErrorCode = this._handleErrorCode.bind(this);
     }
 
     onSuccess() {
@@ -31,8 +32,8 @@ export default class SignUp extends Component {
 
     onFail() {
         Alert.alert(
-            'Notice',
-            'Email has been used by other',
+            'Lỗi',
+            'Email đã được sử dụng',
             [
                 { text: 'OK', onPress: () => this.removeEmail.bind(this) }
             ],
@@ -44,33 +45,33 @@ export default class SignUp extends Component {
         this.setState({ email: '' });
     }
 
-    _handleSuccess(res){
-        console.log('_LOGIN', '_handleSuccess');
-        console.log('_LOGIN',res);
-        if(res.result);
-        // global.onSignIn(res.user);
-        // this.props.goBackToMain();
-        // saveToken(res.token);
-    }
-    _handleError(){
-        console.log('_LOGIN', '_handleError');
-    }
-    _handleErrorCode(){ 
-        console.log('_LOGIN', '_handleErrorCode');
-    }
+    // _handleSuccess(res){
+    //     console.log('_LOGIN', '_handleSuccess');
+    //     console.log('_LOGIN',res);
+    //     if(res.result);
+    //     // global.onSignIn(res.user);
+    //     // this.props.goBackToMain();
+    //     // saveToken(res.token);
+    // }
+    // _handleError(){
+    //     console.log('_LOGIN', '_handleError');
+    // }
+    // _handleErrorCode(){ 
+    //     console.log('_LOGIN', '_handleErrorCode');
+    // }
 
 
     registerUser() {
         const { email, name, password } = this.state;
-        AuthService.signUp(email, password,name,this. _handleSuccess, this._handleErrorCode, this._handleError);
+        // AuthService.signUp(email, password,name,this. _handleSuccess, this._handleErrorCode, this._handleError);
 
 
-        // register(email, name, password)
-        // .then((response) => response.json())
-        // .then((responseJson) => {
-        //   if (responseJson.result === 'THANH_CONG') return this.onSuccess();
-        //   else return this.onFail();
-        // });
+        register(email, name, password)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          if (responseJson.result === 'THANH_CONG') return this.onSuccess();
+          else return this.onFail();
+        });
     }
 
     render() {
@@ -79,26 +80,26 @@ export default class SignUp extends Component {
             <View>
                 <TextInput 
                     style={inputStyle} 
-                    placeholder="Enter your name" 
+                    placeholder="Nhập tên" 
                     value={this.state.name}
                     onChangeText={text => this.setState({ name: text })}
                 />
                 <TextInput 
                     style={inputStyle} 
-                    placeholder="Enter your email" 
+                    placeholder="Nhập email" 
                     value={this.state.email}
                     onChangeText={text => this.setState({ email: text })}
                 />
                 <TextInput 
                     style={inputStyle} 
-                    placeholder="Enter your password" 
+                    placeholder="Nhập mật khẩu" 
                     value={this.state.password}
                     secureTextEntry
                     onChangeText={text => this.setState({ password: text })}
                 />
                 <TextInput 
                     style={inputStyle} 
-                    placeholder="Re-enter your password" 
+                    placeholder="Nhập lại mật khẩu" 
                     value={this.state.rePassword}
                     secureTextEntry
                     onChangeText={text => this.setState({ rePassword: text })}
@@ -106,7 +107,7 @@ export default class SignUp extends Component {
                 <TouchableOpacity style={bigButton} 
                 onPress={this.registerUser.bind(this)}
                 >
-                    <Text style={buttonText}>SIGN UP NOW</Text>
+                    <Text style={buttonText}>Đăng kí ngay</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -132,6 +133,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontFamily: 'Avenir',
         color: '#fff',
-        fontWeight: '400'
+        fontWeight: '400',
+        fontSize: theme.Size.FontSmall,
     }
 });

@@ -27,7 +27,7 @@ export default class TopFood extends Component {
 
   componentDidMount(){
     // try{
-    //   let response = await  fetch("http://10.0.12.57/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+this.state.page,
+    //   let response = await  fetch("http://192.168.64.2/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+this.state.page,
     //   {method:"POST",
     //   headers: {
     //     'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default class TopFood extends Component {
 
   _onEndReached(){
     // this.setState({isLoading:true,})
-    // fetch("http://10.0.12.57/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+(this.state.page+1),
+    // fetch("http://192.168.64.2/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+(this.state.page+1),
     //   {
     //     method:"POST",
     //     headers: {

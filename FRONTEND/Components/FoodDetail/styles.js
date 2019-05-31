@@ -39,15 +39,18 @@ export default StyleSheet.create({
       fontSize: theme.Size.FontMedium,
   },
   ctnImageFood:{
-    justifyContent: 'flex-end', 
+    justifyContent:"center", 
+    alignItems:"center",
     width:width,
+    height: height/2,
     backgroundColor: theme.Color.White,
     marginBottom: 5,
   },
   imageFood:{
-      height:height/3,
+      height:height/2,
       width:width,
       alignItems:"center",
+      justifyContent:"center",
   },
   ctnFoodInfomation:{
     padding:3,

@@ -32,8 +32,8 @@ export default class FoodDetail extends Component {
       swipeToClose: false,
       comment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       allComment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      //picture : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      picture: null,
+      // picture : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      picture: [],
       isLoaded: false,
       menu:[],
       }
@@ -51,78 +51,78 @@ export default class FoodDetail extends Component {
 
   getPicture() {  
     //FlatList
-    // const {restaurant_id} = this.props.food;
-    // console.log("GET_RESTAURANT_ID"+ restaurant_id);
-    // const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
-    // fetch(URLi,{
-    //   method:"GET",
-    //   headers: {
-    //           Accept: 'application/json, text/plain, */*',
-    //           'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-    //           'x-requested-with' : 'XMLHttpRequest'
-    //   }
-    // })
-    // .then(responsei => responsei.json())
-    // .then(responseJsoni=>{
-    //   if(responseJsoni.ListPicture.length !== 0){
-    //     console.log('IMAGE_WORK');
-    //     this.setState({
-    //       picture: responseJsoni.ListPicture,
-    //       isLoading: false,
-    //     });
-    //     console.log("IMAGE",this.state.picture);
-    //   }else{
-    //     console.log('IMAGE_NULL');
-    //     this.setState({
-    //       picture:[],
-    //       isLoading: false,
-    //     });
-    //   }
-    // })	
-    // .catch(error=>{
-    //   console.log('IMAGE_ERROR',error);
-    //   this.setState({
-    //     picture: [],
-    //     isLoading: false, 
-    //   });
-    // });
-
-  //ListView
-  const { restaurant_id} = this.props.food;
-  console.log("GET_RESTAURANT_ID"+ restaurant_id);
-  const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
-  fetch(URLi,
-    {
+    const {restaurant_id} = this.props.food;
+    console.log("GET_RESTAURANT_ID"+ restaurant_id);
+    const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
+    fetch(URLi,{
       method:"GET",
       headers: {
               Accept: 'application/json, text/plain, */*',
               'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
               'x-requested-with' : 'XMLHttpRequest'
       }
-  })
-  .then(responsei => responsei.json())
-  .then(responseJsoni=>{
-    if(responseJsoni.ListPicture.length !== 0){
-      console.log('IMAGE_WORK');
-      this.setState({
-        picture: responseJsoni.ListPicture,
-        isLoading: false,
-      });
-    }else{
-      console.log('IMAGE_NULL');
+    })
+    .then(responsei => responsei.json())
+    .then(responseJsoni=>{
+      if(responseJsoni.ListPicture.length !== 0){
+        console.log('IMAGE_WORK');
+        this.setState({
+          picture: responseJsoni.ListPicture,
+          isLoading: false,
+        });
+        console.log("IMAGE",this.state.picture);
+      }else{
+        console.log('IMAGE_NULL');
+        this.setState({
+          picture:[],
+          isLoading: false,
+        });
+      }
+    })	
+    .catch(error=>{
+      console.log('IMAGE_ERROR',error);
       this.setState({
         picture: [],
-        isLoading: false,
+        isLoading: false, 
       });
-    }
-  })	
-  .catch(error=>{
-    console.log('IMAGE_ERROR',error);
-    this.setState({
-      picture:[],
-      isLoading: false, 
     });
-  });
+
+  //ListView
+  // const { restaurant_id} = this.props.food;
+  // console.log("GET_RESTAURANT_ID"+ restaurant_id);
+  // const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
+  // fetch(URLi,
+  //   {
+  //     method:"GET",
+  //     headers: {
+  //             Accept: 'application/json, text/plain, */*',
+  //             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+  //             'x-requested-with' : 'XMLHttpRequest'
+  //     }
+  // })
+  // .then(responsei => responsei.json())
+  // .then(responseJsoni=>{
+  //   if(responseJsoni.ListPicture.length !== 0){
+  //     console.log('IMAGE_WORK');
+  //     this.setState({
+  //       picture: responseJsoni.ListPicture,
+  //       isLoading: false,
+  //     });
+  //   }else{
+  //     console.log('IMAGE_NULL');
+  //     this.setState({
+  //       picture: [],
+  //       isLoading: false,
+  //     });
+  //   }
+  // })	
+  // .catch(error=>{
+  //   console.log('IMAGE_ERROR',error);
+  //   this.setState({
+  //     picture:[],
+  //     isLoading: false, 
+  //   });
+  // });
   }
 
   getComment(){
@@ -253,6 +253,7 @@ export default class FoodDetail extends Component {
         <View style={styles.ctnHeaderText}>
           <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
         </View>
+        <View style={styles.ctnHeaderIcon}/>
       </View>
     );
 
@@ -358,19 +359,25 @@ export default class FoodDetail extends Component {
           showsButtons={true} 
           width={width} 
           height={height/5}
-          loop={true}
+          // loop={true}
           autoplay={true} 
           showsPagination={true}
         >
-                <FlatList
+                {/* <FlatList
                     enableEmptySection
                     data={this.state.picture}
                     showsVerticalScrollIndicator={false}
-                    renderItem={({pic}) =>
-                      <Image source={{ uri: pic.FullSizeImageUrl }} style={styles.imageFood}/>
+                    renderItem={({item}) =>
+                      <Image source={{ uri: item.FullSizeImageUrl }} style={styles.imageFood}/>
                     }
-                    keyExtractor={pic => pic.Id}
-                />
+                    keyExtractor={item => item.Id}
+                /> */}
+                  {this.state.picture.map(pic => (
+                      <Image key={pic.Id} 
+                      source={{ uri: pic.FullSizeImageUrl }} 
+                      style={styles.imageFood}/>
+
+                    ))}
         </Swiper>
       </View>
     );

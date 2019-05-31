@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+import theme from '../theme';
 import signIn    from '../api/signIn';
 import global    from './global';
 import saveToken from '../api/saveToken';
@@ -42,16 +42,15 @@ export default class SignIn extends Component {
         // AuthService.signIn(email, password,this. _handleSuccess, this._handleErrorCode, this._handleError);
 
         const { email, password } = this.state;
-        try{
-            let response = await signIn(email, password);
-            let responseJson = await response.json();
-    
-            global.onSignIn(responseJson.user);
-            this.props.goBackToMain();
-            saveToken(responseJson.token); 
-        }catch(err) {
-            console.log("ERORORRRRRRRRRRRR")
-        }
+        // try{
+            signIn(email, password)
+            .then(responseJson=>{
+                global.onSignIn(responseJson.user);
+                saveToken(responseJson.token); 
+                this.props.goBackToMain();
+            })
+            .catch(err => console.log(err));
+
     }
 
     render() {
@@ -61,13 +60,13 @@ export default class SignIn extends Component {
             <View>
                 <TextInput
                     style={inputStyle}
-                    placeholder="Enter your email"
+                    placeholder="Nhập email"
                     value={email}
                     onChangeText={text => this.setState({ email: text })}
                 />
                 <TextInput
                     style={inputStyle}
-                    placeholder="Enter your password"
+                    placeholder="Nhập mật khẩu"
                     value={password}
                     onChangeText={text => this.setState({ password: text })}
                     secureTextEntry
@@ -76,7 +75,7 @@ export default class SignIn extends Component {
                     style={bigButton}
                     onPress={() => this.onSignIn()}
                     >
-                    <Text style={buttonText}>SIGN IN NOW</Text>
+                    <Text style={buttonText}>Đăng nhập ngay</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -102,6 +101,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontFamily: 'Avenir',
         color: '#fff',
-        fontWeight: '400'
+        fontWeight: '400',
+        fontSize: theme.Size.FontSmall,
     }
 });

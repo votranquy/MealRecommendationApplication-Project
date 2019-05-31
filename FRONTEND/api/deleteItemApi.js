@@ -1,5 +1,5 @@
 const deleteItemApi = (token, idBookmark, idFood) => (
-    fetch('http://10.0.23.29/MealRecommendationApplication-Project/api/deleteItem.php',
+    fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/deleteItem.php',
     {   
         method: 'POST',
         headers: {

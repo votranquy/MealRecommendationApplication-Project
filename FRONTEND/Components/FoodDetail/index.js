@@ -16,7 +16,6 @@ import call from 'react-native-phone-call';
 import MapView from 'react-native-maps';
 import Modal from 'react-native-modalbox';  
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Swiper from 'react-native-swiper';
 import theme from '../../theme';
 import styles from "./styles";

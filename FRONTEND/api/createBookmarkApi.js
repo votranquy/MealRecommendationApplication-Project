@@ -1,5 +1,5 @@
 const createBookmarkApi = (token, name) => (
-       fetch('http://10.0.23.29/MealRecommendationApplication-Project/api/createBookmark.php',
+       fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/createBookmark.php',
        {   
            method: 'POST',
            headers: {

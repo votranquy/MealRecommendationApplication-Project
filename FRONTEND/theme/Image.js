@@ -31,6 +31,7 @@ const Image = {
     NoImage: require('../Image/noimage.png'),
     WhitePlus: require('../Image/WhitePlus.png'),
     Menu: require('../Image/whitemenu.png'),
+    RedFlag: require('../Image/redflag.png'),
   },
 
   Bg: {

@@ -5,19 +5,17 @@ import {
   ListView,
   Image,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import styles from "./styles";
+import getTopFoodApi from "../../api/getTopFoodApi";
 
 export default class TopFood extends Component {
-
   constructor(props){
     super(props);
     this.state = {
       page:0,
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       mang:[],
-      isLoading:true,
       isEndOfData: false,
     }
   }
@@ -27,29 +25,46 @@ export default class TopFood extends Component {
     navigator.push({name: "FOOD_DETAIL",food});
   }
 
-  async componentDidMount(){
-    try{
-      let response = await  fetch("http://10.0.23.29/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,
-      {method:"POST",
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
-    });
-    let responseJson = await response.json();
-    // mang = responseJson;
-    this.setState({
-      mang : responseJson,
-      dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-      isLoading:false,
-    });
-    }catch(err) {
-        console.log("ERORORRRRRRRRRRRR");
+  componentDidMount(){
+    // try{
+    //   let response = await  fetch("http://10.0.12.57/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+this.state.page,
+    //   {method:"POST",
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Accept: 'application/json'
+    //   }
+    // });
+    // let responseJson = await response.json();
+    // this.setState({
+    //   mang : responseJson.data,
+    //   dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+    // });
+    // }catch(err) {
+    //     console.log("ERORORRRRRRRRRRRR");
+    //     this.setState({
+    //       dataSource: [],
+    //     });
+    // }
+    getTopFoodApi(this.state.page)
+    .then((responseJson)=>{
+      if(responseJson.result==="success"){
         this.setState({
-          dataSource: [],
-          isLoading:false,
-        });
-    }
+            mang : responseJson.data,
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+          });
+      }
+      else{
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        })
+      }
+    })
+    .catch(error=>{
+      console.log('GETTOPFOOD_ERROR',error);
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows([]),
+      });
+    });
   }
 
 
@@ -84,39 +99,65 @@ export default class TopFood extends Component {
   }
 
   _onEndReached(){
-    this.setState({isLoading:true,})
-    fetch("http://10.0.23.29/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
-      {
-        method:"POST",
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-      })
-    .then((response)=>response.json())
-    .then((responseData)=>{
-      if(responseData.length != 0){
+    // this.setState({isLoading:true,})
+    // fetch("http://10.0.12.57/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+(this.state.page+1),
+    //   {
+    //     method:"POST",
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Accept: 'application/json'
+    //     },
+    //   })
+    // .then((response)=>response.json())
+    // .then((responseData)=>{
+    //   if(responseData.result === "success"){
+    //     this.setState({
+    //       // isLoading:false,
+    //       mang : this.state.mang.concat(responseData.data),
+    //       dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+    //       page: this.state.page+1,
+    //     });
+    //   }
+    //   else{
+    //     this.setState({ isEndOfData: true});
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    //   this.setState({
+    //     // isLoading:false,
+    //     dataSource: this.state.dataSource.cloneWithRows([]),
+    //   });
+    // });
+
+    nextpage = this.state.page +1;
+    getTopFoodApi(nextpage)
+    .then((responseJson)=>{
+      if(responseJson.result==="success"){
         this.setState({
-          isLoading:false,
-          mang : this.state.mang.concat(responseData),
-          dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-          page: this.state.page+1,
-        });
+            mang : this.state.mang.concat(responseJson.data),
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+            page: this.state.page+1,
+          });
       }
       else{
-        this.setState({ isEndOfData: true});
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        })
       }
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(error=>{
+      console.log('GETMORETOPFOOD_ERROR',error);
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows([]),
+      });
     });
   }
 
 
   render() {
     const topfoodJSX=(
-       
-          <ListView 
+        <ListView 
           enableEmptySections
           dataSource={this.state.dataSource}
           renderRow={
@@ -124,7 +165,6 @@ export default class TopFood extends Component {
           }
           onEndReached={this._onEndReached.bind(this)}
         />
-        // {this.state.isEndOfData ? <Text>Hết danh sách</Text> : <View/>}
       );
         return (
           <View style={styles.container}>

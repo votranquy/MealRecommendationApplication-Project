@@ -12,17 +12,18 @@ export default class SignUp extends Component {
             name: '',
             email: '',
             password: '',
-            rePassword: ''
+            repassword: '',
+            emailValidate: true,
+            passwordValidate: true,
+            nameValidate: true,
+            repasswordValidate: true,
         };
-        // this._handleSuccess = this._handleSuccess.bind(this);
-        // this._handleError = this._handleError.bind(this);
-        // this._handleErrorCode = this._handleErrorCode.bind(this);
     }
 
     onSuccess() {
         Alert.alert(
-            'Notice',
-            'Sign up successfully',
+            'Thành công',
+            'Đăng kí thành công! Xin mời đăng nhập',
             [
                 { text: 'OK', onPress: this.props.gotoSignIn() }
             ],
@@ -33,7 +34,7 @@ export default class SignUp extends Component {
     onFail() {
         Alert.alert(
             'Lỗi',
-            'Email đã được sử dụng',
+            'Email đã được sử dụng. Vui lòng chọn Email khác',
             [
                 { text: 'OK', onPress: () => this.removeEmail.bind(this) }
             ],
@@ -45,27 +46,8 @@ export default class SignUp extends Component {
         this.setState({ email: '' });
     }
 
-    // _handleSuccess(res){
-    //     console.log('_LOGIN', '_handleSuccess');
-    //     console.log('_LOGIN',res);
-    //     if(res.result);
-    //     // global.onSignIn(res.user);
-    //     // this.props.goBackToMain();
-    //     // saveToken(res.token);
-    // }
-    // _handleError(){
-    //     console.log('_LOGIN', '_handleError');
-    // }
-    // _handleErrorCode(){ 
-    //     console.log('_LOGIN', '_handleErrorCode');
-    // }
-
-
     registerUser() {
         const { email, name, password } = this.state;
-        // AuthService.signUp(email, password,name,this. _handleSuccess, this._handleErrorCode, this._handleError);
-
-
         register(email, name, password)
         .then((response) => response.json())
         .then((responseJson) => {
@@ -74,38 +56,124 @@ export default class SignUp extends Component {
         });
     }
 
+
+    validate(text,type){
+
+        alph=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       
+        if(type == 'name'){
+            if(text.length >= 3){
+                // console.log("Dung PASSWORD");
+                this.setState({nameValidate: true,  name: text});
+            }
+            else{
+                // console.log("Sai Password");
+                this.setState({nameValidate: false, name: text});
+            }
+        }
+
+        if(type == 'email'){
+            if(alph.test(text)){
+                // console.log("Dung EMAIL");
+                this.setState({emailValidate: true, email: text});
+            }
+            else{
+                // console.log("SAI EMAIL");
+                this.setState({emailValidate: false, email: text});
+            }
+        }
+
+        if(type == 'password'){
+            if(text.length>=6){
+                console.log("Dung PASSWORD");
+                this.setState({passwordValidate: true, password: text});
+            }
+            else{
+                console.log("Sai Password");
+                this.setState({passwordValidate: false, password: text});
+            }
+        }
+
+        if(type == 'repassword'){
+            if(text.length>=6 && text == this.state.password){
+                // console.log("Dung PASSWORD");
+                this.setState({repasswordValidate: true, repassword: text});
+            }
+            else{
+                // console.log("Sai Password");
+                this.setState({repasswordValidate: false, repassword: text});
+            }
+        }
+    }
+
+
+    clickSignUp(){
+        if(this.state.email == "" || this.state.password == "" ||  this.state.name == ""
+        ||this.state.repassword=="" || !this.state.emailValidate || !this.state.passwordValidate
+        || !this.state.nameValidate || !this.state.repasswordValidate){
+            Alert.alert(
+                'Lỗi',
+                'Bạn phải nhập đầy đủ và chính xác các thông tin!',
+                [
+                  {text: 'OK'},
+                ],
+                {cancelable: false},
+            );
+        }
+        else{ this.registerUser();}
+    }
+
+
     render() {
         const { inputStyle, bigButton, buttonText } = styles;
         return (
-            <View>
+            <View style={styles.main}>
+                <Text style={styles.label}>Tên</Text>
                 <TextInput 
                     style={inputStyle} 
                     placeholder="Nhập tên" 
                     value={this.state.name}
-                    onChangeText={text => this.setState({ name: text })}
+                    // onChangeText={text => this.setState({ name: text })}
+                    onChangeText={(text)=>{this.validate(text,'name')}}
                 />
+                { !this.state.nameValidate &&( <Text style={styles.labelError}>Họ tên phải có độ dài tối thiểu 3 kí tự</Text>) }
+
+                <Text style={styles.label}>Email</Text>
                 <TextInput 
                     style={inputStyle} 
                     placeholder="Nhập email" 
                     value={this.state.email}
-                    onChangeText={text => this.setState({ email: text })}
+                    // onChangeText={text => this.setState({ email: text })}
+                    onChangeText={(text)=>{this.validate(text,'email')}}
                 />
+                { !this.state.emailValidate &&( <Text style={styles.labelError}>Email không đúng định dạng</Text>) }
+
+                <Text style={styles.label}>Mật khẩu</Text>
                 <TextInput 
                     style={inputStyle} 
                     placeholder="Nhập mật khẩu" 
                     value={this.state.password}
                     secureTextEntry
-                    onChangeText={text => this.setState({ password: text })}
+                    // onChangeText={text => this.setState({ password: text })}
+                    onChangeText={(text)=>{this.validate(text,'password')}}
                 />
+                { !this.state.passwordValidate &&( <Text style={styles.labelError}>Mật khẩu có độ dài tối thiểu 6 kí tự</Text>) }
+
+
+                <Text style={styles.label}>Nhập lại mật khẩu</Text>
                 <TextInput 
                     style={inputStyle} 
                     placeholder="Nhập lại mật khẩu" 
-                    value={this.state.rePassword}
+                    value={this.state.repassword}
                     secureTextEntry
-                    onChangeText={text => this.setState({ rePassword: text })}
+                    // onChangeText={text => this.setState({ repassword: text })}
+                    onChangeText={(text)=>{this.validate(text,'repassword')}}
                 />
+                { !this.state.repasswordValidate &&( <Text style={styles.labelError}>Nhập lại mật khẩu không khớp</Text>) }
+
+
                 <TouchableOpacity style={bigButton} 
-                onPress={this.registerUser.bind(this)}
+                    onPress={() => this.clickSignUp()}
                 >
                     <Text style={buttonText}>Đăng kí ngay</Text>
                 </TouchableOpacity>
@@ -134,6 +202,18 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir',
         color: '#fff',
         fontWeight: '400',
+        fontSize: theme.Size.FontSmall,
+    },
+    main:{
+        paddingBottom:20,
+    },
+    label:{
+        color: theme.Color.White,
+        fontWeight: "900",
+        fontSize: theme.Size.FontMedium,
+    },
+    labelError:{
+        color: theme.Color.Green,
         fontSize: theme.Size.FontSmall,
     }
 });

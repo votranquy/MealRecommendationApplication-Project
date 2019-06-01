@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { 
+    View, 
+    TextInput, 
+    Text, 
+    TouchableOpacity, 
+    StyleSheet,
+    Alert,
+    ScrollView
+} from 'react-native';
 import theme from '../theme';
 import signIn    from '../api/signIn';
 import global    from './global';
 import saveToken from '../api/saveToken';
-
-import {AuthService} from '../Components/services';
 
 export default class SignIn extends Component {
 
@@ -13,69 +19,92 @@ export default class SignIn extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            emailValidate: true,
+            passwordValidate: true,
         };
-
-        // this._handleSuccess = this._handleSuccess.bind(this);
-        // this._handleError = this._handleError.bind(this);
-        // this._handleErrorCode = this._handleErrorCode.bind(this);
     }
 
-    // _handleSuccess(res){
-    //     console.log('_LOGIN', '_handleSuccess');
-    //     console.log('_LOGIN',res);
-    //     global.onSignIn(res.user);
-    //     this.props.goBackToMain();
-    //     saveToken(res.token);
-    // }
-
-    // _handleError(){
-    //     console.log('_LOGIN', '_handleError');
-    // }
-
-    // _handleErrorCode(){
-    //     console.log('_LOGIN', '_handleErrorCode');
-    // }
-
-    async onSignIn() {
-        // const { email, password} = this.state;
-        // AuthService.signIn(email, password,this. _handleSuccess, this._handleErrorCode, this._handleError);
-
+   
+    onSignIn() { 
         const { email, password } = this.state;
-        // try{
-            signIn(email, password)
-            .then(responseJson=>{
-                global.onSignIn(responseJson.user);
-                saveToken(responseJson.token); 
-                this.props.goBackToMain();
-            })
-            .catch(err => console.log(err));
+        signIn(email, password)
+        .then(responseJson=>{
+            global.onSignIn(responseJson.user);
+            saveToken(responseJson.token); 
+            this.props.goBackToMain();
+        })
+        .catch(err => console.log(err));
+    }
 
+    validate(text,type){
+        alph=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(type == 'email'){
+            if(alph.test(text)){
+                console.log("Dung EMAIL");
+                this.setState({emailValidate: true, email: text});
+            }
+            else{
+                console.log("SAI EMAIL");
+                this.setState({emailValidate: false, email: text});
+            }
+        }
+        if(type == 'password'){
+            if(text.length>=6){
+                console.log("Dung PASSWORD");
+                this.setState({passwordValidate: true, password: text});
+            }
+            else{
+                console.log("Sai Password");
+                this.setState({passwordValidate: false, password: text});
+            }
+        }
+    }
+    clickSignIn(){
+        if(this.state.email == "" || this.state.password == "" || !this.state.emailValidate || !this.state.passwordValidate){
+            Alert.alert(
+                'Lỗi',
+                'Bạn phải nhập đầy đủ và chính xác các thông tin!',
+                [
+                  {text: 'OK'},
+                ],
+                {cancelable: false},
+            );
+        }
+        else{ this.onSignIn();}
     }
 
     render() {
-        const { inputStyle, bigButton, buttonText } = styles;
+        const { inputStyle, btnLogIn, txtButton } = styles;
         const { email, password } = this.state;
         return (
-            <View>
+            <View style={styles.main}>
+                <Text style={styles.label}>Email</Text>
                 <TextInput
                     style={inputStyle}
+                    underlineColorAndroid="white"
                     placeholder="Nhập email"
-                    value={email}
-                    onChangeText={text => this.setState({ email: text })}
+                    // value={email}
+                    // onChangeText={text => this.setState({ email: text })}
+                    onChangeText={(text)=>{this.validate(text,'email')}}
                 />
+                { !this.state.emailValidate &&( <Text style={styles.labelError}>Email không đúng định dạng</Text>) }
+                <Text style={styles.label}>Mật khẩu</Text>
                 <TextInput
                     style={inputStyle}
+                    underlineColorAndroid="white"
                     placeholder="Nhập mật khẩu"
-                    value={password}
-                    onChangeText={text => this.setState({ password: text })}
+                    // value={password}
+                    // onChangeText={text => this.setState({ password: text })}
+                    onChangeText={(text)=>this.validate(text,'password')}
                     secureTextEntry
                 />
+                 { !this.state.passwordValidate &&(<Text style={styles.labelError}>Password phải có độ dài tối thiểu là 6</Text>) }
                 <TouchableOpacity
-                    style={bigButton}
-                    onPress={() => this.onSignIn()}
+                    style={btnLogIn}
+                    onPress={() => this.clickSignIn()}
                     >
-                    <Text style={buttonText}>Đăng nhập ngay</Text>
+                    <Text style={txtButton}>Đăng nhập ngay</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -83,25 +112,39 @@ export default class SignIn extends Component {
 }
 
 const styles = StyleSheet.create({
+    main:{
+        paddingBottom:20,
+    },
     inputStyle: {
         height: 50,
         backgroundColor: '#fff',
-        marginBottom: 10,
+        marginBottom: 0,
+        marginTop:10,
         borderRadius: 20,
         paddingLeft: 30
     },
-    bigButton: {
+    btnLogIn: {
+        marginTop:20,
         height: 50,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
-    buttonText: {
+    txtButton: {
         fontFamily: 'Avenir',
         color: '#fff',
         fontWeight: '400',
+        fontSize: theme.Size.FontSmall,
+    },
+    label:{
+        color: theme.Color.White,
+        fontWeight: "900",
+        fontSize: theme.Size.FontMedium,
+    },
+    labelError:{
+        color: theme.Color.Green,
         fontSize: theme.Size.FontSmall,
     }
 });

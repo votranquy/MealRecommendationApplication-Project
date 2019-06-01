@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, Text, TouchableOpacity, Image, StyleSheet
+    View, Text, TouchableOpacity, Image, StyleSheet,ScrollView
 } from 'react-native';
 import theme from '../theme';
 import icBack from '../Image/back_white.png';
@@ -8,6 +8,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 export default class Authentication extends Component {
+
     constructor(props) {
         super(props);
         this.state = { isSignIn: true };
@@ -30,12 +31,13 @@ export default class Authentication extends Component {
         navigator.pop();
     }
     render() {
-        const {
+
+        const{
             row1, iconStyle, titleStyle,
             container, controlStyle,
             signInStyle, signUpStyle,
             activeStyle, inactiveStyle
-        } = styles;
+        }=styles;
 
         const { isSignIn } = this.state;
         const mainJSX = isSignIn ? <SignIn goBackToMain={this.goBackToMain.bind(this)} /> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
@@ -45,40 +47,51 @@ export default class Authentication extends Component {
                     <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
                         <Image source={icBack} style={iconStyle} />
                     </TouchableOpacity>
-                    <Text style={titleStyle}>Ăn Gì Hôm Nay?</Text>
+                    <Text style={titleStyle}>{isSignIn ? "Đăng nhập " : "Đăng kí"}</Text>
                     <View/>
                     {/* <Image source={icLogo} style={iconStyle} /> */}
                 </View>
-                {mainJSX}
-                <View style={controlStyle}>
-                    <TouchableOpacity style={signInStyle} onPress={this.signIn.bind(this)}>
-                        <Text style={!isSignIn ? activeStyle : inactiveStyle}>Đăng nhập</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={signUpStyle} onPress={this.signUp.bind(this)}>
-                        <Text style={isSignIn ? activeStyle : inactiveStyle}>Đăng kí</Text>
-                    </TouchableOpacity>
-                </View>
+                <ScrollView>
+                        <View style={controlStyle}>
+                            <TouchableOpacity style={signInStyle} onPress={this.signIn.bind(this)}>
+                                <Text style={!isSignIn ? activeStyle : inactiveStyle}>Đăng nhập</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={signUpStyle} onPress={this.signUp.bind(this)}>
+                                <Text style={isSignIn ? activeStyle : inactiveStyle}>Đăng kí</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.ctnInput}>
+                            {mainJSX}
+                        </View> 
+                </ScrollView>      
             </View>
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: theme.Color.NiceRed,
         padding: 20,
+        paddingBottom:0,
         justifyContent: 'space-between',
+    },
+    ctnmain:{
+        justifyContent: "space-between",
     },
     row1: { 
         flexDirection: 'row', 
         justifyContent: 'space-between', 
-        alignItems: 'center' 
+        alignItems: 'center',
+        paddingBottom:20,
     },
     titleStyle: { 
         color: '#FFF', 
         fontFamily: 'Avenir', 
         fontSize: theme.Size.FontMedium,
+        fontWeight:"900",
     },
     iconStyle: {
          width: 30, 
@@ -86,7 +99,12 @@ const styles = StyleSheet.create({
     },
     controlStyle: {
         flexDirection: 'row',
-        alignSelf: 'stretch'
+        alignSelf: 'stretch',
+        flex:8,
+        paddingBottom:20,
+    },
+    ctnInput:{
+        flex:2,
     },
     inactiveStyle: {
         color: '#D7D7D7'
@@ -112,6 +130,5 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         borderTopRightRadius: 20
     },
-    
 });
 

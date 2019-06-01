@@ -5,6 +5,7 @@ import {
   ListView,
   Image,
   TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import styles from "./styles";
 import getTopFoodApi from "../../api/getTopFoodApi";
@@ -15,8 +16,8 @@ export default class TopFood extends Component {
     this.state = {
       page:0,
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
-      mang:[],
-      isEndOfData: false,
+      isLoading:true,
+      isLoadingMore: false,
     }
   }
 
@@ -26,35 +27,20 @@ export default class TopFood extends Component {
   }
 
   componentDidMount(){
-    // try{
-    //   let response = await  fetch("http://192.168.43.103/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+this.state.page,
-    //   {method:"POST",
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Accept: 'application/json'
-    //   }
-    // });
-    // let responseJson = await response.json();
-    // this.setState({
-    //   mang : responseJson.data,
-    //   dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-    // });
-    // }catch(err) {
-    //     console.log("ERORORRRRRRRRRRRR");
-    //     this.setState({
-    //       dataSource: [],
-    //     });
-    // }
     getTopFoodApi(this.state.page)
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
             mang : responseJson.data,
-            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-          });
+            isLoading: false,
+            dataSource: this.state.dataSource.cloneWithRows(mang),
+            
+        });
+        // console.log(this.state.dataSource);
       }
       else{
         this.setState({
+          isLoading: false,
           dataSource: this.state.dataSource.cloneWithRows([]),
         })
       }
@@ -62,6 +48,7 @@ export default class TopFood extends Component {
     .catch(error=>{
       console.log('GETTOPFOOD_ERROR',error);
       this.setState({
+        isLoading: false,
         dataSource: this.state.dataSource.cloneWithRows([]),
       });
     });
@@ -98,50 +85,22 @@ export default class TopFood extends Component {
     }
   }
 
-  _onEndReached(){
-    // this.setState({isLoading:true,})
-    // fetch("http://192.168.43.103/MealRecommendationApplication-Project/api/topfood.php?pagenumber="+(this.state.page+1),
-    //   {
-    //     method:"POST",
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Accept: 'application/json'
-    //     },
-    //   })
-    // .then((response)=>response.json())
-    // .then((responseData)=>{
-    //   if(responseData.result === "success"){
-    //     this.setState({
-    //       // isLoading:false,
-    //       mang : this.state.mang.concat(responseData.data),
-    //       dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-    //       page: this.state.page+1,
-    //     });
-    //   }
-    //   else{
-    //     this.setState({ isEndOfData: true});
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    //   this.setState({
-    //     // isLoading:false,
-    //     dataSource: this.state.dataSource.cloneWithRows([]),
-    //   });
-    // });
-
+  loadMore(){
+    this.setState({isLoadingMore: true});
     nextpage = this.state.page +1;
     getTopFoodApi(nextpage)
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
             mang : this.state.mang.concat(responseJson.data),
+            isLoadingMore: false,
             dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
             page: this.state.page+1,
           });
       }
       else{
         this.setState({
+          isLoadingMore: false,
           dataSource: this.state.dataSource.cloneWithRows([]),
         })
       }
@@ -149,6 +108,7 @@ export default class TopFood extends Component {
     .catch(error=>{
       console.log('GETMORETOPFOOD_ERROR',error);
       this.setState({
+        isLoadingMore: false,
         dataSource: this.state.dataSource.cloneWithRows([]),
       });
     });
@@ -157,20 +117,21 @@ export default class TopFood extends Component {
 
   render() {
     const topfoodJSX=(
-        <ListView 
-          enableEmptySections
-          dataSource={this.state.dataSource}
-          renderRow={
-            (propertya) => this.createRow(propertya)
-          }
-          onEndReached={this._onEndReached.bind(this)}
-        />
-      );
-        return (
-          <View style={styles.container}>
-            {topfoodJSX}
-          </View>
-        );
+      <ListView 
+        enableEmptySections
+        dataSource={this.state.dataSource}
+        renderRow={(propertya) => this.createRow(propertya)}
+        onEndReached={this.loadMore.bind(this)}
+        onEndReachedThreshold={0.5}
+      />
+    );
+    const loadJSX=(<ActivityIndicator size={50} color="red" />);
+    return (
+      <View style={styles.container}>
+        {this.state.isLoading       ? loadJSX : topfoodJSX}
+        {this.state.isLoadingMore ? loadJSX : <View/>}
+      </View>
+    );
   }
 }
 

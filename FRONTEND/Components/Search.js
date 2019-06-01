@@ -29,9 +29,9 @@ export default class Search extends Component {
        searchApi(this.state.text)
        .then((responseData)=>{
           if(responseData.result === "success"){
-              // console.log(responseData);
-               this.setState({searchResut: this.state.searchResut.cloneWithRows(responseData.data),});
-               console.log("RESULT", this.state.searchResut);
+          // console.log(responseData);
+            this.setState({searchResut: this.state.searchResut.cloneWithRows(responseData.data),});
+            console.log("RESULT", this.state.searchResut);
           }
           else{ 
             this.setState({ searchResut: this.state.searchResut.cloneWithRows([]),});

@@ -359,7 +359,7 @@ export default class FoodDetail extends Component {
           showsButtons={true} 
           width={width} 
           height={height/5}
-          // loop={true}
+          loop={true}
           autoplay={true} 
           showsPagination={true}
         >

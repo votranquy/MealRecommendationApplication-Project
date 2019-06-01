@@ -43,7 +43,7 @@ export default class Trend extends Component {
 
 
   componentDidMount(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,
+    fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export default class Trend extends Component {
 
 
   _onEndReached(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+(this.state.page+1),
+    fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {

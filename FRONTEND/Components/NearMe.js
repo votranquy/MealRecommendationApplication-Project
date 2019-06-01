@@ -27,7 +27,7 @@ export default class NearMe extends Component {
     componentWillMount(){
         navigator.geolocation.getCurrentPosition(
             (position)=>{
-                // const location = JSON.stringify(position);
+                console.log(position);
                 this.setState({ 
                     region:{
                         latitude: position.coords.latitude,
@@ -41,30 +41,30 @@ export default class NearMe extends Component {
                     }
                  });
             },
-           (error) => alert(error.message),
-            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+           (error) => console.log('aaaaa',error),
+            {enableHighAccuracy: true, timeout: 60000, maximumAge: 3000 }
         )
 
-        getNearRestaurantApi(this.state.marker.latitude,this.state.marker.longitude)
-        .then(responseJsonNearRestaurant =>{
-          if(responseJsonNearRestaurant.result === "success"){
-            this.setState({
-              listRestaurant:  responseJsonNearRestaurant.data,
-            });
-            console.log("RESTAURANT",this.state.listRestaurant);
-          }else{
-            console.log('GETRESTAURANT_ERROR');
-            this.setState({
-                listRestaurant:[],
-            });
-          }
-        })
-        .catch(error=>{
-          console.log('ERROR',error);
-          this.setState({
-            listRestaurant:[],
-          });
-        });
+        // getNearRestaurantApi(this.state.marker.latitude,this.state.marker.longitude)
+        // .then(responseJsonNearRestaurant =>{
+        //   if(responseJsonNearRestaurant.result === "success"){
+        //     this.setState({
+        //       listRestaurant:  responseJsonNearRestaurant.data,
+        //     });
+        //     console.log("RESTAURANT",this.state.listRestaurant);
+        //   }else{
+        //     console.log('GETRESTAURANT_ERROR');
+        //     this.setState({
+        //         listRestaurant:[],
+        //     });
+        //   }
+        // })
+        // .catch(error=>{
+        //   console.log('ERROR',error);
+        //   this.setState({
+        //     listRestaurant:[],
+        //   });
+        // });
     }
 
     render() {
@@ -82,7 +82,7 @@ export default class NearMe extends Component {
                      pinColor={"pink"}
                   >
 
-                {this.state.listRestaurant.map(marker => (
+                {/* {this.state.listRestaurant.map(marker => (
                         <MapView.Marker 
                             coordinate={{        
                                 latitude: parseFloat(marker.latitude),
@@ -92,7 +92,7 @@ export default class NearMe extends Component {
                             description={marker.address}
                             key={marker.restaurant_id}
                         />
-                    ))}
+                    ))} */}
 
                   </MapView.Marker>
               </MapView>

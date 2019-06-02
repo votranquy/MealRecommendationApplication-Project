@@ -20,10 +20,10 @@ export default class NearMe extends Component {
     constructor(props){
         super(props);
         arrayMarkers=[
-            {
-                latitude:16.062313,
-                longitude: 108.217108
-            }
+            // {
+            //     latitude:16.062313,
+            //     longitude: 108.217108
+            // }
         ];
         this.state={
             listRestaurant:[],
@@ -37,6 +37,7 @@ export default class NearMe extends Component {
             marker:{
                 latitude:16.062313,
                 longitude: 108.217108,
+                idlocation: 0,
             }
         }
     }
@@ -55,6 +56,7 @@ export default class NearMe extends Component {
                     marker:{
                         latitude:  position.coords.latitude,
                         longitude: position.coords.longitude,
+                        idlocation: 0,
                     }
                  });
             },
@@ -65,24 +67,32 @@ export default class NearMe extends Component {
         getNearRestaurantApi(this.state.marker.latitude,this.state.marker.longitude)
         .then(responseJsonNearRestaurant =>{
           if(responseJsonNearRestaurant.result === "success"){
-
             // this.setState({
             // //   listRestaurant:  responseJsonNearRestaurant.data,
             // listRestaurant:LocationList,
             // });
-
-
             // console.log("RESTAURANT",this.state.listRestaurant);
             mang = responseJsonNearRestaurant.data;
+            console.log("RESTAURANT",mang);
             for(location of mang){
                 arrayMarkers.push({
                     latitude: parseFloat(location.latitude),
                     longitude: parseFloat(location.longitude),
+                    idlocation: location.id,
+                    food_name: location.food_name,
+                    rate:location.rate,
+                    address: location.address,
+                    image_path: location.image_path,
+                    category: location.category,
+                    restaurant_id: location.restaurant_id,
+                    name: location.name,
+                    image: location.image,
                 })
+
             }
             this.setState({markers: arrayMarkers});
 
-            console.log("RESTAURANT",this.state.markers);
+            // console.log("RESTAURANT",this.state.markers);
 
           }else{
             console.log('GETRESTAURANT_ERROR');
@@ -104,8 +114,12 @@ export default class NearMe extends Component {
         markers=[];
         for(marker of this.state.markers){
             markers.push(
-                <MapView.Marker title={'TOI'} 
+                <MapView.Marker 
                     coordinate={marker}
+                    title={marker.name}
+                    description={marker.address}
+                    key={marker.idlocation}
+                    image={theme.Image.iCon.RedFlag}
                 />
 
             )
@@ -124,12 +138,13 @@ export default class NearMe extends Component {
                     <MapView.Marker 
                         coordinate={this.state.marker} 
                         title={"Vị trí của bạn"} 
-                        // image={theme.Image.iCon.YourLocation}
+                        image={theme.Image.iCon.RedFlag}
                         pinColor={"pink"}
+                        key={this.state.marker.idlocation}
                     >
                     </MapView.Marker>
 
-                    <MapView.Marker 
+                    {/* <MapView.Marker 
                         coordinate={{        
                             latitude:16.062313,
                             longitude: 108.217108,
@@ -138,7 +153,7 @@ export default class NearMe extends Component {
                         // description={item.address}
                         // key={item.restaurant_id}
                     >
-                    </MapView.Marker>
+                    </MapView.Marker> */}
 
 
                 {/* {this.state.listRestaurant.map(marker =>(

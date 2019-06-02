@@ -18,6 +18,7 @@ export default class TopFood extends Component {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       isLoading:true,
       isLoadingMore: false,
+      mang:[],
     }
   }
 
@@ -33,7 +34,7 @@ export default class TopFood extends Component {
         this.setState({
             mang : responseJson.data,
             isLoading: false,
-            dataSource: this.state.dataSource.cloneWithRows(mang),
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
             
         });
         // console.log(this.state.dataSource);

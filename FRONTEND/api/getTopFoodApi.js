@@ -9,9 +9,9 @@ const getTopFoodApi =  (page) => (
               })
       )
       .then(res => {return res.json()})
-      .catch(error=>{
-        return "";
-      });
+      // .catch(error=>{
+      //   return "";
+      // });
 
  module.exports = getTopFoodApi;
       

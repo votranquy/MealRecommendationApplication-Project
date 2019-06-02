@@ -5,7 +5,7 @@ import  BookMarkView from './BookMarkView';
 import FoodDetail from './FoodDetail';
 import BookMarkList from './BookMarkList';
 import SaveBookmark from './SaveBookmark';
-
+import RestaurantDirection from "./RestaurantDirection";
 export default class BookMark extends Component {
     render() {
         // const { bookmarkArray } = this.props;
@@ -16,6 +16,7 @@ export default class BookMark extends Component {
                     switch (route.name) {
                         case 'BOOKMARK_VIEW': return <BookMarkView navigator={navigator} />;
                         case 'BOOKMARK_LIST' : return <BookMarkList  navigator={navigator} idbookmark={route.idbookmark}/>
+                        case "MAP"   :                  return( <RestaurantDirection           navigator={navigator}  location={route.location}                                                /> );
                         case "SAVE_BOOKMARK": return(<SaveBookmark navigator={navigator}     idfood={route.idfood}               />);
                         default: return <FoodDetail navigator={navigator} food={route.food}/>;
                     }

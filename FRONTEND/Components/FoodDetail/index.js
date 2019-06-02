@@ -14,16 +14,18 @@ import {
 } from 'react-native';
 import call from 'react-native-phone-call';
 import MapView from 'react-native-maps';
+import Polyline from '@mapbox/polyline';
 import Modal from 'react-native-modalbox';  
 import ActionButton from 'react-native-action-button';
 import Swiper from 'react-native-swiper';
 import theme from '../../theme';
+import MapViewDirections from 'react-native-maps-directions';
 import styles from "./styles";
 import getToken from '../../api/getToken';
 import getMenuApi from '../../api/getMenuApi';
 const {height , width} = Dimensions.get('window'); 
 
-
+const GOOGLE_MAPS_APIKEY="AIzaSyAG2BnUcY2mW5_VY8Q6cVEabhl9l_Rokkk";
 export default class FoodDetail extends Component {
   constructor(props){
     super(props);
@@ -36,7 +38,16 @@ export default class FoodDetail extends Component {
       picture: [],
       isLoaded: false,
       menu:[],
+      // latitude: null,
+      // longitude: null,
+      // error: null,
+      // concat: null,
+      // coords:[],
+      // x: 'false',
+      // cordLatitude:-6.23,
+      // cordLongitude:106.75,
       }
+      // this.mergeLot = this.mergeLot.bind(this);
   }
 
   goBack() {
@@ -47,6 +58,12 @@ export default class FoodDetail extends Component {
   gotoSaveBookmark(idfood){
     const {navigator} = this.props;
     navigator.push({name: "SAVE_BOOKMARK",idfood});
+  }
+
+
+  gotoMap(location){
+    const {navigator} = this.props;
+    navigator.push({name: "MAP",location});
   }
 
   getPicture() {  
@@ -201,11 +218,27 @@ export default class FoodDetail extends Component {
     })
   }
 
+// getLocation(){
+//   navigator.geolocation.getCurrentPosition(
+//     (position) => {
+//       this.setState({
+//         latitude: position.coords.latitude,
+//         longitude: position.coords.longitude,
+//         error: null,
+//       });
+//       this.mergeLot();
+//     },
+//     (error) => this.setState({ error: error.message }),
+//     { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
+//   );
+// }
+
   componentDidMount(){
     this.checkLogin();
     this.getPicture();	
     this.getMenu();
     this.getComment();
+    // this.getLocation();
     // this.getAllComment();    	
   }
 
@@ -227,19 +260,39 @@ export default class FoodDetail extends Component {
     );
   }
 
-  // commaSeparateNumber(val){
-  //   while (/(\d+)(\d{3})/.test(val.toString())){
-  //     val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-  //   }
-  //   return val;
-  // }
+  // mergeLot(){
+  //   if (this.state.latitude != null && this.state.longitude!=null)
+  //    {
+  //      let concatLot = this.state.latitude +","+this.state.longitude
+  //      this.setState({
+  //        concat: concatLot
+  //      }, () => {
+  //        this.getDirections(concatLot, "-6.270565,106.759550");
+  //      });
+  //    }
+  //  }
 
-  // formatVND(number){
-  //   string = String(number);
-  //   long = str.length;
-  //   display = str.substring(0, long-3) +","+str.substring(long-3,long);
-  //   return display;
-  // }
+//    async getDirections(startLoc, destinationLoc) {
+//     try {
+//         let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
+//         let respJson = await resp.json();
+//         let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
+//         let coords = points.map((point, index) => {
+//             return  {
+//                 latitude : point[0],
+//                 longitude : point[1]
+//             }
+//         })
+//         this.setState({coords: coords})
+//         this.setState({x: "true"})
+//         return coords
+//     } catch(error) {
+//       console.log('masuk fungsi')
+//         this.setState({x: "error"})
+//         return error
+//     }
+// }
+
 
   render() {
 
@@ -262,7 +315,7 @@ export default class FoodDetail extends Component {
         <View style={styles.lableMenu}>
               <Text style={styles.txtMenu}>Thông Tin Cửa Hàng</Text>
         </View>
-        <TouchableOpacity style={styles.ctnInfomationRow} onPress={() => this.refs.modal1.open()}>
+        <TouchableOpacity style={styles.ctnInfomationRow} onPress={() => this.gotoMap(this.props.food)}>
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteAdress}/>
           <Text style={styles.txtAddress} numberOfLines={1}>  {address}</Text>
         </TouchableOpacity>
@@ -277,54 +330,85 @@ export default class FoodDetail extends Component {
       </View>
     );
 
-    const mapJSX=(
-      <Modal
-            style={[styles.modal, styles.modal1]}
-            backdrop={true}
-            coverScreen={true}
-            ref={"modal1"}
-            backdropPressToClose={false}
-            swipeToClose={false}
-          >
-            <View style={styles.ctnMapView}>
-              <View/>
-              <View style={styles.ctnHeaderMap}>
-                <View style={styles.ctnCloseButton}></View>
-                <View style={styles.ctnHeaderText}>
-                  <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
-                </View>
-                <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
-                  <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-                </TouchableOpacity>
-              </View>
-              {/* <Text>{parseFloat(latitude)} {parseFloat(longitude)}</Text> */}
-              <View style={styles.ctnBodyMap}>
-              {
-                parseFloat(latitude) > 0 
-                ? <MapView
-                style={{flex:1,height:height, width:width,}}
-                initialRegion={{        
-                  latitude: parseFloat(latitude),
-                  longitude: parseFloat(longitude),
-                  latitudeDelta: 0.005,
-                  longitudeDelta: 0.005,}}>
-                <MapView.Marker 
-                  coordinate={{        
-                    latitude: parseFloat(latitude),
-                    longitude: parseFloat(longitude),
-                  }} 
-                  title={food_name} 
-                  description={address}
-                  pinColor={"pink"}
-                  >
-                  </MapView.Marker>
-              </MapView>
-              :<Text>Bản đồ hiện không khả dụng</Text>
-              } 
-              </View> 
-            </View>
-          </Modal>
-    );
+    // const mapJSX=(
+    //   <Modal
+    //         style={[styles.modal, styles.modal1]}
+    //         backdrop={true}
+    //         coverScreen={true}
+    //         ref={"modal1"}
+    //         backdropPressToClose={false}
+    //         swipeToClose={false}
+    //       >
+    //         <View style={styles.ctnMapView}>
+    //           <View/>
+    //           <View style={styles.ctnHeaderMap}>
+    //             <View style={styles.ctnCloseButton}></View>
+    //             <View style={styles.ctnHeaderText}>
+    //               <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+    //             </View>
+    //             <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
+    //               <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+    //             </TouchableOpacity>
+    //           </View>
+    //           {/* <Text>{parseFloat(latitude)} {parseFloat(longitude)}</Text> */}
+    //           <View style={styles.ctnBodyMap}>
+    //           {
+    //             parseFloat(latitude) > 0 
+    //             ? <MapView
+    //             style={{flex:1,height:height, width:width,}}
+    //             initialRegion={{        
+    //               latitude: parseFloat(latitude),
+    //               longitude: parseFloat(longitude),
+    //               latitudeDelta: 0.005,
+    //               longitudeDelta: 0.005,}}>
+    //             <MapView.Marker 
+    //               coordinate={{        
+    //                 latitude: parseFloat(latitude),
+    //                 longitude: parseFloat(longitude),
+    //               }} 
+    //               title={food_name} 
+    //               description={address}
+    //               pinColor={"pink"}
+    //               >
+    //               </MapView.Marker>
+
+    //               {!!this.state.latitude && !!this.state.longitude && <MapView.Marker
+    //                 coordinate={{"latitude":this.state.latitude,"longitude":this.state.longitude}}
+    //                 title={"Your Location"}
+    //               />}
+
+    //               {!!this.state.latitude && !!this.state.longitude && this.state.x == 'true' && <MapView.Polyline
+    //                           coordinates={this.state.coords}
+    //                           strokeWidth={2}
+    //                           strokeColor="red"/>
+    //               }
+
+    //               {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapView.Polyline
+    //                         coordinates={[
+    //                             {latitude: this.state.latitude, longitude: this.state.longitude},
+    //                             {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude},
+    //                         ]}
+    //                         strokeWidth={2}
+    //                         strokeColor="red"/>
+    //               }
+
+    //               {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapViewDirections
+    //               origin={{latitude:this.state.latitude,longitude:this.state.longitude}}
+    //               destination={{        
+    //                 latitude: parseFloat(latitude),
+    //                 longitude: parseFloat(longitude),
+    //               }} 
+    //               apikey={GOOGLE_MAPS_APIKEY}
+    //               />
+    //               }
+
+    //           </MapView>
+    //           :<Text>Bản đồ hiện không khả dụng</Text>
+    //           } 
+    //           </View> 
+    //         </View>
+    //       </Modal>
+    // );
 
     const saveJSX=(
       <Modal
@@ -543,7 +627,7 @@ export default class FoodDetail extends Component {
           textStyle={{fontSize: theme.Size.FontSmall}} 
           spaceBetween={5}
           textContainerStyle={{height:25}}       
-          onPress={() => this.refs.modal1.open()}>
+          onPress={() => this.gotoMap(this.props.food)}>
           <Image source={theme.Image.iCon.Earths} style={styles.iconActionButton}/>
         </ActionButton.Item>
 
@@ -576,7 +660,7 @@ export default class FoodDetail extends Component {
         <ScrollView style={styles.body} >
             {pictureJSX }
             {infomationJSX}
-            {mapJSX}
+            {/* {mapJSX} */}
             {bookmarkJSX}
             {menuJSX}
             {commentJSX}

@@ -45,8 +45,8 @@ export default class HomeView extends Component {
               tabBarTextStyle={{fontFamily: 'Roboto', fontSize: theme.Size.FontSmall, fontWeight:"300"}}
               renderTabBar={() => <TabBar underlineColor={theme.Color.Purple} />}
           >
-            <NearMe          tabLabel={{label: "Gần tôi"}}  navigator={this.props.navigator}/>
-            {/* <TopFood   tabLabel={{label: "Top"}} navigator={this.props.navigator}/> */}
+            {/* <NearMe          tabLabel={{label: "Gần tôi"}}  navigator={this.props.navigator}/> */}
+            <TopFood   tabLabel={{label: "Top"}} navigator={this.props.navigator}/>
             {/* <Random         tabLabel={{label: "Ngẫu nhiên"}}  navigator={this.props.navigator} /> */}
             
             {/* <Trend              tabLabel={{label: "Phổ biến"}}  navigator={this.props.navigator}/> */}

@@ -1,4 +1,3 @@
-//import liraries
 import React, { Component } from 'react';
 import { 
     View, 
@@ -7,15 +6,16 @@ import {
     StatusBar, 
     Dimensions, 
     Alert,
-    FlatList
+    FlatList,
+    TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
 import theme from "../theme";
+import Polyline from '@mapbox/polyline';
 import getNearRestaurantApi from "../api/getNearRestaurantApi";
 const {height , width} = Dimensions.get('window'); 
 
-
-const LocationList=[ {latitude:14.062314,longitude: 109.217108 }, {latitude:14.06239,longitude: 109.217108}]
+// const LocationList=[ {latitude:14.062314,longitude: 109.217108 }, {latitude:14.06239,longitude: 109.217108}]
 export default class NearMe extends Component {
     constructor(props){
         super(props);
@@ -38,9 +38,16 @@ export default class NearMe extends Component {
                 latitude:16.062313,
                 longitude: 108.217108,
                 idlocation: 0,
-            }
+            },
         }
     }
+
+
+    gotoDetail(food){
+        const {navigator} = this.props;
+        navigator.push({name: "FOOD_DETAIL",food});
+    }
+
 
     componentWillMount(){
         navigator.geolocation.getCurrentPosition(
@@ -120,7 +127,19 @@ export default class NearMe extends Component {
                     description={marker.address}
                     key={marker.idlocation}
                     image={theme.Image.iCon.RedFlag}
-                />
+                    // showCallout
+                    // onPress={() => this.gotoDetail(marker)}
+                    onCalloutPress={()=> this.gotoDetail(marker)}
+                >
+                    {/* <TouchableOpacity 
+                    activeOpacity={0.8}  
+                    onPress={() => this.gotoDetail(marker)}
+                    style={styles.click}
+                    >
+                        <Text>Click</Text>
+                    </TouchableOpacity> */}
+                        
+                </MapView.Marker>
 
             )
         }
@@ -239,6 +258,9 @@ const styles = StyleSheet.create({
         borderColor:"red",
         borderWidth:1,
     },
+    click:{
+        backgroundColor:"green",
+    }
 });
 
 

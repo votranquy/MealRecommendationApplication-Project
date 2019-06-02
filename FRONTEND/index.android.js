@@ -11,6 +11,7 @@ import App from './Components/App';
 // import theme from "./theme";
 // import LocationA from "./Components/LocationA";
 // import Example from "./Components/direction";
+import Example from "./Components/ConfirmCode";
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
@@ -21,7 +22,7 @@ export default class MealRecommendationApplicationProject extends Component {
           translucent = {false}
           networkActivityIndicatorVisible = {true}
           backgroundColor="#da5350"/>
-       <App/>
+       <Example/>
       </View>
     );
   }

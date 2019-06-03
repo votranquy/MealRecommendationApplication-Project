@@ -8,7 +8,9 @@ import {
   ActivityIndicator
 } from 'react-native';
 import styles from "./styles";
-import getTopFoodApi from "../../api/getTopFoodApi";
+import getTopFoodApi from "../../api/getTopFoodApi";     //Nolocation
+import getTopFoodApi2 from "../../api/getTopFoodApi2"; //Location
+import getLocation from "../../api/getLocation";
 
 export default class TopFood extends Component {
   constructor(props){
@@ -19,6 +21,7 @@ export default class TopFood extends Component {
       isLoading:true,
       isLoadingMore: false,
       mang:[],
+      region:{},
     }
   }
 
@@ -28,9 +31,21 @@ export default class TopFood extends Component {
   }
 
   componentDidMount(){
-    getTopFoodApi(this.state.page)
+
+    getLocation()
+    .then(region => {
+
+      this.setState({region});
+
+      if(region===""){return getTopFoodApi(this.state.page)}
+      else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+      // console.log("STATE_LAT",this.state.region.latitude);
+      // console.log("STATE_LONG",this.state.region.longitude);
+     })
     .then((responseJson)=>{
+      // console.log("RESPONSE",responseJson);
       if(responseJson.result==="success"){
+        // console.log("SUCCESS",responseJson);
         this.setState({
             mang : responseJson.data,
             isLoading: false,
@@ -38,6 +53,7 @@ export default class TopFood extends Component {
         });
       }
       else{
+        console.log("NOT SUCCESS");
         this.setState({
           isLoading: false,
           dataSource: this.state.dataSource.cloneWithRows([]),
@@ -87,7 +103,13 @@ export default class TopFood extends Component {
   loadMore(){
     this.setState({isLoadingMore: true});
     nextpage = this.state.page +1;
-    getTopFoodApi(nextpage)
+
+    getLocation()
+    .then(region => {
+      this.setState({region});
+      if(region===""){return getTopFoodApi(this.state.page)}
+      else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+     })
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({

@@ -153,6 +153,10 @@ export default StyleSheet.create({
     flex:5,
     padding:3,
   },
+  ctnInfomationItem2:{
+    flex:7,
+    padding:3,
+  },
   ctnHeartIcon:{
     flex:2,
     padding:0,

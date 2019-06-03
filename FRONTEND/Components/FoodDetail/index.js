@@ -38,7 +38,7 @@ export default class FoodDetail extends Component {
       picture: [],
       isLoaded: false,
       menu:[],
-
+      phonenumber : `${"09"}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`,
       }
   }
 
@@ -79,7 +79,7 @@ export default class FoodDetail extends Component {
           picture: responseJsoni.ListPicture,
           isLoading: false,
         });
-        console.log("IMAGE",this.state.picture);
+        // console.log("IMAGE",this.state.picture);
       }else{
         console.log('IMAGE_NULL');
         this.setState({
@@ -166,6 +166,9 @@ export default class FoodDetail extends Component {
     })
   }
 
+  increaseView(){
+    
+  }
 
   componentDidMount(){
     this.checkLogin();
@@ -175,14 +178,14 @@ export default class FoodDetail extends Component {
   	
   }
 
-  callTheRestaurant(){
+  callTheRestaurant(phonenumber){
     const args = {
-      number: '0369380628',
+      number: this.state.phonenumber,
       prompt: false,
     }
     Alert.alert(
       'Liên lạc',
-      'Gọi đến số điện thoại này?',
+      'Xác nhận gọi đến của hàng này',
       [
         {
           text: 'Hủy bỏ', onPress: () => console.log('Cancel Pressed'), style: 'cancel',
@@ -193,10 +196,12 @@ export default class FoodDetail extends Component {
     );
   }
 
+  // getNumber(){
+  //   return("09"+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString());
+  // }
 
 
   render() {
-
     const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
     
     const headerJSX=(
@@ -224,9 +229,9 @@ export default class FoodDetail extends Component {
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteHouse}/>
           <Text style={styles.txtCategory}>  { category.substring(0,category.length-2) }</Text>
         </View>
-        <TouchableOpacity style={styles.ctnInfomationRow}  onPress={this.callTheRestaurant}>
-        <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteSmartPhone}/>
-          <Text style={styles.txtPhoneNumber}>  0369380628  {restaurant_id}</Text>
+        <TouchableOpacity style={styles.ctnInfomationRow}  onPress={()=>this.callTheRestaurant(this.state.phonenumber)}>
+         <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteSmartPhone}/>
+          <Text style={styles.txtPhoneNumber}>  {this.state.phonenumber}  </Text>
         </TouchableOpacity>
       </View>
     );
@@ -385,19 +390,26 @@ export default class FoodDetail extends Component {
               }
             </View>
 
-            <View  style={styles.ctnInfomationItem}>
-              <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-              <Text style={styles.txtPrice}>{String(item.price)} đ {item.food_id}</Text>
-            </View>
+
               { this.state.isLogin ?
+              <View>
+                <View  style={styles.ctnInfomationItem}>
+                  <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+                  <Text style={styles.txtPrice}>{String(item.price)} đ {item.food_id}</Text>
+              </View>
                 <View style={styles.ctnHeartIcon}>
                   <View/>
                   <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
                     <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
                   </TouchableOpacity>
                   <View/>
-                </View> :
-                <View/>
+                </View>
+                </View>
+                 :
+            <View  style={styles.ctnInfomationItem2}>
+                 <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+                 <Text style={styles.txtPrice}>{String(item.price)} đ</Text>
+             </View>
               }
 
 

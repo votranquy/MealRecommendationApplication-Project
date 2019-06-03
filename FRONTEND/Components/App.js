@@ -6,6 +6,10 @@ import ChangeInfo from './ChangeInfo';
 import Main from './Main';
 import Welcome from './Welcome';
 import ConfirmCode from "./ConfirmCode";
+import saveLat from "../api/saveLat";
+import saveLong from "../api/saveLong";
+import saveLocation from "../api/saveLocation";
+
 export default class    App extends Component {
     // componentDidMount() {
     //     //var start = Math.random( ) * (900000 - 600000) + 600000;
@@ -41,7 +45,7 @@ export default class    App extends Component {
     //                     rate=responseJson.reply.delivery_detail.rating.avg;
     //                     totalReview=responseJson.reply.delivery_detail.rating.total_review;
     //                     first_image=responseJson.reply.delivery_detail.photos[1].value;
-    //                     fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/saveData.php',
+    //                     fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/saveData.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -81,7 +85,7 @@ export default class    App extends Component {
     //                         for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
     //                         menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
     //                     }
-    //                     fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/updateMenu.php',
+    //                     fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/updateMenu.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -99,6 +103,50 @@ export default class    App extends Component {
     //         .catch(err => console.log(err));
     //    }
     // }
+
+    constructor(props){
+        super(props);
+        this.state={
+            region:{
+                // latitude: 16.0533335,
+                // longitude: 108.2177182,
+                latitude: 0,
+                longitude: 0,
+                latitudeDelta:0.01,
+                longitudeDelta:0.01,
+            },
+        }
+    }
+
+componentDidMount(){
+    navigator.geolocation.getCurrentPosition(
+        (position)=>{
+            console.log("GET_LOCATION_SUCCESS");
+            this.setState({ 
+                region:{
+                    latitude: position.coords.latitude,
+                    longitude:  position.coords.longitude,
+                    latitudeDelta:0.1,
+                    longitudeDelta:0.1,
+                },
+             });
+             saveLocation(this.state.region);
+            //  saveLat(position.coords.latitude);
+            //  saveLong( position.coords.longitude);
+        },
+       (error) => {
+        console.log("GET_LOCATION_FAIL",error);
+        // saveLocation(this.state.region);
+        // saveLat("");
+        // saveLong("");
+       },
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    )
+
+
+}
+
+
 
     render() {
         return (

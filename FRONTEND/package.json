@@ -11,6 +11,7 @@
 		"accordion-collapse-react-native": "^0.1.9",
 		"axios": "^0.18.0",
 		"i18next": "^15.1.0",
+		"lottie-react-native": "^2.5.11",
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.43.0",
 		"react-native-action-button": "^2.8.5",

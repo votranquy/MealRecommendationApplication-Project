@@ -4,14 +4,14 @@
 $obj = json_decode($json, true);
 // $yourlatitude  = floatval($obj['yourlatitude']);
 // $yourlongitude = floatval($obj['yourlongitude']);
-function getDistance($longA, $latA) //, $longB, $latB
-{
-    $loA = floatval($longA);
-    $laA = floatval($latA);
-    $loB = floatval($GLOBALS['yourlatitude']);
-    $laB = floatval($GLOBALS['yourlongitude']); 
-    return(abs( sqrt( pow(($loA-$loB),2) - pow(($laA-$laB),2)  ) ));
-}
+// function getDistance($longA, $latA) //, $longB, $latB
+// {
+//     $loA = floatval($longA);
+//     $laA = floatval($latA);
+//     $loB = floatval($GLOBALS['yourlatitude']);
+//     $laB = floatval($GLOBALS['yourlongitude']); 
+//     return(abs( sqrt( pow(($loA-$loB),2) - pow(($laA-$laB),2)  ) ));
+// }
 
 $yourlatitude  = $obj['yourlatitude'];
 $yourlongitude = $obj['yourlongitude'];

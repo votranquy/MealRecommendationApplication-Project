@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import styles from "./styles";
 import getRandomFoodApi from "../../api/getRandomFoodApi";
+import getRandomFoodApi2 from "../../api/getRandomFoodApi2";
+import getLocation from "../../api/getLocation";
+
 
 export default class Random extends Component {
   constructor(props){
@@ -19,6 +22,7 @@ export default class Random extends Component {
       isLoading:true,
       isLoadingMore: false,
       mang:[],
+      region:{},
     }
   }
 
@@ -28,15 +32,23 @@ export default class Random extends Component {
   }
 
   componentDidMount(){
-    getRandomFoodApi(this.state.page)
+
+    getLocation()
+    .then(region => {
+      this.setState({region});
+      if(region===""){return getRandomFoodApi(this.state.page)}
+      else{  return getRandomFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+     })
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
             mang : responseJson.data,
+            isLoading: false,
             dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
           });
       }
       else{
+        console.log("NOT SUCCESS");
         this.setState({
           isLoading: false,
           dataSource: this.state.dataSource.cloneWithRows([]),
@@ -84,8 +96,14 @@ export default class Random extends Component {
   }
 
   _onEndReached(){
+    this.setState({isLoadingMore: true});
     nextpage = this.state.page +1;
-    getRandomFoodApi(nextpage)
+    getLocation()
+    .then(region => {
+      this.setState({region});
+      if(region===""){return getRandomFoodApi(this.state.page)}
+      else{  return getRandomFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+     })
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({

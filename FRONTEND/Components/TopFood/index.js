@@ -34,18 +34,12 @@ export default class TopFood extends Component {
 
     getLocation()
     .then(region => {
-
       this.setState({region});
-
       if(region===""){return getTopFoodApi(this.state.page)}
       else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
-      // console.log("STATE_LAT",this.state.region.latitude);
-      // console.log("STATE_LONG",this.state.region.longitude);
      })
     .then((responseJson)=>{
-      // console.log("RESPONSE",responseJson);
       if(responseJson.result==="success"){
-        // console.log("SUCCESS",responseJson);
         this.setState({
             mang : responseJson.data,
             isLoading: false,

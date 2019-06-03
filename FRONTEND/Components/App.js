@@ -131,21 +131,15 @@ componentDidMount(){
                 },
              });
              saveLocation(this.state.region);
-            //  saveLat(position.coords.latitude);
-            //  saveLong( position.coords.longitude);
         },
        (error) => {
         console.log("GET_LOCATION_FAIL",error);
-        // saveLocation(this.state.region);
-        // saveLat("");
-        // saveLong("");
        },
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     )
 
 
 }
-
 
 
     render() {

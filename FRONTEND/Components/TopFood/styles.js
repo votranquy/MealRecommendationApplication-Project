@@ -23,8 +23,10 @@ export default StyleSheet.create({
   },
   image:{
     flex:1,
-    width: '100%',
-    height: 'auto',
+    // width: '100%',
+    // height: 'auto',
+    width: width/4,
+    height: height/10,
   },
   ctnInfomation:{
     flex:0.7,

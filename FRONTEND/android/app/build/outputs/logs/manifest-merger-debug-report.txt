@@ -96,7 +96,7 @@ ADDED from /home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/an
 	android:label
 		ADDED from /home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:26:9-41
 	android:windowSoftInputMode
-		ADDED from /home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:28:9-51
+		ADDED from /home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:28:9-48
 	android:configChanges
 		ADDED from /home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/src/main/AndroidManifest.xml:27:9-79
 	android:name

@@ -15,7 +15,6 @@ export default class Authentication extends Component {
         super(props);
         this.state = { 
             isSignIn: true,
-            isModalVisible: false, 
         };
     }
 
@@ -56,7 +55,6 @@ closeLoading(){
 
 
     render() {
-
         const{
             row1, iconStyle, titleStyle,
             container, controlStyle,

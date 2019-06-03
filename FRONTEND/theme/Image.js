@@ -35,6 +35,8 @@ const Image = {
     Menu:            require('../Image/whitemenu.png'),
     RedFlag:        require('../Image/redflag.png'),
     YourLocation:  require('../Image/YourLocation.png'),
+    WhiteSearch: require("../Image/whitesearch.png"),
+    WhiteSetting: require("../Image/whitesetting.png"),
   },
 
   Bg: {

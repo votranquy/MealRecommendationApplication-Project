@@ -35,9 +35,7 @@ export default class TopFood extends Component {
             mang : responseJson.data,
             isLoading: false,
             dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-            
         });
-        // console.log(this.state.dataSource);
       }
       else{
         this.setState({

@@ -6,15 +6,16 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import styles from "./styles";
-import getRandomFoodApi from "../../api/getRandomFoodApi";
-
-export default class Random extends Component {
+import getTrendFoodApi from "../../api/getTrendFoodApi";
+export default class Trend extends Component {
   constructor(props){
     super(props);
     this.state = {
       page:0,
+      mang:[],
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       isLoading:true,
       isLoadingMore: false,
@@ -27,8 +28,10 @@ export default class Random extends Component {
     navigator.push({name: "FOOD_DETAIL",food});
   }
 
+
+
   componentDidMount(){
-    getRandomFoodApi(this.state.page)
+    getTrendFoodApi(this.state.page)
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
@@ -53,6 +56,7 @@ export default class Random extends Component {
   }
 
 
+  
   createRow(property){
     if(property.food_name == "");
     else{
@@ -82,10 +86,12 @@ export default class Random extends Component {
       );
     }
   }
+  
+
 
   _onEndReached(){
     nextpage = this.state.page +1;
-    getRandomFoodApi(nextpage)
+    getTrendFoodApi(nextpage)
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
@@ -112,8 +118,9 @@ export default class Random extends Component {
   }
 
 
+
   render() {
-    const randomfoodJSX=(
+    const trendfoodJSX=(
         <ListView 
           enableEmptySections
           dataSource={this.state.dataSource}
@@ -128,11 +135,9 @@ export default class Random extends Component {
         return (
           <View style={styles.container}>
             {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}
-            {randomfoodJSX}
+            {trendfoodJSX}
             {this.state.isLoadingMore ? loadJSX : <View/>}
           </View>
         );
   }
 }
-
-

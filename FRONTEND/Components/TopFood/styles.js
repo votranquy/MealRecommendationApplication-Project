@@ -20,7 +20,6 @@ export default StyleSheet.create({
   ctnImage:{
     flex:0.3,
     padding:1,
-    // borderRadius: 100
   },
   image:{
     flex:1,
@@ -42,7 +41,6 @@ export default StyleSheet.create({
     fontSize: theme.Size.FontSmall,
     alignItems: 'center',
     fontWeight:"100",
-    // margin: theme.Size.TextMargin,
   },
   txtRate:{
     color: theme.Color.NiceRed,
@@ -71,6 +69,5 @@ export default StyleSheet.create({
   textFood:{
     color: theme.Color.Orange,
     fontSize: theme.Size.FontMedium,
-    // alignItems: 'center',
   }
 });

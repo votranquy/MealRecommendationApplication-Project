@@ -1,37 +1,28 @@
-//Scroll down to move to the next page
-// Home:  10.10.31.41
-// Company: 10.10.31.214
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   ListView,
   Image,
-  RefreshControl,
-  ScrollView,
   TouchableOpacity,
-  Alert,
-  Dimensions
+  ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
-import Header from "./Header";
-import ScrollMenu from "./ScrollMenu";
-import theme from '../theme';
-const {height , width} = Dimensions.get('window'); 
+// import styles from "./styles";
+import theme from "../theme";
+import getTrendFoodApi from "../api/getTrendFoodApi";
+import getRandomFoodApi from "../api/getRandomFoodApi";
 
 export default class Trend extends Component {
-
   constructor(props){
     super(props);
     this.state = {
       page:0,
       mang:[],
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
-      //currentTab:"HOTFOOD",
-      //refreshing:false,
-
+      isLoading:true,
+      isLoadingMore: false,
+      mang:[],
     }
   }
 
@@ -43,26 +34,32 @@ export default class Trend extends Component {
 
 
   componentDidMount(){
-    fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,
-      {method:"POST",
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
+    getTrendFoodApi(this.state.page)
+    .then((responseJson)=>{
+      if(responseJson.result==="success"){
+        this.setState({
+            mang : responseJson.data,
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+          });
+      }
+      else{
+        this.setState({
+          isLoading: false,
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        })
       }
     })
-    .then((response)=>response.json())
-    .then((responseData)=>{
-      mang = responseData;
+    .catch(error=>{
+      console.log('GETRANDOMFOOD_ERROR',error);
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(mang),
+        isLoading: false,
+        dataSource: this.state.dataSource.cloneWithRows([]),
       });
-    })
-    .catch((error) => {
-      console.error(error);
     });
   }
 
 
+  
   createRow(property){
     if(property.food_name == "");
     else{
@@ -72,9 +69,12 @@ export default class Trend extends Component {
         onPress={() => this.gotoDetail(property)} 
         key={property.id} style={styles.ctnRestaurant}>
         <View style={styles.ctnImage} >
-          <Image style={styles.image} source={{uri: property.image_path}} />
+          <Image style={styles.image} source={{uri: "http:"+property.image}} />
         </View>
         <View style={styles.ctnInfomation}>
+          <View style={styles.cntText}>
+            <Text style={styles.textFood} numberOfLines={1}>{property.name }</Text>
+          </View>
           <View style={styles.cntText}>
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
@@ -83,10 +83,6 @@ export default class Trend extends Component {
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
-          </View>
-          <View style={styles.ctnFood} >
-            <Image style={styles.imageFood} source={{uri: "http:"+property.image}}/>
-            <Text style={styles.textFood} numberOfLines={1}>{property.name}</Text>
           </View>
         </View>  
       </TouchableOpacity>
@@ -97,62 +93,55 @@ export default class Trend extends Component {
 
 
   _onEndReached(){
-    fetch("http://10.0.12.57/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+(this.state.page+1),
-      {
-        method:"POST",
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-      })
-    .then((response)=>response.json())
-    .then((responseData)=>{
-      if(responseData.length != 0){
-        mang = mang.concat(responseData);
+    nextpage = this.state.page +1;
+    getRandomFoodApi(nextpage)
+    .then((responseJson)=>{
+      if(responseJson.result==="success"){
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(mang),
-          page: this.state.page+1
-        });
+            mang : this.state.mang.concat(responseJson.data),
+            isLoadingMore: false,
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+            page: this.state.page+1,
+          });
       }
       else{
-          Alert.alert(
-            'Alert Title',
-            'End of Page',
-            [
-              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            {cancelable: false},
-          );
+        this.setState({
+          isLoadingMore: false,
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        })
       }
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(error=>{
+      console.log('GETMORERANDOMFOOD_ERROR',error);
+      this.setState({
+        isLoadingMore: false,
+        dataSource: this.state.dataSource.cloneWithRows([]),
+      });
     });
   }
 
 
 
   render() {
-    return (
-      <View style={styles.container}>
-        <View>
-          <ListView 
-            enableEmptySections
-            dataSource={this.state.dataSource}
-            renderRow={
-              (propertya) => this.createRow(propertya)
-            }
-            onEndReached={this._onEndReached.bind(this)}
-          />
-        </View>
-      </View>
-    );
+    const trendfoodJSX=(
+        <ListView 
+          enableEmptySections
+          dataSource={this.state.dataSource}
+          renderRow={
+            (propertya) => this.createRow(propertya)
+          }
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={0.5}
+        />
+      );
+      const loadJSX=(<ActivityIndicator size={50} color="red" />);
+        return (
+          <View style={styles.container}>
+            {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}
+            {trendfoodJSX}
+            {this.state.isLoadingMore ? loadJSX : <View/>}
+          </View>
+        );
   }
 }
 

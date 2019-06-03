@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import {
-    View, Text, TouchableOpacity, Image, StyleSheet,ScrollView
+    View, Text, TouchableOpacity, Image, StyleSheet,ScrollView, Button
 } from 'react-native';
 import theme from '../theme';
 import icBack from '../Image/back_white.png';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+// import LottieView from 'lottie-react-native';
+import Modal from "react-native-modalbox";
 
 export default class Authentication extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { isSignIn: true };
+        this.state = { 
+            isSignIn: true,
+            isModalVisible: false, 
+        };
     }
+
+
+    toggleModal() {
+        this.refs.modal2.open();
+      }
 
     gotoSignIn() {
         this.setState({ isSignIn: true });
@@ -30,6 +40,21 @@ export default class Authentication extends Component {
         const { navigator } = this.props;
         navigator.pop();
     }
+
+    gotoConfirmCode(email) {
+        const { navigator } = this.props;
+        navigator.push({ name: 'CONFIRMATION_CODE',email });
+    } 
+
+openLoading(){
+    this.refs.modal2.open();
+}
+closeLoading(){
+    this.refs.modal2.close()
+}
+
+
+
     render() {
 
         const{
@@ -39,8 +64,26 @@ export default class Authentication extends Component {
             activeStyle, inactiveStyle
         }=styles;
 
+
+        const LoadJSX=(
+            <Modal
+            style={[styles.modal, styles.modal2]}
+            backdrop={true}
+            coverScreen={true}
+            ref={"modal2"}
+          >
+          <View style={styles.ctnMapView}>
+                    {/* <LottieView source={require("../Image/Animotion/search/data.json")} autoPlay loop /> */}
+            </View>
+          </Modal>
+          );
+
         const { isSignIn } = this.state;
-        const mainJSX = isSignIn ? <SignIn goBackToMain={this.goBackToMain.bind(this)} /> : <SignUp gotoSignIn={this.gotoSignIn.bind(this)} />;
+        const mainJSX = isSignIn ? 
+        <SignIn goBackToMain={this.goBackToMain.bind(this)}  gotoConfirmCode={this.gotoConfirmCode.bind(this)}/> : 
+        <SignUp gotoSignIn={this.gotoSignIn.bind(this)} gotoConfirmCode={this.gotoConfirmCode.bind(this)} 
+        openLoad={this.openLoading.bind(this)} closeLoad={this.closeLoading.bind(this)}
+         />;
         return (
             <View style={container}>
                 <View style={row1}>
@@ -49,8 +92,8 @@ export default class Authentication extends Component {
                     </TouchableOpacity>
                     <Text style={titleStyle}>{isSignIn ? "Đăng nhập " : "Đăng kí"}</Text>
                     <View/>
-                    {/* <Image source={icLogo} style={iconStyle} /> */}
                 </View>
+                {LoadJSX}
                 <ScrollView>
                         <View style={controlStyle}>
                             <TouchableOpacity style={signInStyle} onPress={this.signIn.bind(this)}>
@@ -60,9 +103,12 @@ export default class Authentication extends Component {
                                 <Text style={isSignIn ? activeStyle : inactiveStyle}>Đăng kí</Text>
                             </TouchableOpacity>
                         </View>
+
                         <View style={styles.ctnInput}>
                             {mainJSX}
                         </View> 
+
+                       
                 </ScrollView>      
             </View>
         );

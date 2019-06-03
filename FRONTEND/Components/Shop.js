@@ -13,6 +13,7 @@ import UserMenu from "./UserMenu";
 import Home from "./Home";
 import BookMark from "./BookMark";
 import Search from "./Search";
+import NearMe from "./NearMe";
 import initData from "../api/initData";
 import getBookMark from "../api/getBookMark";
 import saveBookMark from "../api/saveBookMark";
@@ -53,6 +54,18 @@ export default class Shop extends Component{
             >
             <Home open={this.props.open}/>
           </TabNavigator.Item>
+
+          {/* <TabNavigator.Item
+            selected={this.state.selectedTab === 'category'}
+            title="Khám phá"
+            renderIcon={() => <Image source={require("../Image/whitecategory.png")} style={styles.imageStyle}/>}
+            renderSelectedIcon={() => <Image source={require("../Image/redcategory.png")} style={styles.imageStyle} />}
+            onPress={() => this.setState({ selectedTab: 'category' })}
+            selectedTitleStyle={{ color: theme.Color.Red, fontFamily: 'Avenir', }}
+            >
+            <NearMe/>
+          </TabNavigator.Item> */}
+
 
           <TabNavigator.Item
             selected={this.state.selectedTab === 'search'}

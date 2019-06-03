@@ -129,7 +129,8 @@ export default class TopFood extends Component {
     const loadJSX=(<ActivityIndicator size={50} color="red" />);
     return (
       <View style={styles.container}>
-        {this.state.isLoading       ? loadJSX : topfoodJSX}
+        {this.state.isLoading       ?  loadJSX : <View/>} 
+        {topfoodJSX}
         {this.state.isLoadingMore ? loadJSX : <View/>}
       </View>
     );

@@ -25,14 +25,42 @@ export default class SignIn extends Component {
         };
     }
 
+    removeEmail(){
+        this.setState({
+            email: '',
+            password: '',
+        })
+    }
    
     onSignIn() { 
         const { email, password } = this.state;
         signIn(email, password)
         .then(responseJson=>{
-            global.onSignIn(responseJson.user);
-            saveToken(responseJson.token); 
-            this.props.goBackToMain();
+            if(responseJson.result=="success"){
+                global.onSignIn(responseJson.user);
+                saveToken(responseJson.token); 
+                this.props.goBackToMain();
+            }
+            if(responseJson.result=="fail"){
+                Alert.alert(
+                    'Lỗi',
+                    'Thông tin đăng nhập không chính xác',
+                    [
+                        { text: 'OK', onPress: () =>this.setState({ email: '', password: '' })  }
+                    ],
+                    { cancelable: false }
+                );
+            }
+            if(responseJson.result=="notactive"){
+                Alert.alert(
+                    'Thông báo',
+                    'Bạn chưa xác thực tài khoản. Vui lòng nhập mã xác thực gửi đến email!',
+                    [
+                        { text: 'OK', onPress: () =>  this.props.gotoConfirmCode(this.state.email) }
+                    ],
+                    { cancelable: false }
+                );
+            }
         })
         .catch(err => console.log(err));
     }

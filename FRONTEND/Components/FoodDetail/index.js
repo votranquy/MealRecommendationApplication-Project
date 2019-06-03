@@ -38,16 +38,8 @@ export default class FoodDetail extends Component {
       picture: [],
       isLoaded: false,
       menu:[],
-      // latitude: null,
-      // longitude: null,
-      // error: null,
-      // concat: null,
-      // coords:[],
-      // x: 'false',
-      // cordLatitude:-6.23,
-      // cordLongitude:106.75,
+
       }
-      // this.mergeLot = this.mergeLot.bind(this);
   }
 
   goBack() {
@@ -103,43 +95,6 @@ export default class FoodDetail extends Component {
         isLoading: false, 
       });
     });
-
-  //ListView
-  // const { restaurant_id} = this.props.food;
-  // console.log("GET_RESTAURANT_ID"+ restaurant_id);
-  // const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
-  // fetch(URLi,
-  //   {
-  //     method:"GET",
-  //     headers: {
-  //             Accept: 'application/json, text/plain, */*',
-  //             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-  //             'x-requested-with' : 'XMLHttpRequest'
-  //     }
-  // })
-  // .then(responsei => responsei.json())
-  // .then(responseJsoni=>{
-  //   if(responseJsoni.ListPicture.length !== 0){
-  //     console.log('IMAGE_WORK');
-  //     this.setState({
-  //       picture: responseJsoni.ListPicture,
-  //       isLoading: false,
-  //     });
-  //   }else{
-  //     console.log('IMAGE_NULL');
-  //     this.setState({
-  //       picture: [],
-  //       isLoading: false,
-  //     });
-  //   }
-  // })	
-  // .catch(error=>{
-  //   console.log('IMAGE_ERROR',error);
-  //   this.setState({
-  //     picture:[],
-  //     isLoading: false, 
-  //   });
-  // });
   }
 
   getComment(){
@@ -162,14 +117,11 @@ export default class FoodDetail extends Component {
         console.log('COMMENT_WORK');
         this.setState({
           comment: this.state.comment.cloneWithRows(responseJsons.Items),
-          // isLoading: false,
         });
-        // console.log("COMMENT",this.state.comment);
       }else{
         console.log('COMMENT_NULL');
         this.setState({
           comment: this.state.comment.cloneWithRows([]),
-          // isLoading: false,
         });
       }
     })	
@@ -177,7 +129,6 @@ export default class FoodDetail extends Component {
       console.log('COMMENT_ERROR',error);
       this.setState({
         comment:  this.state.comment.cloneWithRows([]),
-        // isLoading: false, 
       });
     });
   }
@@ -190,14 +141,11 @@ export default class FoodDetail extends Component {
         console.log('MENU_WORK');
         this.setState({
           menu: responseJsonMenu.data,
-          // isLoading: false,
         });
-        // console.log("ME_NU",this.state.menu);
       }else{
         console.log('MENU_ERROR');
         this.setState({
           menu:[],
-          // isLoading: false,
         });
       }
     })
@@ -218,28 +166,13 @@ export default class FoodDetail extends Component {
     })
   }
 
-// getLocation(){
-//   navigator.geolocation.getCurrentPosition(
-//     (position) => {
-//       this.setState({
-//         latitude: position.coords.latitude,
-//         longitude: position.coords.longitude,
-//         error: null,
-//       });
-//       this.mergeLot();
-//     },
-//     (error) => this.setState({ error: error.message }),
-//     { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
-//   );
-// }
 
   componentDidMount(){
     this.checkLogin();
     this.getPicture();	
     this.getMenu();
     this.getComment();
-    // this.getLocation();
-    // this.getAllComment();    	
+  	
   }
 
   callTheRestaurant(){
@@ -260,38 +193,6 @@ export default class FoodDetail extends Component {
     );
   }
 
-  // mergeLot(){
-  //   if (this.state.latitude != null && this.state.longitude!=null)
-  //    {
-  //      let concatLot = this.state.latitude +","+this.state.longitude
-  //      this.setState({
-  //        concat: concatLot
-  //      }, () => {
-  //        this.getDirections(concatLot, "-6.270565,106.759550");
-  //      });
-  //    }
-  //  }
-
-//    async getDirections(startLoc, destinationLoc) {
-//     try {
-//         let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }`)
-//         let respJson = await resp.json();
-//         let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
-//         let coords = points.map((point, index) => {
-//             return  {
-//                 latitude : point[0],
-//                 longitude : point[1]
-//             }
-//         })
-//         this.setState({coords: coords})
-//         this.setState({x: "true"})
-//         return coords
-//     } catch(error) {
-//       console.log('masuk fungsi')
-//         this.setState({x: "error"})
-//         return error
-//     }
-// }
 
 
   render() {
@@ -330,85 +231,6 @@ export default class FoodDetail extends Component {
       </View>
     );
 
-    // const mapJSX=(
-    //   <Modal
-    //         style={[styles.modal, styles.modal1]}
-    //         backdrop={true}
-    //         coverScreen={true}
-    //         ref={"modal1"}
-    //         backdropPressToClose={false}
-    //         swipeToClose={false}
-    //       >
-    //         <View style={styles.ctnMapView}>
-    //           <View/>
-    //           <View style={styles.ctnHeaderMap}>
-    //             <View style={styles.ctnCloseButton}></View>
-    //             <View style={styles.ctnHeaderText}>
-    //               <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
-    //             </View>
-    //             <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
-    //               <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-    //             </TouchableOpacity>
-    //           </View>
-    //           {/* <Text>{parseFloat(latitude)} {parseFloat(longitude)}</Text> */}
-    //           <View style={styles.ctnBodyMap}>
-    //           {
-    //             parseFloat(latitude) > 0 
-    //             ? <MapView
-    //             style={{flex:1,height:height, width:width,}}
-    //             initialRegion={{        
-    //               latitude: parseFloat(latitude),
-    //               longitude: parseFloat(longitude),
-    //               latitudeDelta: 0.005,
-    //               longitudeDelta: 0.005,}}>
-    //             <MapView.Marker 
-    //               coordinate={{        
-    //                 latitude: parseFloat(latitude),
-    //                 longitude: parseFloat(longitude),
-    //               }} 
-    //               title={food_name} 
-    //               description={address}
-    //               pinColor={"pink"}
-    //               >
-    //               </MapView.Marker>
-
-    //               {!!this.state.latitude && !!this.state.longitude && <MapView.Marker
-    //                 coordinate={{"latitude":this.state.latitude,"longitude":this.state.longitude}}
-    //                 title={"Your Location"}
-    //               />}
-
-    //               {!!this.state.latitude && !!this.state.longitude && this.state.x == 'true' && <MapView.Polyline
-    //                           coordinates={this.state.coords}
-    //                           strokeWidth={2}
-    //                           strokeColor="red"/>
-    //               }
-
-    //               {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapView.Polyline
-    //                         coordinates={[
-    //                             {latitude: this.state.latitude, longitude: this.state.longitude},
-    //                             {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude},
-    //                         ]}
-    //                         strokeWidth={2}
-    //                         strokeColor="red"/>
-    //               }
-
-    //               {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapViewDirections
-    //               origin={{latitude:this.state.latitude,longitude:this.state.longitude}}
-    //               destination={{        
-    //                 latitude: parseFloat(latitude),
-    //                 longitude: parseFloat(longitude),
-    //               }} 
-    //               apikey={GOOGLE_MAPS_APIKEY}
-    //               />
-    //               }
-
-    //           </MapView>
-    //           :<Text>Bản đồ hiện không khả dụng</Text>
-    //           } 
-    //           </View> 
-    //         </View>
-    //       </Modal>
-    // );
 
     const saveJSX=(
       <Modal
@@ -431,7 +253,6 @@ export default class FoodDetail extends Component {
                 </TouchableOpacity>
               </View>
               <View style={styles.ctnBodyMap}>
-                  {/* NOIDUNG */}
               </View> 
             </View>
           </Modal>
@@ -447,15 +268,7 @@ export default class FoodDetail extends Component {
           autoplay={true} 
           showsPagination={true}
         >
-                {/* <FlatList
-                    enableEmptySection
-                    data={this.state.picture}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({item}) =>
-                      <Image source={{ uri: item.FullSizeImageUrl }} style={styles.imageFood}/>
-                    }
-                    keyExtractor={item => item.Id}
-                /> */}
+       
                   {this.state.picture.map(pic => (
                       <Image key={pic.Id} 
                       source={{ uri: pic.FullSizeImageUrl }} 
@@ -473,8 +286,7 @@ export default class FoodDetail extends Component {
         </View>
         <ListView
             enableEmptySections={true}
-            // enableEmptySections={<View></View>}
-            dataSource={this.state.comment}
+           dataSource={this.state.comment}
             renderRow={
               (data) => 
                 <View style={styles.ctnComment}>
@@ -660,7 +472,6 @@ export default class FoodDetail extends Component {
         <ScrollView style={styles.body} >
             {pictureJSX }
             {infomationJSX}
-            {/* {mapJSX} */}
             {bookmarkJSX}
             {menuJSX}
             {commentJSX}

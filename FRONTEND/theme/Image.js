@@ -2,7 +2,9 @@
 // TODO the temp images will be removed in version 1.0
 // TODO: Remember to refactor
 const Image = {
-
+ Animotion:{
+  //  Search: require("../Image/Animotion/search/data.json"),
+ },
   iCon:{
     Star:             require("../Image/star.png"),
     YellowStar:     require("../Image/yellowstar.png"),

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert ,Button} from 'react-native';
 import register from "../api/register";
-import {AuthService} from '../Components/services';
 import theme from '../theme';
-
 
 export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            email: '',
-            password: '',
-            repassword: '',
+            name: 'votranquy96@gmail.com',
+            email:'votranquy96@gmail.com',
+            password:'votranquy96@gmail.com',
+            repassword:'votranquy96@gmail.com',
             emailValidate: true,
             passwordValidate: true,
             nameValidate: true,
@@ -20,12 +18,13 @@ export default class SignUp extends Component {
         };
     }
 
+
     onSuccess() {
         Alert.alert(
             'Thành công',
-            'Đăng kí thành công! Xin mời đăng nhập',
+            'Đăng kí thành công! Xin mời kiểm tra email để nhận mã xác thực',
             [
-                { text: 'OK', onPress: this.props.gotoSignIn() }
+                { text: 'OK', onPress: this.props.gotoConfirmCode(this.state.email) }
             ],
             { cancelable: false }
         );
@@ -47,38 +46,35 @@ export default class SignUp extends Component {
     }
 
     registerUser() {
+        this.props.openLoad();
         const { email, name, password } = this.state;
         register(email, name, password)
         .then((response) => response.json())
         .then((responseJson) => {
+            this.props.closeLoad();
           if (responseJson.result === 'THANH_CONG') return this.onSuccess();
           else return this.onFail();
-        });
+        })
+        .catch(err => console.log(err));
     }
 
 
     validate(text,type){
-
         alph=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-       
         if(type == 'name'){
             if(text.length >= 3){
-                // console.log("Dung PASSWORD");
                 this.setState({nameValidate: true,  name: text});
             }
             else{
-                // console.log("Sai Password");
                 this.setState({nameValidate: false, name: text});
             }
         }
 
         if(type == 'email'){
             if(alph.test(text)){
-                // console.log("Dung EMAIL");
                 this.setState({emailValidate: true, email: text});
             }
             else{
-                // console.log("SAI EMAIL");
                 this.setState({emailValidate: false, email: text});
             }
         }
@@ -96,11 +92,9 @@ export default class SignUp extends Component {
 
         if(type == 'repassword'){
             if(text.length>=6 && text == this.state.password){
-                // console.log("Dung PASSWORD");
                 this.setState({repasswordValidate: true, repassword: text});
             }
             else{
-                // console.log("Sai Password");
                 this.setState({repasswordValidate: false, repassword: text});
             }
         }
@@ -111,6 +105,10 @@ export default class SignUp extends Component {
         if(this.state.email == "" || this.state.password == "" ||  this.state.name == ""
         ||this.state.repassword=="" || !this.state.emailValidate || !this.state.passwordValidate
         || !this.state.nameValidate || !this.state.repasswordValidate){
+            if(this.state.email == "") this.setState({emailValidate: false});
+            if(this.state.password == "") this.setState({passwordValidate: false});
+            if(this.state.name == "") this.setState({nameValidate: false});
+            if(this.state.repassword == "") this.setState({repasswordValidate: false});
             Alert.alert(
                 'Lỗi',
                 'Bạn phải nhập đầy đủ và chính xác các thông tin!',
@@ -126,6 +124,9 @@ export default class SignUp extends Component {
 
     render() {
         const { inputStyle, bigButton, buttonText } = styles;
+
+
+
         return (
             <View style={styles.main}>
                 <Text style={styles.label}>Tên</Text>
@@ -166,7 +167,6 @@ export default class SignUp extends Component {
                     placeholder="Nhập lại mật khẩu" 
                     value={this.state.repassword}
                     secureTextEntry
-                    // onChangeText={text => this.setState({ repassword: text })}
                     onChangeText={(text)=>{this.validate(text,'repassword')}}
                 />
                 { !this.state.repasswordValidate &&( <Text style={styles.labelError}>Nhập lại mật khẩu không khớp</Text>) }

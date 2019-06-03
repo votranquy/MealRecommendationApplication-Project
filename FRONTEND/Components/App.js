@@ -5,8 +5,8 @@ import Authentication from './Authentication';
 import ChangeInfo from './ChangeInfo';
 import Main from './Main';
 import Welcome from './Welcome';
-
-export default class                                                             App extends Component {
+import ConfirmCode from "./ConfirmCode";
+export default class    App extends Component {
     // componentDidMount() {
     //     //var start = Math.random( ) * (900000 - 600000) + 600000;
     //    for (var i = 500000; i < 60000; i++){
@@ -41,7 +41,7 @@ export default class                                                            
     //                     rate=responseJson.reply.delivery_detail.rating.avg;
     //                     totalReview=responseJson.reply.delivery_detail.rating.total_review;
     //                     first_image=responseJson.reply.delivery_detail.photos[1].value;
-    //                     fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
+    //                     fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/saveData.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -81,7 +81,7 @@ export default class                                                            
     //                         for(var kk=0; kk<responsemenuJson.reply.menu_infos[k].dishes.length;kk++)
     //                         menu=menu+responsemenuJson.reply.menu_infos[k].dishes[kk].name+', ';
     //                     }
-    //                     fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/updateMenu.php',
+    //                     fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/updateMenu.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -110,6 +110,7 @@ export default class                                                            
                         case 'MAIN':                       return <Main navigator={navigator} />;
                         case 'CHANGE_INFO':      return <ChangeInfo navigator={navigator} user={route.user} />;
                         case 'AUTHENTICATION': return <Authentication navigator={navigator} />; 
+                        case "CONFIRMATION_CODE": return <ConfirmCode navigator={navigator}  email={route.email}/>
                     }
                 }}
                 configureScene={route => {

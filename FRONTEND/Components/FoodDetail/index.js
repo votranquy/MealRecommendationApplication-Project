@@ -197,9 +197,12 @@ export default class FoodDetail extends Component {
   }
 
   // getNumber(){
-  //   return("09"+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString()+Math.floor(Math.random() * 10).toString());
+  //    `${"09"}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
   // }
-
+formatMoney(money){
+  var num = money.length();
+  return `${money.substring(0,num-3)}${","}${money.substring(num-3,num)}`;
+}
 
   render() {
     const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
@@ -237,31 +240,31 @@ export default class FoodDetail extends Component {
     );
 
 
-    const saveJSX=(
-      <Modal
-            style={[styles.modal, styles.modal1]}
-            backdrop={true}
-            coverScreen={true}
-            ref={"modal1"}
-            backdropPressToClose={false}
-            swipeToClose={false}
-        >
-            <View style={styles.ctnMapView}>
-              <View/>
-              <View style={styles.ctnHeaderMap}>
-                <View style={styles.ctnCloseButton}></View>
-                <View style={styles.ctnHeaderText}>
-                  <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
-                </View>
-                <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
-                  <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-                </TouchableOpacity>
-              </View>
-              <View style={styles.ctnBodyMap}>
-              </View> 
-            </View>
-          </Modal>
-    );
+    // const saveJSX=(
+    //   <Modal
+    //         style={[styles.modal, styles.modal1]}
+    //         backdrop={true}
+    //         coverScreen={true}
+    //         ref={"modal1"}
+    //         backdropPressToClose={false}
+    //         swipeToClose={false}
+    //     >
+    //         <View style={styles.ctnMapView}>
+    //           <View/>
+    //           <View style={styles.ctnHeaderMap}>
+    //             <View style={styles.ctnCloseButton}></View>
+    //             <View style={styles.ctnHeaderText}>
+    //               <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+    //             </View>
+    //             <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
+    //               <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+    //             </TouchableOpacity>
+    //           </View>
+    //           <View style={styles.ctnBodyMap}>
+    //           </View> 
+    //         </View>
+    //       </Modal>
+    // );
 
     const pictureJSX=(
       <View style={styles.ctnImageFood}>
@@ -333,7 +336,6 @@ export default class FoodDetail extends Component {
             swipeToClose={false}
           >
             <View style={styles.ctnMapView}>
-
               <View style={styles.ctnHeaderMap}>
                 <View style={styles.ctnCloseButton}></View>
                 <View style={styles.ctnHeaderText}>
@@ -343,7 +345,6 @@ export default class FoodDetail extends Component {
                   <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
                 </TouchableOpacity>
               </View>
-
               <View style={styles.ctnCommentArea}>
                 <ListView 
                     enableEmptySections={true}
@@ -392,10 +393,10 @@ export default class FoodDetail extends Component {
 
 
               { this.state.isLogin ?
-              <View>
+              <View style={styles.ctnRestImage}>
                 <View  style={styles.ctnInfomationItem}>
                   <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-                  <Text style={styles.txtPrice}>{String(item.price)} đ {item.food_id}</Text>
+                  <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
               </View>
                 <View style={styles.ctnHeartIcon}>
                   <View/>
@@ -408,7 +409,7 @@ export default class FoodDetail extends Component {
                  :
             <View  style={styles.ctnInfomationItem2}>
                  <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-                 <Text style={styles.txtPrice}>{String(item.price)} đ</Text>
+                 <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
              </View>
               }
 

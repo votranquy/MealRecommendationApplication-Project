@@ -154,14 +154,14 @@ export default class NearMe extends Component {
                     initialRegion={this.state.region}
                     showsUserLocation={true}
                 >
-                    <MapView.Marker 
+                    {/* <MapView.Marker 
                         coordinate={this.state.marker} 
                         title={"Vị trí của bạn"} 
                         image={theme.Image.iCon.RedFlag}
                         pinColor={"pink"}
                         key={this.state.marker.idlocation}
                     >
-                    </MapView.Marker>
+                    </MapView.Marker> */}
 
                     {/* <MapView.Marker 
                         coordinate={{        

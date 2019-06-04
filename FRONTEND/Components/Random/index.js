@@ -142,7 +142,14 @@ export default class Random extends Component {
           onEndReachedThreshold={0.5}
         />
       );
-      const loadJSX=(<ActivityIndicator size={50} color="red" />);
+      const loadJSX=(
+        <View style={styles.ctnLoadingRow}>
+          <ActivityIndicator size="large" size={50} color="#FF0000" />
+          <ActivityIndicator size="large" size={50} color="#3C00A7" />
+          <ActivityIndicator size="large" size={50} color="#00BE00" />
+          <ActivityIndicator size="large" size={50} color="#FDCE00" />
+        </View>
+          );
         return (
           <View style={styles.container}>
             {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}

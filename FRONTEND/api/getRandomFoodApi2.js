@@ -1,6 +1,6 @@
 
 const getRandomFoodApi2 =  (page, latitude, longitude) => (
-       fetch("http://192.168.43.103/MealRecommendationApplication-Project/api/random2.php?pagenumber="+page,
+       fetch("http://10.0.12.57/MealRecommendationApplication-Project/api/random2.php?pagenumber="+page,
               {
                   method:"POST",
                   headers: {

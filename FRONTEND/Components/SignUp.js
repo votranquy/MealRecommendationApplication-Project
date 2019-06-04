@@ -7,10 +7,10 @@ export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'votranquy96@gmail.com',
-            email:'votranquy96@gmail.com',
-            password:'votranquy96@gmail.com',
-            repassword:'votranquy96@gmail.com',
+            name: '',
+            email:'',
+            password:'',
+            repassword:'',
             emailValidate: true,
             passwordValidate: true,
             nameValidate: true,
@@ -33,9 +33,9 @@ export default class SignUp extends Component {
     onFail() {
         Alert.alert(
             'Lỗi',
-            'Email đã được sử dụng. Vui lòng chọn Email khác',
+            'Email đã được sử dụng. Vui lòng sử dụng email khác',
             [
-                { text: 'OK', onPress: () => this.removeEmail.bind(this) }
+                { text: 'OK', onPress: () => this.setState({email:""})}
             ],
             { cancelable: false }
         );
@@ -52,12 +52,11 @@ export default class SignUp extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
             this.props.closeLoad();
-          if (responseJson.result === 'THANH_CONG') return this.onSuccess();
-          else return this.onFail();
+            if (responseJson.result === 'success') return this.onSuccess();
+            else return this.onFail();
         })
-        .catch(err => console.log(err));
+        .catch(err =>{ console.log(err);  this.props.closeLoad();});
     }
-
 
     validate(text,type){
         alph=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -134,7 +133,6 @@ export default class SignUp extends Component {
                     style={inputStyle} 
                     placeholder="Nhập tên" 
                     value={this.state.name}
-                    // onChangeText={text => this.setState({ name: text })}
                     onChangeText={(text)=>{this.validate(text,'name')}}
                 />
                 { !this.state.nameValidate &&( <Text style={styles.labelError}>Họ tên phải có độ dài tối thiểu 3 kí tự</Text>) }
@@ -144,7 +142,6 @@ export default class SignUp extends Component {
                     style={inputStyle} 
                     placeholder="Nhập email" 
                     value={this.state.email}
-                    // onChangeText={text => this.setState({ email: text })}
                     onChangeText={(text)=>{this.validate(text,'email')}}
                 />
                 { !this.state.emailValidate &&( <Text style={styles.labelError}>Email không đúng định dạng</Text>) }
@@ -155,7 +152,6 @@ export default class SignUp extends Component {
                     placeholder="Nhập mật khẩu" 
                     value={this.state.password}
                     secureTextEntry
-                    // onChangeText={text => this.setState({ password: text })}
                     onChangeText={(text)=>{this.validate(text,'password')}}
                 />
                 { !this.state.passwordValidate &&( <Text style={styles.labelError}>Mật khẩu có độ dài tối thiểu 6 kí tự</Text>) }
@@ -172,9 +168,7 @@ export default class SignUp extends Component {
                 { !this.state.repasswordValidate &&( <Text style={styles.labelError}>Nhập lại mật khẩu không khớp</Text>) }
 
 
-                <TouchableOpacity style={bigButton} 
-                    onPress={() => this.clickSignUp()}
-                >
+                <TouchableOpacity style={bigButton} onPress={() => this.clickSignUp()} >
                     <Text style={buttonText}>Đăng kí ngay</Text>
                 </TouchableOpacity>
             </View>
@@ -187,10 +181,10 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#fff',
         marginBottom: 10,
-        borderRadius: 20,
-        paddingLeft: 30
+        paddingLeft: 10,
     },
     bigButton: {
+        marginTop:20,
         height: 50,
         borderRadius: 20,
         borderWidth: 1,
@@ -211,6 +205,7 @@ const styles = StyleSheet.create({
         color: theme.Color.White,
         fontWeight: "900",
         fontSize: theme.Size.FontMedium,
+        marginTop: 5,
     },
     labelError:{
         color: theme.Color.Green,

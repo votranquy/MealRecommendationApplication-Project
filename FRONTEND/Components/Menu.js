@@ -55,7 +55,7 @@ export default class Menu extends Component {
         const logoutJSX = (
             <View style={{ flex: 1 }}>
                 <TouchableOpacity style={btnStyle} onPress={this.gotoAuthentication.bind(this)}>
-                    <Text style={btnText}>Đăng nhập</Text>
+                    <Text style={styles.btnText}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -147,9 +147,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 70
     },
     btnText: {
-        color: '#34B089',
+        color: theme.Color.Black,
         fontFamily: 'Avenir', 
-        fontSize: 20
+        fontSize: theme.Size.FontBig,
     },
     btnSignInStyle: {
         margin:5,

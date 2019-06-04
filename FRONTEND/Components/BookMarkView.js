@@ -17,7 +17,9 @@ export default class BookMarkView extends Component {
     this.state = {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       text:"",
+      isLogin: false,
       }
+      // this.checkLogin.bind(this);
     }
 
     gotoList(idbookmark) {
@@ -25,9 +27,24 @@ export default class BookMarkView extends Component {
       navigator.push({ name: 'BOOKMARK_LIST' ,idbookmark});
     }
 
+
+    checkLogin(){
+
+      getToken()
+      .then(token => {
+        if(token!==""){
+          this.setState({ isLogin: true})
+        }
+      })
+    }
+
     getData(){
         getToken()
-        .then(token =>{return(getBookmarkApi(token));})
+        .then(token =>{
+            if(token!==""){
+              this.setState({ isLogin: true});
+            }
+          return(getBookmarkApi(token));})
         .then((responseData)=>{
           if(responseData.result === "success"){
             this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData.data),});
@@ -149,15 +166,25 @@ alertError() {
             <View style={styles.ctnHeaderText}>
               <Text style={styles.txtHeader}>Danh sách đã lưu</Text>
             </View>
+            { this.state.isLogin ?
               <TouchableOpacity style={styles.ctnHeaderIcon} onPress={() => this.refs.modal1.open()}>
                <Image source={theme.Image.iCon.WhitePlus} style={styles.iconHeader} />
-              </TouchableOpacity>
+              </TouchableOpacity> 
+              :<View style={styles.ctnHeaderIcon} />
+              }
             </View>
           );
 
+          
         return (
           <View style={styles.wrapper}>
             {headerJSX}
+            { !this.state.isLogin ?
+            <View style={{flex:1, alignItems: "center", justifyContent:"center", padding: 10}}>
+              <Text style={{fontSize: theme.Size.FontBig}}>Chức năng này chỉ dành cho thành viên đã đăng nhập</Text>
+             </View>
+              :<View />
+              }
             {bookmarkJSX}
             {createBookmarkJSX}
           </View>

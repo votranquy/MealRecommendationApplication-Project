@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     View, Text, TouchableOpacity, ListView,
-    Dimensions, StyleSheet, Image, Alert,TextInput,ScrollView
+    Dimensions, StyleSheet, Image, Alert,TextInput,ScrollView, ActivityIndicator,
 } from 'react-native';
 import theme from '../theme';
 import searchApi from '../api/searchApi';
@@ -18,19 +18,20 @@ export default class SearchView extends Component {
     this.state = {
       page:0,
       isLoading: false,
-      searchResut: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
-      text:"",
+      dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
+      key:"",
       value: "",
       checkboxA: false,
       checkboxB: false,
       checkboxC: false,
       checkboxD: false,
+      isLoading:true,
+      isLoadingMore: false,
+      region:{},
+      mang:[],
       }
     }
 
-    toggleModal() {
-      this.refs.modal2.open();
-    }
     
     gotoDetail(food) {
       const { navigator } = this.props;
@@ -38,62 +39,131 @@ export default class SearchView extends Component {
 }
 
     getData(){
-       searchApi(this.state.text)
+      this.refs.modal3.open();
+
+       searchApi(this.state.key)
        .then((responseData)=>{
           if(responseData.result === "success"){
-            this.setState({searchResut: this.state.searchResut.cloneWithRows(responseData.data),});
-            console.log("RESULT");
+            this.refs.modal3.close();
+            this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData.data),});
+            console.log("RESULT_RETURN");
           }
-          else{ 
-            this.setState({ searchResut: this.state.searchResut.cloneWithRows([]),});
+          else{
+            this.refs.modal3.close();
+            this.setState({ dataSource: this.state.dataSource.cloneWithRows([]),});
             console.log("NOT SUCCESS");
           }
        })  
-       .catch(err => console.log("ERROR"));
+       .catch(err => {this.refs.modal3.close(); console.log("LOI TIM KIEM",err)});
     }
 
 
 
 hanleChangeText(text){
-       this.setState({text});
-       console.log("KEYWORK", this.state.text);
+       this.setState({key: text});
+       console.log("KEYWORK", this.state.key);
               // this.getData();
 }
 
 
-    componentDidMount(){
-      getLocation()
-      .then(region => {
-        this.setState({region});
-        if(region===""){return getTopFoodApi(this.state.page)}
-        else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
-       })
-      .then((responseJson)=>{
-        if(responseJson.result==="success"){
-          this.setState({
-              mang : responseJson.data,
-              isLoading: false,
-              searchResut: this.state.searchResut.cloneWithRows(this.state.mang),
-          });
-        }
-        else{
-          console.log("NOT SUCCESS");
-          this.setState({
-            isLoading: false,
-            searchResut: this.state.searchResut.cloneWithRows([]),
-          })
-        }
-      })
-      .catch(error=>{
-        console.log('GETTOPFOOD_ERROR',error);
-        this.setState({
+componentDidMount(){
+
+  getLocation()
+  .then(region => {
+    this.setState({region});
+    if(region===""){return getTopFoodApi(this.state.page)}
+    else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+   })
+  .then((responseJson)=>{
+
+    if(responseJson.result==="success"){
+      this.setState({
+          mang : responseJson.data,
           isLoading: false,
-          searchResut: this.state.searchResut.cloneWithRows([]),
-        });
+          dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
       });
-   }     
+    }
+    else{
+      console.log("NOT SUCCESS");
+      this.setState({
+        isLoading: false,
+        dataSource: this.state.dataSource.cloneWithRows([]),
+      })
+    }
+  })
+  .catch(error=>{
+    console.log('GETTOPFOOD_ERROR',error);
+    this.setState({
+      isLoading: false,
+      dataSource: this.state.dataSource.cloneWithRows([]),
+    });
+  });
+}
+  
+
+createRow(property){
+  if(property.food_name == "");
+  else{
+    return(
+    <TouchableOpacity 
+      activeOpacity={0.8}  
+      onPress={() => this.gotoDetail(property)} 
+      key={property.id} style={styles.ctnRestaurant}>
+      <View style={styles.ctnImage} >
+        <Image style={styles.image} source={{uri: "http:"+property.image}} />
+      </View>
+      <View style={styles.ctnInfomation}>
+        <View style={styles.cntText}>
+          <Text style={styles.textFood} numberOfLines={1}>{property.name }</Text>
+        </View>
+        <View style={styles.cntText}>
+          <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
+        </View>
+        <View style={styles.cntText}>
+          <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
+        </View>
+        <View style={styles.cntText}>
+          <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
+        </View>
+      </View>  
+    </TouchableOpacity>
+    );
+  }
+}
 
     render() {
+
+      const LoadJSX=(//WAITING SEARCH
+        <Modal
+            style={[styles.modal, styles.modal2]}
+            backdrop={true}
+            coverScreen={false}
+            entry={"top"}
+            ref={"modal3"}
+            backdropOpacity={0.5}
+        >
+        <View style={[styles.ctnLoading, styles.horizontal]}>
+             <View style={styles.ctnLoadingRow}>
+                <ActivityIndicator size="large" size={50} color="#FF0000" />
+                <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                <ActivityIndicator size="large" size={50} color="#00BE00" />
+                <ActivityIndicator size="large" size={50} color="#FDCE00" />
+            </View>
+            <View style={styles.ctnLoadingRow}>
+                <ActivityIndicator size="large" size={50} color="#FF0000" />
+                <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                <ActivityIndicator size="large" size={50} color="#00BE00" />
+                <ActivityIndicator size="large" size={50} color="#FDCE00" />
+            </View>
+            <View style={styles.ctnLoadingRow}>
+                <ActivityIndicator size="large" size={50} color="#FF0000" />
+                <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                <ActivityIndicator size="large" size={50} color="#00BE00" />
+                <ActivityIndicator size="large" size={50} color="#FDCE00" />
+            </View>
+        </View>
+      </Modal>
+      );
 
       const settingJSX=(
         <Modal
@@ -173,43 +243,30 @@ hanleChangeText(text){
             );
 
           const resultJSX=(
-            <View style={{flex:1, borderColor: "red", borderWidth:3}}>
+            <View style={{flex:1}}>
               <ListView 
-              enableEmptySections={true}
-              dataSource={this.state.searchResut}
-              renderRow={
-                     (property)=>
-                                   <TouchableOpacity 
-                                   activeOpacity={0.8}  
-                                   onPress={() => this.gotoDetail(property)} 
-                                   key={property.id} style={styles.ctnRestaurant}>
-                                   <View style={styles.ctnImage} >
-                                     <Image style={styles.image} source={{uri: "http:"+property.image}} />
-                                   </View>
-                                   <View style={styles.ctnInfomation}>
-                                     <View style={styles.cntText}>
-                                       <Text style={styles.textFood} numberOfLines={1}>{property.name }</Text>
-                                     </View>
-                                     <View style={styles.cntText}>
-                                       <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
-                                     </View>
-                                     <View style={styles.cntText}>
-                                       <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
-                                     </View>
-                                     <View style={styles.cntText}>
-                                       <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
-                                     </View>
-                                   </View>  
-                                 </TouchableOpacity>
-              }
+              enableEmptySections
+              dataSource={this.state.dataSource}
+              renderRow={(propertya) => this.createRow(propertya)}
             />
-            </View>
+          </View>
           );
+          const loadJSX=(
+            <View style={styles.ctnLoadingRow}>
+              <ActivityIndicator size="large" size={50} color="#FF0000" />
+              <ActivityIndicator size="large" size={50} color="#3C00A7" />
+              <ActivityIndicator size="large" size={50} color="#00BE00" />
+              <ActivityIndicator size="large" size={50} color="#FDCE00" />
+            </View>
+              );
 
         return (
           <View style={styles.wrapper}>
+            {LoadJSX}
             {headerJSX}
+            {this.state.isLoading       ?  loadJSX : <View/>} 
             {resultJSX}
+            {this.state.isLoadingMore ? loadJSX : <View/>}
           </View>
         );
 
@@ -220,6 +277,19 @@ const { width, height} = Dimensions.get('window');
 const imageWidth = width / 4;
 const imageHeight = (imageWidth * 452) / 361;
 const styles = StyleSheet.create({
+  ctnLoading: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  ctnLoadingRow:{
+    flexDirection:"row",
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: 10
+  },
   labelTitle:{
     fontSize: theme.Size.FontSmall,
     color: theme.Color.Red,
@@ -361,7 +431,7 @@ ctnSearch:{
     ctnHeader:{
       flexDirection: 'row',
       alignItems:'center', 
-      height: height / 17, 
+      height: height / 15, 
       backgroundColor: theme.Color.NiceRed,
       padding:5, 
       justifyContent:'space-between'

@@ -17,6 +17,10 @@ export default StyleSheet.create({
     borderColor: theme.Color.LightGray,
     paddingBottom:10,
   },
+  ctnLoadingRow:{
+    flexDirection:"row",
+    justifyContent: 'center',
+  },
   ctnImage:{
     flex:0.3,
     padding:1,

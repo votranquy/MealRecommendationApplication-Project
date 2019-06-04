@@ -1,6 +1,6 @@
 
 const resendEmailApi = (email) => (
-       fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/resendEmail.php',
+       fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/resendEmail.php',
        {   
            method: 'POST',
            headers: {

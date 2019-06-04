@@ -19,13 +19,13 @@ import getBookMark from "../api/getBookMark";
 import saveBookMark from "../api/saveBookMark";
 import theme from "../theme";
 import getToken from "../api/getToken";
-
+import Detect from "../Components/Detect";
 
 export default class Shop extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab: "search",
+      selectedTab: "home",
       bookmarkArray: [],
       isLogIn:null,
     };
@@ -55,7 +55,7 @@ export default class Shop extends Component{
             <Home open={this.props.open}/>
           </TabNavigator.Item>
 
-          {/* <TabNavigator.Item
+          <TabNavigator.Item
             selected={this.state.selectedTab === 'category'}
             title="Khám phá"
             renderIcon={() => <Image source={require("../Image/whitecategory.png")} style={styles.imageStyle}/>}
@@ -63,8 +63,8 @@ export default class Shop extends Component{
             onPress={() => this.setState({ selectedTab: 'category' })}
             selectedTitleStyle={{ color: theme.Color.Red, fontFamily: 'Avenir', }}
             >
-            <NearMe/>
-          </TabNavigator.Item> */}
+            <Detect/>
+          </TabNavigator.Item>
 
 
           <TabNavigator.Item

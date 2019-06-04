@@ -37,6 +37,7 @@ const Image = {
     YourLocation:  require('../Image/YourLocation.png'),
     WhiteSearch: require("../Image/whitesearch.png"),
     WhiteSetting: require("../Image/whitesetting.png"),
+    WhiteBack: require("../Image/whiteback.png"),
   },
 
   Bg: {

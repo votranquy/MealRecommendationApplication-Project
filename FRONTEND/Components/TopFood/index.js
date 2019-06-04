@@ -13,6 +13,7 @@ import getTopFoodApi2 from "../../api/getTopFoodApi2"; //Location
 import getLocation from "../../api/getLocation";
 
 export default class TopFood extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -39,6 +40,7 @@ export default class TopFood extends Component {
       else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
      })
     .then((responseJson)=>{
+
       if(responseJson.result==="success"){
         this.setState({
             mang : responseJson.data,
@@ -131,7 +133,7 @@ export default class TopFood extends Component {
 
 
   render() {
-    const topfoodJSX=(
+    const topfoodJSX=(//RESULT
       <ListView 
         enableEmptySections
         dataSource={this.state.dataSource}
@@ -140,12 +142,21 @@ export default class TopFood extends Component {
         onEndReachedThreshold={0.5}
       />
     );
-    const loadJSX=(<ActivityIndicator size={50} color="red" />);
+    
+      const loadJSX=(
+      <View style={styles.ctnLoadingRow}>
+        <ActivityIndicator size="large" size={50} color="#FF0000" />
+        <ActivityIndicator size="large" size={50} color="#3C00A7" />
+        <ActivityIndicator size="large" size={50} color="#00BE00" />
+        <ActivityIndicator size="large" size={50} color="#FDCE00" />
+      </View>
+        );
+
     return (
       <View style={styles.container}>
-        {this.state.isLoading       ?  loadJSX : <View/>} 
-        {topfoodJSX}
-        {this.state.isLoadingMore ? loadJSX : <View/>}
+          {this.state.isLoading       ?  loadJSX : <View/>} 
+          {topfoodJSX}
+          {this.state.isLoadingMore ? loadJSX : <View/>}
       </View>
     );
   }

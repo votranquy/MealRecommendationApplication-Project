@@ -6,11 +6,14 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  StyleSheet,
 } from 'react-native';
 import styles from "./styles";
 import getTrendFoodApi from "../../api/getTrendFoodApi";
+import getTrendFoodApi2 from "../../api/getTrendFoodApi2";
+import getLocation from "../../api/getLocation";
+
 export default class Trend extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -20,6 +23,7 @@ export default class Trend extends Component {
       isLoading:true,
       isLoadingMore: false,
       mang:[],
+      region:{},
     }
   }
 
@@ -31,11 +35,18 @@ export default class Trend extends Component {
 
 
   componentDidMount(){
-    getTrendFoodApi(this.state.page)
+
+    getLocation()
+    .then(region => {
+      this.setState({region});
+      if(region===""){return getTopFoodApi(this.state.page)}
+      else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+     })
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
             mang : responseJson.data,
+            isLoading: false,
             dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
           });
       }
@@ -90,8 +101,14 @@ export default class Trend extends Component {
 
 
   _onEndReached(){
+    this.setState({isLoadingMore: true});
     nextpage = this.state.page +1;
-    getTrendFoodApi(nextpage)
+    getLocation()
+    .then(region => {
+      this.setState({region});
+      if(region===""){return getTrendFoodApi(this.state.page)}
+      else{  return getTrendFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+     })
     .then((responseJson)=>{
       if(responseJson.result==="success"){
         this.setState({
@@ -124,14 +141,19 @@ export default class Trend extends Component {
         <ListView 
           enableEmptySections
           dataSource={this.state.dataSource}
-          renderRow={
-            (propertya) => this.createRow(propertya)
-          }
+          renderRow={  (propertya) => this.createRow(propertya) }
           onEndReached={this._onEndReached.bind(this)}
           onEndReachedThreshold={0.5}
         />
       );
-      const loadJSX=(<ActivityIndicator size={50} color="red" />);
+      const loadJSX=(
+        <View style={styles.ctnLoadingRow}>
+          <ActivityIndicator size="large" size={50} color="#FF0000" />
+          <ActivityIndicator size="large" size={50} color="#3C00A7" />
+          <ActivityIndicator size="large" size={50} color="#00BE00" />
+          <ActivityIndicator size="large" size={50} color="#FDCE00" />
+        </View>
+          );
         return (
           <View style={styles.container}>
             {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}

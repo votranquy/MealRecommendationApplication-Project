@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, Text, TouchableOpacity, Image, StyleSheet,ScrollView, Button
+    View, Text, TouchableOpacity, Image, StyleSheet,ScrollView, Button, ActivityIndicator, 
 } from 'react-native';
 import theme from '../theme';
 import icBack from '../Image/back_white.png';
@@ -45,14 +45,12 @@ export default class Authentication extends Component {
         navigator.push({ name: 'CONFIRMATION_CODE',email });
     } 
 
-openLoading(){
-    this.refs.modal2.open();
-}
-closeLoading(){
-    this.refs.modal2.close()
-}
-
-
+    openLoading(){
+        this.refs.modal2.open();
+    }
+    closeLoading(){
+        this.refs.modal2.close();
+    }
 
     render() {
         const{
@@ -62,37 +60,62 @@ closeLoading(){
             activeStyle, inactiveStyle
         }=styles;
 
-
         const LoadJSX=(
             <Modal
-            style={[styles.modal, styles.modal2]}
-            backdrop={true}
-            coverScreen={true}
-            ref={"modal2"}
-          >
-          <View style={styles.ctnMapView}>
-                    {/* <LottieView source={require("../Image/Animotion/search/data.json")} autoPlay loop /> */}
+                style={[styles.modal, styles.modal2]}
+                backdrop={true}
+                coverScreen={false}
+                entry={"top"}
+                ref={"modal2"}
+                backdropOpacity={0.5}
+            >
+            <View style={[styles.ctnLoading, styles.horizontal]}>
+                 <View style={styles.ctnLoadingRow}>
+                    <ActivityIndicator size="large" size={50} color="#FF0000" />
+                    <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                    <ActivityIndicator size="large" size={50} color="#00BE00" />
+                    <ActivityIndicator size="large" size={50} color="#FDCE00" />
+                </View>
+                <View style={styles.ctnLoadingRow}>
+                    <ActivityIndicator size="large" size={50} color="#FF0000" />
+                    <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                    <ActivityIndicator size="large" size={50} color="#00BE00" />
+                    <ActivityIndicator size="large" size={50} color="#FDCE00" />
+                </View>
+                <View style={styles.ctnLoadingRow}>
+                    <ActivityIndicator size="large" size={50} color="#FF0000" />
+                    <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                    <ActivityIndicator size="large" size={50} color="#00BE00" />
+                    <ActivityIndicator size="large" size={50} color="#FDCE00" />
+                </View>
+
             </View>
           </Modal>
           );
 
         const { isSignIn } = this.state;
         const mainJSX = isSignIn ? 
-        <SignIn goBackToMain={this.goBackToMain.bind(this)}  gotoConfirmCode={this.gotoConfirmCode.bind(this)}/> : 
-        <SignUp gotoSignIn={this.gotoSignIn.bind(this)} gotoConfirmCode={this.gotoConfirmCode.bind(this)} 
+        <SignIn goBackToMain={this.goBackToMain.bind(this)}  gotoConfirmCode={this.gotoConfirmCode.bind(this)} 
         openLoad={this.openLoading.bind(this)} closeLoad={this.closeLoading.bind(this)}
+        /> : 
+        <SignUp gotoSignIn={this.gotoSignIn.bind(this)}         gotoConfirmCode={this.gotoConfirmCode.bind(this)}    
+         openLoad={this.openLoading.bind(this)} closeLoad={this.closeLoading.bind(this)}
          />;
         return (
             <View style={container}>
+
                 <View style={row1}>
                     <TouchableOpacity onPress={this.goBackToMain.bind(this)}>
-                        <Image source={icBack} style={iconStyle} />
+                        <Image source={theme.Image.iCon.WhiteBack} style={iconStyle} />
                     </TouchableOpacity>
                     <Text style={titleStyle}>{isSignIn ? "Đăng nhập " : "Đăng kí"}</Text>
-                    <View/>
+                    <Text></Text>
                 </View>
+
                 {LoadJSX}
+
                 <ScrollView>
+
                         <View style={controlStyle}>
                             <TouchableOpacity style={signInStyle} onPress={this.signIn.bind(this)}>
                                 <Text style={!isSignIn ? activeStyle : inactiveStyle}>Đăng nhập</Text>
@@ -105,9 +128,8 @@ closeLoading(){
                         <View style={styles.ctnInput}>
                             {mainJSX}
                         </View> 
+                </ScrollView>
 
-                       
-                </ScrollView>      
             </View>
         );
     }
@@ -115,6 +137,7 @@ closeLoading(){
 
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
         backgroundColor: theme.Color.NiceRed,
@@ -122,6 +145,19 @@ const styles = StyleSheet.create({
         paddingBottom:0,
         justifyContent: 'space-between',
     },
+    ctnLoading: {
+        flex: 1,
+        justifyContent: 'center'
+      },
+      ctnLoadingRow:{
+        flexDirection:"row",
+        justifyContent: 'center',
+      },
+      horizontal: {
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        padding: 10
+      },
     ctnmain:{
         justifyContent: "space-between",
     },
@@ -134,7 +170,7 @@ const styles = StyleSheet.create({
     titleStyle: { 
         color: '#FFF', 
         fontFamily: 'Avenir', 
-        fontSize: theme.Size.FontMedium,
+        fontSize: theme.Size.FontBig,
         fontWeight:"900",
     },
     iconStyle: {
@@ -151,13 +187,15 @@ const styles = StyleSheet.create({
         flex:2,
     },
     inactiveStyle: {
-        color: '#D7D7D7'
+        color: '#D7D7D7',
+        fontSize: theme.Size.FontMedium
     },
     activeStyle: {
-        color: '#3EBA77'
+        color: '#3EBA77',
+        fontSize: theme.Size.FontMedium,
     },
     signInStyle: {
-        backgroundColor: '#fff',
+        backgroundColor:  theme.Color.White,
         alignItems: 'center',
         paddingVertical: 15,
         flex: 1,
@@ -166,7 +204,7 @@ const styles = StyleSheet.create({
         marginRight: 1
     },
     signUpStyle: {
-        backgroundColor: '#fff',
+        backgroundColor:  theme.Color.White,
         paddingVertical: 15,
         alignItems: 'center',
         flex: 1,

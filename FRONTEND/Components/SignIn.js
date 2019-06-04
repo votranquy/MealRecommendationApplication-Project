@@ -6,7 +6,6 @@ import {
     TouchableOpacity, 
     StyleSheet,
     Alert,
-    ScrollView
 } from 'react-native';
 import theme from '../theme';
 import signIn    from '../api/signIn';
@@ -32,11 +31,14 @@ export default class SignIn extends Component {
         })
     }
    
-    onSignIn() { 
+    onSignIn(){
+        this.props.openLoad(); 
         const { email, password } = this.state;
         signIn(email, password)
         .then(responseJson=>{
+
             if(responseJson.result=="success"){
+                this.props.closeLoad();
                 global.onSignIn(responseJson.user);
                 saveToken(responseJson.token); 
                 this.props.goBackToMain();
@@ -46,7 +48,7 @@ export default class SignIn extends Component {
                     'Lỗi',
                     'Thông tin đăng nhập không chính xác',
                     [
-                        { text: 'OK', onPress: () =>this.setState({ email: '', password: '' })  }
+                        { text: 'OK', onPress: () =>{this.props.closeLoad();this.setState({ email: '', password: '' });}  }
                     ],
                     { cancelable: false }
                 );
@@ -56,40 +58,43 @@ export default class SignIn extends Component {
                     'Thông báo',
                     'Bạn chưa xác thực tài khoản. Vui lòng nhập mã xác thực gửi đến email!',
                     [
-                        { text: 'OK', onPress: () =>  this.props.gotoConfirmCode(this.state.email) }
+                        { text: 'OK', onPress: () =>{  this.props.closeLoad(); this.props.gotoConfirmCode(this.state.email);} }
                     ],
                     { cancelable: false }
                 );
             }
+            this.props.closeLoad();
         })
-        .catch(err => console.log(err));
+        .catch(err => {console.log(err);  this.props.closeLoad();});
     }
 
     validate(text,type){
         alph=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(type == 'email'){
             if(alph.test(text)){
-                console.log("Dung EMAIL");
+                // console.log("Dung EMAIL");
                 this.setState({emailValidate: true, email: text});
             }
             else{
-                console.log("SAI EMAIL");
+                // console.log("SAI EMAIL");
                 this.setState({emailValidate: false, email: text});
             }
         }
         if(type == 'password'){
             if(text.length>=6){
-                console.log("Dung PASSWORD");
+                // console.log("Dung PASSWORD");
                 this.setState({passwordValidate: true, password: text});
             }
             else{
-                console.log("Sai Password");
+                // console.log("Sai Password");
                 this.setState({passwordValidate: false, password: text});
             }
         }
     }
     clickSignIn(){
         if(this.state.email == "" || this.state.password == "" || !this.state.emailValidate || !this.state.passwordValidate){
+            if(this.state.email == ""){ this.setState({emailValidate: false})};
+            if(this.state.password == ""){ this.setState({passwordValidate: false})};
             Alert.alert(
                 'Lỗi',
                 'Bạn phải nhập đầy đủ và chính xác các thông tin!',
@@ -104,7 +109,6 @@ export default class SignIn extends Component {
 
     render() {
         const { inputStyle, btnLogIn, txtButton } = styles;
-        const { email, password } = this.state;
         return (
             <View style={styles.main}>
                 <Text style={styles.label}>Email</Text>
@@ -112,8 +116,6 @@ export default class SignIn extends Component {
                     style={inputStyle}
                     underlineColorAndroid="white"
                     placeholder="Nhập email"
-                    // value={email}
-                    // onChangeText={text => this.setState({ email: text })}
                     onChangeText={(text)=>{this.validate(text,'email')}}
                 />
                 { !this.state.emailValidate &&( <Text style={styles.labelError}>Email không đúng định dạng</Text>) }
@@ -122,17 +124,16 @@ export default class SignIn extends Component {
                     style={inputStyle}
                     underlineColorAndroid="white"
                     placeholder="Nhập mật khẩu"
-                    // value={password}
-                    // onChangeText={text => this.setState({ password: text })}
                     onChangeText={(text)=>this.validate(text,'password')}
                     secureTextEntry
                 />
                  { !this.state.passwordValidate &&(<Text style={styles.labelError}>Password phải có độ dài tối thiểu là 6</Text>) }
-                <TouchableOpacity
-                    style={btnLogIn}
-                    onPress={() => this.clickSignIn()}
-                    >
+                <TouchableOpacity    style={btnLogIn}   onPress={() => this.clickSignIn()}>
                     <Text style={txtButton}>Đăng nhập ngay</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.ctnFofGot}>
+                            <Text style={styles.txtForGot}> Quên mật khẩu</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -140,6 +141,16 @@ export default class SignIn extends Component {
 }
 
 const styles = StyleSheet.create({
+    ctnFofGot:{
+        marginTop: 20,
+        alignItems:"center",
+        justifyContent:"center",
+    },
+    txtForGot:{
+        fontSize: theme.Size.FontBig,
+        fontWeight:"900",
+        color: theme.Color.White,
+    },
     main:{
         paddingBottom:20,
     },
@@ -148,8 +159,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         marginBottom: 0,
         marginTop:10,
-        borderRadius: 20,
-        paddingLeft: 30
+        // borderRadius: 20,
+        paddingLeft: 10
     },
     btnLogIn: {
         marginTop:20,
@@ -164,12 +175,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir',
         color: '#fff',
         fontWeight: '400',
-        fontSize: theme.Size.FontSmall,
+        fontSize: theme.Size.FontBig,
     },
     label:{
         color: theme.Color.White,
         fontWeight: "900",
         fontSize: theme.Size.FontMedium,
+        marginTop: 5,
     },
     labelError:{
         color: theme.Color.Green,

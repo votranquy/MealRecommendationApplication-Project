@@ -67,7 +67,7 @@ export default class ConfirmCode extends Component {
         Alert.alert(
           'Thành công',
           'Xác thực tài khoản thành công!',
-          [{text: 'OK'}],
+          [{text: 'OK',onPress: () => this.goBackToMain()}],
           { cancelable: false }
         );
       }

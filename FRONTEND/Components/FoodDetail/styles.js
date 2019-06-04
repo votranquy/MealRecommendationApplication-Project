@@ -143,6 +143,10 @@ export default StyleSheet.create({
     borderColor: theme.Color.LightGray,
     paddingBottom:10,
   },
+  ctnRestImage:{
+    flexDirection:"row",
+    flex:6,
+  },
   ctnImageItem:{
     flex:3,
     padding:1,

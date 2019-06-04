@@ -14,8 +14,9 @@ try{
   AND rate <= 5.0 
   AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
   AND NOT image = '/style/images/deli-dish-no-image.png'
+  -- AND distance < 1.0
   GROUP BY p.id
-  ORDER BY distance ASC";
+  ORDER BY distance";
 
 
   $topfood = $mysqli->query($sql);

@@ -38,7 +38,7 @@ if($name !='' && $email != '' && $password!=''){
 				$mail->Port = 587;                                    // TCP port to connect to
 				//Recipients
 				$mail->CharSet = 'UTF-8';
-				$mail->setFrom('votranquy96@gmail.com', 'MealApp');
+				$mail->setFrom('votranquy96@gmail.com', 'Wyatt');
 				$mail->addAddress($usermail);               
 				$mail->addReplyTo('votranquy96@gmail.com', 'Information');
 				$mail->isHTML(true);                                
@@ -49,21 +49,21 @@ if($name !='' && $email != '' && $password!=''){
 			} catch (Exception $e) {
 				$sql_delete = "DELETE FROM USER WHERE email='$email'";
 				$result = $mysqli->query($sql_delete);
-				echo("{\"result\":\"KHONG_THANH_CONG\"}");
+				echo("{\"result\":\"fail\"}");
 			}
 		}
 
 		SendEmail($email,$confirmationcode);
 		//     echo 'Message has been sent';
-			echo("{\"result\":\"THANH_CONG\"}");
+			echo("{\"result\":\"success\"}");
 
 	}
 	else{
-		echo("{\"result\":\"KHONG_THANH_CONG\"}");
+		echo("{\"result\":\"fail\"}");
 	};
 }
 else{
-	echo("{\"result\":\"KHONG_THANH_CONG\"}");
+	echo("{\"result\":\"fail\"}");
 }
 
 ?>

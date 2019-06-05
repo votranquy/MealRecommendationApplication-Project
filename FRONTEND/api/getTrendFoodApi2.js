@@ -1,7 +1,7 @@
 
 
 const getTrendFoodApi2 =  (page, latitude, longitude) => (
-       fetch("http://10.0.12.57/MealRecommendationApplication-Project/api/getTrendFood2.php?pagenumber="+page,
+       fetch("http://192.168.43.103/MealRecommendationApplication-Project/api/getTrendFood2.php?pagenumber="+page,
               {
                   method:"POST",
                   headers: {

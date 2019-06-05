@@ -24,7 +24,15 @@ export default class SignUp extends Component {
             'Thành công',
             'Đăng kí thành công! Xin mời kiểm tra email để nhận mã xác thực',
             [
-                { text: 'OK', onPress: this.props.gotoConfirmCode(this.state.email) }
+                { text: 'OK', onPress:()=>{
+                    this.setState({  
+                        name: '',
+                        email:'',
+                        password:'',
+                        repassword:'', 
+                    }); 
+                    this.props.closeLoad(); 
+                    this.props.gotoConfirmCode(this.state.email);}  }
             ],
             { cancelable: false }
         );
@@ -35,7 +43,7 @@ export default class SignUp extends Component {
             'Lỗi',
             'Email đã được sử dụng. Vui lòng sử dụng email khác',
             [
-                { text: 'OK', onPress: () => this.setState({email:""})}
+                { text: 'OK', onPress: () =>{ this.props.closeLoad(); this.setState({email:""}); }}
             ],
             { cancelable: false }
         );

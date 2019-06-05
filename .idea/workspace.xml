@@ -3,6 +3,55 @@
   <component name="ChangeListManager">
     <list default="true" id="7b7ceb56-8ee9-4ca3-87ed-00a638e930cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Authentication.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/BookMarkView.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/BookMarkView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Category.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/FoodDetail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/FoodDetail/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/FoodDetail/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/FoodDetail/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/ListFood.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/ListFood.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Random/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Random/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Random/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Random/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/RandomS.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/RandomS.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/RefreshListView.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/RefreshListView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/Restaurant.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/Restaurant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/SearchView.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/SearchView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/SignIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/TopFood/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/TopFood/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/TopFood/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/TopFood/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/TrendFood/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/TrendFood/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/Components/TrendFood/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/Components/TrendFood/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/android/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/changeInfoApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/changeInfoApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/checkCodeApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/checkCodeApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/checkLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/checkLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/crawlData.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/crawlData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/createBookmarkApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/createBookmarkApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/deleteItemApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/deleteItemApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getBookmarkApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getBookmarkApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getBookmarkOfOneFood.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getBookmarkOfOneFood.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getMenuApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getMenuApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getNearRestaurantApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getNearRestaurantApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getOneBookmarkApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getOneBookmarkApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getRandomFoodApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getRandomFoodApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getRandomFoodApi2.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getRandomFoodApi2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getTopFoodApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getTopFoodApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getTopFoodApi2.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getTopFoodApi2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/getTrendFoodApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/getTrendFoodApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/initData.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/initData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/refreshToken.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/refreshToken.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/resendEmailApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/resendEmailApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/searchApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/searchApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/signIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/signIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/api/updateBookmarkOfOneFoodApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/api/updateBookmarkOfOneFoodApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/theme/Image.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/theme/Image.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,9 +74,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

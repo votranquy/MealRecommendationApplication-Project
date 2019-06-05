@@ -22,7 +22,6 @@ export default class Trend extends Component {
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       isLoading:true,
       isLoadingMore: false,
-      mang:[],
       region:{},
     }
   }
@@ -39,8 +38,8 @@ export default class Trend extends Component {
     getLocation()
     .then(region => {
       this.setState({region});
-      if(region===""){return getTopFoodApi(this.state.page)}
-      else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+      if(region===""){return getTrendFoodApi(this.state.page)}
+      else{  return getTrendFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
      })
     .then((responseJson)=>{
       if(responseJson.result==="success"){
@@ -67,7 +66,6 @@ export default class Trend extends Component {
   }
 
 
-  
   createRow(property){
     if(property.food_name == "");
     else{

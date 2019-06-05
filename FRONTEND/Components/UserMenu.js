@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
  },
  titleStyle:{
   color: '#FFF', 
-  fontSize:20, 
+  fontSize:theme.Size.FontBig, 
   alignItems:'center',
    justifyContent:"space-between",
  }, 

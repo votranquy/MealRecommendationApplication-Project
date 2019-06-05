@@ -15,11 +15,11 @@ export default class Home extends Component{
           initialRoute={{ name: "NEAR_ME" }}
           renderScene={(route, navigator) => {
               switch(route.name){
-                case "NEAR_ME"                :    return( <NearMe           navigator={navigator}  />);  
-                case "CATEGORYFOOD"   :    return( <CategoryFood           navigator={navigator} />);
+                case "NEAR_ME"                :    return( <NearMe                                  navigator={navigator}  />);  
+                case "CATEGORYFOOD"   :    return( <CategoryFood                      navigator={navigator} />);
                 case "MAP"                          :   return( <RestaurantDirection           navigator={navigator}  location={route.location}  /> );
-                case "SAVE_BOOKMARK" :    return(<SaveBookmark navigator={navigator}     idfood={route.idfood}               />);                                            
-                default                                 :    return( <FoodDetail       navigator={navigator}     food={route.food}                    /> );
+                case "SAVE_BOOKMARK" :    return(<SaveBookmark                    navigator={navigator}     idfood={route.idfood}               />);                                            
+                default                                 :    return( <FoodDetail                           navigator={navigator}     food={route.food}                    /> );
               }
           }}
         />

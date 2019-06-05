@@ -14,6 +14,7 @@ const GOOGLE_MAPS_APIKEY="AIzaSyAG2BnUcY2mW5_VY8Q6cVEabhl9l_Rokkk";
 const {height , width} = Dimensions.get('window'); 
 
 export default class RestaurantDirection extends Component {
+  _isMounted = false;
   constructor(props){
     super(props);
     this.state = {
@@ -38,19 +39,22 @@ export default class RestaurantDirection extends Component {
 getLocation(){
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        error: null,
-      });
+      // if(this._isMounted){
+          this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            error: null,
+          });
+    // }
       // this.mergeLot();
     },
-    (error) => this.setState({ error: error.message }),
+    (error) => {}, //this.setState({ error: error.message })
     { enableHighAccuracy: true, timeout: 200000, maximumAge: 1000 },
   );
 }
 
   componentDidMount(){
+    this._isMounted = true;
     this.getLocation();
   }
 

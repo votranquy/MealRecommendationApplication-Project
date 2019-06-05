@@ -1,32 +1,46 @@
 <?php
-	include('connect/connect.php');
+//     use \Firebase\JWT\JWT;
+//     require __DIR__ . '/vendor/autoload.php';
+//     include('function.php');
+    include('connect/connect.php');
        if(1){ //isset($_GET['key']) && strlen($_GET['key'])>2
               $json = file_get_contents('php://input');
               $obj = json_decode($json, true);
-              // $idfood = $obj['idfood'];
-		$keyword = $obj['key'];
-              $food = array();
-              // echo($keyword);
+              $keyword = $obj['key'];
+              // $token = $obj['token'];
+              // $key = "example_key";
+              // $page = $_GET["pagenumber"];
 
-              $max = str_word_count($keyword);
+       // if($token != "" && $page != "0"){
+       //        $decoded = JWT::decode($token, $key, array('HS256'));
+       //        if($decoded->expire < time()){}
+       //        else{
+       //               $email = $decoded->email;
+
+       //               $sql_getid = $mysqli->query("SELECT id FROM USER WHERE email = '$email'");
+
+       //               while ($row = $sql_getid->fetch_assoc()) {
+       //                      $id = $row["id"];
+       //               }
+       //        $sql_insert = "INSERT INTO SEARCH_HISTORY(id_user,keyword) VALUE('$id','$keyword')";
+       //        $result = $mysqli->query($sql_insert);       
+       // }
+       // }
+              $food = array();
+
+              $maxx = str_word_count($keyword);
               
               $arr = explode(" ", $keyword);
 
-              if($max == 1 || $max > 2){
+              if($maxx == 1 || $maxx > 2){
                      try{
                             $key = $arr[0];
 
                             $sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, q.name, q.image
                             FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
                             WHERE  food_name like '%$key%'
-                            OR address like '%$key%'
-                            OR category like '%$key%'
-                            OR menu like '%$key%'
-                            -- AND NOT image = '/style/images/deli-dish-no-image.png'
                             AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
                             GROUP BY restaurant_id
-                            ORDER BY rate DESC
-                            LIMIT 100
                             ";
                             
                             $topfood = $mysqli->query($sql);
@@ -58,41 +72,16 @@
 
               } //==1
 
-              if($max == 2){
+              if($maxx == 2){
                      try{
-                            // $key1 = $keyword;
-                            // $key2 = $arr[0];
-                            // $key3 = $arr[1];
+
 
                             $sql = "SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
                             FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
                             WHERE  food_name like '%$keyword%'
-                            -- OR address like '%$keyword%'
-                            -- OR category like '%$keyword%'
-                            -- OR menu like '%$keyword%'
                             AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
-                            -- AND NOT image = '/style/images/deli-dish-no-image.png'
-                            -- UNION
-
-                            -- SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
-                            -- FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-                            -- WHERE  food_name like '%$key2%'
-                            -- -- OR address like '%$key2%'
-                            -- -- OR category like '%$key2%'
-                            -- OR menu like '%$key2%'
-                            -- AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
-                            
-                            -- UNION
-
-                            -- SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
-                            -- FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-                            -- WHERE  food_name like '%$key3%'
-                            -- -- OR address like '%$key3%'
-                            -- -- OR category like '%$key3%'
-                            -- OR menu like '%$key3%'
-                            -- AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
-                            -- GROUP BY restaurant_id
-                            LIMIT 100
+                            GROUP BY restaurant_id
+                            ORDER BY rate DESC
                             ";
                             
                             $topfood = $mysqli->query($sql);

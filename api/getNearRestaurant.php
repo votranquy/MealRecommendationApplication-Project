@@ -1,6 +1,6 @@
 <?php 
-  include('connect/connect.php');
-  $json = file_get_contents('php://input');
+include('connect/connect.php');
+$json = file_get_contents('php://input');
 $obj = json_decode($json, true);
 // $yourlatitude  = floatval($obj['yourlatitude']);
 // $yourlongitude = floatval($obj['yourlongitude']);
@@ -27,7 +27,7 @@ try{
     AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
     GROUP BY p.id
     ORDER BY distance ASC
-    LIMIT 5
+    LIMIT 200;
     ";
   // -- getDistance(p.longitude, p.latitude) as distance
   // --ABS(SQRT(POW((CAST(p.longitude as float)-CAST('$yourlongitude' as float)),2)-POW((CAST(p.latitude as float)-CAST('$yourlatitude' as float)),2))) as distance

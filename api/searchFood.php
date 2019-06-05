@@ -22,10 +22,11 @@
                             OR address like '%$key%'
                             OR category like '%$key%'
                             OR menu like '%$key%'
+                            -- AND NOT image = '/style/images/deli-dish-no-image.png'
                             AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
                             GROUP BY restaurant_id
                             ORDER BY rate DESC
-                            LIMIT 20
+                            LIMIT 100
                             ";
                             
                             $topfood = $mysqli->query($sql);
@@ -60,38 +61,38 @@
               if($max == 2){
                      try{
                             // $key1 = $keyword;
-                            $key2 = $arr[0];
-                            $key3 = $arr[1];
+                            // $key2 = $arr[0];
+                            // $key3 = $arr[1];
 
                             $sql = "SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
                             FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
                             WHERE  food_name like '%$keyword%'
-                            OR address like '%$keyword%'
-                            OR category like '%$keyword%'
-                            OR menu like '%$keyword%'
+                            -- OR address like '%$keyword%'
+                            -- OR category like '%$keyword%'
+                            -- OR menu like '%$keyword%'
                             AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
-                            
-                            UNION
+                            -- AND NOT image = '/style/images/deli-dish-no-image.png'
+                            -- UNION
 
-                            SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
-                            FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-                            WHERE  food_name like '%$key2%'
-                            OR address like '%$key2%'
-                            OR category like '%$key2%'
-                            OR menu like '%$key2%'
-                            AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
+                            -- SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
+                            -- FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
+                            -- WHERE  food_name like '%$key2%'
+                            -- -- OR address like '%$key2%'
+                            -- -- OR category like '%$key2%'
+                            -- OR menu like '%$key2%'
+                            -- AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
                             
-                            UNION
+                            -- UNION
 
-                            SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
-                            FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-                            WHERE  food_name like '%$key3%'
-                            OR address like '%$key3%'
-                            OR category like '%$key3%'
-                            OR menu like '%$key3%'
-                            AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
-                            GROUP BY restaurant_id
-                            LIMIT 20
+                            -- SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
+                            -- FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
+                            -- WHERE  food_name like '%$key3%'
+                            -- -- OR address like '%$key3%'
+                            -- -- OR category like '%$key3%'
+                            -- OR menu like '%$key3%'
+                            -- AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
+                            -- GROUP BY restaurant_id
+                            LIMIT 100
                             ";
                             
                             $topfood = $mysqli->query($sql);

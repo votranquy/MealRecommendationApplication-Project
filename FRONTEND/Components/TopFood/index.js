@@ -32,7 +32,6 @@ export default class TopFood extends Component {
   }
 
   componentDidMount(){
-
     getLocation()
     .then(region => {
       this.setState({region});
@@ -40,7 +39,6 @@ export default class TopFood extends Component {
       else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
      })
     .then((responseJson)=>{
-
       if(responseJson.result==="success"){
         this.setState({
             mang : responseJson.data,

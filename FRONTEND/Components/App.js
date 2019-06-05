@@ -9,7 +9,6 @@ import ConfirmCode from "./ConfirmCode";
 import saveLat from "../api/saveLat";
 import saveLong from "../api/saveLong";
 import saveLocation from "../api/saveLocation";
-
 export default class    App extends Component {
     // componentDidMount() {
     //     //var start = Math.random( ) * (900000 - 600000) + 600000;
@@ -121,7 +120,7 @@ export default class    App extends Component {
 componentDidMount(){
     navigator.geolocation.getCurrentPosition(
         (position)=>{
-            console.log("GET_LOCATION_SUCCESS", position);
+            // console.log("GET_LOCATION_SUCCESS", position);
             this.setState({ 
                 region:{
                     latitude: position.coords.latitude,
@@ -133,7 +132,7 @@ componentDidMount(){
              saveLocation(this.state.region);
         },
        (error) => {
-        console.log("GET_LOCATION_FAIL",error);
+        // console.log("GET_LOCATION_FAIL",error);
        },
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     )

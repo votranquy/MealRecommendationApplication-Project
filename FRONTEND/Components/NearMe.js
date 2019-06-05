@@ -13,6 +13,7 @@ import MapView from 'react-native-maps';
 import theme from "../theme";
 import Polyline from '@mapbox/polyline';
 import getNearRestaurantApi from "../api/getNearRestaurantApi";
+import Toast, {DURATION} from 'react-native-easy-toast';
 const {height , width} = Dimensions.get('window'); 
 
 export default class NearMe extends Component {
@@ -63,27 +64,29 @@ export default class NearMe extends Component {
                         idlocation: 0,
                     }
                  });
+                 this.refs.toast.show('Lấy thông tin vị trí thành công');
                  
-                Alert.alert(
-                    'Thông báo',
-                    'Đã tìm thấy vị trí của bạn' ,
-                    [
-                        { text: 'OK' },
-                    ],
-                    { cancelable: false }
-                );
+                // Alert.alert(
+                //     'Thông báo',
+                //     'Đã tìm thấy vị trí của bạn' ,
+                //     [
+                //         { text: 'OK' },
+                //     ],
+                //     { cancelable: false }
+                // );
 
             },
            (error) => {
                console.log('aaaaa',error); 
-               Alert.alert(
-                'Thông báo',
-                'Không tìm thấy vị trí của bạn' ,
-                [
-                    { text: 'OK' },
-                ],
-                { cancelable: false }
-            );
+               this.refs.toast.show('Lấy thông tin vị trí thất bại');
+            //    Alert.alert(
+            //     'Thông báo',
+            //     'Không tìm thấy vị trí của bạn' ,
+            //     [
+            //         { text: 'OK' },
+            //     ],
+            //     { cancelable: false }
+            // );
         },
             {enableHighAccuracy: true, timeout: 60000, maximumAge: 3000 }
         )
@@ -199,6 +202,7 @@ export default class NearMe extends Component {
               <TouchableOpacity style={styles.btnComment}  onPress={()=> this.reGetNearRestaurant()}>
                   <Text style={styles.txtButton}>Tìm quán ăn gần bạn</Text>
               </TouchableOpacity>
+              <Toast ref="toast"/>
             </View>
         );
     }
@@ -219,7 +223,8 @@ const styles = StyleSheet.create({
     btnComment:{
         backgroundColor: theme.Color.NiceRed,
         alignItems:"center",
-        padding:5,
+        padding:10,
+        width: "100%"
       },
       txtButton:{
         color: theme.Color.White,

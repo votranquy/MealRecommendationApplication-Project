@@ -7,17 +7,16 @@ import theme from '../theme';
 import searchApi from '../api/searchApi';
 import Modal from "react-native-modalbox";
 import CheckBox from 'react-native-check-box';
+import getToken from "../api/getToken";
 import getTopFoodApi from "../api/getTopFoodApi";     //Nolocation
 import getTopFoodApi2 from "../api/getTopFoodApi2"; //Location
 import getLocation from "../api/getLocation";
-
-
+import TopFood from "../Components/TopFood";
 export default class SearchView extends Component {
   constructor(props){
     super(props);
     this.state = {
       page:0,
-      isLoading: false,
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
       key:"",
       value: "",
@@ -29,6 +28,8 @@ export default class SearchView extends Component {
       isLoadingMore: false,
       region:{},
       mang:[],
+      isSearch: false,
+      // token:"",
       }
     }
 
@@ -36,73 +37,111 @@ export default class SearchView extends Component {
     gotoDetail(food) {
       const { navigator } = this.props;
       navigator.push({ name: 'FOOD_DETAIL' ,food});
-}
+    }
 
     getData(){
       this.refs.modal3.open();
 
-       searchApi(this.state.key)
+
+       searchApi(this.state.key, this.state.page)
        .then((responseData)=>{
           if(responseData.result === "success"){
             this.refs.modal3.close();
-            this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData.data),});
+            this.setState({
+              isSearch: true,
+              mang: responseData.data,
+              dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+            });
             console.log("RESULT_RETURN");
           }
           else{
             this.refs.modal3.close();
-            this.setState({ dataSource: this.state.dataSource.cloneWithRows([]),});
+            
+            this.setState({ isSearch: true,dataSource: this.state.dataSource.cloneWithRows([]),});
             console.log("NOT SUCCESS");
           }
        })  
        .catch(err => {this.refs.modal3.close(); console.log("LOI TIM KIEM",err)});
     }
 
-
+    loadMore(){
+      this.setState({isLoadingMore: true});
+      nextpage = this.state.page +1;
+  
+      searchApi(this.state.key, nextpage)
+      .then((responseJson)=>{
+        if(responseJson.result==="success"){
+          this.setState({
+              mang : this.state.mang.concat(responseJson.data),
+              isLoadingMore: false,
+              dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+              page: this.state.page+1,
+            });
+        }
+        else{
+          this.setState({
+            isLoadingMore: false,
+            dataSource: this.state.dataSource.cloneWithRows([]),
+          })
+        }
+      })
+      .catch(error=>{
+        console.log('GETMORESEARCH_ERROR',error);
+        this.setState({
+          isLoadingMore: false,
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        });
+      });
+    }
 
 hanleChangeText(text){
        this.setState({key: text});
        console.log("KEYWORK", this.state.key);
-              // this.getData();
 }
 
+// getTopFood(){
+//   getLocation()
+//   .then(region => {
+//     this.setState({region});
+//     if(region===""){return getTopFoodApi(this.state.page)}
+//     else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
+//    })
+//   .then((responseJson)=>{
+//     // console.log("TOPFOODRESULTSEARCHPAGE",)
+//     if(responseJson.result==="success"){
+//       this.setState({
+//           mang : responseJson.data,
+//           isLoading: false,
+//           dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+//       });
+//       // console.log("DATASOURCE", this.state.dataSource);
+//     }
+//     else{
+//       console.log("NOT SUCCESS");
+//       this.setState({
+//         isLoading: false,
+//         dataSource: this.state.dataSource.cloneWithRows([]),
+//       })
+//     }
+//   })
+//   .catch(error=>{
+//     console.log('GETTOPFOOD_ERROR',error);
+//     this.setState({
+//       isLoading: false,
+//       dataSource: this.state.dataSource.cloneWithRows([]),
+//     });
+//   });
+// }
 
 componentDidMount(){
-
-  getLocation()
-  .then(region => {
-    this.setState({region});
-    if(region===""){return getTopFoodApi(this.state.page)}
-    else{  return getTopFoodApi2(this.state.page, this.state.region.latitude, this.state.region.longitude) }
-   })
-  .then((responseJson)=>{
-
-    if(responseJson.result==="success"){
-      this.setState({
-          mang : responseJson.data,
-          isLoading: false,
-          dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-      });
-    }
-    else{
-      console.log("NOT SUCCESS");
-      this.setState({
-        isLoading: false,
-        dataSource: this.state.dataSource.cloneWithRows([]),
-      })
-    }
-  })
-  .catch(error=>{
-    console.log('GETTOPFOOD_ERROR',error);
-    this.setState({
-      isLoading: false,
-      dataSource: this.state.dataSource.cloneWithRows([]),
-    });
-  });
+  // getToken()
+  // .then(token=>{this.setState({token})});
+  // this.getTopFood();
 }
   
 
 createRow(property){
-  // if(property.image == '/style/images/deli-dish-no-image.png');
+  if(property.image == '');
   // else{
     return(
     <TouchableOpacity 
@@ -247,16 +286,18 @@ createRow(property){
               <ListView 
               enableEmptySections
               dataSource={this.state.dataSource}
-              renderRow={(propertya) => this.createRow(propertya)}
+              renderRow={(propertya) =>  this.createRow(propertya)}
+              onEndReached={this.loadMore.bind(this)}
+              onEndReachedThreshold={0.5}
             />
           </View>
           );
           const loadJSX=(
             <View style={styles.ctnLoadingRow}>
               <ActivityIndicator size="large" size={50} color="#FF0000" />
-              <ActivityIndicator size="large" size={50} color="#3C00A7" />
+              {/* <ActivityIndicator size="large" size={50} color="#3C00A7" />
               <ActivityIndicator size="large" size={50} color="#00BE00" />
-              <ActivityIndicator size="large" size={50} color="#FDCE00" />
+              <ActivityIndicator size="large" size={50} color="#FDCE00" /> */}
             </View>
               );
 
@@ -264,8 +305,8 @@ createRow(property){
           <View style={styles.wrapper}>
             {LoadJSX}
             {headerJSX}
-            {this.state.isLoading       ?  loadJSX : <View/>} 
-            {resultJSX}
+            {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}
+            {!this.state.isSearch ?<TopFood/> :resultJSX}
             {this.state.isLoadingMore ? loadJSX : <View/>}
           </View>
         );

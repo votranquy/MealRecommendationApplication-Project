@@ -9,6 +9,7 @@ import {
   Dimensions,
 
 } from 'react-native';
+import Random from "../Components/Random";
 import theme from '../theme';
 export default class UserMenu extends Component {
 
@@ -19,6 +20,7 @@ export default class UserMenu extends Component {
       <View style={styles.row1}>
         <Text style={styles.titleStyle}>Gợi Ý Cho Bạn</Text>
       </View>
+      <Random/>
       </View>
 
     );

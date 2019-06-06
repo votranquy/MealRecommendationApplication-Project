@@ -1,5 +1,5 @@
 const crawlData = () => (
-    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/')// eslint-disable-line
+    fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/')// eslint-disable-line
     .then(res => res.json())
 );
 

@@ -129,7 +129,7 @@ updateBookmarkOfOneFood(idbookmark,idfood){
   return (
       <View style={styles.wrapper}>
         {headerJSX }
-        {this.state.bookmark.length === 0 ? <Text>Loading</Text> : bookmarkJSX}
+        {this.state.bookmark.length === 0 ? <Text>Bạn chưa có bookmark nào!</Text> : bookmarkJSX}
         {/* {bookmarkJSX} */}
         </View>
     );

@@ -32,7 +32,6 @@ export default class Random extends Component {
   }
 
   componentDidMount(){
-
     getLocation()
     .then(region => {
       this.setState({region});
@@ -145,14 +144,10 @@ export default class Random extends Component {
       const loadJSX=(
         <View style={styles.ctnLoadingRow}>
           <ActivityIndicator size="large" size={50} color="#FF0000" />
-          <ActivityIndicator size="large" size={50} color="#3C00A7" />
-          <ActivityIndicator size="large" size={50} color="#00BE00" />
-          <ActivityIndicator size="large" size={50} color="#FDCE00" />
         </View>
           );
         return (
           <View style={styles.container}>
-            {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}
             {randomfoodJSX}
             {this.state.isLoadingMore ? loadJSX : <View/>}
           </View>

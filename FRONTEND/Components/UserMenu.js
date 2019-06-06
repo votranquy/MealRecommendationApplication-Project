@@ -9,9 +9,38 @@ import {
   Dimensions,
 
 } from 'react-native';
+import getToken from "../api/getToken";
+
 import Random from "../Components/Random";
 import theme from '../theme';
 export default class UserMenu extends Component {
+  constructor(props){
+    super(props);
+      this.state={isShow: false,}   ;   
+    }
+  
+
+
+    checkLogin(){
+      getToken()
+      .then(token => {
+        if(token!==""){
+          this.setState({ isShow: true})
+        }
+      })
+    }
+
+    componentDidMount(){
+      this._isMounted = true;
+      this.interval = setInterval(() => this.checkLogin(), 2000);
+    }     
+
+    componentWillUnmount() {
+      this._isMounted = false;
+      clearInterval(this.interval);
+    }
+
+
 
   render() {
     return (
@@ -20,7 +49,16 @@ export default class UserMenu extends Component {
       <View style={styles.row1}>
         <Text style={styles.titleStyle}>Gợi Ý Cho Bạn</Text>
       </View>
+
+{ this.state.isShow ?
+  <View style={{flex:1}}>
+      {/* <TouchableOpacity style={styles.btnComment}  onPress={()=> this.reGetNearRestaurant()}>
+        <Text style={styles.txtButton}>Làm mới</Text>
+    </TouchableOpacity> */}
       <Random/>
+   </View>   
+  :<Text> Chỉ dành riêng cho thành viên đã đăng nhập</Text>}
+
       </View>
 
     );
@@ -46,5 +84,15 @@ const styles = StyleSheet.create({
   alignItems:'center',
    justifyContent:"space-between",
  }, 
+ btnComment:{
+  backgroundColor: theme.Color.NiceRed,
+  alignItems:"center",
+  padding:10,
+  width: "100%"
+},
+txtButton:{
+  color: theme.Color.White,
+  fontWeight:"bold",
+},
 });
 

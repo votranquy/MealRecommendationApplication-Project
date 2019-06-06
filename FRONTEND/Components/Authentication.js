@@ -72,22 +72,22 @@ export default class Authentication extends Component {
             <View style={[styles.ctnLoading, styles.horizontal]}>
                  <View style={styles.ctnLoadingRow}>
                     <ActivityIndicator size="large" size={50} color="#FF0000" />
-                    <ActivityIndicator size="large" size={50} color="#3C00A7" />
+                    {/* <ActivityIndicator size="large" size={50} color="#3C00A7" />
                     <ActivityIndicator size="large" size={50} color="#00BE00" />
-                    <ActivityIndicator size="large" size={50} color="#FDCE00" />
+                    <ActivityIndicator size="large" size={50} color="#FDCE00" /> */}
                 </View>
-                <View style={styles.ctnLoadingRow}>
+                {/* <View style={styles.ctnLoadingRow}>
                     <ActivityIndicator size="large" size={50} color="#FF0000" />
                     <ActivityIndicator size="large" size={50} color="#3C00A7" />
                     <ActivityIndicator size="large" size={50} color="#00BE00" />
                     <ActivityIndicator size="large" size={50} color="#FDCE00" />
-                </View>
-                <View style={styles.ctnLoadingRow}>
+                </View> */}
+                {/* <View style={styles.ctnLoadingRow}>
                     <ActivityIndicator size="large" size={50} color="#FF0000" />
                     <ActivityIndicator size="large" size={50} color="#3C00A7" />
                     <ActivityIndicator size="large" size={50} color="#00BE00" />
                     <ActivityIndicator size="large" size={50} color="#FDCE00" />
-                </View>
+                </View> */}
 
             </View>
           </Modal>

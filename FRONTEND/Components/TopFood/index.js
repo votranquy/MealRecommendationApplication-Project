@@ -144,9 +144,6 @@ export default class TopFood extends Component {
       const loadJSX=(
       <View style={styles.ctnLoadingRow}>
         <ActivityIndicator size="large" size={50} color="#FF0000" />
-        <ActivityIndicator size="large" size={50} color="#3C00A7" />
-        <ActivityIndicator size="large" size={50} color="#00BE00" />
-        <ActivityIndicator size="large" size={50} color="#FDCE00" />
       </View>
         );
 

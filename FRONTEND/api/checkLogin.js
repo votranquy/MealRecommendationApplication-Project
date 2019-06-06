@@ -1,5 +1,5 @@
 const checkLogin = (token) => (
-    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/check_login.php',
+    fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/check_login.php',
     {   
         method: 'POST',
         headers: {

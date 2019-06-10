@@ -6,8 +6,7 @@ try{
   WHERE rate > 0 
   AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
   AND NOT image = '/style/images/deli-dish-no-image.png'
-  GROUP BY p.id
-  ORDER BY RAND()";
+  GROUP BY p.id";
   
   $topfood = $mysqli->query($sql);
   $max = $topfood->num_rows; //The nsumber of result

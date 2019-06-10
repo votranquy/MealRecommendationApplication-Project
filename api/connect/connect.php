@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("Asia/Ho_Chi_Minh");
 
-$mysqli = mysqli_connect("localhost", "root", "", "mealapp");
+$mysqli = mysqli_connect("localhost", "root", "", "MealApp");
 $mysqli->set_charset("utf8");
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());

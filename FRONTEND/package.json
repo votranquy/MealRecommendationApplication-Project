@@ -1,52 +1,58 @@
 {
-	"name": "MealRecommendationApplicationProject",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"@mapbox/polyline": "^1.1.0",
-		"accordion-collapse-react-native": "^0.1.9",
-		"axios": "^0.18.0",
-		"i18next": "^15.1.0",
-		"lottie-react-native": "^2.5.11",
-		"react": "16.0.0-alpha.6",
-		"react-native": "0.43.0",
-		"react-native-action-button": "^2.8.5",
-		"react-native-app-intro-slider": "^2.0.1",
-		"react-native-check-box": "^1.0.4",
-		"react-native-confirmation-code-input": "^1.0.4",
-		"react-native-datepicker": "^1.7.2",
-		"react-native-drawer": "^2.5.1",
-		"react-native-easy-toast": "^1.2.0",
-		"react-native-elements": "^1.1.0",
-		"react-native-indicators": "^0.13.0",
-		"react-native-maps": "^0.12.4",
-		"react-native-maps-directions": "^1.7.0",
-		"react-native-material-dropdown": "^0.11.1",
-		"react-native-modalbox": "^1.6.0",
-		"react-native-phone-call": "^1.0.9",
-		"react-native-popup-menu": "^0.9.0",
-		"react-native-radio-button": "^2.0.1",
-		"react-native-scrollable-tab-view": "^0.4.2",
-		"react-native-scrolling-button-menu": "0.0.4",
-		"react-native-scrolling-menu": "^0.1.1",
-		"react-native-step-indicator": "0.0.11",
-		"react-native-swiper": "^1.5.14",
-		"react-native-switch-toggle": "^1.1.0",
-		"react-native-tab-navigator": "^0.3.4",
-		"react-native-underline-tabbar": "^1.3.6",
-		"react-navigation": "^2.0.0"
-	},
-	"devDependencies": {
-		"babel-jest": "24.5.0",
-		"babel-preset-react-native": "4.0.1",
-		"jest": "24.5.0",
-		"react-test-renderer": "16.0.0-alpha.6"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "MealRecommendationApplicationProject",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "eject-native-base": "node node_modules/native-base/ejectTheme.js"
+  },
+  "dependencies": {
+    "@appbaseio/reactivesearch-native": "^0.4.1",
+    "@mapbox/polyline": "^1.1.0",
+    "accordion-collapse-react-native": "^0.1.9",
+    "axios": "^0.18.0",
+    "expo": "^33.0.0",
+    "expo-font": "^5.0.1",
+    "i18next": "^15.1.0",
+    "lottie-react-native": "^2.5.11",
+    "native-base": "^2.1.3",
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.43.0",
+    "react-native-action-button": "^2.8.5",
+    "react-native-app-intro-slider": "^2.0.1",
+    "react-native-check-box": "^1.0.4",
+    "react-native-confirmation-code-input": "^1.0.4",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-drawer": "^2.5.1",
+    "react-native-easy-toast": "^1.2.0",
+    "react-native-elements": "^1.1.0",
+    "react-native-indicators": "^0.13.0",
+    "react-native-maps": "^0.12.4",
+    "react-native-maps-directions": "^1.7.0",
+    "react-native-material-dropdown": "^0.11.1",
+    "react-native-modalbox": "^1.6.0",
+    "react-native-phone-call": "^1.0.9",
+    "react-native-popup-menu": "^0.9.0",
+    "react-native-radio-button": "^2.0.1",
+    "react-native-scrollable-tab-view": "^0.4.2",
+    "react-native-scrolling-button-menu": "0.0.4",
+    "react-native-scrolling-menu": "^0.1.1",
+    "react-native-step-indicator": "0.0.11",
+    "react-native-swiper": "^1.5.14",
+    "react-native-switch-toggle": "^1.1.0",
+    "react-native-tab-navigator": "^0.3.4",
+    "react-native-underline-tabbar": "^1.3.6",
+    "react-navigation": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-jest": "24.5.0",
+    "babel-preset-expo": "^5.1.1",
+    "babel-preset-react-native": "4.0.1",
+    "jest": "24.5.0",
+    "react-test-renderer": "16.0.0-alpha.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

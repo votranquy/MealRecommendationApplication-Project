@@ -3,255 +3,255 @@
 
     <item
         is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/libs/internal_impl-24.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/internal_impl-24.0.0_b621655ecc0ed6c53776d394e1edd351a6207016.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="9f6d236bac26d02b410e4ee186ba517ace5ee661">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-9.8.0_803bf978a4aa142858bf75f908b0c7ed241b917f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_2d1937a370b4fd92492392d37ad612f9ebf824c9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1_dd6ab78a59c298faa05e2889b2cc98aeda92a596.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="7e92aadd0697922316d1395c1887a23aebec640a">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.8.0_408d790c0f915d237869a924b98716b90e21690a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.43.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f66dccf471b94d5d28c54a6b8ca9e1668b0fb0ce">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.43.0_3f51c67760d9f88185fe58739ffbcc8774f5275f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_3a89726b87bb512a167fd81a4de2de255fb50182.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_5c8463c57ec4f34f587adc5988168187857450c4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.43.0/jars/libs/infer-annotations-1.5.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="dcac634e137395f79693ec760f081a86eb2bd84e">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5_1d85c214f09c92faaeea34ce243db9720379b610.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.8.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="122ec9237acd8a57d974b9d529987f1ee6ca5aea">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-maps-9.8.0_28e2b4e9b62b43bdfae3acdeb5c429bfdb5dafc1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.0.1_0afa10d6602082ee86d0eeb2c9bbcfcebf8d68a7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.4.0_9306b5d5271d58ca12521d13354a96014acfc4c9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.0.1_79509c33d3ae08837cdf67f585993c45bbc068a8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-ws/3.4.1/8ace66ef7002d98f633377c9e67daeeb196d8c3b/okhttp-ws-3.4.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-3.4.1_9ede3e9ee1ea94317646595107fc6e64a9532e31.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_e290c7ae9dbe28fabf18cc208a9d061d025d8518.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.0.1_c464cdac32d0b6fdfe01e07da0956e81ea7b58fa.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.0.0/support-annotations-24.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/support-annotations-24.0.0_1c67d9415f326f58d1ccae39ec88ac6e32509f41.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_d26ad6a2eada052de05bda78900adf9a4df51ed5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okio-1.9.0_7cdcde343d0510ae8aae8573a54fc70d5f0a94b3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_ac6cc4d6a40ec4f07bbb174844580d44cd7a641b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.0.1/jars/classes.jar"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\1.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="cf836a435a496eb22ff2aa69aa1e619462549f81">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.0.1_5ca496720d0e36ec7e2a6139b7f7c5dffc243b51.jar" />
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fresco-1.0.1_11fcdb04f964ab1a087865e1538a1942a16767ff.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/MealRecommendationApplicationProject/react-native-maps/unspecified/jars/classes.jar"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="66425eedc7f5376974341420d35ef833c1cabbf7">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/MealRecommendationApplicationProject-react-native-maps-unspecified_34b0945bd9afbee9e2bb9fa5f2b313ae1c4156d4.jar" />
+        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-drawee-1.0.1_7ea331cb1830f747d9cbdb75e0a3df441d320877.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.0.0_bdc82f28d9c8540daa0667b5b66c800c091b6a6f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.4.1/63994437f62bc861bc20c605d12962f7246116d1/okhttp-urlconnection-3.4.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="63994437f62bc861bc20c605d12962f7246116d1">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.4.1_c54af7cade53f3bbb55625ae592962288fcb3ae8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_a3ec7a6505be72fc34a67de7d79f5ca88674b11c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.0.1_f3ba3d2a022d47de77e5f5f2044ae0c8e4426033.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.0.1/jars/classes.jar"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\1.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.0.1_d8005d016a5a4c2d5405e2f41cf03d4596ad3878.jar" />
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-1.0.1_fe25e1b163b724bd310a8667e571a63da669ba85.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.8.0/jars/classes.jar"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.43.0\jars\libs\infer-annotations-1.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="dcac634e137395f79693ec760f081a86eb2bd84e">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\infer-annotations-1.5_c1c7b93c56e8e852c83ad81d4d9c1250bedaaff5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\okhttp-3.4.1_81308c32254c44126a47d9693565c4af212b5731.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-1.0.1_bedfc99006d78ae15d387ea3b6b338c5e47cbc30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.8.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="7e92aadd0697922316d1395c1887a23aebec640a">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-9.8.0_d13e2b11475b7bbce6e0f997ef73d7bfa3d5ae76.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\bolts-tasks-1.4.0_c1d856f5aefc7b4f081625242193eacefe26de25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\24.0.0\support-annotations-24.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\support-annotations-24.0.0_67f329d59091c6a327f1b064008ec50f1d1d7094.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.facebook.fbui.textlayoutbuilder\staticlayout-proxy\1.0\f162442a19fff13995fbd51ba414d9ee05579080\staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\staticlayout-proxy-1.0_dd47cce97157795a481e5ef195509bdfa2b0c228.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fbui.textlayoutbuilder\textlayoutbuilder\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_127d52554aea0d01160031f49952aa67f2e982f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.43.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f66dccf471b94d5d28c54a6b8ca9e1668b0fb0ce">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.react-react-native-0.43.0_100a0b94efef81c65b5903b9f84dc76fbef5abe4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\okio-1.9.0_4034d097fa65cfe9590af05258682ed63f04939e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-1.0.1_74168418dec3722feb62da5c3fd7da48ab333120.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.soloader-soloader-0.1.0_8ab455e9b95f22835114adfe0286b0aecea153f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\javax.inject-1_6f2f8e4283730a7d16ad9f85195975068f28fa25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\MealRecommendationApplicationProject\react-native-maps\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="670b0b852bb7c6383a46f6935e7a771dcb83e721">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\MealRecommendationApplicationProject-react-native-maps-unspecified_643f4ea536a70d442810210bb332b27298686603.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\libs\internal_impl-24.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\internal_impl-24.0.0_14d3912e3a7c98af3253d77b3afbd3dd5f8bf6f6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-ws\3.4.1\8ace66ef7002d98f633377c9e67daeeb196d8c3b\okhttp-ws-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\okhttp-ws-3.4.1_d64b303a5910a0f0d710001a6edf3263a9fec221.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.8.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="bf2e1838e4428616c1aa26edf43de72b5b99bf84">
-        <dex dex="/home/wyatt/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.8.0_19082d889690eabd4dc26c05558f034348acc847.jar" />
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-9.8.0_e5dd36d13fb35fef545a11804a78e75435921bb4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_05c859f5cfee67b5993192d5eb1c860ab9aa0437.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.4.1\63994437f62bc861bc20c605d12962f7246116d1\okhttp-urlconnection-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="63994437f62bc861bc20c605d12962f7246116d1">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\okhttp-urlconnection-3.4.1_a712eac5b9cc34f4ca53aac2e45160a079d56722.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.8.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="122ec9237acd8a57d974b9d529987f1ee6ca5aea">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-9.8.0_611155714e53ba0e80fd23e483c5dcbb6369a928.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\jsr305-3.0.0_38b31928bbb34c8fca0ab66506dd9015c28de121.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-okhttp3-1.0.1_e5ccd9aa2a8508123d3e5268c0fc7e6fc4f36caf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.0.0_0945ac8132f0c3f5eee1062f0a48da8521390d02.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_e9ccc7a768a624d077ee3c525bd43401e2f52165.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.8.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9f6d236bac26d02b410e4ee186ba517ace5ee661">
+        <dex dex="C:\Users\QUY\Desktop\MealRecommendationApplication-Project\FRONTEND\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-9.8.0_3b314e9bfad24bf51dbedf3385acb6cab58cba53.jar" />
     </item>
 
 </items>

@@ -7,7 +7,7 @@ import {
   StatusBar,
 } from 'react-native';
 import App from './Components/App';
-
+// import AppB from './Components/AppB';
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
@@ -29,4 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEE',
   },
 });
+
+
+
 AppRegistry.registerComponent('MealRecommendationApplicationProject', () => MealRecommendationApplicationProject);

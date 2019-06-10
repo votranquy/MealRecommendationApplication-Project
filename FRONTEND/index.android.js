@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import App from './Components/App';
 // import AppB from './Components/AppB';
+import SearchView from "./TEST/SearchView";
 export default class MealRecommendationApplicationProject extends Component {
   render() {
     return (
@@ -18,7 +19,7 @@ export default class MealRecommendationApplicationProject extends Component {
           translucent = {false}
           networkActivityIndicatorVisible = {true}
           backgroundColor="#da5350"/>
-         <App/>
+         <SearchView/>
       </View>
     );
   }

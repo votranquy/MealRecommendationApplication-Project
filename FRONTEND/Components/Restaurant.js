@@ -40,7 +40,7 @@ export default class Restaurant extends Component {
 
 
   componentDidMount(){
-    fetch("http://192.168.21.250/MealRecommendationApplication-Project/BACKEND/Restaurant.php?pagenumber="+this.state.page,
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Restaurant.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export default class Restaurant extends Component {
 
 
   _onEndReached(){
-    fetch("http://192.168.21.250/MealRecommendationApplication-Project/BACKEND/Restaurant.php?pagenumber="+(this.state.page+1),
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/Restaurant.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {

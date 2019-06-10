@@ -21,6 +21,7 @@
     "react-native": "0.43.0",
     "react-native-action-button": "^2.8.5",
     "react-native-app-intro-slider": "^2.0.1",
+    "react-native-autocomplete-search": "^1.0.8",
     "react-native-check-box": "^1.0.4",
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-datepicker": "^1.7.2",

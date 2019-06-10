@@ -1,5 +1,5 @@
 const getOneBookmarkApi = (token,idbookmark) => (
-       fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/get_onebookmark.php',
+       fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/get_onebookmark.php',
        {   
            method: 'POST',
            headers: {

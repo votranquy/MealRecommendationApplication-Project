@@ -12,7 +12,8 @@
               FROM FOOD 
               WHERE  name like '$keyword%'
               GROUP BY name
-              ORDER BY name ASC
+              -- ORDER BY name ASC
+              LIMIT 20
               ";
               
               $listSuggestion = $mysqli->query($sql);

@@ -1,44 +1,26 @@
 <?php
-//     use \Firebase\JWT\JWT;
-//     require __DIR__ . '/vendor/autoload.php';
-//     include('function.php');
+
     include('connect/connect.php');
-       if(1){ //isset($_GET['key']) && strlen($_GET['key'])>2
+       if(1){
               $json = file_get_contents('php://input');
               $obj = json_decode($json, true);
               $keyword = $obj['key'];
-              // $token = $obj['token'];
-              // $key = "example_key";
-              // $page = $_GET["pagenumber"];
-
-       // if($token != "" && $page != "0"){
-       //        $decoded = JWT::decode($token, $key, array('HS256'));
-       //        if($decoded->expire < time()){}
-       //        else{
-       //               $email = $decoded->email;
-
-       //               $sql_getid = $mysqli->query("SELECT id FROM USER WHERE email = '$email'");
-
-       //               while ($row = $sql_getid->fetch_assoc()) {
-       //                      $id = $row["id"];
-       //               }
-       //        $sql_insert = "INSERT INTO SEARCH_HISTORY(id_user,keyword) VALUE('$id','$keyword')";
-       //        $result = $mysqli->query($sql_insert);       
-       // }
-       // }
               $food = array();
-
               $maxx = str_word_count($keyword);
-              
               $arr = explode(" ", $keyword);
-
-              if($maxx == 1 || $maxx > 2){
+              if(1){
                      try{
-                            $key = $arr[0];
+                            // $key = $arr[0];
 
+                            // $sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, q.name, q.image
+                            // FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
+                            // WHERE  food_name like '%$key%'
+                            // AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
+                            // GROUP BY restaurant_id
+                            // ";
                             $sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, q.name, q.image
-                            FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-                            WHERE  food_name like '%$key%'
+                            FROM FOOD q INNER JOIN STORE p ON q.restaurant_id = p.restaurant_id
+                            WHERE  q.name like '%$keyword%'
                             AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
                             GROUP BY restaurant_id
                             ";
@@ -72,46 +54,46 @@
 
               } //==1
 
-              if($maxx == 2){
-                     try{
+              // if($maxx == 2){
+              //        try{
 
 
-                            $sql = "SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
-                            FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
-                            WHERE  food_name like '%$keyword%'
-                            AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
-                            GROUP BY restaurant_id
-                            ORDER BY rate DESC
-                            ";
+              //               $sql = "SELECT  p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, p.menu, q.name, q.image
+              //               FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
+              //               WHERE  food_name like '%$keyword%'
+              //               AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
+              //               GROUP BY restaurant_id
+              //               ORDER BY rate DESC
+              //               ";
                             
-                            $topfood = $mysqli->query($sql);
-                            $max = $topfood->num_rows; //The nsumber of result
+              //               $topfood = $mysqli->query($sql);
+              //               $max = $topfood->num_rows; //The nsumber of result
                             
-                            $arrFood = array(); //0-> $max -1
-                            while( $row = $topfood->fetch_assoc()){
-                                 array_push($arrFood,$row);
-                            }
+              //               $arrFood = array(); //0-> $max -1
+              //               while( $row = $topfood->fetch_assoc()){
+              //                    array_push($arrFood,$row);
+              //               }
                           
-                            $the_number_of_items_per_page = 10; //10 datas per page
-                            $page = $_GET["pagenumber"];
-                            $from = $page * $the_number_of_items_per_page;
+              //               $the_number_of_items_per_page = 10; //10 datas per page
+              //               $page = $_GET["pagenumber"];
+              //               $from = $page * $the_number_of_items_per_page;
                             
                             
-                            $newArrayFood = array();
-                            if($from > $max){}
-                            else{
-                              for($i=$from; ($i <= $from + $the_number_of_items_per_page-1) && ($i <= $max-1); $i = $i + 1){
-                                array_push($newArrayFood,$arrFood[$i]);
-                              }  
-                            } 
-                            $result = array('result'=>'success','page'=>$page,'data'=>$newArrayFood);
-                            echo json_encode($result);
-                          }catch(Exception $e){
-                                 $result = array('result'=>'error');  
-                                 echo json_encode($result);  
-                          }
+              //               $newArrayFood = array();
+              //               if($from > $max){}
+              //               else{
+              //                 for($i=$from; ($i <= $from + $the_number_of_items_per_page-1) && ($i <= $max-1); $i = $i + 1){
+              //                   array_push($newArrayFood,$arrFood[$i]);
+              //                 }  
+              //               } 
+              //               $result = array('result'=>'success','page'=>$page,'data'=>$newArrayFood);
+              //               echo json_encode($result);
+              //             }catch(Exception $e){
+              //                    $result = array('result'=>'error');  
+              //                    echo json_encode($result);  
+              //             }
 
-              } //==2
+              // } //==2
 
               // if($max == 3){ // 0 1 2
               //        try{

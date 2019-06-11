@@ -42,7 +42,8 @@ export default class FoodDetail extends Component {
       }
   }
 
-  goBack() {
+  goBack(){
+      this.props.showTabNavigator();
       const { navigator } = this.props;
       navigator.pop();
   }
@@ -171,6 +172,7 @@ export default class FoodDetail extends Component {
   }
 
   componentDidMount(){
+    this.props.hiddenTabNavigator();
     this.checkLogin();
     this.getPicture();	
     this.getMenu();
@@ -480,18 +482,26 @@ formatMoney(money){
   );
 
   return (
-      <View style={styles.wrapper}>
-        {headerJSX }
-        <ScrollView style={styles.body} >
-            {pictureJSX }
-            {infomationJSX}
-            {bookmarkJSX}
-            {menuJSX}
-            {commentJSX}
-          </ScrollView>
-          {actionButtonJSX}
-          {allCommentJSX}
-        </View>
+  //   <Modal
+  //   style={[styles.modal,]}
+  //   backdrop={true}
+  //   coverScreen={true}
+  //   ref={"modal0"}
+  //   swipeToClose={false}
+  // >
+        <View style={styles.wrapper}>
+          {headerJSX }
+          <ScrollView style={styles.body} >
+              {pictureJSX }
+              {infomationJSX}
+              {bookmarkJSX}
+              {menuJSX}
+              {commentJSX}
+            </ScrollView>
+            {actionButtonJSX}
+            {allCommentJSX}
+          </View>
+      // </Modal>
     );
   }
 }

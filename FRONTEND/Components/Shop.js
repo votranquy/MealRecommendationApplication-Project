@@ -25,24 +25,35 @@ export default class Shop extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab: "search",
+      selectedTab: "home",
       bookmarkArray: [],
       isLogIn:null,
+      tabBarHeight: 50,
     };
   }
 
 
 
+hiddenTabNavigator(){
+  this.setState({tabBarHeight: 0});
+}
+
+showTabNavigator(){
+  this.setState({tabBarHeight: 50});
+}
+
 
   componentDidMount(){
-
   }
 
 
   render(){
     return(
       <View style={{flex:1, backgroundColor:theme.Color.White,padding:0,}}>
-        <TabNavigator >
+        <TabNavigator 
+        tabBarStyle={{ height: this.state.tabBarHeight, overflow: 'hidden' }}
+        sceneStyle={{ paddingBottom:  this.state.tabBarHeight }}
+        >
 
           <TabNavigator.Item
             selected={this.state.selectedTab === 'home'}
@@ -52,7 +63,11 @@ export default class Shop extends Component{
             onPress={() => this.setState({ selectedTab: 'home' })}
             selectedTitleStyle={{ color: theme.Color.Red, fontFamily: 'Avenir', }}
             >
-            <Home open={this.props.open}/>
+            <Home 
+              open={this.props.open} 
+              hiddenTabNavigator={this.hiddenTabNavigator.bind(this)} 
+              showTabNavigator={this.showTabNavigator.bind(this)}
+            />
           </TabNavigator.Item>
 
           <TabNavigator.Item

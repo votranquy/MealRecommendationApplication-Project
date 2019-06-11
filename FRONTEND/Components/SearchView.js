@@ -44,13 +44,15 @@ export default class SearchView extends Component {
     }
 
     getData(){
-      this.setState({listSuggestion:[]});
-      this.refs.modal3.open();
+      this.setState({isLoadingMore: true});
+      // this.refs.modal3.open();
+      
        searchApi(this.state.key, this.state.page)
        .then((responseData)=>{
           if(responseData.result === "success"){
-            this.refs.modal3.close();
+            // this.refs.modal3.close();
             this.setState({
+              isLoadingMore: false,
               isSearch: false,
               mang: responseData.data,
               dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
@@ -58,31 +60,45 @@ export default class SearchView extends Component {
             console.log("RESULT_RETURN");
           }
           else{
-            this.refs.modal3.close();
-            this.setState({ isSearch: false,dataSource: this.state.dataSource.cloneWithRows([]),});
+            // this.refs.modal3.close();
+            this.setState({ 
+              isLoadingMore: false,
+              isSearch: false,
+              dataSource: this.state.dataSource.cloneWithRows([]),
+            });
             console.log("NOT SUCCESS");
           }
        })  
-       .catch(err => {this.refs.modal3.close(); console.log("LOI TIM KIEM",err)});
+       .catch(err => {
+        //  this.refs.modal3.close(); 
+        this.setState({ 
+          isLoadingMore: false,
+          isSearch: false,
+        });
+         console.log("LOI TIM KIEM",err);
+        });
     }
 
     selectSuggestion(text){
       this.setState({
+        key:text,
         isShowSuggestion: false,
+        listSuggestion:[],
       })
       this.getData();
-      this.setState({key:text})
+      // this.setState({key:text})
     }
 
-  componentDidMount(){
-    //  this.getData();
-    }
+  // componentDidMount(){
+  //   //  this.getData();
+  //   }
       
 
 
     loadMore(){
       this.setState({isLoadingMore: true});
       nextpage = this.state.page +1;
+
       searchApi(this.state.key, nextpage)
       .then((responseJson)=>{
         if(responseJson.result==="success"){
@@ -91,7 +107,7 @@ export default class SearchView extends Component {
               isLoadingMore: false,
               dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
               page: this.state.page+1,
-            });
+          });
         }
         else{
           this.setState({
@@ -113,21 +129,22 @@ export default class SearchView extends Component {
 
     hanleChangeText(text){
       // const { keyword } = this.state;
+      //isShowSuggestion: true, listSuggestion:[]
 
-      this.setState({key: text, isShowSuggestion: true, listSuggestion:[]});
+      this.setState({key: text, isShowSuggestion: true});
       console.log("KEYWORD", text);
 
-      // getSuggestionAPI( this.state.key)
-      // .then((responseJson)=>{
-      //   console.log(responseJson);
-      //   if(responseJson.result === "success"){
-      //     this.setState({
-      //       isShowSuggestion: true,
-      //       listSuggestion: responseJson.data,
-      //     });
-      //     console.log("KETQUATRAVE");
-      //   }
-      // })
+      getSuggestionAPI( this.state.key)
+      .then((responseJson)=>{
+        console.log(responseJson);
+        if(responseJson.result === "success"){
+          this.setState({
+            isShowSuggestion: true,
+            listSuggestion: responseJson.data,
+          });
+          console.log("KETQUATRAVE");
+        }
+      })
     }
 
 
@@ -176,7 +193,6 @@ export default class SearchView extends Component {
              <View style={styles.ctnLoadingRow}>
                 <ActivityIndicator size="large" size={50} color="#FF0000" />
             </View>
-
         </View>
       </Modal>
       );
@@ -228,42 +244,40 @@ export default class SearchView extends Component {
       </Modal>
       );
 
+  const headerJSX=(
+          <View style={styles.ctnHeader}>
+              <View style={styles.ctnSearch}>
+                <View style={styles.ctnHeaderIcon}>
+                    <Image source={theme.Image.iCon.WhiteSearch}  style={styles.imageHeader}/>
+                  </View>    
+                    <View style={styles.ctnInputSearch}>
+                          <TextInput 
+                          style={styles.inputSearch} 
+                          placeholder="Bạn muốn ăn gì?" 
+                          underlineColorAndroid="white"
+                          value={this.state.key}
+                          onChangeText={(text)=> { this.hanleChangeText(text)
+                            // _.debounce(this.hanleChangeText(text), 1000)
+                            
 
+                          }}
+                          />
+                    </View>
+                    {/* <TouchableOpacity style={styles.ctnHeaderIcon}  onPress={()=>  this.refs.modal2.open()}>
+                      <Image source={theme.Image.iCon.WhiteSetting}  style={styles.imageHeader}/>
+                    </TouchableOpacity>   */}
+                  </View>
 
-      const headerJSX=(
-              <View style={styles.ctnHeader}>
-                  <View style={styles.ctnSearch}>
-                    <View style={styles.ctnHeaderIcon}>
-                        <Image source={theme.Image.iCon.WhiteSearch}  style={styles.imageHeader}/>
-                      </View>    
-                       <View style={styles.ctnInputSearch}>
-                              <TextInput 
-                              style={styles.inputSearch} 
-                              placeholder="Bạn muốn ăn gì?" 
-                              underlineColorAndroid="white"
-                              value={this.state.key}
-                              onChangeText={(text)=> { this.hanleChangeText(text)
-                                // _.debounce(this.hanleChangeText(text), 1000)
-                               
+                    <TouchableOpacity style={styles.btnSearch} onPress={()=>  this.getData()}>
+                          <Text style={styles.txtBtnSearch}> Tìm </Text>
+                    </TouchableOpacity>
+                    {settingJSX}
+          </View>
+    );
 
-                              }}
-                              />
-                       </View>
-                        {/* <TouchableOpacity style={styles.ctnHeaderIcon}  onPress={()=>  this.refs.modal2.open()}>
-                          <Image source={theme.Image.iCon.WhiteSetting}  style={styles.imageHeader}/>
-                        </TouchableOpacity>   */}
-                      </View>
-
-                       <TouchableOpacity style={styles.btnSearch} onPress={()=>  this.getData()}>
-                              <Text style={styles.txtBtnSearch}> Tìm </Text>
-                       </TouchableOpacity>
-                       {settingJSX}
-              </View>
-        );
-
-      const resultJSX=(
-        <View style={{flex:1}}>
-          <ListView 
+    const resultJSX=(
+      <View style={{flex:1, borderColor: "green"}}>
+        <ListView 
           enableEmptySections
           dataSource={this.state.dataSource}
           renderRow={(propertya) =>  this.createRow(propertya)}
@@ -271,36 +285,41 @@ export default class SearchView extends Component {
           onEndReachedThreshold={0.5}
         />
       </View>
-      );
+    );
 
-      const loadmoreJSX=(
-        <View style={styles.ctnLoadingRow}>
-          <ActivityIndicator size="large" size={50} color="#FF0000" />
-        </View>
-      );
+    const loadmoreJSX=(
+      <View style={styles.ctnLoadingRow}>
+        <ActivityIndicator size="large" size={50} color="#FF0000" />
+      </View>
+    );
 
-      const suggestionJSX=(
-        <FlatList
+    const suggestionJSX=(
+      <FlatList
           data={this.state.listSuggestion}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={this.selectSuggestion(item.name)}>
-              <Text>{item.name}</Text>
+            <TouchableOpacity 
+              onPress={()=> this.selectSuggestion(item.name) }
+              style={styles.ctnSuggestion}
+            >
+              <Text style={styles.txtSuggestion}>{item.name}</Text>
             </TouchableOpacity>
           )}
           keyExtractor={item => item.id}
         />
+    );
+
+      return (
+        <View style={styles.wrapper}>
+          {headerJSX}
+          <ScrollView>
+              {this.state.isShowSuggestion ? suggestionJSX :<View/>}
+              {resultJSX}
+              {this.state.isLoadingMore ? loadmoreJSX : <View/>}
+              {LoadForSearchingJSX}
+          </ScrollView>
+        </View>
       );
-        return (
-          <View style={styles.wrapper}>
-            {LoadForSearchingJSX}
-            {headerJSX}
-            <ScrollView>
-                {resultJSX}
-                {suggestionJSX}
-                {this.state.isLoadingMore ? loadmoreJSX : <View/>}
-            </ScrollView>
-          </View>
-        );
+
     }
 }
 
@@ -308,6 +327,16 @@ const { width, height} = Dimensions.get('window');
 const imageWidth = width / 4;
 const imageHeight = (imageWidth * 452) / 361;
 const styles = StyleSheet.create({
+  ctnSuggestion:{
+    padding:5,
+    borderBottomWidth: 1,
+    borderColor: theme.Color.Gray,
+    paddingLeft:10,
+  },
+  txtSuggestion:{
+    fontSize: theme.Size.FontSmall,
+    color: theme.Color.DarkGray,
+  },
   ctnLoading: {
     flex: 1,
     justifyContent: 'center'
@@ -564,6 +593,4 @@ ctnSearch:{
        fontSize: theme.Size.FontSmall,
        alignItems: 'center',
      },
-
-
   });

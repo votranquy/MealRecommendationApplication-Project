@@ -21,7 +21,7 @@
               while( $row = $listSuggestion->fetch_assoc()){
                     array_push($list,$row);
               }
-              $result = array($list);
+              $result = array('result' => 'success' , 'data'=>$list);
               echo json_encode($result);
        }        
 ?>

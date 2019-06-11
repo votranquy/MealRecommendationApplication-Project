@@ -1,5 +1,5 @@
 const searchApi = (key, page) => (
-       fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/searchFood.php?pagenumber='+page,
+       fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/searchFood.php?pagenumber='+page,
        {   
            method: 'POST',
            headers: {

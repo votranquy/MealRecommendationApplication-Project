@@ -1,22 +1,26 @@
 [
     {
-        "merged": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\home\\votranquy\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\home\\votranquy\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\Users\\QUY\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\Users\\QUY\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\home\\votranquy\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\home\\votranquy\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\home\\wyatt\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\home\\wyatt\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "C:\\Users\\QUY\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\QUY\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "merged": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\home\\wyatt\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\home\\wyatt\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
-        "merged": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
-        "source": "/Users/quy.vo/Desktop/MealRecommendationApplication-Project/FRONTEND/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/color-v23/abc_color_highlight_material.xml"
+        "merged": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\Users\\QUY\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\quy.vo\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\C:\\Users\\QUY\\Desktop\\MealRecommendationApplication-Project\\FRONTEND\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\color-v23\\abc_color_highlight_material.xml"
     }
 ]

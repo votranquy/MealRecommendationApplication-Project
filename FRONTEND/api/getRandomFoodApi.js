@@ -1,6 +1,6 @@
 
 const getRandomFoodApi =  (page) => (
-       fetch("http://192.168.64.2/MealRecommendationApplication-Project/api/random.php?pagenumber="+page,
+       fetch("http://192.168.21.250/MealRecommendationApplication-Project/api/random.php?pagenumber="+page,
               {
                   method:"POST",
                   headers: {

@@ -39,7 +39,7 @@ export default class Random extends Component {
 
 
   componentDidMount(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+this.state.page,
+    fetch("http://192.168.21.250/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+this.state.page,
       {method:"POST",
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ createRow(property){
 
 
   _onEndReached(){
-    fetch("http://192.168.64.2/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+(this.state.page+1),
+    fetch("http://192.168.21.250/MealRecommendationApplication-Project/BACKEND/RanDom.php?pagenumber="+(this.state.page+1),
       {
         method:"POST",
         headers: {

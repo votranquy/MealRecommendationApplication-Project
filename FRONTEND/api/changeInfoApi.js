@@ -1,5 +1,5 @@
 const changeInfoApi = (token, name, phone, address) => (
-  fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/change_info.php',
+  fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/change_info.php',
   {   
       method: 'POST',
       headers: {

@@ -1,5 +1,5 @@
 const getSuggestionAPI =  (text) => (
-  fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/getSuggestion.php',
+  fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/getSuggestion.php',
   {   
       method: 'POST',
       headers: {

@@ -23,9 +23,10 @@ import MapViewDirections from 'react-native-maps-directions';
 import styles from "./styles";
 import getToken from '../../api/getToken';
 import getMenuApi from '../../api/getMenuApi';
+import getFoodImageAPI from '../../api/getFoodImageAPI';
 const {height , width} = Dimensions.get('window'); 
-
 const GOOGLE_MAPS_APIKEY="AIzaSyAG2BnUcY2mW5_VY8Q6cVEabhl9l_Rokkk";
+
 export default class FoodDetail extends Component {
   constructor(props){
     super(props);
@@ -34,25 +35,47 @@ export default class FoodDetail extends Component {
       swipeToClose: false,
       comment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       allComment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-      // picture : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       picture: [],
       isLoaded: false,
       menu:[],
       phonenumber : `${"09"}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`,
+      foodImage: "",
+      foodName: "",
       }
   }
 
-  goBack(){
-      this.props.showTabNavigator();
-      const { navigator } = this.props;
-      navigator.pop();
-  }
+  // goBack(){
+  //     this.props.showTabNavigator();
+  //     const { navigator } = this.props;
+  //     navigator.pop();
+  // }
+
+  gotoHome(){
+    this.props.showTabNavigator();
+    const { navigator } = this.props;
+    navigator.push({name: "HOME_VIEW"});
+}
 
   gotoSaveBookmark(idfood){
     const {navigator} = this.props;
     navigator.push({name: "SAVE_BOOKMARK",idfood});
   }
 
+  getFoodImage(){
+    getFoodImageAPI(this.props.food_id)
+    .then((responseJson)=>{
+      if(responseJson.result === "success"){
+       this.setState({
+         foodImage: responseJson.data[0].image,
+         foodName: responseJson.data[0].name,
+        })
+        console.log("IMAGE",this.state.foodImage)
+      }
+    })
+    .catch(error=>{
+      console.log('GET_IMAGE_ERROR',error);
+    });
+  }
 
   gotoMap(location){
     const {navigator} = this.props;
@@ -172,11 +195,12 @@ export default class FoodDetail extends Component {
   }
 
   componentDidMount(){
-    this.props.hiddenTabNavigator();
-    this.checkLogin();
-    this.getPicture();	
-    this.getMenu();
-    this.getComment();
+    // this.props.hiddenTabNavigator();
+    // this.checkLogin();
+    // this.getPicture();	
+    // this.getMenu();
+    // this.getComment();
+    this.getFoodImage();
   	
   }
 
@@ -201,45 +225,45 @@ export default class FoodDetail extends Component {
   // getNumber(){
   //    `${"09"}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
   // }
-formatMoney(money){
-  var num = money.length();
-  return `${money.substring(0,num-3)}${","}${money.substring(num-3,num)}`;
-}
+// formatMoney(money){
+//   var num = money.length();
+//   return `${money.substring(0,num-3)}${","}${money.substring(num-3,num)}`;
+// }
 
   render() {
-    const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
+    // const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
     
     const headerJSX=(
       <View style={styles.ctnHeader}>
-        <TouchableOpacity  onPress={this.goBack.bind(this)} style={styles.ctnHeaderIcon}>
+        <TouchableOpacity  onPress={this.gotoHome.bind(this)} style={styles.ctnHeaderIcon}>
           <Image source={theme.Image.iCon.Whiteback} style={styles.iconHeader}/>
         </TouchableOpacity>
         <View style={styles.ctnHeaderText}>
-          <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
+          <Text style={styles.txtHeader} numberOfLines={1}>{this.state.foodName}</Text>
         </View>
         <View style={styles.ctnHeaderIcon}/>
       </View>
     );
 
-    const infomationJSX=(
-      <View style={styles.ctnFoodInfomation}>
-        <View style={styles.lableMenu}>
-              <Text style={styles.txtMenu}>Thông Tin Cửa Hàng</Text>
-        </View>
-        <TouchableOpacity style={styles.ctnInfomationRow} onPress={() => this.gotoMap(this.props.food)}>
-          <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteAdress}/>
-          <Text style={styles.txtAddress} numberOfLines={1}>  {address}</Text>
-        </TouchableOpacity>
-        <View style={styles.ctnInfomationRow} >
-          <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteHouse}/>
-          <Text style={styles.txtCategory}>  { category.substring(0,category.length-2) }</Text>
-        </View>
-        <TouchableOpacity style={styles.ctnInfomationRow}  onPress={()=>this.callTheRestaurant(this.state.phonenumber)}>
-         <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteSmartPhone}/>
-          <Text style={styles.txtPhoneNumber}>  {this.state.phonenumber}  </Text>
-        </TouchableOpacity>
-      </View>
-    );
+    // const infomationJSX=(
+    //   <View style={styles.ctnFoodInfomation}>
+    //     <View style={styles.lableMenu}>
+    //           <Text style={styles.txtMenu}>Thông Tin Cửa Hàng</Text>
+    //     </View>
+    //     <TouchableOpacity style={styles.ctnInfomationRow} onPress={() => this.gotoMap(this.props.food)}>
+    //       <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteAdress}/>
+    //       <Text style={styles.txtAddress} numberOfLines={1}>  {address}</Text>
+    //     </TouchableOpacity>
+    //     <View style={styles.ctnInfomationRow} >
+    //       <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteHouse}/>
+    //       <Text style={styles.txtCategory}>  { category.substring(0,category.length-2) }</Text>
+    //     </View>
+    //     <TouchableOpacity style={styles.ctnInfomationRow}  onPress={()=>this.callTheRestaurant(this.state.phonenumber)}>
+    //      <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteSmartPhone}/>
+    //       <Text style={styles.txtPhoneNumber}>  {this.state.phonenumber}  </Text>
+    //     </TouchableOpacity>
+    //   </View>
+    // );
 
 
     // const saveJSX=(
@@ -268,240 +292,239 @@ formatMoney(money){
     //       </Modal>
     // );
 
-    const pictureJSX=(
-      <View style={styles.ctnImageFood}>
-        <Swiper
-          showsButtons={true} 
-          width={width} 
-          height={height/5}
-          loop={true}
-          autoplay={true} 
-          showsPagination={true}
-        >
+    // const RestaurantPictureJSX=(
+    //   <View style={styles.ctnImageFood}>
+    //     <Swiper
+    //       showsButtons={true} 
+    //       width={width} 
+    //       height={height/5}
+    //       loop={true}
+    //       autoplay={true} 
+    //       showsPagination={true}
+    //     >
        
-                  {this.state.picture.map(pic => (
-                      <Image key={pic.Id} 
-                      source={{ uri: pic.FullSizeImageUrl }} 
-                      style={styles.imageFood}/>
+    //               {this.state.picture.map(pic => (
+    //                   <Image key={pic.Id} 
+    //                   source={{ uri: pic.FullSizeImageUrl }} 
+    //                   style={styles.imageFood}/>
 
-                    ))}
-        </Swiper>
-      </View>
-    );
+    //                 ))}
+    //     </Swiper>
+    //   </View>
+    // );
 
-    const commentJSX=(
-      <View style={styles.ctnMenu}>
-        <View style={styles.lableMenu}>
-              <Text style={styles.txtMenu}>Bình Luận</Text>
-        </View>
-        <ListView
-            enableEmptySections={true}
-           dataSource={this.state.comment}
-            renderRow={
-              (data) => 
-                <View style={styles.ctnComment}>
+  //   const commentJSX=(
+  //     <View style={styles.ctnMenu}>
+  //       <View style={styles.lableMenu}>
+  //             <Text style={styles.txtMenu}>Bình Luận</Text>
+  //       </View>
+  //       <ListView
+  //           enableEmptySections={true}
+  //          dataSource={this.state.comment}
+  //           renderRow={
+  //             (data) => 
+  //               <View style={styles.ctnComment}>
+  //                 <View style={styles.ctnUsername}>
+  //                   <View style={styles.ctnUsernameArea}>
+  //                     <View style={styles.logoUsername}>
+  //                       <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
+  //                     </View>
+  //                     <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
+  //                   </View>
+  //                   <View style={styles.ctnScore}>
+  //                     <Text style={styles.txtScore}>đã chấm {String(data.AvgRating/2)} đ</Text>
+  //                   </View>
+  //                 </View>
+  //                   <Text style={styles.comment}>{data.Description}</Text>
+  //                   <Image source={{uri: data.Pictures[0].Url}} style={styles.imageComment} />
+  //               </View>
+  //           }
+  //       />
+  //       { this.state.comment.getRowCount() == 0 && (<Text>Không có bình luận nào!</Text>)}
+  //       { this.state.comment.getRowCount() >= 10 && (
+  //         <TouchableOpacity style={styles.btnComment} onPress={() => this.refs.modal3.open()}>
+  //           <Text style={styles.txtButton}>Xem tất cả bình luận</Text>
+  //         </TouchableOpacity>
+  //       )}
+  //     </View>
+  //   );
 
-                  <View style={styles.ctnUsername}>
+  //   const allCommentJSX=(
+  //     <Modal
+  //           style={[styles.modal, styles.modal3]}
+  //           backdrop={true}
+  //           coverScreen={true}
+  //           ref={"modal3"}
+  //           swipeToClose={false}
+  //         >
+  //           <View style={styles.ctnMapView}>
+  //             <View style={styles.ctnHeaderMap}>
+  //               <View style={styles.ctnCloseButton}></View>
+  //               <View style={styles.ctnHeaderText}>
+  //                 <Text style={styles.txtHeader} numberOfLines={1}>Bình luận</Text>
+  //               </View>
+  //               <TouchableOpacity onPress={() => this.refs.modal3.close()} style={styles.ctnHeaderIcon}>
+  //                 <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+  //               </TouchableOpacity>
+  //             </View>
+  //             <View style={styles.ctnCommentArea}>
+  //               <ListView 
+  //                   enableEmptySections={true}
+  //                   dataSource={this.state.comment}
+  //                   renderRow={
+  //                     (data) => 
+  //                       <View style={styles.ctnComment}>
+  //                         <View style={styles.ctnUsername}>
+  //                           <View style={styles.logoUsername}>
+  //                             <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
+  //                           </View>
+  //                           <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
+  //                           <Text style={styles.comment}> {data.AvgRating}</Text>
 
-                    <View style={styles.ctnUsernameArea}>
-                      <View style={styles.logoUsername}>
-                        <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
-                      </View>
-                      <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
-                    </View>
+  //                         </View>
+  //                           <Text style={styles.comment}>{data.Description}</Text>
+  //                           <Image source={{uri: data.Pictures[0].Url}} style={styles.imageComment} />
+  //                       </View>
+  //                     }
+  //              />
+  //             </View> 
 
-                    <View style={styles.ctnScore}>
-                      <Text style={styles.txtScore}>đã chấm {String(data.AvgRating/2)} đ</Text>
-                    </View>
+  //           </View>
+  //         </Modal>
+  //   );
 
-                  </View>
-                    <Text style={styles.comment}>{data.Description}</Text>
-                    <Image source={{uri: data.Pictures[0].Url}} style={styles.imageComment} />
-                </View>
-            }
-        />
-        { this.state.comment.getRowCount() == 0 && (<Text>Không có bình luận nào!</Text>)}
-        { this.state.comment.getRowCount() >= 10 && (
-          <TouchableOpacity style={styles.btnComment} onPress={() => this.refs.modal3.open()}>
-            <Text style={styles.txtButton}>Xem tất cả bình luận</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    );
+  // const menuJSX = (
+  //   <View style={styles.ctnMenu}>
+  //     <View style={styles.lableMenu}>
+  //       <Text style={styles.txtMenu}>Thực Đơn</Text>
+  //     </View>
+  //     <FlatList
+  //       enableEmptySection
+  //       data={this.state.menu}
+  //       showsVerticalScrollIndicator={false}
+  //       renderItem={ ({item}) => (
+  //         <View style={styles.ctnItem}>
 
-    const allCommentJSX=(
-      <Modal
-            style={[styles.modal, styles.modal3]}
-            backdrop={true}
-            coverScreen={true}
-            ref={"modal3"}
-            swipeToClose={false}
-          >
-            <View style={styles.ctnMapView}>
-              <View style={styles.ctnHeaderMap}>
-                <View style={styles.ctnCloseButton}></View>
-                <View style={styles.ctnHeaderText}>
-                  <Text style={styles.txtHeader} numberOfLines={1}>Bình luận</Text>
-                </View>
-                <TouchableOpacity onPress={() => this.refs.modal3.close()} style={styles.ctnHeaderIcon}>
-                  <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-                </TouchableOpacity>
-              </View>
-              <View style={styles.ctnCommentArea}>
-                <ListView 
-                    enableEmptySections={true}
-                    dataSource={this.state.comment}
-                    renderRow={
-                      (data) => 
-                        <View style={styles.ctnComment}>
-                          <View style={styles.ctnUsername}>
-                            <View style={styles.logoUsername}>
-                              <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
-                            </View>
-                            <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
-                            <Text style={styles.comment}> {data.AvgRating}</Text>
-
-                          </View>
-                            <Text style={styles.comment}>{data.Description}</Text>
-                            <Image source={{uri: data.Pictures[0].Url}} style={styles.imageComment} />
-                        </View>
-                      }
-               />
-              </View> 
-
-            </View>
-          </Modal>
-    );
-
-  const menuJSX = (
-    <View style={styles.ctnMenu}>
-      <View style={styles.lableMenu}>
-        <Text style={styles.txtMenu}>Thực Đơn</Text>
-      </View>
-      <FlatList
-        enableEmptySection
-        data={this.state.menu}
-        showsVerticalScrollIndicator={false}
-        renderItem={ ({item}) => (
-          <View style={styles.ctnItem}>
-
-            <View style={styles.ctnImageItem}>
-              { 
-              item.image !== "/style/images/deli-dish-no-image.png"  ?
-              <Image source={{uri: "https:"+item.image }}  style={styles.imgeItem}/> :
-              <Image source={theme.Image.iCon.NoImage} style={styles.imgeItem}/> //style={{width: width/4 , height: height/13,flex:1}}
-              }
-            </View>
+  //           <View style={styles.ctnImageItem}>
+  //             { 
+  //             item.image !== "/style/images/deli-dish-no-image.png"  ?
+  //             <Image source={{uri: "https:"+item.image }}  style={styles.imgeItem}/> :
+  //             <Image source={theme.Image.iCon.NoImage} style={styles.imgeItem}/> //style={{width: width/4 , height: height/13,flex:1}}
+  //             }
+  //           </View>
 
 
-              { this.state.isLogin ?
-              <View style={styles.ctnRestImage}>
-                <View  style={styles.ctnInfomationItem}>
-                  <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-                  <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
-              </View>
-                <View style={styles.ctnHeartIcon}>
-                  <View/>
-                  <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
-                    <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
-                  </TouchableOpacity>
-                  <View/>
-                </View>
-                </View>
-                 :
-            <View  style={styles.ctnInfomationItem2}>
-                 <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-                 <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
-             </View>
-              }
+  //             { this.state.isLogin ?
+  //             <View style={styles.ctnRestImage}>
+  //               <View  style={styles.ctnInfomationItem}>
+  //                 <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+  //                 <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
+  //             </View>
+  //               <View style={styles.ctnHeartIcon}>
+  //                 <View/>
+  //                 <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
+  //                   <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
+  //                 </TouchableOpacity>
+  //                 <View/>
+  //               </View>
+  //               </View>
+  //                :
+  //           <View  style={styles.ctnInfomationItem2}>
+  //                <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+  //                <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
+  //            </View>
+  //             }
 
 
-          </View>
-        )}
-        keyExtractor={item => item.id}
+  //         </View>
+  //       )}
+  //       keyExtractor={item => item.id}
+  //     />
+  //   </View>
+  // );
+
+  // const bookmarkJSX=(
+  //   <Modal
+  //   style={[styles.modal, styles.modal2]}
+  //   backdrop={true}
+  //   coverScreen={true}
+  //   ref={"modal2"}
+  // >
+  // <View style={styles.ctnMapView}>
+  //     <View style={styles.ctnHeaderMap}>
+  //       <View style={styles.ctnCloseButton}></View>
+  //       <View style={styles.ctnHeaderText}>
+  //         <Text style={styles.txtHeader} numberOfLines={1}>BOOKMARK</Text>
+  //       </View>
+  //       <TouchableOpacity onPress={() => this.refs.modal2.close()} style={styles.ctnHeaderIcon}>
+  //         <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
+  //       </TouchableOpacity>
+  //     </View>
+  //     <View style={styles.ctnMapArea}>
+  //     </View>
+  //   </View>
+  // </Modal>
+  // );
+
+  // const actionButtonJSX=(
+  //   <ActionButton buttonColor={theme.Color.LightRed}>
+  //       <ActionButton.Item 
+  //         buttonColor={theme.Color.NicePurple}
+  //         title="Bản đồ" 
+  //         textStyle={{fontSize: theme.Size.FontSmall}} 
+  //         spaceBetween={5}
+  //         textContainerStyle={{height:25}}       
+  //         onPress={() => this.gotoMap(this.props.food)}>
+  //         <Image source={theme.Image.iCon.Earths} style={styles.iconActionButton}/>
+  //       </ActionButton.Item>
+
+  //       <ActionButton.Item 
+  //       buttonColor={theme.Color.NiceBlue} 
+  //       title="Gọi điện" 
+  //       textStyle={{fontSize: theme.Size.FontSmall}} 
+  //       spaceBetween={5}
+  //       textContainerStyle={{height:25}}       
+  //       onPress={this.callTheRestaurant}>
+  //         <Image source={theme.Image.iCon.WhitePhone} style={styles.iconActionButton}/>
+  //       </ActionButton.Item>
+
+  //       {/* <ActionButton.Item 
+  //         buttonColor={theme.Color.NiceGreen} 
+  //         title="Lưu lại" 
+  //         textStyle={{fontSize: theme.Size.FontSmall}} 
+  //         spaceBetween={5}
+  //         textContainerStyle={{height:25}}       
+  //         onPress={() => this.refs.modal2.open()}>
+  //           <Image source={theme.Image.iCon.WhiteHeart} style={styles.iconActionButton}/>
+  //       </ActionButton.Item> */}
+
+  //   </ActionButton>
+  // );
+
+  const FoodImageJSX=(
+    <View style={styles.ctnImageFood}>
+      <Image 
+        source={{uri: "https:"+this.state.foodImage }}
+        style={styles.imageFood}
       />
-    </View>
-  );
-
-  const bookmarkJSX=(
-    <Modal
-    style={[styles.modal, styles.modal2]}
-    backdrop={true}
-    coverScreen={true}
-    ref={"modal2"}
-  >
-  <View style={styles.ctnMapView}>
-      <View style={styles.ctnHeaderMap}>
-        <View style={styles.ctnCloseButton}></View>
-        <View style={styles.ctnHeaderText}>
-          <Text style={styles.txtHeader} numberOfLines={1}>BOOKMARK</Text>
-        </View>
-        <TouchableOpacity onPress={() => this.refs.modal2.close()} style={styles.ctnHeaderIcon}>
-          <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-        </TouchableOpacity>
-      </View>
-      <View style={styles.ctnMapArea}>
-      </View>
-    </View>
-  </Modal>
-  );
-
-  const actionButtonJSX=(
-    <ActionButton buttonColor={theme.Color.LightRed}>
-        <ActionButton.Item 
-          buttonColor={theme.Color.NicePurple}
-          title="Bản đồ" 
-          textStyle={{fontSize: theme.Size.FontSmall}} 
-          spaceBetween={5}
-          textContainerStyle={{height:25}}       
-          onPress={() => this.gotoMap(this.props.food)}>
-          <Image source={theme.Image.iCon.Earths} style={styles.iconActionButton}/>
-        </ActionButton.Item>
-
-        <ActionButton.Item 
-        buttonColor={theme.Color.NiceBlue} 
-        title="Gọi điện" 
-        textStyle={{fontSize: theme.Size.FontSmall}} 
-        spaceBetween={5}
-        textContainerStyle={{height:25}}       
-        onPress={this.callTheRestaurant}>
-          <Image source={theme.Image.iCon.WhitePhone} style={styles.iconActionButton}/>
-        </ActionButton.Item>
-
-        {/* <ActionButton.Item 
-          buttonColor={theme.Color.NiceGreen} 
-          title="Lưu lại" 
-          textStyle={{fontSize: theme.Size.FontSmall}} 
-          spaceBetween={5}
-          textContainerStyle={{height:25}}       
-          onPress={() => this.refs.modal2.open()}>
-            <Image source={theme.Image.iCon.WhiteHeart} style={styles.iconActionButton}/>
-        </ActionButton.Item> */}
-
-    </ActionButton>
+    </View>                 
   );
 
   return (
-  //   <Modal
-  //   style={[styles.modal,]}
-  //   backdrop={true}
-  //   coverScreen={true}
-  //   ref={"modal0"}
-  //   swipeToClose={false}
-  // >
         <View style={styles.wrapper}>
           {headerJSX }
           <ScrollView style={styles.body} >
-              {pictureJSX }
-              {infomationJSX}
-              {bookmarkJSX}
+              {FoodImageJSX}
+
+              {/* {infomationJSX}
+              {RestaurantPictureJSX}
               {menuJSX}
               {commentJSX}
+               {bookmarkJSX} */}
             </ScrollView>
-            {actionButtonJSX}
-            {allCommentJSX}
+            {/* {actionButtonJSX} */}
+            {/* {allCommentJSX} */}
           </View>
-      // </Modal>
     );
   }
 }

@@ -26,9 +26,9 @@ export default class TopFood extends Component {
     }
   }
 
-  gotoDetail(food){
+  gotoDetail(food_id){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",food});
+    navigator.push({name: "FOOD_DETAIL",food_id});
   }
 
   componentDidMount(){
@@ -70,7 +70,7 @@ export default class TopFood extends Component {
       return(
       <TouchableOpacity 
         activeOpacity={0.8}  
-        onPress={() => this.gotoDetail(property)} 
+        onPress={() => this.gotoDetail(property.id)} 
         key={property.id} style={styles.ctnRestaurant}>
         <View style={styles.ctnImage} >
           <Image style={styles.image} source={{uri: "http:"+property.image}} />

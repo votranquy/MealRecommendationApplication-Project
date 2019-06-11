@@ -20,7 +20,7 @@ export default class Home extends Component{
                 case "LIST_FOOD"   :             return(  <ListFood           navigator={navigator}  />);  
                 case "MAP"   :                          return( <RestaurantDirection           navigator={navigator}  location={route.location}                                                /> );
                 case "SAVE_BOOKMARK":    return( <SaveBookmark navigator={navigator}     idfood={route.idfood}               />);
-                default                        :             return( <FoodDetail       navigator={navigator}     food={route.food}    hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} /> );
+                default                        :             return( <FoodDetail       navigator={navigator}     food_id={route.food_id}    hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} /> );
               }
           }}
         />

@@ -1,5 +1,5 @@
 const updateBookmarkOfOneFoodApi = (token,idbookmark, idfood) => (
-       fetch('http://192.168.21.250/MealRecommendationApplication-Project/api/updateBookmarkOfOneFood.php',
+       fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/updateBookmarkOfOneFood.php',
        {   
            method: 'POST',
            headers: {

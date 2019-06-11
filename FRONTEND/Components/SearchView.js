@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import {
     View, Text, TouchableOpacity, ListView,
-    Dimensions, StyleSheet, Image, Alert,TextInput,ScrollView, ActivityIndicator,
+    Dimensions, StyleSheet, Image, Alert,TextInput,ScrollView, ActivityIndicator, FlatList,
 } from 'react-native';
 import theme from '../theme';
 import searchApi from '../api/searchApi';
 import Modal from "react-native-modalbox";
 import CheckBox from 'react-native-check-box';
-import getToken from "../api/getToken";
-import getTopFoodApi from "../api/getTopFoodApi";     //Nolocation
-import getTopFoodApi2 from "../api/getTopFoodApi2"; //Location
-import getLocation from "../api/getLocation";
-import TopFood from "../Components/TopFood";
-import getRandomFoodApi from "../api/getRandomFoodApi";
-import getRandomFoodApi2 from "../api/getRandomFoodApi2";
+import getSuggestionAPI from "../api/getSuggestionAPI";
+// import  _ from 'lodash';
+
 
 export default class SearchView extends Component {
   constructor(props){
@@ -33,8 +29,12 @@ export default class SearchView extends Component {
       region:{},
       mang:[],
       isSearch: false,
+      isShowSuggestion: false,
+      listSuggestion: [],
       // token:"",
+      keyword: '',
       }
+
     }
 
     
@@ -44,6 +44,7 @@ export default class SearchView extends Component {
     }
 
     getData(){
+      this.setState({listSuggestion:[]});
       this.refs.modal3.open();
        searchApi(this.state.key, this.state.page)
        .then((responseData)=>{
@@ -63,6 +64,14 @@ export default class SearchView extends Component {
           }
        })  
        .catch(err => {this.refs.modal3.close(); console.log("LOI TIM KIEM",err)});
+    }
+
+    selectSuggestion(text){
+      this.setState({
+        isShowSuggestion: false,
+      })
+      this.getData();
+      this.setState({key:text})
     }
 
   componentDidMount(){
@@ -103,8 +112,22 @@ export default class SearchView extends Component {
 
 
     hanleChangeText(text){
-      this.setState({key: text});
-      console.log("KEYWORK", this.state.key);
+      // const { keyword } = this.state;
+
+      this.setState({key: text, isShowSuggestion: true, listSuggestion:[]});
+      console.log("KEYWORD", text);
+
+      // getSuggestionAPI( this.state.key)
+      // .then((responseJson)=>{
+      //   console.log(responseJson);
+      //   if(responseJson.result === "success"){
+      //     this.setState({
+      //       isShowSuggestion: true,
+      //       listSuggestion: responseJson.data,
+      //     });
+      //     console.log("KETQUATRAVE");
+      //   }
+      // })
     }
 
 
@@ -207,7 +230,7 @@ export default class SearchView extends Component {
 
 
 
-       const headerJSX=(
+      const headerJSX=(
               <View style={styles.ctnHeader}>
                   <View style={styles.ctnSearch}>
                     <View style={styles.ctnHeaderIcon}>
@@ -218,12 +241,17 @@ export default class SearchView extends Component {
                               style={styles.inputSearch} 
                               placeholder="Bạn muốn ăn gì?" 
                               underlineColorAndroid="white"
-                              onChangeText={(text)=>this.hanleChangeText(text)}
+                              value={this.state.key}
+                              onChangeText={(text)=> { this.hanleChangeText(text)
+                                // _.debounce(this.hanleChangeText(text), 1000)
+                               
+
+                              }}
                               />
                        </View>
-                        <TouchableOpacity style={styles.ctnHeaderIcon}  onPress={()=>  this.refs.modal2.open()}>
+                        {/* <TouchableOpacity style={styles.ctnHeaderIcon}  onPress={()=>  this.refs.modal2.open()}>
                           <Image source={theme.Image.iCon.WhiteSetting}  style={styles.imageHeader}/>
-                        </TouchableOpacity>  
+                        </TouchableOpacity>   */}
                       </View>
 
                        <TouchableOpacity style={styles.btnSearch} onPress={()=>  this.getData()}>
@@ -251,12 +279,26 @@ export default class SearchView extends Component {
         </View>
       );
 
+      const suggestionJSX=(
+        <FlatList
+          data={this.state.listSuggestion}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={this.selectSuggestion(item.name)}>
+              <Text>{item.name}</Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={item => item.id}
+        />
+      );
         return (
           <View style={styles.wrapper}>
             {LoadForSearchingJSX}
             {headerJSX}
-            {resultJSX}
-            {this.state.isLoadingMore ? loadmoreJSX : <View/>}
+            <ScrollView>
+                {resultJSX}
+                {suggestionJSX}
+                {this.state.isLoadingMore ? loadmoreJSX : <View/>}
+            </ScrollView>
           </View>
         );
     }
@@ -525,4 +567,3 @@ ctnSearch:{
 
 
   });
-  

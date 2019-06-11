@@ -19,7 +19,7 @@ export default class MealRecommendationApplicationProject extends Component {
           translucent = {false}
           networkActivityIndicatorVisible = {true}
           backgroundColor="#da5350"/>
-         <SearchView/>
+         <App/>
       </View>
     );
   }

@@ -11,6 +11,7 @@ import theme from '../../theme';
 import MapViewDirections from 'react-native-maps-directions';
 import getFoodInformationAPI from '../../api/getFoodInformationAPI';
 import styles from "./styles";
+import Toast, {DURATION} from 'react-native-easy-toast';
 const GOOGLE_MAPS_APIKEY="AIzaSyAG2BnUcY2mW5_VY8Q6cVEabhl9l_Rokkk";
 const {height , width} = Dimensions.get('window'); 
 
@@ -54,6 +55,7 @@ getLocation(){
           });
     // }
       // this.mergeLot();
+      this.refs.toast.show('Xác định vị trí của bạn thành công!');
     },
     (error) => {}, //this.setState({ error: error.message })
     { enableHighAccuracy: true, timeout: 200000, maximumAge: 1000 },
@@ -77,10 +79,12 @@ getRestaurantLocation(){
       console.log('GET_LOCATION_ERROR',error);
     });
 }
+
   componentDidMount(){
     this._isMounted = true;
     this.getRestaurantLocation();
     this.getLocation();
+    this.refs.toast.show('Đang xác định vị trí của bạn');
   }
 
 
@@ -99,7 +103,9 @@ getRestaurantLocation(){
                   <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
                 </TouchableOpacity>
               </View>
+
               <View style={styles.ctnBodyMap}>
+              
               {
                 (parseFloat(this.state.RestaurantLongitude) > 0 && parseFloat(this.state.latitude) >0)  
                 ? 
@@ -109,8 +115,8 @@ getRestaurantLocation(){
                   initialRegion={{        
                   latitude: parseFloat(this.state.RestaurantLatitude),
                   longitude: parseFloat(this.state.RestaurantLongitude),
-                  latitudeDelta: 0.005,
-                  longitudeDelta: 0.005,}}>
+                  latitudeDelta: 0.01,
+                  longitudeDelta: 0.01}}>
                 
                     {/* //Your location */}
                 <MapView.Marker
@@ -120,12 +126,12 @@ getRestaurantLocation(){
                     longitude: parseFloat(this.state.longitude),
                   }} 
                   title={"Vị trí hiện tại của bạn"} 
-                  // description={this.state.RestaurantAddress}
                   pinColor={"pink"}
                   image={theme.Image.iCon.You}
                   >
                 </MapView.Marker>
                   
+
                 {/* Restaurant  Marker*/}
                 <MapView.Marker
                   key={1} 
@@ -140,14 +146,11 @@ getRestaurantLocation(){
                   >
                 </MapView.Marker>
 
-                 
-
                   {/* //Direction */}
-                  {!!this.state.latitude && !!this.state.longitude  && //&& this.state.x == 'error'
                   <MapViewDirections
                     origin={{
                       latitude:this.state.latitude,
-                      longitude:this.state.longitude
+                      longitude:this.state.longitude,
                     }}
                     destination={{        
                       latitude: parseFloat(this.state.RestaurantLatitude),
@@ -157,24 +160,6 @@ getRestaurantLocation(){
                     strokeWidth={5}
                     strokeColor="blue"
                   />
-                  }
-
-
-                  {/* TEST */}
-                  {/* {!!this.state.latitude && !!this.state.RestaurantLatitude  &&
-                  <Polyline
-                    coordinates={[
-                      { latitude: this.state.latitude, longitude: this.state.longitude },
-                      { latitude: this.state.RestaurantLatitude, longitude: this.state.RestaurantLongitude },
-                    ]}
-                    strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
-                    strokeColors={[
-                      '#7F0000',
-                      '#B24112',
-                    ]}
-                    strokeWidth={6}
-                  />} */}
-
               </MapView>
               :
               <MapView
@@ -183,11 +168,12 @@ getRestaurantLocation(){
               initialRegion={{        
               latitude: 16.0551443,
               longitude: 108.1867645,
-              latitudeDelta: 0.5,
-              longitudeDelta: 0.5,}}>
+              latitudeDelta: 0.1,
+              longitudeDelta: 0.1,}}>
                 </MapView>
               } 
               </View> 
+              <Toast ref="toast"/>
             </View>
   );
 

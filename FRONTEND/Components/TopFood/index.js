@@ -26,9 +26,9 @@ export default class TopFood extends Component {
     }
   }
 
-  gotoDetail(food_id){
+  gotoDetail(food_id,restaurant_id){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",food_id});
+    navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
   }
 
   componentDidMount(){
@@ -70,7 +70,7 @@ export default class TopFood extends Component {
       return(
       <TouchableOpacity 
         activeOpacity={0.8}  
-        onPress={() => this.gotoDetail(property.id)} 
+        onPress={() => this.gotoDetail(property.id,property.restaurant_id)} 
         key={property.id} style={styles.ctnRestaurant}>
         <View style={styles.ctnImage} >
           <Image style={styles.image} source={{uri: "http:"+property.image}} />
@@ -83,7 +83,7 @@ export default class TopFood extends Component {
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
           <View style={styles.cntText}>
-            <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
+            <Text style={styles.txtRate}>{String(Math.round(property.average_score*10)/10)} ★</Text>
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
@@ -95,8 +95,8 @@ export default class TopFood extends Component {
   }
 
   loadMore(){
-    this.setState({isLoadingMore: true});
-    nextpage = this.state.page +1;
+    this.setState({isLoadingMore: true, page: this.state.page +1});
+    // nextpage = this.state.page +1;
 
     getLocation()
     .then(region => {

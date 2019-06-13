@@ -68,10 +68,10 @@ export default StyleSheet.create({
   ctnImageFood:{
     justifyContent:"center", 
     alignItems:"center",
-    // width:width,
-    // height: height/2,
+    width:width,
+    height: height/2,
     backgroundColor: theme.Color.White,
-    // marginBottom: 5,
+    marginBottom: 5,
   },
   imageFood:{
       height:height/2,
@@ -201,10 +201,10 @@ export default StyleSheet.create({
     height: width/11,
   },
   imgeItem:{
-    flex:1,
+    // flex:1,
     alignItems:"center",
     justifyContent:"center",
-    height: width/12,
+    height: width/6,
     width: width/4,
   },
 

@@ -22,6 +22,7 @@ export default class NearMe extends Component {
         arrayMarkers=[
         ];
         this.state={
+            isShowButton: true,
             isGetLocationSuccess: false,
             listRestaurant:[],
             region:{
@@ -148,7 +149,9 @@ export default class NearMe extends Component {
                 })
 
             }
-            this.setState({markers: arrayMarkers});
+            this.setState({
+                markers: arrayMarkers
+            });
           }else{
             console.log('GETRESTAURANT_ERROR');
             this.setState({
@@ -199,9 +202,11 @@ export default class NearMe extends Component {
                 >
                 {this.state.isGetLocationSuccess && this.renderMarker() }
               </MapView>
-              <TouchableOpacity style={styles.btnComment}  onPress={()=> this.reGetNearRestaurant()}>
+              {this.state.isShowButton ?
+              <TouchableOpacity style={styles.btnComment}  onPress={()=> {this.setState({isShowButton: false});this.reGetNearRestaurant();}}>
                   <Text style={styles.txtButton}>Tìm quán ăn gần bạn</Text>
               </TouchableOpacity>
+              : <View/>}
               <Toast ref="toast"/>
             </View>
         );

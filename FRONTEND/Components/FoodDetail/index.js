@@ -23,7 +23,7 @@ import theme from '../../theme';
 import MapViewDirections from 'react-native-maps-directions';
 import styles from "./styles";
 import getToken from '../../api/getToken';
-import getMenuApi from '../../api/getMenuApi';
+import getAnotherMenuApi from '../../api/getAnotherMenuApi';
 import getFoodInformationAPI from '../../api/getFoodInformationAPI';
 import getPersonalVoteAPI from '../../api/getPersonalVoteAPI';
 import increaseViewAPI from "../../api/increaseViewAPI";
@@ -77,13 +77,24 @@ export default class FoodDetail extends Component {
     navigator.push({name: "VOTE", starCount ,comment ,id_food });
   }
 
+  gotoMap(food_id, restaurant_id){
+    const {navigator} = this.props;
+    navigator.push({name: "MAP",food_id, restaurant_id});
+  }
+
+  gotoAnotherFood(food_id,restaurant_id) {
+    const { navigator } = this.props;
+    navigator.push({name:  "FOOD_DETAIL", food_id,restaurant_id});
+  }
 
   gotoSaveBookmark(idfood){
     const {navigator} = this.props;
     navigator.push({name: "SAVE_BOOKMARK",idfood});
   }
+
+
 //done
-  getFoodImage(){
+  getFoodInformation(){
     getFoodInformationAPI(this.props.food_id)
     .then((responseJson)=>{
       if(responseJson.result === "success"){
@@ -135,7 +146,7 @@ export default class FoodDetail extends Component {
       console.log('INCREASE_VIEW_ERROR',error);
     });
   }
-
+//done
   getComment(){
     getCommentAPI(this.props.food_id)
     .then((responseJson)=>{
@@ -151,89 +162,47 @@ export default class FoodDetail extends Component {
     });
   }
 
-  gotoMap(food_id, restaurant_id){
-    const {navigator} = this.props;
-    navigator.push({name: "MAP",food_id, restaurant_id});
+  getPicture() {  
+    //FlatList
+    // const {restaurant_id} = this.props;
+    // console.log("GET_RESTAURANT_ID"+ restaurant_id);
+    const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+this.props.restaurant_id;
+    fetch(URLi,{
+      method:"GET",
+      headers: {
+              Accept: 'application/json, text/plain, */*',
+              'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+              'x-requested-with' : 'XMLHttpRequest'
+      }
+    })
+    .then(responsei => responsei.json())
+    .then(responseJsoni=>{
+      if(responseJsoni.ListPicture.length !== 0){
+        console.log('IMAGE_WORK');
+        this.setState({
+          picture: responseJsoni.ListPicture,
+          // isLoading: false,
+        });
+        // console.log("IMAGE",this.state.picture);
+      }else{
+        console.log('IMAGE_NULL');
+        this.setState({
+          picture:[],
+          // isLoading: false,
+        });
+      }
+    })	
+    .catch(error=>{
+      console.log('IMAGE_ERROR',error);
+      this.setState({
+        picture: [],
+        // isLoading: false, 
+      });
+    });
   }
 
-  // getPicture() {  
-  //   //FlatList
-  //   const {restaurant_id} = this.props.food;
-  //   console.log("GET_RESTAURANT_ID"+ restaurant_id);
-  //   const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
-  //   fetch(URLi,{
-  //     method:"GET",
-  //     headers: {
-  //             Accept: 'application/json, text/plain, */*',
-  //             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-  //             'x-requested-with' : 'XMLHttpRequest'
-  //     }
-  //   })
-  //   .then(responsei => responsei.json())
-  //   .then(responseJsoni=>{
-  //     if(responseJsoni.ListPicture.length !== 0){
-  //       console.log('IMAGE_WORK');
-  //       this.setState({
-  //         picture: responseJsoni.ListPicture,
-  //         isLoading: false,
-  //       });
-  //       // console.log("IMAGE",this.state.picture);
-  //     }else{
-  //       console.log('IMAGE_NULL');
-  //       this.setState({
-  //         picture:[],
-  //         isLoading: false,
-  //       });
-  //     }
-  //   })	
-  //   .catch(error=>{
-  //     console.log('IMAGE_ERROR',error);
-  //     this.setState({
-  //       picture: [],
-  //       isLoading: false, 
-  //     });
-  //   });
-  // }
-
-  // getComment(){
-  //   const { restaurant_id} = this.props.food;
-  //   console.log("GET_RESTAURANT_ID"+ restaurant_id);
-  //   const URLs = "https://www.foody.vn/__get/Review/ResLoadMore?t=1556358596613&ResId="+restaurant_id+"&LastId=0&Count=10&Type=1&isLatest=true&HasPicture=true";
-  //   fetch(URLs,
-  //       {method:"GET",
-  //       headers: {
-  //         Accept: 'application/json, text/plain, */*',
-  //         'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-  //         'cache-control' : 'no-cache',
-  //         'pragma' :  'no-cache',
-  //         'x-requested-with' : 'XMLHttpRequest'
-  //       }
-  //   })
-  //   .then(responses => responses.json())
-  //   .then(responseJsons=>{
-  //     if(responseJsons.Total !== 0){
-  //       console.log('COMMENT_WORK');
-  //       this.setState({
-  //         comment: this.state.comment.cloneWithRows(responseJsons.Items),
-  //       });
-  //     }else{
-  //       console.log('COMMENT_NULL');
-  //       this.setState({
-  //         comment: this.state.comment.cloneWithRows([]),
-  //       });
-  //     }
-  //   })	
-  //   .catch(error=>{
-  //     console.log('COMMENT_ERROR',error);
-  //     this.setState({
-  //       comment:  this.state.comment.cloneWithRows([]),
-  //     });
-  //   });
-  // }
-
   getMenu(){
-    getToken()
-    .then(token => getMenuApi(token, this.props.food.restaurant_id))
+    getAnotherMenuApi(this.props.restaurant_id, this.props.food_id)
     .then(responseJsonMenu =>{
       if(responseJsonMenu.result === "success"){
         console.log('MENU_WORK');
@@ -267,13 +236,13 @@ export default class FoodDetail extends Component {
   componentDidMount(){
     this.props.hiddenTabNavigator();
     // this.checkLogin();
-    // this.getPicture();	
-    // this.getMenu();
+    // 
     // this.getComment();
     this.increaseView();
-    this.getFoodImage();
-    this.getComment();
+    this.getFoodInformation();
     this.getPersonalVote();
+    this.getComment();
+    this.getMenu();
   	
   }
 
@@ -332,7 +301,7 @@ export default class FoodDetail extends Component {
         </View> */}
         <View style={styles.ctnInfomationRow} >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteMoney}/>
-          <Text style={styles.txtCategory}>  { this.state.foodPrice } đ {this.props.food_id}</Text>
+          <Text style={styles.txtCategory}>  { this.state.foodPrice } đ {this.props.food_id} {this.props.restaurant_id}</Text>
         </View>
         <TouchableOpacity style={styles.ctnInfomationRow} 
         onPress={() => this.gotoMap(this.props.food_id, this.state.restaurant_id)}
@@ -378,26 +347,32 @@ export default class FoodDetail extends Component {
     //       </Modal>
     // );
 
-    // const RestaurantPictureJSX=(
-    //   <View style={styles.ctnImageFood}>
-    //     <Swiper
-    //       showsButtons={true} 
-    //       width={width} 
-    //       height={height/5}
-    //       loop={true}
-    //       autoplay={true} 
-    //       showsPagination={true}
-    //     >
+    const RestaurantPictureJSX=(
+      
+      <View style={styles.ctnFoodInfomation}>
+      <View style={styles.lableMenu}>
+            <Text style={styles.txtMenu}>Một Số Hình Ảnh Về Cửa Hàng</Text>
+      </View>
+      <View style={styles.ctnImageFood}>
+        <Swiper
+          showsButtons={true} 
+          width={width} 
+          height={height/5}
+          loop={true}
+          autoplay={true} 
+          showsPagination={true}
+        >
        
-    //               {this.state.picture.map(pic => (
-    //                   <Image key={pic.Id} 
-    //                   source={{ uri: pic.FullSizeImageUrl }} 
-    //                   style={styles.imageFood}/>
+                  {this.state.picture.map(pic => (
+                      <Image key={pic.Id} 
+                      source={{ uri: pic.FullSizeImageUrl }} 
+                      style={styles.imageFood}/>
 
-    //                 ))}
-    //     </Swiper>
-    //   </View>
-    // );
+                    ))}
+        </Swiper>
+      </View>
+    </View>
+    );
 
     const commentJSX=(
       <View style={styles.ctnMenu}>
@@ -486,55 +461,54 @@ export default class FoodDetail extends Component {
   //         </Modal>
   //   );
 
-  // const menuJSX = (
-  //   <View style={styles.ctnMenu}>
-  //     <View style={styles.lableMenu}>
-  //       <Text style={styles.txtMenu}>Thực Đơn</Text>
-  //     </View>
-  //     <FlatList
-  //       enableEmptySection
-  //       data={this.state.menu}
-  //       showsVerticalScrollIndicator={false}
-  //       renderItem={ ({item}) => (
-  //         <View style={styles.ctnItem}>
+  const MenuJSX = (
+    <View style={styles.ctnMenu}>
+      <View style={styles.lableMenu}>
+        <Text style={styles.txtMenu}>Món Ăn Khác Ở Cùng Cửa Hàng</Text>
+      </View>
+      <FlatList
+        enableEmptySection
+        data={this.state.menu}
+        showsVerticalScrollIndicator={false}
+        renderItem={ ({item}) => (
 
-  //           <View style={styles.ctnImageItem}>
-  //             { 
-  //             item.image !== "/style/images/deli-dish-no-image.png"  ?
-  //             <Image source={{uri: "https:"+item.image }}  style={styles.imgeItem}/> :
-  //             <Image source={theme.Image.iCon.NoImage} style={styles.imgeItem}/> //style={{width: width/4 , height: height/13,flex:1}}
-  //             }
-  //           </View>
+          <TouchableOpacity style={styles.ctnItem} onPress={()=> this.gotoAnotherFood(item.id, item.restaurant_id)}>
+            <View style={styles.ctnImageItem}>
+              { 
+              item.image !== "/style/images/deli-dish-no-image.png"  ?
+              <Image source={{uri: "https:"+item.image }}  style={styles.imgeItem}/> :
+              <Image source={theme.Image.iCon.NoImage} style={styles.imgeItem}/> //style={{width: width/4 , height: height/13,flex:1}}
+              }
+            </View>
+              {/* { this.state.isLogin ?
+              <View style={styles.ctnRestImage}>
+                <View  style={styles.ctnInfomationItem}>
+                  <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+                  <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
+              </View>
+                <View style={styles.ctnHeartIcon}>
+                  <View/>
+                  <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
+                    <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
+                  </TouchableOpacity>
+                  <View/>
+                </View>
+                </View>
+                 : */}
+            <View  style={styles.ctnInfomationItem2}>
+                 <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
+                 <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
+             </View>
+              {/* } */}
+          </TouchableOpacity>
 
 
-  //             { this.state.isLogin ?
-  //             <View style={styles.ctnRestImage}>
-  //               <View  style={styles.ctnInfomationItem}>
-  //                 <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-  //                 <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
-  //             </View>
-  //               <View style={styles.ctnHeartIcon}>
-  //                 <View/>
-  //                 <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
-  //                   <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
-  //                 </TouchableOpacity>
-  //                 <View/>
-  //               </View>
-  //               </View>
-  //                :
-  //           <View  style={styles.ctnInfomationItem2}>
-  //                <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-  //                <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
-  //            </View>
-  //             }
 
-
-  //         </View>
-  //       )}
-  //       keyExtractor={item => item.id}
-  //     />
-  //   </View>
-  // );
+        )}
+        keyExtractor={item => item.id}
+      />
+    </View>
+  );
 
   // const bookmarkJSX=(
   //   <Modal
@@ -617,31 +591,32 @@ export default class FoodDetail extends Component {
   );
 // fix map and call
   const FoodImageJSX=(
-    <View style={styles.ctnImageFood}>
-      <Image 
-        source={{uri: "https:"+this.state.foodImage }}
-        style={styles.imageFood}
-      />
-    </View>                 
+      <View style={styles.ctnImageFood}>
+        <Image 
+          source={{uri: "https:"+this.state.foodImage }}
+          style={styles.imageFood}
+        />
+      </View>               
   );
   const ReviewJSX=(
     <View style={{alignItems:"center"}}>
     <View style={styles.ctnReview}>
 
       <View style={styles.ctnCellReview}>
-          <Text style={styles.txtBigScore}>{Math.round(this.state.avarageScore * 10) / 10}</Text>
+          <Text style={styles.txtBigScore}>{String(Math.round(this.state.avarageScore * 10) / 10)}</Text>
           <Text>Điểm trung bình</Text>
       </View>
 
       <View style={styles.ctnCellReview}>
-          <Text style={styles.txtBigScore}>{this.state.totalVote}</Text>
+          <Text style={styles.txtBigScore}>{String(this.state.totalVote)}</Text>
           <Text>Tổng đánh giá</Text>
       </View>
 
       <View style={styles.ctnCellReview}>
-          <Text style={styles.txtBigScore}>{this.state.totalView}</Text>
+          <Text style={styles.txtBigScore}>{String(this.state.totalView)}</Text>
           <Text>Tổng lượt xem</Text>
       </View>
+
     </View>
     <Text style={styles.txtSuperBigScore}>{ this.state.foodName }</Text>
     {/* <Text style={styles.txtBigScore}>{ this.state.foodPrice } đ</Text> */}
@@ -654,15 +629,16 @@ export default class FoodDetail extends Component {
         <View style={styles.wrapper}>
           {headerJSX }
           <ScrollView style={styles.body} >
-              {FoodImageJSX}
+              {this.state.foodImage != "/style/images/deli-dish-no-image.png" ? FoodImageJSX : <View/>}
               {ReviewJSX}
               {InfomationJSX}
               {VoteJSX}
               {commentJSX}
-
+              {this.state.picture.length > 0 ? RestaurantPictureJSX : <View/>}
+              {MenuJSX}
               {/* 
               {RestaurantPictureJSX}
-              {menuJSX}
+              
               {commentJSX}
                {bookmarkJSX} */}
             </ScrollView>

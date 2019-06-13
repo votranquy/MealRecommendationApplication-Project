@@ -19,7 +19,7 @@ $yourlongitude = $obj['yourlongitude'];
 try{
 
   $sql_get = 
-    "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,
+    "SELECT q.id, p.food_name, p.rate, p.address, p.image_path,
     p.category, p.restaurant_id, p.latitude, p.longitude, q.name, q.image, 
     ABS(SQRT( POW(p.longitude-'$yourlongitude',2)-POW('p.latitude-$yourlatitude',2) )) as distance
     FROM STORE p LEFT JOIN FOOD q ON p.restaurant_id = q.restaurant_id
@@ -27,7 +27,7 @@ try{
     AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
     GROUP BY p.id
     ORDER BY distance ASC
-    LIMIT 500;
+    LIMIT 100;
     ";
   // -- getDistance(p.longitude, p.latitude) as distance
   // --ABS(SQRT(POW((CAST(p.longitude as float)-CAST('$yourlongitude' as float)),2)-POW((CAST(p.latitude as float)-CAST('$yourlatitude' as float)),2))) as distance

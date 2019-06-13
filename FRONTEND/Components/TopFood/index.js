@@ -96,8 +96,6 @@ export default class TopFood extends Component {
 
   loadMore(){
     this.setState({isLoadingMore: true, page: this.state.page +1});
-    // nextpage = this.state.page +1;
-
     getLocation()
     .then(region => {
       this.setState({region});
@@ -110,7 +108,7 @@ export default class TopFood extends Component {
             mang : this.state.mang.concat(responseJson.data),
             isLoadingMore: false,
             dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-            page: this.state.page+1,
+            // page: this.state.page+1,
           });
       }
       else{

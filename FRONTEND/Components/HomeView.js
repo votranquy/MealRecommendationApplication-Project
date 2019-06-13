@@ -17,8 +17,10 @@ import TrendFood                from "./TrendFood";
 import Header                       from "./Header";
 import TopFood                    from "./TopFood/index";
 import Restaurant                 from './Restaurant';
+import TopFoodView            from "./TopFoodView";
+import TopVote              from "./TopVote";
 import theme from '../theme';
-
+import NewFood          from "./NewFood";
 const Page = ({label}) => (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -49,9 +51,12 @@ export default class HomeView extends Component {
 
             {/* Them Tab Xem Nhieu */}
             <TopFood   tabLabel={{label: "Top"}} navigator={this.props.navigator}/>
+            <TopFoodView tabLabel={{label: "Xem nhiều"}} navigator={this.props.navigator}/>
+            <TopVote tabLabel={{label: "Đánh giá nhiều"}} navigator={this.props.navigator}/>
+            <NewFood tabLabel={{label: "Món mới"}} navigator={this.props.navigator}/>
             <Random         tabLabel={{label: "Ngẫu nhiên"}}  navigator={this.props.navigator} />
             {/* <NearMe          tabLabel={{label: "Gần tôi"}}  navigator={this.props.navigator}/> */}
-            <TrendFood              tabLabel={{label: "Phổ biến"}}  navigator={this.props.navigator}/>
+            {/* <TrendFood              tabLabel={{label: "Phổ biến"}}  navigator={this.props.navigator}/> */}
             {/* <Restaurant     tabLabel={{label: "Quán ăn"}}  navigator={this.props.navigator}/> */}
             {/* <Page               tabLabel={{label: "Page #7     "}}  label="Page #5"/> */}
             {/* <Category        tabLabel={{label: "Danh Mục  "}} navigator={this.props.navigator}/> */}

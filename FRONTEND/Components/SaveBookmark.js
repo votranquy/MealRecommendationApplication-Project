@@ -13,7 +13,7 @@ import theme from "../theme";
 import getToken from '../api/getToken';
 import getBookmarkOfOneFood from '../api/getBookmarkOfOneFood';
 import updateBookmarkOfOneFoodApi from '../api/updateBookmarkOfOneFoodApi';
-
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 export default class FoodDetail extends Component {
 
@@ -70,7 +70,11 @@ updateBookmarkOfOneFood(idbookmark,idfood){
     getToken()
     .then(token =>{return updateBookmarkOfOneFoodApi(token,idbookmark, idfood)})
     .then(responseJson =>{
-      console.log(responseJson.result);
+      if(responseJson.result == "success"){
+        this.refs.toast.show('Thao tác thành công!');
+      }else{
+        this.refs.toast.show('Thao tác thất bại!');
+      }
     })
     .catch(error=>{
       console.log('ERROR',error);
@@ -131,7 +135,8 @@ updateBookmarkOfOneFood(idbookmark,idfood){
         {headerJSX }
         {this.state.bookmark.length === 0 ? <Text>Bạn chưa có bookmark nào!</Text> : bookmarkJSX}
         {/* {bookmarkJSX} */}
-        </View>
+        <Toast ref="toast"/>
+      </View>
     );
   }
 }

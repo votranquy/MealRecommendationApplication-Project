@@ -14,6 +14,7 @@ import getLocation from "../../api/getLocation";
 
 
 export default class Random extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -26,9 +27,9 @@ export default class Random extends Component {
     }
   }
 
-  gotoDetail(food){
+  gotoDetail(food_id,restaurant_id){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",food});
+    navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
   }
 
   componentDidMount(){
@@ -44,7 +45,7 @@ export default class Random extends Component {
             mang : responseJson.data,
             isLoading: false,
             dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-          });
+        });
       }
       else{
         console.log("NOT SUCCESS");
@@ -55,7 +56,7 @@ export default class Random extends Component {
       }
     })
     .catch(error=>{
-      console.log('GETRANDOMFOOD_ERROR',error);
+      console.log('GETTOPFOOD_ERROR',error);
       this.setState({
         isLoading: false,
         dataSource: this.state.dataSource.cloneWithRows([]),
@@ -70,7 +71,7 @@ export default class Random extends Component {
       return(
       <TouchableOpacity 
         activeOpacity={0.8}  
-        onPress={() => this.gotoDetail(property)} 
+        onPress={() => this.gotoDetail(property.id,property.restaurant_id)} 
         key={property.id} style={styles.ctnRestaurant}>
         <View style={styles.ctnImage} >
           <Image style={styles.image} source={{uri: "http:"+property.image}} />
@@ -83,7 +84,7 @@ export default class Random extends Component {
             <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
           </View>
           <View style={styles.cntText}>
-            <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
+            <Text style={styles.txtRate}>{String(Math.round(property.average_score*10)/10)} ★</Text>
           </View>
           <View style={styles.cntText}>
             <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
@@ -94,9 +95,10 @@ export default class Random extends Component {
     }
   }
 
-  _onEndReached(){
-    this.setState({isLoadingMore: true});
-    nextpage = this.state.page +1;
+  loadMore(){
+    this.setState({isLoadingMore: true, page: this.state.page +1});
+    // nextpage = this.state.page +1;
+
     getLocation()
     .then(region => {
       this.setState({region});
@@ -120,7 +122,7 @@ export default class Random extends Component {
       }
     })
     .catch(error=>{
-      console.log('GETMORERANDOMFOOD_ERROR',error);
+      console.log('GETMORETOPFOOD_ERROR',error);
       this.setState({
         isLoadingMore: false,
         dataSource: this.state.dataSource.cloneWithRows([]),
@@ -130,28 +132,29 @@ export default class Random extends Component {
 
 
   render() {
-    const randomfoodJSX=(
-        <ListView 
-          enableEmptySections
-          dataSource={this.state.dataSource}
-          renderRow={
-            (propertya) => this.createRow(propertya)
-          }
-          onEndReached={this._onEndReached.bind(this)}
-          onEndReachedThreshold={0.5}
-        />
-      );
+    const topfoodJSX=(//RESULT
+      <ListView 
+        enableEmptySections
+        dataSource={this.state.dataSource}
+        renderRow={(propertya) => this.createRow(propertya)}
+        onEndReached={this.loadMore.bind(this)}
+        onEndReachedThreshold={0.5}
+      />
+    );
+    
       const loadJSX=(
-        <View style={styles.ctnLoadingRow}>
-          <ActivityIndicator size="large" size={50} color="#FF0000" />
-        </View>
-          );
-        return (
-          <View style={styles.container}>
-            {randomfoodJSX}
-            {this.state.isLoadingMore ? loadJSX : <View/>}
-          </View>
+      <View style={styles.ctnLoadingRow}>
+        <ActivityIndicator size="large" size={50} color="#FF0000" />
+      </View>
         );
+
+    return (
+      <View style={styles.container}>
+          {this.state.isLoading       ?  loadJSX : <View/>} 
+          {topfoodJSX}
+          {this.state.isLoadingMore ? loadJSX : <View/>}
+      </View>
+    );
   }
 }
 

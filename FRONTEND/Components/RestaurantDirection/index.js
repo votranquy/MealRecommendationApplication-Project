@@ -38,10 +38,15 @@ export default class RestaurantDirection extends Component {
       }
   }
 
-  goBack() {
-      const { navigator } = this.props;
-      navigator.pop();
+  goBack(food_id,restaurant_id) {
+    const {navigator} = this.props;
+    navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
   }
+
+  // gotoDetail(food_id,restaurant_id){
+  //   const {navigator} = this.props;
+  //   navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
+  // }
 
 
 getLocation(){
@@ -99,7 +104,7 @@ getRestaurantLocation(){
                 <View style={styles.ctnHeaderText}>
                   <Text style={styles.txtHeader} numberOfLines={1}>Map</Text>
                 </View>
-                <TouchableOpacity onPress={() => this.goBack()} style={styles.ctnHeaderIcon}>
+                <TouchableOpacity onPress={() => this.goBack(this.props.food_id,this.props.restaurant_id)} style={styles.ctnHeaderIcon}>
                   <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
                 </TouchableOpacity>
               </View>

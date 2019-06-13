@@ -44,6 +44,7 @@ export default class FoodDetail extends Component {
       picture: [],
       isLoaded: false,
       menu:[],
+      isLogin: false,
       phonenumber : `${"09"}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`,
       foodImage: "",
       foodName: "",
@@ -92,6 +93,14 @@ export default class FoodDetail extends Component {
     navigator.push({name: "SAVE_BOOKMARK",idfood});
   }
 
+  checkLogin(){
+    getToken()
+    .then(token => {
+      if(token!==""){
+        this.setState({ isLogin: true})
+      }
+    })
+  }
 
 //done
   getFoodInformation(){
@@ -224,20 +233,10 @@ export default class FoodDetail extends Component {
     });
   }
 
-  checkLogin(){
-    getToken()
-    .then(token => {
-      if(token!==""){
-        this.setState({ isLogin: true})
-      }
-    })
-  }
 
   componentDidMount(){
     this.props.hiddenTabNavigator();
-    // this.checkLogin();
-    // 
-    // this.getComment();
+    this.checkLogin();
     this.increaseView();
     this.getFoodInformation();
     this.getPersonalVote();
@@ -264,20 +263,12 @@ export default class FoodDetail extends Component {
     );
   }
 
-  // getNumber(){
-  //    `${"09"}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`
-  // }
-// formatMoney(money){
-//   var num = money.length();
-//   return `${money.substring(0,num-3)}${","}${money.substring(num-3,num)}`;
-// }
-
-
 
 
   render() {
     // const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
     const {starCount, comment} = this.state;
+
     const headerJSX=(
       <View style={styles.ctnHeader}>
         <TouchableOpacity  onPress={this.gotoHome.bind(this)} style={styles.ctnHeaderIcon}>
@@ -295,16 +286,12 @@ export default class FoodDetail extends Component {
         <View style={styles.lableMenu}>
               <Text style={styles.txtMenu}>Thông Tin</Text>
         </View>
-        {/* <View style={styles.ctnInfomationRow} >
-          <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteDisk}/>
-          <Text style={styles.txtCategory}>  { this.state.foodName }</Text>
-        </View> */}
         <View style={styles.ctnInfomationRow} >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteMoney}/>
           <Text style={styles.txtCategory}>  { this.state.foodPrice } đ {this.props.food_id} {this.props.restaurant_id}</Text>
         </View>
         <TouchableOpacity style={styles.ctnInfomationRow} 
-        onPress={() => this.gotoMap(this.props.food_id, this.state.restaurant_id)}
+          onPress={() => this.gotoMap(this.props.food_id, this.state.restaurant_id)}
         >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteAdress}/>
           <Text style={styles.txtAddress}>  {this.state.storeAddress}</Text>
@@ -321,34 +308,7 @@ export default class FoodDetail extends Component {
     );
 
 
-    // const saveJSX=(
-    //   <Modal
-    //         style={[styles.modal, styles.modal1]}
-    //         backdrop={true}
-    //         coverScreen={true}
-    //         ref={"modal1"}
-    //         backdropPressToClose={false}
-    //         swipeToClose={false}
-    //     >
-    //         <View style={styles.ctnMapView}>
-    //           <View/>
-    //           <View style={styles.ctnHeaderMap}>
-    //             <View style={styles.ctnCloseButton}></View>
-    //             <View style={styles.ctnHeaderText}>
-    //               <Text style={styles.txtHeader} numberOfLines={1}>{food_name}</Text>
-    //             </View>
-    //             <TouchableOpacity onPress={() => this.refs.modal1.close()} style={styles.ctnHeaderIcon}>
-    //               <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-    //             </TouchableOpacity>
-    //           </View>
-    //           <View style={styles.ctnBodyMap}>
-    //           </View> 
-    //         </View>
-    //       </Modal>
-    // );
-
     const RestaurantPictureJSX=(
-      
       <View style={styles.ctnFoodInfomation}>
       <View style={styles.lableMenu}>
             <Text style={styles.txtMenu}>Một Số Hình Ảnh Về Cửa Hàng</Text>
@@ -480,21 +440,6 @@ export default class FoodDetail extends Component {
               <Image source={theme.Image.iCon.NoImage} style={styles.imgeItem}/> //style={{width: width/4 , height: height/13,flex:1}}
               }
             </View>
-              {/* { this.state.isLogin ?
-              <View style={styles.ctnRestImage}>
-                <View  style={styles.ctnInfomationItem}>
-                  <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
-                  <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
-              </View>
-                <View style={styles.ctnHeartIcon}>
-                  <View/>
-                  <TouchableOpacity onPress={()=> this.gotoSaveBookmark(item.food_id )}>
-                    <Image source={theme.Image.iCon.saveBookmark} style={styles.imageHeart}/>
-                  </TouchableOpacity>
-                  <View/>
-                </View>
-                </View>
-                 : */}
             <View  style={styles.ctnInfomationItem2}>
                  <Text style={styles.txtItem} numberOfLines={1}>{item.name}</Text>
                  <Text style={styles.txtPrice}>{String(item.price)} đ </Text>
@@ -533,40 +478,41 @@ export default class FoodDetail extends Component {
   // </Modal>
   // );
 
-  // const actionButtonJSX=(
-  //   <ActionButton buttonColor={theme.Color.LightRed}>
-  //       <ActionButton.Item 
-  //         buttonColor={theme.Color.NicePurple}
-  //         title="Bản đồ" 
-  //         textStyle={{fontSize: theme.Size.FontSmall}} 
-  //         spaceBetween={5}
-  //         textContainerStyle={{height:25}}       
-  //         onPress={() => this.gotoMap(this.props.food)}>
-  //         <Image source={theme.Image.iCon.Earths} style={styles.iconActionButton}/>
-  //       </ActionButton.Item>
+  const actionButtonJSX=(
+    <ActionButton buttonColor={theme.Color.LightRed}>
+        <ActionButton.Item 
+          buttonColor={theme.Color.NicePurple}
+          title="Bản đồ" 
+          textStyle={{fontSize: theme.Size.FontSmall}} 
+          spaceBetween={5}
+          textContainerStyle={{height:25}}       
+          onPress={() => this.gotoMap(this.props.food_id, this.state.restaurant_id)}>
+          <Image source={theme.Image.iCon.Earths} style={styles.iconActionButton}/>
+        </ActionButton.Item>
 
-  //       <ActionButton.Item 
-  //       buttonColor={theme.Color.NiceBlue} 
-  //       title="Gọi điện" 
-  //       textStyle={{fontSize: theme.Size.FontSmall}} 
-  //       spaceBetween={5}
-  //       textContainerStyle={{height:25}}       
-  //       onPress={this.callTheRestaurant}>
-  //         <Image source={theme.Image.iCon.WhitePhone} style={styles.iconActionButton}/>
-  //       </ActionButton.Item>
+        <ActionButton.Item 
+        buttonColor={theme.Color.NiceBlue} 
+        title="Gọi điện" 
+        textStyle={{fontSize: theme.Size.FontSmall}} 
+        spaceBetween={5}
+        textContainerStyle={{height:25}}       
+        onPress={()=>this.callTheRestaurant(this.state.phonenumber)}
+        >
+          <Image source={theme.Image.iCon.WhitePhone} style={styles.iconActionButton}/>
+        </ActionButton.Item>
 
-  //       {/* <ActionButton.Item 
-  //         buttonColor={theme.Color.NiceGreen} 
-  //         title="Lưu lại" 
-  //         textStyle={{fontSize: theme.Size.FontSmall}} 
-  //         spaceBetween={5}
-  //         textContainerStyle={{height:25}}       
-  //         onPress={() => this.refs.modal2.open()}>
-  //           <Image source={theme.Image.iCon.WhiteHeart} style={styles.iconActionButton}/>
-  //       </ActionButton.Item> */}
+        <ActionButton.Item 
+          buttonColor={theme.Color.NiceGreen} 
+          title="Lưu lại" 
+          textStyle={{fontSize: theme.Size.FontSmall}} 
+          spaceBetween={5}
+          textContainerStyle={{height:25}}       
+          onPress={() => this.gotoSaveBookmark(this.props.food_id)}>
+            <Image source={theme.Image.iCon.WhiteHeart} style={styles.iconActionButton}/>
+        </ActionButton.Item>
 
-  //   </ActionButton>
-  // );
+    </ActionButton>
+  );
 
 
   //done
@@ -632,7 +578,7 @@ export default class FoodDetail extends Component {
               {this.state.foodImage != "/style/images/deli-dish-no-image.png" ? FoodImageJSX : <View/>}
               {ReviewJSX}
               {InfomationJSX}
-              {VoteJSX}
+              {this.state.isLogin ?   VoteJSX : <View/> }
               {commentJSX}
               {this.state.picture.length > 0 ? RestaurantPictureJSX : <View/>}
               {MenuJSX}
@@ -642,7 +588,7 @@ export default class FoodDetail extends Component {
               {commentJSX}
                {bookmarkJSX} */}
             </ScrollView>
-            {/* {actionButtonJSX} */}
+            { this.state.isLogin ? actionButtonJSX :<View/>}
             {/* {allCommentJSX} */}
           </View>
     );

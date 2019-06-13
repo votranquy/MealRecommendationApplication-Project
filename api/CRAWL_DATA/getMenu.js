@@ -3,15 +3,16 @@ const fetch = require('node-fetch');
 
 async function getMenu(){
     let count =0 ;
+    let countSuccess =0
     //FROM 770624  
     //TO   778392
     //TOTAL 2667 STORES
-    for (i = 770624; i < 778392 +1; i++){
+    for (i = 11787; i < 11787 +1; i++){
 
         console.log(i);
 
        //Get data for Review Menu
-       let resp_menu =await fetch('https://www.foody.vn/__get/Delivery/GetDeliveryDishes?t=1557065498605&RequestCount=10&RestaurantId='+i+'&SortType=2&NextItemId=0',
+       let resp_menu =await fetch('https://www.foody.vn/__get/Delivery/GetDeliveryDishes?t=1556675807861&RequestCount=100&RestaurantId='+i+'&SortType=2&NextItemId=0',
        {
            method: 'GET',
            headers: {
@@ -22,7 +23,7 @@ async function getMenu(){
        });
 
      try{
-        let responsemenuJson =await resp_menu.json();
+        let responsemenuJson = await resp_menu.json();
 
         try{
 
@@ -32,8 +33,12 @@ async function getMenu(){
                 let name    = responsemenuJson.Dishes.Items[k].Name;
                 let price   = responsemenuJson.Dishes.Items[k].Price;
                 let image   = responsemenuJson.Dishes.Items[k].ImageUrl;
+                console.log(food_id);
+                console.log(name);
+                console.log(price);
+                console.log(image);
                 
-                    let save =await fetch('http://10.0.12.57/MealRecommendationApplication-Project/api/saveMenu.php',
+                    let save =await fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/saveMenu.php',
                     {   
                         method: 'POST',
                         headers: {
@@ -42,7 +47,11 @@ async function getMenu(){
                         },
                         body:  JSON.stringify({restaurant_id,food_id, name, price, image})
                     });
-                    count++;         
+                    count++; 
+                    let saveJson = await save.json();
+                    if(saveJson.result == "INSERT_MENU_THANH_CONG") countSuccess++;
+                    console.log(saveJson);  
+                          
 
                 }
         }catch (err) {}
@@ -50,6 +59,7 @@ async function getMenu(){
      }catch (err) {}
     }
     console.log(count);
+    console.log(countSuccess);
 }
 
 getMenu();

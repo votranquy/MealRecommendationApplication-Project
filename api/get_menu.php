@@ -7,6 +7,7 @@
        $json = file_get_contents('php://input');
        $obj = json_decode($json, true);
        $restaurant_id = $obj['restaurant_id'];
+       $food_id = $obj['food_id'];
        $token = $obj['token'];
        $arrMenu = array();
        $key = "example_key";

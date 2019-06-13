@@ -16,7 +16,7 @@
     $price         =$obj["price"];
     $image         =$obj["image"];
     if($name!=""){
-        $sql_update = $query = "INSERT INTO FOOD VALUES(null,'$restaurantid','$food_id','$name','$price','$image')";
+        $sql_update = "INSERT INTO FOOD(restaurant_id,	food_id,name,	price,image) VALUES('$restaurantid','$food_id','$name','$price','$image')";
         $sql_update_result=mysqli_query($conn,$sql_update);
         if($sql_update_result){echo("{\"result\":\"INSERT_MENU_THANH_CONG\"}");}
         else{echo("{\"result\":\"INSERT_MENU_KHONG_THANH_CONG\"}");};

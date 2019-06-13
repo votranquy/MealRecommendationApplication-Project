@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 async function getData(){
     let count =0 ;
 
-    for (i = 648405; i < 648405 +100; i++){
+    for (i = 648405; i < 648405; i++){
 
         console.log(i);
 

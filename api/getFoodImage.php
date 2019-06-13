@@ -7,9 +7,9 @@
     try{
         
         $sql = 
-        "SELECT id, image, name
-        FROM FOOD
-        WHERE id = '$id'
+        "SELECT p.id, p.image, p.name,  p.price, q.restaurant_id, q.food_name, q.address, q.category, q.latitude, q.longitude
+        FROM FOOD p INNER JOIN STORE q ON p.restaurant_id = q.restaurant_id
+        WHERE p.id = '$id'
         ";
         
         $imagefood = $mysqli->query($sql);

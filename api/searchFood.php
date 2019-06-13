@@ -18,9 +18,10 @@
                             // AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
                             // GROUP BY restaurant_id
                             // ";
-                            $sql = "SELECT p.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, q.name, q.image
+                            $sql = "SELECT q.id, p.food_name, p.rate, p.address, p.image_path,p.category, p.restaurant_id, p.latitude, p.longitude, q.name, q.image
                             FROM FOOD q INNER JOIN STORE p ON q.restaurant_id = p.restaurant_id
                             WHERE  q.name like '%$keyword%'
+                            AND address like '%Đà Nẵng%'
                             AND (category='Quán ăn, ' OR category='Ăn vặt/vỉa hè, ' OR category='Café/Dessert, ' OR category='Ăn chay, ' OR category='Nhà hàng, ' OR category='Tiệm bánh, ') 
                             GROUP BY restaurant_id
                             ";

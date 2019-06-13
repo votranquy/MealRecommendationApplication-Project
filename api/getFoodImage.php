@@ -7,7 +7,7 @@
     try{
         
         $sql = 
-        "SELECT p.id, p.image, p.name,  p.price, q.restaurant_id, q.food_name, q.address, q.category, q.latitude, q.longitude
+        "SELECT p.id, p.image, p.name,  p.price, p.average_score, p.total_vote, p.total_view, q.restaurant_id, q.food_name, q.address, q.category, q.latitude, q.longitude
         FROM FOOD p INNER JOIN STORE q ON p.restaurant_id = q.restaurant_id
         WHERE p.id = '$id'
         ";

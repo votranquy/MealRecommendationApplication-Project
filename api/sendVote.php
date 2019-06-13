@@ -33,7 +33,7 @@
                                           while ($row = $result_check->fetch_assoc()) {
                                                  $oldvote = $row["rate"];
                                           }//Get old vote
-                                          $sqlvote = "UPDATE VOTE SET rate = '$rate', comment = '$comment' WHERE user_id='$iduser' AND food_id='$idfood'" ;
+                                          $sqlvote = "UPDATE VOTE SET rate = '$rate', comment = '$comment',updated_time = NOW() WHERE user_id='$iduser' AND food_id='$idfood'" ;
                                           $voteresult = $mysqli->query($sqlvote); //Updat Vote table
                                           $sql_update_food_table=
                                           "UPDATE FOOD 
@@ -53,7 +53,7 @@
                                           WHERE 
                                           id = '$idfood'";
                                           $result_update_food_table = $mysqli->query($sql_update_food_table);//update food table
-                                   }//Not vote beor
+                                   }//Not vote before
                                    $result = array('result'=>'success');
                                    echo json_encode($result);
                             }

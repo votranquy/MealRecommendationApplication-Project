@@ -22,7 +22,7 @@ export default class Home extends Component{
                 case "MAP"   :                          return( <RestaurantDirection           navigator={navigator}  food_id={route.food_id}  restaurant_id={route.restaurant_id}                                        /> );
                 case "SAVE_BOOKMARK":    return( <SaveBookmark navigator={navigator}     idfood={route.idfood}               />);
                 case "VOTE":                           return( <VoteFood        navigator={navigator}     starCount={route.starCount}   comment={route.comment}        id_food={route.id_food}    />);
-                case "FOOD_DETAIL"     :       return( <FoodDetail       navigator={navigator}     food_id={route.food_id}  restaurant_id={route.restaurant_id}  hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} /> );
+                case "FOOD_DETAIL"     :       return( <FoodDetail       navigator={navigator}     food_id={route.food_id}  restaurant_id={route.restaurant_id} KEY={route.KEY} hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} /> );
               }
           }}
           configureScene={route => {

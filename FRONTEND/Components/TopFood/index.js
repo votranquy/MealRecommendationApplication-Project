@@ -11,7 +11,7 @@ import styles from "./styles";
 import getTopFoodApi from "../../api/getTopFoodApi";     //Nolocation
 import getTopFoodApi2 from "../../api/getTopFoodApi2"; //Location
 import getLocation from "../../api/getLocation";
-
+import postNavigator from "../../api/postNavigator";
 export default class TopFood extends Component {
 
   constructor(props){
@@ -27,8 +27,11 @@ export default class TopFood extends Component {
   }
 
   gotoDetail(food_id,restaurant_id){
+    KEY = "HOME";
+    // navigator = "HOME";
+    postNavigator("HOME_VIEW");
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
+    navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id, KEY});
   }
 
   componentDidMount(){

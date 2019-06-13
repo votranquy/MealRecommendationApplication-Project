@@ -40,7 +40,8 @@ export default class RestaurantDirection extends Component {
 
   goBack(food_id,restaurant_id) {
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
+    // navigator.push({name: "FOOD_DETAIL",food_id,restaurant_id});
+    navigator.pop();
   }
 
   // gotoDetail(food_id,restaurant_id){

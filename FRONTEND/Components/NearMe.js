@@ -14,6 +14,7 @@ import theme from "../theme";
 // import Polyline from '@mapbox/polyline';
 import getNearRestaurantApi from "../api/getNearRestaurantApi";
 import Toast, {DURATION} from 'react-native-easy-toast';
+import postNavigator from "../api/postNavigator";
 const {height , width} = Dimensions.get('window'); 
 
 export default class NearMe extends Component {
@@ -53,8 +54,10 @@ export default class NearMe extends Component {
 
     gotoDetail(food_id,restaurant_id){
         const {navigator} = this.props;
-        console.log(food_id);
-        console.log(restaurant_id);
+        // console.log(food_id);
+        // console.log(restaurant_id);
+        // KEY = "DETECT";
+        postNavigator("NEAR_ME");
         navigator.push({name: "FOOD_DETAIL",food_id, restaurant_id});
     }
 

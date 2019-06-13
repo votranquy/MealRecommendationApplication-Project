@@ -30,6 +30,8 @@ import increaseViewAPI from "../../api/increaseViewAPI";
 import StarRating from 'react-native-star-rating';
 import TimeAgo from 'react-native-timeago';
 import getCommentAPI from '../../api/getCommentAPI';
+import getNavigator from "../../api/getNavigator";
+import sendVoteAPI from '../../api/sendVoteAPI';
 const {height , width} = Dimensions.get('window'); 
 const GOOGLE_MAPS_APIKEY="AIzaSyAG2BnUcY2mW5_VY8Q6cVEabhl9l_Rokkk";
 
@@ -53,6 +55,8 @@ export default class FoodDetail extends Component {
       storeCategory:"",
       starCount: 0,
       comment:"",
+      NewstarCount: 0,
+      Newcomment:"",
       commentList:[],
       avarageScore:0,
       totalVote:0,
@@ -63,7 +67,7 @@ export default class FoodDetail extends Component {
 
   onStarRatingPress(rating) {
     this.setState({
-      starCount: rating
+      NewstarCount: rating
     });
   }
 
@@ -71,12 +75,22 @@ export default class FoodDetail extends Component {
     this.props.showTabNavigator();
     const { navigator } = this.props;
     navigator.pop();
+    // getNavigator()
+    // .then((POSITION) =>{navigator.push({name: POSITION});} )
+    // if(this.props.KEY == "HOME"){navigator.push({name: "HOME_VIEW"}); }
+    // if(this.props.KEY == "DETECT"){navigator.push({name: "HOME_VIEW"}); }
+    // if(this.props.KEY == "SEARCH"){navigator.push({name: "SEARCHVIEW"}); }
 }
 
-  gotoVote(starCount, comment, id_food) {
-    const { navigator } = this.props;
-    navigator.push({name: "VOTE", starCount ,comment ,id_food });
-  }
+// updateAfterVote(){
+//   this.getPersonalVote();
+//   this.getComment();
+// }
+
+  // gotoVote(starCount, comment, id_food, ) {
+  //   const { navigator } = this.props;
+  //   navigator.push({name: "VOTE", starCount ,comment ,id_food, updateAfterVote});
+  // }
 
   gotoMap(food_id, restaurant_id){
     const {navigator} = this.props;
@@ -107,6 +121,7 @@ export default class FoodDetail extends Component {
     getFoodInformationAPI(this.props.food_id)
     .then((responseJson)=>{
       if(responseJson.result === "success"){
+        console.log("LAY THÔNG TIN");
        this.setState({
          foodImage: responseJson.data[0].image,
          foodName: responseJson.data[0].name,
@@ -130,9 +145,12 @@ export default class FoodDetail extends Component {
     .then(token =>{ return getPersonalVoteAPI(token, this.props.food_id)})
     .then((responseJson)=>{
       if(responseJson.result === "success"){
+        console.log("LAY VOTE CA NHAN");
         this.setState({
           starCount: parseInt(responseJson.data[0].rate),
           comment:  responseJson.data[0].comment,
+          NewstarCount: parseInt(responseJson.data[0].rate),
+          Newcomment: responseJson.data[0].comment,
         })
       }
     })
@@ -161,6 +179,7 @@ export default class FoodDetail extends Component {
     .then((responseJson)=>{
       // console.log("COMMENT",responseJson);
       if(responseJson.result === "success"){
+        console.log("LAY LAI BINH LUAN");
        this.setState({
         commentList: responseJson.data,
         })
@@ -234,6 +253,39 @@ export default class FoodDetail extends Component {
   }
 
 
+
+  sendVote(){
+    console.log(this.props.food_id, this.state.NewstarCount, this.state.Newcomment);
+      getToken()
+      .then(token =>{return sendVoteAPI(token, this.props.food_id, this.state.NewstarCount, this.state.Newcomment)})
+      .then(responseJson =>{
+        console.log(responseJson);
+          if(responseJson.result == "success"){
+            Alert.alert(
+              'Thành công',
+              'Bạn đã đánh giá thành công!',
+              [{text: 'OK', onPress: ()=>{
+                this.getFoodInformation();
+                this.getPersonalVote();
+                this.getComment();
+              } }, ],
+              {cancelable: false},
+            );
+          }
+          else{
+            Alert.alert(
+              'Thất bại',
+              'Đánh giá thất bại!',
+              [{text: 'OK'},],
+              {cancelable: false},
+            );
+          }
+      })
+      .catch(error=>{
+        console.log('ERROR',error);
+      });
+  }
+
   componentDidMount(){
     this.props.hiddenTabNavigator();
     this.checkLogin();
@@ -241,8 +293,7 @@ export default class FoodDetail extends Component {
     this.getFoodInformation();
     this.getPersonalVote();
     this.getComment();
-    this.getMenu();
-  	
+    this.getMenu();	
   }
 
   callTheRestaurant(phonenumber){
@@ -263,10 +314,7 @@ export default class FoodDetail extends Component {
     );
   }
 
-
-
   render() {
-    // const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
     const {starCount, comment} = this.state;
 
     const headerJSX=(
@@ -288,7 +336,7 @@ export default class FoodDetail extends Component {
         </View>
         <View style={styles.ctnInfomationRow} >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteMoney}/>
-          <Text style={styles.txtCategory}>  { this.state.foodPrice } đ {this.props.food_id} {this.props.restaurant_id}</Text>
+          <Text style={styles.txtCategory}>  { this.state.foodPrice } đ </Text>
         </View>
         <TouchableOpacity style={styles.ctnInfomationRow} 
           onPress={() => this.gotoMap(this.props.food_id, this.state.restaurant_id)}
@@ -455,28 +503,71 @@ export default class FoodDetail extends Component {
     </View>
   );
 
-  // const bookmarkJSX=(
-  //   <Modal
-  //   style={[styles.modal, styles.modal2]}
-  //   backdrop={true}
-  //   coverScreen={true}
-  //   ref={"modal2"}
-  // >
-  // <View style={styles.ctnMapView}>
-  //     <View style={styles.ctnHeaderMap}>
-  //       <View style={styles.ctnCloseButton}></View>
-  //       <View style={styles.ctnHeaderText}>
-  //         <Text style={styles.txtHeader} numberOfLines={1}>BOOKMARK</Text>
-  //       </View>
-  //       <TouchableOpacity onPress={() => this.refs.modal2.close()} style={styles.ctnHeaderIcon}>
-  //         <Image source={theme.Image.iCon.Close} style={styles.iconHeader}/>  
-  //       </TouchableOpacity>
-  //     </View>
-  //     <View style={styles.ctnMapArea}>
-  //     </View>
-  //   </View>
-  // </Modal>
-  // );
+  const VotePopUpJSX=(
+    <Modal
+    style={[styles.modal, styles.modal2]}
+    backdrop={true}
+    coverScreen={true}
+    ref={"modal2"}
+    coverScreen={true}
+    backdropPressToClose={false}
+    swipeToClose={false}
+    keyboardTopOffset={0}
+    position={"top"}
+  >
+
+
+    <View style={styles.ctnHeader}>
+            <TouchableOpacity  
+             onPress={() => this.refs.modal2.close()} 
+            style={styles.ctnHeaderIcon}
+            >
+              <Image source={theme.Image.iCon.WhiteBack} style={styles.iconHeader}/>
+            </TouchableOpacity>
+            <View style={styles.ctnHeaderText}>
+              <Text style={styles.txtHeader} numberOfLines={1}>Đánh giá</Text>
+            </View>
+            <View style={styles.ctnHeaderIcon}/>
+      </View>
+
+      <View 
+        style={styles.ctnFoodInfomation}
+        > 
+          <StarRating 
+            disabled={false}
+            maxStars={5}
+            starColor={"red"}
+            starSize={30}
+            rating={this.state.NewstarCount}
+            selectedStar={(rating) => this.onStarRatingPress(rating)}
+          />
+          <TextInput
+          multiline={true}
+          editable = {true}
+          numberOfLines={4}
+          style={styles.InputVote}
+          placeholder="Mời bạn đánh giá"
+          onChangeText={(text) => this.setState({Newcomment: text})}
+          value={this.state.Newcomment}
+          />
+          <TouchableOpacity 
+            style={styles.btnComment} 
+            onPress={()=> {
+              this.sendVote(); 
+              // this.getFoodInformation();
+              // this.getPersonalVote();
+              // this.getComment();
+            }}
+          >
+              <Text style={styles.txtButton}>Gửi đánh giá</Text>
+          </TouchableOpacity>
+        </View>
+
+
+
+  </Modal>
+  );
+
 
   const actionButtonJSX=(
     <ActionButton buttonColor={theme.Color.LightRed}>
@@ -513,13 +604,11 @@ export default class FoodDetail extends Component {
 
     </ActionButton>
   );
-
-
   //done
   const VoteJSX=(
     <TouchableOpacity 
     style={styles.ctnFoodInfomation}
-    onPress={()=>this.gotoVote(starCount, comment, this.props.food_id)}
+    onPress={() => this.refs.modal2.open()}
     > 
       <View style={styles.lableMenu}>
             <Text style={styles.txtMenu}>Đánh Giá Từ Bạn</Text>
@@ -582,11 +671,12 @@ export default class FoodDetail extends Component {
               {commentJSX}
               {this.state.picture.length > 0 ? RestaurantPictureJSX : <View/>}
               {MenuJSX}
+              {VotePopUpJSX}
               {/* 
               {RestaurantPictureJSX}
               
               {commentJSX}
-               {bookmarkJSX} */}
+                */}
             </ScrollView>
             { this.state.isLogin ? actionButtonJSX :<View/>}
             {/* {allCommentJSX} */}

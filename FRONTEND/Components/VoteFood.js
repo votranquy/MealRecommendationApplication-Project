@@ -33,7 +33,8 @@ export default class VoteFood extends Component {
 
   gotoDetail(food_id){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",food_id});
+    navigator.pop();
+    // navigator.push({name: "FOOD_DETAIL",food_id});
   }
 
 //   getBookmark(){

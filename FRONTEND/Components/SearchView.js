@@ -38,9 +38,10 @@ export default class SearchView extends Component {
     }
 
     
-    gotoDetail(food) {
+    gotoDetail(food_id, restaurant_id) {
       const { navigator } = this.props;
-      navigator.push({ name: 'FOOD_DETAIL' ,food});
+      KEY = "SEARCH";
+      navigator.push({ name: 'FOOD_DETAIL' ,food_id, restaurant_id, KEY});
     }
 
     getData(){
@@ -154,7 +155,7 @@ export default class SearchView extends Component {
         return(
         <TouchableOpacity 
           activeOpacity={0.8}  
-          onPress={() => this.gotoDetail(property)} 
+          onPress={() => this.gotoDetail(property.id, property.restaurant_id)} 
           key={property.id} style={styles.ctnRestaurant}>
           <View style={styles.ctnImage} >
             <Image style={styles.image} source={{uri: "http:"+property.image}} />

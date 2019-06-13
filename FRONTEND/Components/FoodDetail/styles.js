@@ -7,6 +7,24 @@ export default StyleSheet.create({
     flex:1, 
     backgroundColor: theme.Color.White,
   },
+  ctnReview:{
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ctnCellReview:{
+    borderWidth:1,
+    marginRight:1,
+    borderColor: theme.Color.Red,
+    justifyContent: "center",
+    alignItems: "center",
+    padding:5,
+    backgroundColor: theme.Color.White,
+  },
+  txtBigScore:{
+    fontSize: theme.Size.FontBigger,
+    fontWeight: "900",
+  },
   body:{
     flex: 1,
     margin:0,
@@ -207,6 +225,7 @@ export default StyleSheet.create({
     justifyContent:"center",
     alignItems:"center",
     marginRight:5,
+    backgroundColor: "gray",
   },
   txtLogo:{
     color: theme.Color.White,
@@ -253,7 +272,10 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-
+  comment:{
+    color: theme.Color.NiceBlack,
+    padding: 5,
+  },
   // txtComment:{
   //   // backgroundColor:"white",
   //   fontSize: theme.Size.FontSmall,

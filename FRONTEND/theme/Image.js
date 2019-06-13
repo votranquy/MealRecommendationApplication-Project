@@ -41,6 +41,7 @@ const Image = {
     FoodName: require("../Image/foodname.png"),
     WhiteDisk: require("../Image/whitedisk.png"),
     WhiteMoney: require("../Image/whitemoney.png"),
+    QuestionMark: require("../Image/questionmark.png"),
   },
 
   Bg: {

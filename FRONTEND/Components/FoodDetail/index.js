@@ -28,6 +28,7 @@ import getFoodImageAPI from '../../api/getFoodImageAPI';
 import getPersonalVoteAPI from '../../api/getPersonalVoteAPI';
 import increaseViewAPI from "../../api/increaseViewAPI";
 import StarRating from 'react-native-star-rating';
+import TimeAgo from 'react-native-timeago';
 import getCommentAPI from '../../api/getCommentAPI';
 const {height , width} = Dimensions.get('window'); 
 const GOOGLE_MAPS_APIKEY="AIzaSyAG2BnUcY2mW5_VY8Q6cVEabhl9l_Rokkk";
@@ -38,7 +39,7 @@ export default class FoodDetail extends Component {
     this.state = {
 	    isLoading: true,
       swipeToClose: false,
-      comment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+      // comment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       allComment : new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       picture: [],
       isLoaded: false,
@@ -52,6 +53,9 @@ export default class FoodDetail extends Component {
       starCount: 0,
       comment:"",
       commentList:[],
+      avarageScore:0,
+      totalVote:0,
+      totalView:0,
       }
   }
 
@@ -60,11 +64,6 @@ export default class FoodDetail extends Component {
       starCount: rating
     });
   }
-  // goBack(){
-  //     this.props.showTabNavigator();
-  //     const { navigator } = this.props;
-  //     navigator.pop();
-  // }
 
   gotoHome(){
     this.props.showTabNavigator();
@@ -73,9 +72,8 @@ export default class FoodDetail extends Component {
 }
 
   gotoVote(starCount, comment, id_food) {
-  // this.props.showTabNavigator();
-  const { navigator } = this.props;
-  navigator.push({name: "VOTE", starCount ,comment ,id_food });
+    const { navigator } = this.props;
+    navigator.push({name: "VOTE", starCount ,comment ,id_food });
   }
 
 
@@ -83,7 +81,7 @@ export default class FoodDetail extends Component {
     const {navigator} = this.props;
     navigator.push({name: "SAVE_BOOKMARK",idfood});
   }
-
+//done
   getFoodImage(){
     getFoodImageAPI(this.props.food_id)
     .then((responseJson)=>{
@@ -94,6 +92,9 @@ export default class FoodDetail extends Component {
          foodPrice: responseJson.data[0].price,
          storeAddress: responseJson.data[0].address,
          storeCategory: responseJson.data[0].category,
+         avarageScore:responseJson.data[0].average_score,
+         totalVote:responseJson.data[0].total_vote,
+         totalView:responseJson.data[0].total_view,
         })
       }
     })
@@ -101,8 +102,7 @@ export default class FoodDetail extends Component {
       console.log('GET_IMAGE_ERROR',error);
     });
   }
-
-
+//done
   getPersonalVote(){
     getToken()
     .then(token =>{ return getPersonalVoteAPI(token, this.props.food_id)})
@@ -118,7 +118,7 @@ export default class FoodDetail extends Component {
       console.log('GET_PERSONAL_VOTE_ERROR',error);
     });
   }
-
+//done
   increaseView(){
     increaseViewAPI(this.props.food_id)
     .then((responseJson)=>{
@@ -137,20 +137,15 @@ export default class FoodDetail extends Component {
   getComment(){
     getCommentAPI(this.props.food_id)
     .then((responseJson)=>{
-      console.log("COMMENT",responseJson);
+      // console.log("COMMENT",responseJson);
       if(responseJson.result === "success"){
        this.setState({
-         //Thao tac voi FlatList
-        //  foodImage: responseJson.data[0].image,
-        //  foodName: responseJson.data[0].name,
-        //  foodPrice: responseJson.data[0].price,
-        //  storeAddress: responseJson.data[0].address,
-        //  storeCategory: responseJson.data[0].category,
+        commentList: responseJson.data,
         })
       }
     })
     .catch(error=>{
-      console.log('GET_IMAGE_ERROR',error);
+      console.log('GET_COMMENT_ERROR',error);
     });
   }
 
@@ -306,6 +301,9 @@ export default class FoodDetail extends Component {
 //   return `${money.substring(0,num-3)}${","}${money.substring(num-3,num)}`;
 // }
 
+
+
+
   render() {
     // const {category, food_name,  address, latitude, longitude, restaurant_id} = this.props.food;
     const {starCount, comment} = this.state;
@@ -399,42 +397,49 @@ export default class FoodDetail extends Component {
     //   </View>
     // );
 
-  //   const commentJSX=(
-  //     <View style={styles.ctnMenu}>
-  //       <View style={styles.lableMenu}>
-  //             <Text style={styles.txtMenu}>Bình Luận</Text>
-  //       </View>
-  //       <ListView
-  //           enableEmptySections={true}
-  //          dataSource={this.state.comment}
-  //           renderRow={
-  //             (data) => 
-  //               <View style={styles.ctnComment}>
-  //                 <View style={styles.ctnUsername}>
-  //                   <View style={styles.ctnUsernameArea}>
-  //                     <View style={styles.logoUsername}>
-  //                       <Image source={{uri: data.Owner.Avatar}} style={styles.imageAvatar}                  />
-  //                     </View>
-  //                     <Text style={styles.txtUsername}>{data.Owner.DisplayName}</Text>
-  //                   </View>
-  //                   <View style={styles.ctnScore}>
-  //                     <Text style={styles.txtScore}>đã chấm {String(data.AvgRating/2)} đ</Text>
-  //                   </View>
-  //                 </View>
-  //                   <Text style={styles.comment}>{data.Description}</Text>
-  //                   <Image source={{uri: data.Pictures[0].Url}} style={styles.imageComment} />
-  //               </View>
-  //           }
-  //       />
-  //       { this.state.comment.getRowCount() == 0 && (<Text>Không có bình luận nào!</Text>)}
-  //       { this.state.comment.getRowCount() >= 10 && (
-  //         <TouchableOpacity style={styles.btnComment} onPress={() => this.refs.modal3.open()}>
-  //           <Text style={styles.txtButton}>Xem tất cả bình luận</Text>
-  //         </TouchableOpacity>
-  //       )}
-  //     </View>
-  //   );
+    const commentJSX=(
+      <View style={styles.ctnMenu}>
+        <View style={styles.lableMenu}>
+              <Text style={styles.txtMenu}>Đánh giá từ mọi người</Text>
+        </View>
+        <FlatList
+            enableEmptySection
+           data={this.state.commentList}
+           showsVerticalScrollIndicator={false}
+           renderItem={
+            ({item}) => (
+                <View style={styles.ctnComment}>
+                  <View style={styles.ctnUsername}>
+                    <View style={styles.ctnUsernameArea}>
+                      <View style={styles.logoUsername}>
+                        <Image source={theme.Image.iCon.QuestionMark} style={styles.imageAvatar}                  />
+                      </View>
+                      <Text style={styles.txtUsername}>{item.name}</Text>
+                    </View>
+                    <View style={styles.ctnScore}>
+                      <Text style={styles.txtScore}>đã đánh giá {item.rate} sao</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.comment}>{item.comment}</Text>
+                  {/* <Text>Thời gian: {item.updated_time}</Text> */}
+                  <TimeAgo time={item.updated_time} />
+                </View>
+            )}
+            keyExtractor={item => item.id}
+        />
+        { this.state.commentList.length == 0 && (<Text>Không có đánh giá nào!</Text>)}
+        { this.state.commentList.length >= 10 && (
+          <TouchableOpacity style={styles.btnComment} 
+          // onPress={() => this.refs.modal3.open()}
+          >
+            <Text style={styles.txtButton}>Xem tất cả đánh giá</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    );
 
+
+    
   //   const allCommentJSX=(
   //     <Modal
   //           style={[styles.modal, styles.modal3]}
@@ -587,6 +592,8 @@ export default class FoodDetail extends Component {
   //   </ActionButton>
   // );
 
+
+  //done
   const VoteJSX=(
     <TouchableOpacity 
     style={styles.ctnFoodInfomation}
@@ -614,7 +621,7 @@ export default class FoodDetail extends Component {
       />
   </TouchableOpacity>
   );
-
+// fix map and call
   const FoodImageJSX=(
     <View style={styles.ctnImageFood}>
       <Image 
@@ -623,19 +630,37 @@ export default class FoodDetail extends Component {
       />
     </View>                 
   );
+  const ReviewJSX=(
+    <View style={styles.ctnReview}>
 
-  // const CommentJSX=(
-     
-  // );
+      <View style={styles.ctnCellReview}>
+          <Text style={styles.txtBigScore}>{this.state.avarageScore}</Text>
+          <Text>Điểm trung bình</Text>
+      </View>
+
+      <View style={styles.ctnCellReview}>
+          <Text style={styles.txtBigScore}>{this.state.totalVote}</Text>
+          <Text>Tổng đánh giá</Text>
+      </View>
+
+      <View style={styles.ctnCellReview}>
+          <Text style={styles.txtBigScore}>{this.state.totalView}</Text>
+          <Text>Tổng lượt xem</Text>
+      </View>
+    </View>
+  );
+
+
 
   return (
         <View style={styles.wrapper}>
           {headerJSX }
           <ScrollView style={styles.body} >
               {FoodImageJSX}
+              {ReviewJSX}
               {InfomationJSX}
               {VoteJSX}
-              {/* {CommentJSX} */}
+              {commentJSX}
 
               {/* 
               {RestaurantPictureJSX}

@@ -25,6 +25,11 @@ export default StyleSheet.create({
     fontSize: theme.Size.FontBigger,
     fontWeight: "900",
   },
+  txtSuperBigScore:{
+    fontSize: theme.Size.FontBiggest,
+    fontWeight: "900",
+    color: theme.Color.Red,
+  },
   body:{
     flex: 1,
     margin:0,

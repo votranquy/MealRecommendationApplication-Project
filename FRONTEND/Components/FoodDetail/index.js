@@ -24,7 +24,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import styles from "./styles";
 import getToken from '../../api/getToken';
 import getMenuApi from '../../api/getMenuApi';
-import getFoodImageAPI from '../../api/getFoodImageAPI';
+import getFoodInformationAPI from '../../api/getFoodInformationAPI';
 import getPersonalVoteAPI from '../../api/getPersonalVoteAPI';
 import increaseViewAPI from "../../api/increaseViewAPI";
 import StarRating from 'react-native-star-rating';
@@ -56,6 +56,7 @@ export default class FoodDetail extends Component {
       avarageScore:0,
       totalVote:0,
       totalView:0,
+      restaurant_id:0,
       }
   }
 
@@ -83,7 +84,7 @@ export default class FoodDetail extends Component {
   }
 //done
   getFoodImage(){
-    getFoodImageAPI(this.props.food_id)
+    getFoodInformationAPI(this.props.food_id)
     .then((responseJson)=>{
       if(responseJson.result === "success"){
        this.setState({
@@ -95,6 +96,7 @@ export default class FoodDetail extends Component {
          avarageScore:responseJson.data[0].average_score,
          totalVote:responseJson.data[0].total_vote,
          totalView:responseJson.data[0].total_view,
+         restaurant_id: responseJson.data[0].restaurant_id,
         })
       }
     })
@@ -149,49 +151,49 @@ export default class FoodDetail extends Component {
     });
   }
 
-  gotoMap(location){
+  gotoMap(food_id, restaurant_id){
     const {navigator} = this.props;
-    navigator.push({name: "MAP",location});
+    navigator.push({name: "MAP",food_id, restaurant_id});
   }
 
-  getPicture() {  
-    //FlatList
-    const {restaurant_id} = this.props.food;
-    console.log("GET_RESTAURANT_ID"+ restaurant_id);
-    const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
-    fetch(URLi,{
-      method:"GET",
-      headers: {
-              Accept: 'application/json, text/plain, */*',
-              'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-              'x-requested-with' : 'XMLHttpRequest'
-      }
-    })
-    .then(responsei => responsei.json())
-    .then(responseJsoni=>{
-      if(responseJsoni.ListPicture.length !== 0){
-        console.log('IMAGE_WORK');
-        this.setState({
-          picture: responseJsoni.ListPicture,
-          isLoading: false,
-        });
-        // console.log("IMAGE",this.state.picture);
-      }else{
-        console.log('IMAGE_NULL');
-        this.setState({
-          picture:[],
-          isLoading: false,
-        });
-      }
-    })	
-    .catch(error=>{
-      console.log('IMAGE_ERROR',error);
-      this.setState({
-        picture: [],
-        isLoading: false, 
-      });
-    });
-  }
+  // getPicture() {  
+  //   //FlatList
+  //   const {restaurant_id} = this.props.food;
+  //   console.log("GET_RESTAURANT_ID"+ restaurant_id);
+  //   const URLi = "https://www.foody.vn/__get/Restaurant/Mobile_Get_HomePictures?t=1557065498601&Count=7&RestaurantId="+restaurant_id;
+  //   fetch(URLi,{
+  //     method:"GET",
+  //     headers: {
+  //             Accept: 'application/json, text/plain, */*',
+  //             'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+  //             'x-requested-with' : 'XMLHttpRequest'
+  //     }
+  //   })
+  //   .then(responsei => responsei.json())
+  //   .then(responseJsoni=>{
+  //     if(responseJsoni.ListPicture.length !== 0){
+  //       console.log('IMAGE_WORK');
+  //       this.setState({
+  //         picture: responseJsoni.ListPicture,
+  //         isLoading: false,
+  //       });
+  //       // console.log("IMAGE",this.state.picture);
+  //     }else{
+  //       console.log('IMAGE_NULL');
+  //       this.setState({
+  //         picture:[],
+  //         isLoading: false,
+  //       });
+  //     }
+  //   })	
+  //   .catch(error=>{
+  //     console.log('IMAGE_ERROR',error);
+  //     this.setState({
+  //       picture: [],
+  //       isLoading: false, 
+  //     });
+  //   });
+  // }
 
   // getComment(){
   //   const { restaurant_id} = this.props.food;
@@ -324,16 +326,16 @@ export default class FoodDetail extends Component {
         <View style={styles.lableMenu}>
               <Text style={styles.txtMenu}>Thông Tin</Text>
         </View>
-        <View style={styles.ctnInfomationRow} >
+        {/* <View style={styles.ctnInfomationRow} >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteDisk}/>
           <Text style={styles.txtCategory}>  { this.state.foodName }</Text>
-        </View>
+        </View> */}
         <View style={styles.ctnInfomationRow} >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteMoney}/>
           <Text style={styles.txtCategory}>  { this.state.foodPrice } đ {this.props.food_id}</Text>
         </View>
         <TouchableOpacity style={styles.ctnInfomationRow} 
-        // onPress={() => this.gotoMap(this.props.food)}
+        onPress={() => this.gotoMap(this.props.food_id, this.state.restaurant_id)}
         >
           <Image style={styles.iconInfomation} source={theme.Image.iCon.WhiteAdress}/>
           <Text style={styles.txtAddress}>  {this.state.storeAddress}</Text>
@@ -400,7 +402,7 @@ export default class FoodDetail extends Component {
     const commentJSX=(
       <View style={styles.ctnMenu}>
         <View style={styles.lableMenu}>
-              <Text style={styles.txtMenu}>Đánh giá từ mọi người</Text>
+              <Text style={styles.txtMenu}>Đánh Giá Từ Mọi Người</Text>
         </View>
         <FlatList
             enableEmptySection
@@ -600,7 +602,7 @@ export default class FoodDetail extends Component {
     onPress={()=>this.gotoVote(starCount, comment, this.props.food_id)}
     > 
       <View style={styles.lableMenu}>
-            <Text style={styles.txtMenu}>Đánh Giá Của Bạn</Text>
+            <Text style={styles.txtMenu}>Đánh Giá Từ Bạn</Text>
       </View>
       <StarRating 
         disabled={true}
@@ -610,15 +612,7 @@ export default class FoodDetail extends Component {
         rating={this.state.starCount}
         selectedStar={(rating) => this.onStarRatingPress(rating)}
       />
-      <TextInput
-        multiline={true}
-        editable = {false}
-        numberOfLines={3}
-        style={styles.InputVote}
-        placeholder="Mời bạn đánh giá"
-        value={this.state.comment}
-        placeholderTextColor={"white"}
-      />
+      <Text>{this.state.comment !="" ? this.state.comment : "Mời bạn đánh giá!"}</Text>
   </TouchableOpacity>
   );
 // fix map and call
@@ -631,10 +625,11 @@ export default class FoodDetail extends Component {
     </View>                 
   );
   const ReviewJSX=(
+    <View style={{alignItems:"center"}}>
     <View style={styles.ctnReview}>
 
       <View style={styles.ctnCellReview}>
-          <Text style={styles.txtBigScore}>{this.state.avarageScore}</Text>
+          <Text style={styles.txtBigScore}>{Math.round(this.state.avarageScore * 10) / 10}</Text>
           <Text>Điểm trung bình</Text>
       </View>
 
@@ -647,6 +642,9 @@ export default class FoodDetail extends Component {
           <Text style={styles.txtBigScore}>{this.state.totalView}</Text>
           <Text>Tổng lượt xem</Text>
       </View>
+    </View>
+    <Text style={styles.txtSuperBigScore}>{ this.state.foodName }</Text>
+    {/* <Text style={styles.txtBigScore}>{ this.state.foodPrice } đ</Text> */}
     </View>
   );
 

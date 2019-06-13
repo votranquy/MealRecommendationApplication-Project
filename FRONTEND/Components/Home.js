@@ -8,6 +8,7 @@ import ListFood          from './ListFood';
 import FoodDetail     from "./FoodDetail/";
 import SaveBookmark from "./SaveBookmark";
 import RestaurantDirection from "./RestaurantDirection";
+import VoteFood from "./VoteFood";
 export default class Home extends Component{
   render() {
     return(
@@ -20,8 +21,13 @@ export default class Home extends Component{
                 case "LIST_FOOD"   :             return(  <ListFood           navigator={navigator}  />);  
                 case "MAP"   :                          return( <RestaurantDirection           navigator={navigator}  location={route.location}                                                /> );
                 case "SAVE_BOOKMARK":    return( <SaveBookmark navigator={navigator}     idfood={route.idfood}               />);
-                default                        :             return( <FoodDetail       navigator={navigator}     food_id={route.food_id}    hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} /> );
+                case "VOTE":                           return( <VoteFood        navigator={navigator}     starCount={route.starCount}   comment={route.comment}        id_food={route.id_food}    />);
+                case "FOOD_DETAIL"     :       return( <FoodDetail       navigator={navigator}     food_id={route.food_id}    hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} /> );
               }
+          }}
+          configureScene={route => {
+              if (route.name === 'FOOD_DETAIL') return Navigator.SceneConfigs.FloatFromRight;
+              return Navigator.SceneConfigs.FloatFromLeft;
           }}
         />
     )

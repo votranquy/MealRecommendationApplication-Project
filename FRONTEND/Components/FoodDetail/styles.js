@@ -12,6 +12,10 @@ export default StyleSheet.create({
     margin:0,
     backgroundColor: theme.Color.NiceGray,
   },
+  InputVote:{
+    borderColor: theme.Color.NiceGray,
+    borderWidth:1,
+  },
   ctnHeader:{
     flexDirection:'row', 
     justifyContent:'space-between',
@@ -41,14 +45,14 @@ export default StyleSheet.create({
   ctnImageFood:{
     justifyContent:"center", 
     alignItems:"center",
-    width:width,
-    height: height/2,
+    // width:width,
+    // height: height/2,
     backgroundColor: theme.Color.White,
-    marginBottom: 5,
+    // marginBottom: 5,
   },
   imageFood:{
       height:height/2,
-      width:width,
+      width: '100%',
       alignItems:"center",
       justifyContent:"center",
   },

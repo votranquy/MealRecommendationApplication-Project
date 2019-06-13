@@ -38,6 +38,9 @@ const Image = {
     WhiteSearch: require("../Image/whitesearch.png"),
     WhiteSetting: require("../Image/whitesetting.png"),
     WhiteBack: require("../Image/whiteback.png"),
+    FoodName: require("../Image/foodname.png"),
+    WhiteDisk: require("../Image/whitedisk.png"),
+    WhiteMoney: require("../Image/whitemoney.png"),
   },
 
   Bg: {

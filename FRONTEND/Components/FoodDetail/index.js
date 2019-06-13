@@ -252,7 +252,7 @@ export default class FoodDetail extends Component {
     }
     Alert.alert(
       'Liên lạc',
-      'Xác nhận gọi đến của hàng này',
+      'Bạn có muốn liên lạc đến cửa hàng này?',
       [
         {
           text: 'Hủy bỏ', onPress: () => console.log('Cancel Pressed'), style: 'cancel',

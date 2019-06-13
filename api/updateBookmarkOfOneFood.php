@@ -46,7 +46,7 @@
                                               echo("{\"result\":\"success\"}");
                                           }
                                           else{
-                                              echo("{\"result\":\"KHONG_THANH_CONG\"}");
+                                              echo("{\"result\":\"fail\"}");
                                           };
 
                                    }
@@ -59,18 +59,18 @@
                                                  echo("{\"result\":\"success\"}");
                                           }
                                           else{
-                                                 echo("{\"result\":\"KHONG_THANH_CONG\"}");
+                                                 echo("{\"result\":\"fail\"}");
                                           };
                                    }
                                           
                             }
                             catch(Exception $e){
-                                   echo("{\"result\":\"LOI\"}");
+                                   echo("{\"result\":\"fail\"}");
                             }
                      }
-                     else{echo("{\"result\":\"LOI\"}");}
+                     else{echo("{\"result\":\"fail\"}");}
               }
        }catch(Exception $e){
-              echo("{\"result\":\"LOI\"}");
+              echo("{\"result\":\"fail\"}");
        }
 ?>

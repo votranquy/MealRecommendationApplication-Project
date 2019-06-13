@@ -25,7 +25,7 @@ export default class Shop extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab: "home",
+      selectedTab: "category",
       bookmarkArray: [],
       isLogIn:null,
       tabBarHeight: 50,
@@ -78,7 +78,10 @@ showTabNavigator(){
             onPress={() => this.setState({ selectedTab: 'category' })}
             selectedTitleStyle={{ color: theme.Color.Red, fontFamily: 'Avenir', }}
             >
-            <Detect/>
+            <Detect
+              hiddenTabNavigator={this.hiddenTabNavigator.bind(this)} 
+              showTabNavigator={this.showTabNavigator.bind(this)}
+            />
           </TabNavigator.Item>
 
 
@@ -90,7 +93,10 @@ showTabNavigator(){
             onPress={() => this.setState({ selectedTab: 'search' })}
             selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
             >
-            <Search/>
+            <Search
+                          hiddenTabNavigator={this.hiddenTabNavigator.bind(this)} 
+                          showTabNavigator={this.showTabNavigator.bind(this)}
+            />
           </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -101,7 +107,10 @@ showTabNavigator(){
             onPress={() => this.setState({ selectedTab: 'suggestion' })}
             selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
             >
-            <UserMenu/>
+            <UserMenu
+                          hiddenTabNavigator={this.hiddenTabNavigator.bind(this)} 
+                          showTabNavigator={this.showTabNavigator.bind(this)}
+            />
           </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -114,6 +123,8 @@ showTabNavigator(){
             selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
           >
             <BookMark 
+                          hiddenTabNavigator={this.hiddenTabNavigator.bind(this)} 
+                          showTabNavigator={this.showTabNavigator.bind(this)}
             // bookmarkArray={bookmarkArray}
              />
           </TabNavigator.Item>

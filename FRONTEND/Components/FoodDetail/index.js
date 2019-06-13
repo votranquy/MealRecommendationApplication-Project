@@ -70,7 +70,7 @@ export default class FoodDetail extends Component {
   gotoHome(){
     this.props.showTabNavigator();
     const { navigator } = this.props;
-    navigator.push({name: "HOME_VIEW"});
+    navigator.pop();
 }
 
   gotoVote(starCount, comment, id_food) {

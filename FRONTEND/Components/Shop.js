@@ -20,12 +20,13 @@ import saveBookMark from "../api/saveBookMark";
 import theme from "../theme";
 import getToken from "../api/getToken";
 import Detect from "../Components/Detect";
+import Suggestion from "../Components/Suggestion";
 
 export default class Shop extends Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedTab: "home",
+      selectedTab: "suggestion",
       bookmarkArray: [],
       isLogIn:null,
       tabBarHeight: 50,
@@ -107,7 +108,7 @@ showTabNavigator(){
             onPress={() => this.setState({ selectedTab: 'suggestion' })}
             selectedTitleStyle={{ color:theme.Color.Red, fontFamily: 'Avenir' }}
             >
-            <UserMenu
+            <Suggestion
                           hiddenTabNavigator={this.hiddenTabNavigator.bind(this)} 
                           showTabNavigator={this.showTabNavigator.bind(this)}
             />

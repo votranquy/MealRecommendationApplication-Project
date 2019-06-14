@@ -15,10 +15,10 @@ export default class BookMark extends Component {
                 renderScene={(route, navigator) => {
                     switch (route.name) {
                         case 'BOOKMARK_VIEW': return <BookMarkView navigator={navigator} />;
-                        case 'BOOKMARK_LIST' : return <BookMarkList  navigator={navigator} idbookmark={route.idbookmark}/>
-                        case "MAP"   :                  return( <RestaurantDirection           navigator={navigator}  location={route.location}                                                /> );
-                        case "SAVE_BOOKMARK": return(<SaveBookmark navigator={navigator}     idfood={route.idfood}               />);
-                        default: return <FoodDetail navigator={navigator} food={route.food}/>;
+                        case 'BOOKMARK_LIST' : return <BookMarkList  navigator={navigator} idbookmark={route.idbookmark} hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator} />
+                        case "MAP"   :                  return( <RestaurantDirection           navigator={navigator}  food_id={route.food_id}  restaurant_id={route.restaurant_id}                                               /> );
+                        case "SAVE_BOOKMARK": return(<SaveBookmark navigator={navigator}     idfood={route.idfood}          hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator}      />);
+                        default: return <FoodDetail navigator={navigator}  food_id={route.food_id}  restaurant_id={route.restaurant_id} hiddenTabNavigator={this.props.hiddenTabNavigator}  showTabNavigator={this.props.showTabNavigator}  KEY={route.KEY}/>;
                     }
                 }}
             />

@@ -45,6 +45,7 @@ const Image = {
     Restaurant: require("../Image/restaurant.png"),
     You: require("../Image/you.png"),
     NoHaveImage: require("../Image/informationA.png"),
+    ReLoad: require("../Image/reload.png"),
   },
 
   Bg: {

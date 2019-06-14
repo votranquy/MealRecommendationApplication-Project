@@ -62,6 +62,7 @@ export default class FoodDetail extends Component {
       totalVote:0,
       totalView:0,
       restaurant_id:0,
+      idfoodyfood:0,
       }
   }
 

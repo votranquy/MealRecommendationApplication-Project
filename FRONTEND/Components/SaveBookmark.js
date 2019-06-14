@@ -15,7 +15,7 @@ import getBookmarkOfOneFood from '../api/getBookmarkOfOneFood';
 import updateBookmarkOfOneFoodApi from '../api/updateBookmarkOfOneFoodApi';
 import Toast, {DURATION} from 'react-native-easy-toast';
 
-export default class FoodDetail extends Component {
+export default class SaveBookmarks extends Component {
 
   constructor(props){
     super(props);

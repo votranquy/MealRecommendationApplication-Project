@@ -8,6 +8,7 @@ import theme from '../theme';
 import getToken from "../api/getToken";
 import getOneBookmarkApi from "../api/getOneBookmarkApi";
 import Modal from 'react-native-modalbox';  
+import postNavigator from "../api/postNavigator";
 
 
 export default class BookMarkList extends Component {
@@ -21,12 +22,18 @@ export default class BookMarkList extends Component {
       }
     }
 
-  gotoDetail(food) {
+  gotoDetail(food_id,restaurant_id) {
+    KEY = "HOME";
+    // navigator = "HOME";
+    console.log(food_id+ 'AAAAAA' +restaurant_id);
+    // postNavigator("HOME_VIEW");
+        postNavigator("HOME_VIEW");
         const { navigator } = this.props;
-        navigator.push({ name: 'FOOD_DETAIL' ,food});
+        navigator.push({ name: 'FOOD_DETAIL' ,food_id,restaurant_id, KEY});
   }
 
   goBack() {
+    this.props.showTabNavigator();
       const { navigator } = this.props;
       navigator.pop();
   }
@@ -88,7 +95,8 @@ export default class BookMarkList extends Component {
 
 
       componentDidMount(){
-      this._isMounted = true;
+        this.props.hiddenTabNavigator();
+        this._isMounted = true;
       this.interval = setInterval(() => this.getData(), 2000);
     }     
 
@@ -108,7 +116,7 @@ export default class BookMarkList extends Component {
             renderRow={e => (
               <TouchableOpacity 
                 activeOpacity={0.8}  
-                onPress={() => this.gotoDetail(e)} 
+                onPress={() => this.gotoDetail(e.idoffood, e.restaurant_id)} 
                 style={styles.ctnRestaurant}>
                 <View style={styles.ctnImage} >
                   { e.image !== "/style/images/deli-dish-no-image.png" ?

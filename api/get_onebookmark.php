@@ -24,9 +24,9 @@
                      }
               
                      $bookmarksave = $mysqli->query(
-                            "SELECT p.id_food  as id, t.food_name, q.image, t.rate, t.address, t.image_path, t.category, t.restaurant_id, t.latitude,t.longitude,q.name, t.menu
+                            "SELECT p.id_food  as id, t.food_name, q.image,q.id as idoffood, t.rate, t.address, t.image_path, t.category, t.restaurant_id, t.latitude,t.longitude,q.name, t.menu
                             FROM BOOKMARK_SAVE p 
-                            LEFT JOIN FOOD q ON p.id_food = q.food_id
+                            LEFT JOIN FOOD q ON p.id_food = q.id
                             INNER JOIN STORE t ON q.restaurant_id=t.restaurant_id
                             WHERE id_bookmark = '$idbookmark'");
 

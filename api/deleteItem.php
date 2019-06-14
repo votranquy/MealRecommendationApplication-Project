@@ -25,7 +25,7 @@
                 $id = $rowid["id"];
             }
 
-            $sql_delete = "DELETE FROM BOOKMARK_SAVE WHERE id_bookmark='$idbookmark' AND id_food='$idfood'";
+            $sql_delete = "DELETE FROM BOOKMARK_SAVE WHERE id_bookmark='$idbookmark' AND id='$idfood'";
 
             $result = $mysqli->query($sql_delete);
             if($result){

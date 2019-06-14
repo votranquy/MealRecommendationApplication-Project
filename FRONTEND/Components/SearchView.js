@@ -34,7 +34,6 @@ export default class SearchView extends Component {
       // token:"",
       keyword: '',
       }
-
     }
 
     
@@ -43,6 +42,7 @@ export default class SearchView extends Component {
       KEY = "SEARCH";
       navigator.push({ name: 'FOOD_DETAIL' ,food_id, restaurant_id, KEY});
     }
+
 
     getData(){
       this.setState({isLoadingMore: true});
@@ -58,7 +58,7 @@ export default class SearchView extends Component {
               mang: responseData.data,
               dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
             });
-            console.log("RESULT_RETURN");
+            console.log("RESULT_RETURN", responseData.data );
           }
           else{
             // this.refs.modal3.close();
@@ -97,17 +97,17 @@ export default class SearchView extends Component {
 
 
     loadMore(){
-      this.setState({isLoadingMore: true});
-      nextpage = this.state.page +1;
+      this.setState({isLoadingMore: true, page:  this.state.page +1,});
+      // nextpage = this.state.page +1;
 
-      searchApi(this.state.key, nextpage)
+      searchApi(this.state.key, this.state.page)
       .then((responseJson)=>{
         if(responseJson.result==="success"){
           this.setState({
               mang : this.state.mang.concat(responseJson.data),
               isLoadingMore: false,
               dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
-              page: this.state.page+1,
+              // page: this.state.page+1,
           });
         }
         else{
@@ -131,13 +131,11 @@ export default class SearchView extends Component {
     hanleChangeText(text){
       // const { keyword } = this.state;
       //isShowSuggestion: true, listSuggestion:[]
-
       this.setState({key: text, isShowSuggestion: true});
       console.log("KEYWORD", text);
-
       getSuggestionAPI( this.state.key)
       .then((responseJson)=>{
-        console.log(responseJson);
+        // console.log(responseJson);
         if(responseJson.result === "success"){
           this.setState({
             isShowSuggestion: true,
@@ -150,7 +148,7 @@ export default class SearchView extends Component {
 
 
     createRow(property){
-      if(property.image == '');
+      if(property.image === '') return(<View/>);
       else{
         return(
         <TouchableOpacity 
@@ -158,7 +156,12 @@ export default class SearchView extends Component {
           onPress={() => this.gotoDetail(property.id, property.restaurant_id)} 
           key={property.id} style={styles.ctnRestaurant}>
           <View style={styles.ctnImage} >
-            <Image style={styles.image} source={{uri: "http:"+property.image}} />
+            {
+              property.image == '/style/images/deli-dish-no-image.png' ?
+              <Image style={styles.image} source={theme.Image.iCon.NoHaveImage} />
+              :<Image style={styles.image} source={{uri: "http:"+property.image}} />
+            }
+            
           </View>
           <View style={styles.ctnInfomation}>
             <View style={styles.cntText}>
@@ -179,7 +182,9 @@ export default class SearchView extends Component {
       }
     }
 
+
     render() {
+
 
       const  LoadForSearchingJSX=(//WAITING SEARCH
         <Modal
@@ -245,36 +250,36 @@ export default class SearchView extends Component {
       </Modal>
       );
 
-  const headerJSX=(
-          <View style={styles.ctnHeader}>
-              <View style={styles.ctnSearch}>
-                <View style={styles.ctnHeaderIcon}>
-                    <Image source={theme.Image.iCon.WhiteSearch}  style={styles.imageHeader}/>
-                  </View>    
-                    <View style={styles.ctnInputSearch}>
-                          <TextInput 
-                          style={styles.inputSearch} 
-                          placeholder="Bạn muốn ăn gì?" 
-                          underlineColorAndroid="white"
-                          value={this.state.key}
-                          onChangeText={(text)=> { this.hanleChangeText(text)
-                            // _.debounce(this.hanleChangeText(text), 1000)
-                            
-
-                          }}
-                          />
+    const headerJSX=(
+            <View style={styles.ctnHeader}>
+                <View style={styles.ctnSearch}>
+                  <View style={styles.ctnHeaderIcon}>
+                      <Image source={theme.Image.iCon.WhiteSearch}  style={styles.imageHeader}/>
+                    </View>    
+                      <View style={styles.ctnInputSearch}>
+                            <TextInput 
+                            style={styles.inputSearch} 
+                            placeholder="Bạn muốn ăn gì?" 
+                            underlineColorAndroid="white"
+                            value={this.state.key}
+                            onChangeText={(text)=> { this.hanleChangeText(text)
+                              // _.debounce(this.hanleChangeText(text), 1000)
+                            }}
+                            />
+                      </View>
+                      {/* <TouchableOpacity style={styles.ctnHeaderIcon}  onPress={()=>  this.refs.modal2.open()}>
+                        <Image source={theme.Image.iCon.WhiteSetting}  style={styles.imageHeader}/>
+                      </TouchableOpacity>   */}
                     </View>
-                    {/* <TouchableOpacity style={styles.ctnHeaderIcon}  onPress={()=>  this.refs.modal2.open()}>
-                      <Image source={theme.Image.iCon.WhiteSetting}  style={styles.imageHeader}/>
-                    </TouchableOpacity>   */}
-                  </View>
 
-                    <TouchableOpacity style={styles.btnSearch} onPress={()=>  this.getData()}>
-                          <Text style={styles.txtBtnSearch}> Tìm </Text>
-                    </TouchableOpacity>
-                    {settingJSX}
-          </View>
-    );
+                      <TouchableOpacity style={styles.btnSearch} onPress={()=>  this.getData()}>
+                            <Text style={styles.txtBtnSearch}> Tìm </Text>
+                      </TouchableOpacity>
+                      {settingJSX}
+            </View>
+      );
+
+
 
     const resultJSX=(
       <View style={{flex:1, borderColor: "green"}}>
@@ -288,11 +293,13 @@ export default class SearchView extends Component {
       </View>
     );
 
+
     const loadmoreJSX=(
       <View style={styles.ctnLoadingRow}>
         <ActivityIndicator size="large" size={50} color="#FF0000" />
       </View>
     );
+
 
     const suggestionJSX=(
       <FlatList

@@ -44,6 +44,7 @@ const Image = {
     QuestionMark: require("../Image/questionmark.png"),
     Restaurant: require("../Image/restaurant.png"),
     You: require("../Image/you.png"),
+    NoHaveImage: require("../Image/informationA.png"),
   },
 
   Bg: {

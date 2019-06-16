@@ -5,6 +5,6 @@ require_once("sample_list.php");
 
 
 $re = new Recommend();
-print_r($re->getRecommendations($books, "jill"));
+print_r($re->getRecommendations($food, ""));
 
 ?>

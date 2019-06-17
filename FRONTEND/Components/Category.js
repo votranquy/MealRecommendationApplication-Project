@@ -35,7 +35,7 @@ export default class Category extends Component {
   }
 
   // fetchData(){
-  //   fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
+  //   fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page ,
   //     {method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
@@ -47,7 +47,7 @@ export default class Category extends Component {
   // }
 
   componentDidMount(){
-    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/category.php",
+    fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/category.php",
       {method:"GET",
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export default class Category extends Component {
               <View style={styles.content}>
                 <View style={styles.content_row}>
                   <Image source={require('../Image/location.png')}/>
-                  <Text style={styles.content_row_address}>{property.food_category}</Text>
+                  <Text style={styles.content_row_address}>{property.category_name}</Text>
                 </View>
               </View>  
              </TouchableOpacity>
@@ -84,7 +84,7 @@ export default class Category extends Component {
   //     refreshing:true,
   //   });
 
-  //   fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
+  //   fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+this.state.page,{method:"POST",body:null})
   //   .then((response)=>response.json())
   //   .then((responseData)=>{
   //     this.setState({
@@ -98,7 +98,7 @@ export default class Category extends Component {
 
 
 //   _onEndReached(){
-//     fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
+//     fetch("http://192.168.43.103/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber="+(this.state.page+1),
 //       {
 //         method:"POST",
 //         headers: {
@@ -152,6 +152,7 @@ export default class Category extends Component {
           //     onRefresh={this.loadNewData.bind(this)}
           //   />
           // }
+          enableEmptySections
           dataSource={this.state.dataSource}
           renderRow={
             (category) => this.createRow(category)

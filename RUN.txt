@@ -1,0 +1,13 @@
+lsusb
+
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="plugdev"' | sudo tee /etc/udev/rules.d/51-android-usb.rules
+
+adb devices
+
+cd FRONTEND
+
+react-native run-android
+
+adb -s CMIRT4FYCIAUSKU4 reverse tcp:8081 tcp:8081
+
+npm start

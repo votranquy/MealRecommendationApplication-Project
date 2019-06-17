@@ -1,7 +1,7 @@
 import saveToken from './saveToken';
 
 const refreshToken = (token) => {
-    fetch('http://192.168.1.85/MealRecommendationApplication-Project/api/refresh_token.php',
+    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/refresh_token.php',
     {   
         method: 'POST',
         headers: {

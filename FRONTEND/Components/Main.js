@@ -10,7 +10,8 @@ import refreshToken from '../api/refreshToken';
 import global from './global';
 
 export default class Main extends Component{
-    componentDidMount() {
+    
+    componentDidMount(){
         getToken()
         .then(token => checkLogin(token))
         .then(res => global.onSignIn(res.user))
@@ -31,7 +32,7 @@ export default class Main extends Component{
             <Drawer
                 ref={(ref) => { this.drawer = ref; }}
                 content={<Menu navigator={navigator} />}
-                openDrawerOffset={0.4}
+                openDrawerOffset={0.1}
                 tapToClose
             >
                 <Shop open={this.openControlPanel.bind(this)} />

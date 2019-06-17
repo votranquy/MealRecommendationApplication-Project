@@ -1,7 +1,8 @@
 module.exports = {
-    addProductToCart: null,
+    addFoodToBookMark: null,
     incrQuantity: null,
     decrQuantity: null,
-    removeProduct: null,
-    onSignIn: null
+    removeFood: null,
+    onSignIn: null,
+    
 };

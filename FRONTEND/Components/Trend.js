@@ -1,210 +1,218 @@
-//Scroll down to move to the next page
-// Home:  10.10.31.41
-// Company: 10.10.31.214
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
   Text,
   View,
-  StatusBar,
   ListView,
   Image,
-  RefreshControl,
-  ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
-import Header from "./Header";
-import ScrollMenu from "./ScrollMenu";
-// var URL="http://10.10.31.41/MealRecommendationApplication-Project/BACKEND/HomePage.php?pagenumber=";
-
-const Img_Path= 'http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/CRAWL_DATA/IMAGE/';
-var URL="http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber=";
+// import styles from "./styles";
+import theme from "../theme";
+import getTrendFoodApi from "../api/getTrendFoodApi";
+import getRandomFoodApi from "../api/getRandomFoodApi";
 
 export default class Trend extends Component {
-
   constructor(props){
     super(props);
     this.state = {
-      refreshing:false,
       page:0,
+      mang:[],
       dataSource: new ListView.DataSource( {rowHasChanged:(r1,r2)=>r1!==r2} ),
-      currentTab:"HOTFOOD",
+      isLoading:true,
+      isLoadingMore: false,
+      mang:[],
     }
   }
 
-  gotoDetail(property){
+  gotoDetail(food){
     const {navigator} = this.props;
-    navigator.push({name: "FOOD_DETAIL",property});
+    navigator.push({name: "FOOD_DETAIL",food});
   }
 
-  fetchData(){
-    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page ,
-      {method:"POST",body:null})
-    .then((response)=>response.json())
-    .then((responseData)=>{
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(responseData)
-      });
-    })
-    .done()
-  }
+
 
   componentDidMount(){
-    this.fetchData();
-  }
-
-  createRow(property){
-    return(
-        <TouchableOpacity onPress={this.gotoDetail.bind(this)} style={styles.row}>
-            <View style={styles.image}>
-              {/* <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} /> */}
-            </View>
-            <View style={styles.content}>
-
-              <View style={styles.content_row}>
-                <Text style={styles.content_row_name}>{property.food_name}</Text>
-              </View>
-
-              <View style={styles.content_row}>
-                <Image source={require('../Image/star.png')}/>
-                <Text style={styles.content_row_rate}>{property.rate}</Text>
-              </View>
-
-              <View style={styles.content_row}>
-                <Image source={require('../Image/location.png')}/>
-                <Text style={styles.content_row_address}>{property.address}</Text>
-              </View>
-
-              <View style={styles.content_row}>
-                <Image source={require('../Image/clock.png')}/>
-                {/* <Text style={styles.content_row_worktime}>{property.worktime}</Text> */}
-              </View>  
-            </View>  
-        </TouchableOpacity>
-    );
-  }
-
-  loadNewData(){
-    this.setState({
-      refreshing:true,
-    });
-
-    fetch("http://192.168.1.85/MealRecommendationApplication-Project/BACKEND/Trend.php?pagenumber="+this.state.page,{method:"POST",body:null})
-    .then((response)=>response.json())
-    .then((responseData)=>{
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(responseData),
-        refreshing:false,
-        page: this.state.page+1,
-      });
+    getTrendFoodApi(this.state.page)
+    .then((responseJson)=>{
+      if(responseJson.result==="success"){
+        this.setState({
+            mang : responseJson.data,
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+          });
+      }
+      else{
+        this.setState({
+          isLoading: false,
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        })
+      }
     })
-    .done()
+    .catch(error=>{
+      console.log('GETRANDOMFOOD_ERROR',error);
+      this.setState({
+        isLoading: false,
+        dataSource: this.state.dataSource.cloneWithRows([]),
+      });
+    });
+  }
+
+
+  
+  createRow(property){
+    if(property.food_name == "");
+    else{
+      return(
+      <TouchableOpacity 
+        activeOpacity={0.8}  
+        onPress={() => this.gotoDetail(property)} 
+        key={property.id} style={styles.ctnRestaurant}>
+        <View style={styles.ctnImage} >
+          <Image style={styles.image} source={{uri: "http:"+property.image}} />
+        </View>
+        <View style={styles.ctnInfomation}>
+          <View style={styles.cntText}>
+            <Text style={styles.textFood} numberOfLines={1}>{property.name }</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtName} numberOfLines={1}>{property.food_name }</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtRate}>{String(Math.round(property.rate*10)/10)} ★</Text>
+          </View>
+          <View style={styles.cntText}>
+            <Text style={styles.txtAddress} numberOfLines={1}>{property.address}</Text>
+          </View>
+        </View>  
+      </TouchableOpacity>
+      );
+    }
+  }
+  
+
+
+  _onEndReached(){
+    nextpage = this.state.page +1;
+    getRandomFoodApi(nextpage)
+    .then((responseJson)=>{
+      if(responseJson.result==="success"){
+        this.setState({
+            mang : this.state.mang.concat(responseJson.data),
+            isLoadingMore: false,
+            dataSource: this.state.dataSource.cloneWithRows(this.state.mang),
+            page: this.state.page+1,
+          });
+      }
+      else{
+        this.setState({
+          isLoadingMore: false,
+          dataSource: this.state.dataSource.cloneWithRows([]),
+        })
+      }
+    })
+    .catch(error=>{
+      console.log('GETMORERANDOMFOOD_ERROR',error);
+      this.setState({
+        isLoadingMore: false,
+        dataSource: this.state.dataSource.cloneWithRows([]),
+      });
+    });
   }
 
 
 
   render() {
-
-
-
-    return (
-    <View style={{flex:1, backgroundColor:'#86AAEE'}}>
-    
-      
-      <View style={styles.container}>
-        <StatusBar hidden={true} />
-        <View>
+    const trendfoodJSX=(
         <ListView 
-          refreshControl={
-            <RefreshControl 
-              refreshing={this.state.refreshing}
-              onRefresh={this.loadNewData.bind(this)}
-            />
-          }
+          enableEmptySections
           dataSource={this.state.dataSource}
           renderRow={
-            // this.createRow
-            (property) =>
-              <TouchableOpacity  onPress={() => this.gotoDetail(property)} key={property.id} style={styles.row}>
-                <View style={styles.image}>
-                  {/* <Image style={styles.image} source={{uri: `${Img_Path}${property.img_path}` }} /> */}
-                </View>
-                <View style={styles.content}>
-                  <View style={styles.content_row}>
-                    <Text style={styles.content_row_name}>{property.food_name}</Text>
-                  </View>
-                  <View style={styles.content_row}>
-                    <Image source={require('../Image/star.png')}/>
-                    <Text style={styles.content_row_rate}>{property.rate}</Text>
-                  </View>
-                  <View style={styles.content_row}>
-                    <Image source={require('../Image/location.png')}/>
-                    <Text style={styles.content_row_address}>{property.address}</Text>
-                  </View>
-                  <View style={styles.content_row}>
-                    <Image source={require('../Image/clock.png')}/>
-                    {/* <Text style={styles.content_row_worktime}>{property.worktime}</Text> */}
-                  </View>  
-                </View>  
-               </TouchableOpacity>
+            (propertya) => this.createRow(propertya)
           }
-          //onEndReached={this.loadNewData.bind(this)}
-              
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={0.5}
         />
-        </View>
-      </View>
-    </View>
-    );
+      );
+      const loadJSX=(<ActivityIndicator size={50} color="red" />);
+        return (
+          <View style={styles.container}>
+            {/* {this.state.isLoading       ?  loadJSX : <View/>}  */}
+            {trendfoodJSX}
+            {this.state.isLoadingMore ? loadJSX : <View/>}
+          </View>
+        );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1, backgroundColor: "white",
+    flex:1, 
+    backgroundColor: theme.Color.White,
   },
-  row: {
+  ctnRestaurant: {
     flex: 1,
     flexDirection:'row',
-    backgroundColor:"#EEEEEE",
+    backgroundColor:"#FFF",
     padding:3,
     margin:3,
-    
+    borderBottomWidth:1,
+    borderColor: theme.Color.LightGray,
+    paddingBottom:10,
+  },
+  ctnImage:{
+    flex:0.3,
+    padding:1,
+    // borderRadius: 100
   },
   image:{
-    flex:0.4,
-    margin:5,
-    borderWidth:1,
-    borderColor:"black",
+    flex:1,
   },
-  content:{
-    flex:0.6,
+  ctnInfomation:{
+    flex:0.7,
     padding:3,
   },
-  content_row:{
+  cntText:{
     flex:1,
     flexDirection:"row",
     alignItems: 'center',
+    padding:3,
   },
-  content_row_name:{
-    color:"green",
-    fontSize: 15,
+  txtName:{
+    color: theme.Color.Black,
+    fontSize: theme.Size.FontSmall,
+    alignItems: 'center',
+    fontWeight:"900",
+    // margin: theme.Size.TextMargin,
+  },
+  txtRate:{
+    color: theme.Color.NiceRed,
+    fontSize:  theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_rate:{
-    color:"green",
-    fontSize: 20,
+  txtAddress:{
+    color: theme.Color.MediumGray,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_address:{
-    color:"gray",
-    fontSize: 15,
+  txtMenu:{
+    color: theme.Color.Orange,
+    fontSize: theme.Size.FontSmall,
     alignItems: 'center',
   },
-  content_row_worktime:{
-    color:"gray",
-    fontSize: 15,
+  ctnFood:{
+    flexDirection: "row",
     alignItems: 'center',
   },
+  imageFood:{
+    width:width/10,
+    height:width/10,
+    marginRight:2,
+  },
+  textFood:{
+    color: theme.Color.Orange,
+    fontSize: theme.Size.FontSmall,
+    // alignItems: 'center',
+  }
 });
 

@@ -24,6 +24,8 @@ export default class SignIn extends Component {
         };
     }
 
+
+
     removeEmail(){
         this.setState({
             email: '',
@@ -91,6 +93,7 @@ export default class SignIn extends Component {
             }
         }
     }
+
     clickSignIn(){
         if(this.state.email == "" || this.state.password == "" || !this.state.emailValidate || !this.state.passwordValidate){
             if(this.state.email == ""){ this.setState({emailValidate: false})};
@@ -132,7 +135,9 @@ export default class SignIn extends Component {
                     <Text style={txtButton}>Đăng nhập ngay</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.ctnFofGot}>
+                <TouchableOpacity style={styles.ctnFofGot}
+                    onPress={()=>this.props.gotoForgetPassword()}
+                >
                             <Text style={styles.txtForGot}> Quên mật khẩu</Text>
                 </TouchableOpacity>
             </View>

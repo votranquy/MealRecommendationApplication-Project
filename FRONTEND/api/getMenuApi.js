@@ -1,5 +1,5 @@
 const getMenuApi = (token, restaurant_id, food_id) => (
-  fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/get_menu.php',
+  fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/get_menu.php',
   {   
       method: 'POST',
       headers: {

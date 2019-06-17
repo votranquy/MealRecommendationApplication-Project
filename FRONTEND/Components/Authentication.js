@@ -27,6 +27,11 @@ export default class Authentication extends Component {
         this.setState({ isSignIn: true });
     }
 
+    gotoForgetPassword(){
+        const { navigator } = this.props;
+        navigator.push({ name: 'FORGET_PASSWORD'});   
+    }
+
     signIn() {
         this.setState({ isSignIn: true });
     }
@@ -37,7 +42,7 @@ export default class Authentication extends Component {
 
     goBackToMain() {
         const { navigator } = this.props;
-        navigator.pop();
+        navigator.push({ name: 'MAIN'});  
     }
 
     gotoConfirmCode(email) {
@@ -72,23 +77,7 @@ export default class Authentication extends Component {
             <View style={[styles.ctnLoading, styles.horizontal]}>
                  <View style={styles.ctnLoadingRow}>
                     <ActivityIndicator size="large" size={50} color="#FF0000" />
-                    {/* <ActivityIndicator size="large" size={50} color="#3C00A7" />
-                    <ActivityIndicator size="large" size={50} color="#00BE00" />
-                    <ActivityIndicator size="large" size={50} color="#FDCE00" /> */}
                 </View>
-                {/* <View style={styles.ctnLoadingRow}>
-                    <ActivityIndicator size="large" size={50} color="#FF0000" />
-                    <ActivityIndicator size="large" size={50} color="#3C00A7" />
-                    <ActivityIndicator size="large" size={50} color="#00BE00" />
-                    <ActivityIndicator size="large" size={50} color="#FDCE00" />
-                </View> */}
-                {/* <View style={styles.ctnLoadingRow}>
-                    <ActivityIndicator size="large" size={50} color="#FF0000" />
-                    <ActivityIndicator size="large" size={50} color="#3C00A7" />
-                    <ActivityIndicator size="large" size={50} color="#00BE00" />
-                    <ActivityIndicator size="large" size={50} color="#FDCE00" />
-                </View> */}
-
             </View>
           </Modal>
           );
@@ -97,6 +86,7 @@ export default class Authentication extends Component {
         const mainJSX = isSignIn ? 
         <SignIn goBackToMain={this.goBackToMain.bind(this)}  gotoConfirmCode={this.gotoConfirmCode.bind(this)} 
         openLoad={this.openLoading.bind(this)} closeLoad={this.closeLoading.bind(this)}
+        gotoForgetPassword={this.gotoForgetPassword.bind(this)}
         /> : 
         <SignUp gotoSignIn={this.gotoSignIn.bind(this)}         gotoConfirmCode={this.gotoConfirmCode.bind(this)}    
          openLoad={this.openLoading.bind(this)} closeLoad={this.closeLoading.bind(this)}

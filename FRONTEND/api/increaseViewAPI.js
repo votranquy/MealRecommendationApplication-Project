@@ -1,6 +1,6 @@
 
 const increaseViewAPI = (id) => (
-    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/increaseView.php',
+    fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/increaseView.php',
     {   
         method: 'POST',
         headers: {

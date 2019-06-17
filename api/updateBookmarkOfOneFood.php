@@ -6,11 +6,8 @@
 
        $json = file_get_contents('php://input');
        $obj = json_decode($json, true);
-       $idfood = $obj['idfood'];
-       $token = $obj['token'];
-       $idbookmark = $obj['idbookmark'];
-       $arrMenu = array();
-       $key = "example_key";
+       $email = $obj['email'];
+       $password = $obj['password'];
 
        try{
               $decoded = JWT::decode($token, $key, array('HS256'));

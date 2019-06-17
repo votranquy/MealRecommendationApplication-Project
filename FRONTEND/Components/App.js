@@ -6,10 +6,13 @@ import ChangeInfo from './ChangeInfo';
 import Main from './Main';
 import Welcome from './Welcome';
 import ConfirmCode from "./ConfirmCode";
-import saveLat from "../api/saveLat";
-import saveLong from "../api/saveLong";
+import ResetPassword from "./ResetPassword";
+import ForgetPassword from "../Components/ForgetPassword";
+import ForgetPasswordCode from "../Components/ForgetPasswordCode";
 import saveLocation from "../api/saveLocation";
+
 export default class    App extends Component {
+
     // componentDidMount() {
     //     //var start = Math.random( ) * (900000 - 600000) + 600000;
     //    for (var i = 500000; i < 60000; i++){
@@ -44,7 +47,7 @@ export default class    App extends Component {
     //                     rate=responseJson.reply.delivery_detail.rating.avg;
     //                     totalReview=responseJson.reply.delivery_detail.rating.total_review;
     //                     first_image=responseJson.reply.delivery_detail.photos[1].value;
-    //                     fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/saveData.php',
+    //                     fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/saveData.php',
     //                     {   
     //                         method: 'POST',
     //                         headers: {
@@ -117,29 +120,28 @@ export default class    App extends Component {
         }
     }
 
-componentDidMount(){
-    navigator.geolocation.getCurrentPosition(
-        (position)=>{
-            // console.log("GET_LOCATION_SUCCESS", position);
-            this.setState({ 
-                region:{
-                    latitude: position.coords.latitude,
-                    longitude:  position.coords.longitude,
-                    latitudeDelta:0.1,
-                    longitudeDelta:0.1,
-                },
-             });
-             saveLocation(this.state.region);
+    componentDidMount(){
+        navigator.geolocation.getCurrentPosition(
+            (position)=>{
+                // console.log("GET_LOCATION_SUCCESS", position);
+                this.setState({ 
+                    region:{
+                        latitude: position.coords.latitude,
+                        longitude:  position.coords.longitude,
+                        latitudeDelta:0.1,
+                        longitudeDelta:0.1,
+                    },
+                });
+                saveLocation(this.state.region);
+            },
+        (error) => {
+            // console.log("GET_LOCATION_FAIL",error);
         },
-       (error) => {
-        // console.log("GET_LOCATION_FAIL",error);
-       },
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    )
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        )
 
 
-}
-
+    }
 
     render() {
         return (
@@ -147,15 +149,20 @@ componentDidMount(){
                 initialRoute={{ name: 'MAIN' }}
                 renderScene={(route, navigator) => {
                     switch (route.name) {
-                        case "WELCOME":            return <Welcome navigator={navigator} />
-                        case 'MAIN':                       return <Main navigator={navigator} />;
-                        case 'CHANGE_INFO':      return <ChangeInfo navigator={navigator} user={route.user} />;
-                        case 'AUTHENTICATION': return <Authentication navigator={navigator} />; 
-                        case "CONFIRMATION_CODE": return <ConfirmCode navigator={navigator}  email={route.email}/>
+                        case "WELCOME":                      return <Welcome navigator={navigator} />
+                        case 'MAIN':                             return <Main navigator={navigator} />;
+                        case 'CHANGE_INFO':                return <ChangeInfo navigator={navigator} user={route.user} />;
+                        case 'AUTHENTICATION':            return <Authentication navigator={navigator} />; 
+                        case "CONFIRMATION_CODE":      return <ConfirmCode navigator={navigator}  email={route.email}/>
+                        case "FORGET_PASSWORD":        return <ForgetPassword navigator={navigator}/>
+                        case "FORGETPASSWORD_CODE": return <ForgetPasswordCode navigator={navigator} email={route.email}/>
+                        case "RESET_PASSWORD":           return <ResetPassword navigator={navigator} email={route.email}/>
                     }
                 }}
                 configureScene={route => {
                     if (route.name === 'AUTHENTICATION') return Navigator.SceneConfigs.FloatFromRight;
+                    if (route.name === 'FORGET_PASSWORD') return Navigator.SceneConfigs.FloatFromRight;
+                    if (route.name === 'FORGETPASSWORD_CODE') return Navigator.SceneConfigs.FloatFromRight;
                     return Navigator.SceneConfigs.FloatFromLeft;
                 }}
                 style={{flex:1}}

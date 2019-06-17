@@ -1,6 +1,6 @@
 
 const sendVoteAPI = (token, id_food,  starCount, comment) => (
-    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/sendVote.php',
+    fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/sendVote.php',
     {   
         method: 'POST',
         headers: {

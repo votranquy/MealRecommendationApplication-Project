@@ -1,5 +1,5 @@
 const getNewFoodApi2 =  (page) => (
-    fetch("http://192.168.43.103/MealRecommendationApplication-Project/api/getNewFood2.php?pagenumber="+page,
+    fetch("http://192.168.64.2/MealRecommendationApplication-Project/api/getNewFood2.php?pagenumber="+page,
            {
                method:"POST",
                headers: {

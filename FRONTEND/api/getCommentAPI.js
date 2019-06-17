@@ -1,6 +1,6 @@
 
 const getCommentAPI = (id) => (
-    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/getComment.php',
+    fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/getComment.php',
     {   
         method: 'POST',
         headers: {

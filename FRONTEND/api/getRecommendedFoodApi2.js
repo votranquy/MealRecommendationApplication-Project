@@ -1,5 +1,5 @@
 const getRecommendedFood2 =  (token, latitude, longitude) => (
-    fetch('http://192.168.43.103/MealRecommendationApplication-Project/api/getRecommendedFood2.php',
+    fetch('http://192.168.64.2/MealRecommendationApplication-Project/api/getRecommendedFood2.php',
     {   
         method: 'POST',
         headers: {

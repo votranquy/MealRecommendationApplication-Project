@@ -1,3 +1,0 @@
-[On branch master]: 
-git branch -t frontend origin/frontend
-git branch -t backend origin/backend
